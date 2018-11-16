@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.user.dao.ResourceOptionMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.user.entity.ResourceOption" >
+    <id column="resource_option_id" property="resourceOptionId" jdbcType="VARCHAR" />
+    <result column="resource_id" property="resourceId" jdbcType="VARCHAR" />
+    <result column="option_name" property="optionName" jdbcType="VARCHAR" />
+    <result column="option_type" property="optionType" jdbcType="INTEGER" />
+    <result column="option_url" property="optionUrl" jdbcType="VARCHAR" />
+    <result column="ind" property="ind" jdbcType="INTEGER" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    resource_option_id, resource_id, option_name, option_type, option_url, ind, isvalid, 
+    version, register_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.ResourceOptionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from resource_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from resource_option
+    where resource_option_id = #{resourceOptionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from resource_option
+    where resource_option_id = #{resourceOptionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.user.entity.ResourceOptionExample" >
+    delete from resource_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.user.entity.ResourceOption" >
+    insert into resource_option (resource_option_id, resource_id, option_name, 
+      option_type, option_url, ind, 
+      isvalid, version, register_time
+      )
+    values (#{resourceOptionId,jdbcType=VARCHAR}, #{resourceId,jdbcType=VARCHAR}, #{optionName,jdbcType=VARCHAR}, 
+      #{optionType,jdbcType=INTEGER}, #{optionUrl,jdbcType=VARCHAR}, #{ind,jdbcType=INTEGER}, 
+      #{isvalid,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{registerTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.user.entity.ResourceOption" >
+    insert into resource_option
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceOptionId != null" >
+        resource_option_id,
+      </if>
+      <if test="resourceId != null" >
+        resource_id,
+      </if>
+      <if test="optionName != null" >
+        option_name,
+      </if>
+      <if test="optionType != null" >
+        option_type,
+      </if>
+      <if test="optionUrl != null" >
+        option_url,
+      </if>
+      <if test="ind != null" >
+        ind,
+      </if>
+      <if test="isvalid != null" >
+        isvalid,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceOptionId != null" >
+        #{resourceOptionId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceId != null" >
+        #{resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="optionName != null" >
+        #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="optionType != null" >
+        #{optionType,jdbcType=INTEGER},
+      </if>
+      <if test="optionUrl != null" >
+        #{optionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ind != null" >
+        #{ind,jdbcType=INTEGER},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.user.entity.ResourceOptionExample" resultType="java.lang.Integer" >
+    select count(*) from resource_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update resource_option
+    <set >
+      <if test="record.resourceOptionId != null" >
+        resource_option_id = #{record.resourceOptionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceId != null" >
+        resource_id = #{record.resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionName != null" >
+        option_name = #{record.optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionType != null" >
+        option_type = #{record.optionType,jdbcType=INTEGER},
+      </if>
+      <if test="record.optionUrl != null" >
+        option_url = #{record.optionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ind != null" >
+        ind = #{record.ind,jdbcType=INTEGER},
+      </if>
+      <if test="record.isvalid != null" >
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.registerTime != null" >
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update resource_option
+    set resource_option_id = #{record.resourceOptionId,jdbcType=VARCHAR},
+      resource_id = #{record.resourceId,jdbcType=VARCHAR},
+      option_name = #{record.optionName,jdbcType=VARCHAR},
+      option_type = #{record.optionType,jdbcType=INTEGER},
+      option_url = #{record.optionUrl,jdbcType=VARCHAR},
+      ind = #{record.ind,jdbcType=INTEGER},
+      isvalid = #{record.isvalid,jdbcType=INTEGER},
+      version = #{record.version,jdbcType=INTEGER},
+      register_time = #{record.registerTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.user.entity.ResourceOption" >
+    update resource_option
+    <set >
+      <if test="resourceId != null" >
+        resource_id = #{resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="optionName != null" >
+        option_name = #{optionName,jdbcType=VARCHAR},
+      </if>
+      <if test="optionType != null" >
+        option_type = #{optionType,jdbcType=INTEGER},
+      </if>
+      <if test="optionUrl != null" >
+        option_url = #{optionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ind != null" >
+        ind = #{ind,jdbcType=INTEGER},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where resource_option_id = #{resourceOptionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.user.entity.ResourceOption" >
+    update resource_option
+    set resource_id = #{resourceId,jdbcType=VARCHAR},
+      option_name = #{optionName,jdbcType=VARCHAR},
+      option_type = #{optionType,jdbcType=INTEGER},
+      option_url = #{optionUrl,jdbcType=VARCHAR},
+      ind = #{ind,jdbcType=INTEGER},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      register_time = #{registerTime,jdbcType=TIMESTAMP}
+    where resource_option_id = #{resourceOptionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

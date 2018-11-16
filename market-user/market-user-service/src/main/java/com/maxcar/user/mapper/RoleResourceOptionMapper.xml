@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.user.dao.RoleResourceOptionMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.user.entity.RoleResourceOption" >
+    <id column="role_resource_option_id" property="roleResourceOptionId" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="resource_option_id" property="resourceOptionId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    role_resource_option_id, role_id, resource_option_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.RoleResourceOptionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from role_resource_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_resource_option
+    where role_resource_option_id = #{roleResourceOptionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from role_resource_option
+    where role_resource_option_id = #{roleResourceOptionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.user.entity.RoleResourceOptionExample" >
+    delete from role_resource_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.user.entity.RoleResourceOption" >
+    insert into role_resource_option (role_resource_option_id, role_id, resource_option_id
+      )
+    values (#{roleResourceOptionId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{resourceOptionId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.user.entity.RoleResourceOption" >
+    insert into role_resource_option
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleResourceOptionId != null" >
+        role_resource_option_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="resourceOptionId != null" >
+        resource_option_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleResourceOptionId != null" >
+        #{roleResourceOptionId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceOptionId != null" >
+        #{resourceOptionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.user.entity.RoleResourceOptionExample" resultType="java.lang.Integer" >
+    select count(*) from role_resource_option
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update role_resource_option
+    <set >
+      <if test="record.roleResourceOptionId != null" >
+        role_resource_option_id = #{record.roleResourceOptionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceOptionId != null" >
+        resource_option_id = #{record.resourceOptionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update role_resource_option
+    set role_resource_option_id = #{record.roleResourceOptionId,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=VARCHAR},
+      resource_option_id = #{record.resourceOptionId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.user.entity.RoleResourceOption" >
+    update role_resource_option
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceOptionId != null" >
+        resource_option_id = #{resourceOptionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_resource_option_id = #{roleResourceOptionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.user.entity.RoleResourceOption" >
+    update role_resource_option
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      resource_option_id = #{resourceOptionId,jdbcType=VARCHAR}
+    where role_resource_option_id = #{roleResourceOptionId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getResourceOptionaByRoleIdOrResourceId" resultType="com.maxcar.user.entity.ResourceOption" parameterType="map">
+    select
+    aaa.resource_option_id as resourceOptionId,
+    aaa.resource_id as resourceId,
+    aaa.option_name as optionName,
+    aaa.option_type as optionType,
+    (case (select count(1)  from role_resource_option temp where temp.role_id = #{roleId,jdbcType=VARCHAR} and temp.resource_option_id=aaa.resource_option_id) when 0 then false else true end ) as checked
+    from
+    (
+    select rd.*
+    from role_resource_option rrd inner join resource_option rd on rrd.resource_option_id=rd.resource_option_id where
+    rrd.role_id = #{parentRoleId,jdbcType=VARCHAR}
+    <if test="resourceId != null" >
+      and rd.resource_id=#{resourceId,jdbcType=VARCHAR}
+    </if>
+    ) aaa
+  </select>
+</mapper>

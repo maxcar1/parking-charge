@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.market.dao.EleLabelRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.market.pojo.EleLabelRecord" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="car_number" property="carNumber" jdbcType="VARCHAR" />
+    <result column="vin" property="vin" jdbcType="VARCHAR" />
+    <result column="owned_tenant" property="ownedTenant" jdbcType="VARCHAR" />
+    <result column="old_rfid" property="oldRfid" jdbcType="VARCHAR" />
+    <result column="new_rfid" property="newRfid" jdbcType="VARCHAR" />
+    <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_number, vin, owned_tenant,market_id, old_rfid, new_rfid, operation_time, operator,
+    is_valid, insert_time, insert_operator, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.market.pojo.EleLabelRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ele_label_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ele_label_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ele_label_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.market.pojo.EleLabelRecordExample" >
+    delete from ele_label_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.market.pojo.EleLabelRecord" >
+    insert into ele_label_record (id, car_number, vin, 
+      owned_tenant, old_rfid, new_rfid, 
+      operation_time, operator, is_valid, 
+      insert_time, insert_operator, remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR}, 
+      #{ownedTenant,jdbcType=VARCHAR}, #{oldRfid,jdbcType=VARCHAR}, #{newRfid,jdbcType=VARCHAR}, 
+      #{operationTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{insertOperator,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.market.pojo.EleLabelRecord" >
+    insert into ele_label_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carNumber != null" >
+        car_number,
+      </if>
+      <if test="vin != null" >
+        vin,
+      </if>
+      <if test="ownedTenant != null" >
+        owned_tenant,
+      </if>
+      <if test="oldRfid != null" >
+        old_rfid,
+      </if>
+      <if test="newRfid != null" >
+        new_rfid,
+      </if>
+      <if test="operationTime != null" >
+        operation_time,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="marketId != null" >
+        market_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="ownedTenant != null" >
+        #{ownedTenant,jdbcType=VARCHAR},
+      </if>
+      <if test="oldRfid != null" >
+        #{oldRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="newRfid != null" >
+        #{newRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.market.pojo.EleLabelRecordExample" resultType="java.lang.Integer" >
+    select count(*) from ele_label_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ele_label_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carNumber != null" >
+        car_number = #{record.carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vin != null" >
+        vin = #{record.vin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownedTenant != null" >
+        owned_tenant = #{record.ownedTenant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldRfid != null" >
+        old_rfid = #{record.oldRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newRfid != null" >
+        new_rfid = #{record.newRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationTime != null" >
+        operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isValid != null" >
+        is_valid = #{record.isValid,jdbcType=INTEGER},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.insertOperator != null" >
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ele_label_record
+    set id = #{record.id,jdbcType=VARCHAR},
+      car_number = #{record.carNumber,jdbcType=VARCHAR},
+      vin = #{record.vin,jdbcType=VARCHAR},
+      owned_tenant = #{record.ownedTenant,jdbcType=VARCHAR},
+      old_rfid = #{record.oldRfid,jdbcType=VARCHAR},
+      new_rfid = #{record.newRfid,jdbcType=VARCHAR},
+      operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      is_valid = #{record.isValid,jdbcType=INTEGER},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.market.pojo.EleLabelRecord" >
+    update ele_label_record
+    <set >
+      <if test="carNumber != null" >
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="ownedTenant != null" >
+        owned_tenant = #{ownedTenant,jdbcType=VARCHAR},
+      </if>
+      <if test="oldRfid != null" >
+        old_rfid = #{oldRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="newRfid != null" >
+        new_rfid = #{newRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        operation_time = #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.market.pojo.EleLabelRecord" >
+    update ele_label_record
+    set car_number = #{carNumber,jdbcType=VARCHAR},
+      vin = #{vin,jdbcType=VARCHAR},
+      owned_tenant = #{ownedTenant,jdbcType=VARCHAR},
+      old_rfid = #{oldRfid,jdbcType=VARCHAR},
+      new_rfid = #{newRfid,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      is_valid = #{isValid,jdbcType=INTEGER},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getRecordList" parameterType="com.maxcar.market.pojo.EleLabelRecord" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from ele_label_record
+    <include refid="where_select" />
+  </select>
+  <sql id="where_select">
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test="carNumber != null and carNumber != ''">
+        and car_number = #{carNumber}
+      </if>
+      <if test="marketId != null and marketId != ''">
+        and market_id = #{marketId}
+      </if>
+      <if test="vin != null and vin != ''">
+        and vin like concat("%",#{vin},"%")
+      </if>
+      <if test="ownedTenant != null and ownedTenant != ''">
+        and owned_tenant = #{ownedTenant}
+      </if>
+      <if test="beginDate != null and beginDate != ''">
+        and <![CDATA[ unix_timestamp(operation_time) >= unix_timestamp(#{beginDate}) ]]>
+      </if>
+      <if test="endDate != null and endDate != ''">
+        and <![CDATA[ unix_timestamp(operation_time) <= unix_timestamp(#{endDate}) ]]>
+      </if>
+    </where>
+  </sql>
+</mapper>

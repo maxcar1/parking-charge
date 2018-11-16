@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="market-stock-interface"  />
+    <!-- 注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="9003" />
+	<dubbo:service interface="com.maxcar.stock.service.CarService" ref="carService"  timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.stock.service.CarBaseService" ref="carBaseService"  timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.stock.service.CarRecordService" ref="carRecordService"  timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.stock.service.CarPicService" ref="carPicService"  timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.stock.service.CarCheckService" ref="carCheckService"  timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.stock.service.CarChannelService" ref="carChannelService"  timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.stock.service.CarStaffService" ref="carStaffService"  timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.stock.service.ShoppingGuideService" ref="shoppingGuideService"  timeout="1200000"/>
+
+	<dubbo:service interface="com.maxcar.barrier.service.BarrierService" ref="barrierService"  timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.stock.service.BarrierCameraService" ref="barrierCameraService"  timeout="1200000"/>
+
+	<dubbo:service interface="com.maxcar.stock.service.OutMarketCarService" ref="outMarketCarService"  timeout="1200000"/>
+
+
+	<!-- 引入服务-->
+	<dubbo:reference interface="com.maxcar.user.service.OrganizationsService" id="organizationsService" check="false" retries="0" timeout="20000" />
+	<dubbo:reference interface="com.maxcar.user.service.StaffService" id="staffService" check="false" retries="0" timeout="20000" />
+	<dubbo:reference interface="com.maxcar.tenant.service.UserTenantService" id="userTenantService" check="false" retries="0" timeout="20000" />
+	<dubbo:reference interface="com.maxcar.market.service.AreaShopService" id="areaShopService" check="false" retries="0" timeout="20000" />
+	<dubbo:reference interface="com.maxcar.base.service.DaSouCheService" id="daSouCheService" check="false" retries="0" timeout="20000" />
+
+	<dubbo:reference interface="com.maxcar.base.service.CityService" id="cityService" check="false" retries="0" timeout="20000" />
+	<dubbo:reference interface="com.maxcar.base.service.ProvinceService" id="provinceService" check="false" retries="0" timeout="20000" />
+
+	<dubbo:reference interface="com.maxcar.user.service.OutMarketManageService" id="outMarketManageService" check="false" retries="0" timeout="20000" />
+
+	<dubbo:reference interface="com.maxcar.kafka.service.MessageProducerService" id="messageProducerService" check="false" retries="0" timeout="20000" />
+
+	<dubbo:reference interface="com.maxcar.market.service.AreaService" id="areaService" check="false" retries="0" timeout="20000" />
+	<!--引入缓存-->
+
+	<!--引入字典 com.maxcar.user.service -->
+	<dubbo:reference interface="com.maxcar.user.service.ConfigurationService" id="configurationService" check="false" retries="0" timeout="20000" />
+
+</beans>

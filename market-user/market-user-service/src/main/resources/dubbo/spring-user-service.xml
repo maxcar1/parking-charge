@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="market-user-interface"  />
+    <!-- 注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="9005" />
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="com.maxcar.user.service.MarketService" ref="marketService" timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.CustomerService" ref="customerService" timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.UserService" ref="userService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.RoleService" ref="roleService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.RoleResourceService" ref="roleResourceService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.RoleResourceOptionService" ref="roleResourceOptionService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.UserRoleService" ref="userRoleService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.ConfigurationService" ref="configurationService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.LoginLogService" ref="loginLogService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.ResourceService" ref="resourceService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.OrganizationsService" ref="organizationsService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.OperationRecordService" ref="operationRecordService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.StaffService" ref="staffService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.NoticeDetailsService" ref="noticeDetailsService"   timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.user.service.OutMarketManageService" ref="outMarketManageService"   timeout="1200000"/>
+
+    <!--引入缓存-->
+    <dubbo:reference interface="com.maxcar.redis.service.SsoService" id="ssoService"   timeout="1200000" check="false"/>
+    <dubbo:reference interface="com.maxcar.base.service.CityService" id="cityService"   timeout="1200000" check="false"/>
+
+    <dubbo:reference interface="com.maxcar.market.service.ParkingFeeService" id="parkingFeeService" check="false" retries="0" timeout="20000" />
+
+</beans>

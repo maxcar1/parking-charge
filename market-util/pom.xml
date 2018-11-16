@@ -1,0 +1,1045 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.maxcar</groupId>
+	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>market-util</artifactId>
+	<properties>
+		<spring.version>4.3.9.RELEASE</spring.version>
+		<java-jdk.version>1.8</java-jdk.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<toolbox.version>2.0</toolbox.version>
+		<jackson.version>2.5.0</jackson.version>
+		<velocity.version>1.7</velocity.version>
+		<aspectj.version>1.6.11</aspectj.version>
+		<redis.version>2.9.0</redis.version>
+		<!-- TODO 其它依赖库版本 -->
+		<kafka-version>1.3.2.RELEASE</kafka-version>
+        <!-- 版本号-->
+        <zxing.version>3.2.1</zxing.version>
+	</properties>
+
+	<!--仓库地址-->
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>public</id>
+			<name>public</name>
+			<url>http://nexus.maxcar.com.cn/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	<!-- 加载的是maven生命周期插件的jar包 -->
+	<pluginRepositories>
+		<pluginRepository>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>public</id>
+			<name>public</name>
+			<url>http://nexus.maxcar.com.cn/nexus/content/groups/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<!-- 配置部署的远程仓库 -->
+	<distributionManagement>
+		<!-- 正式版方式 -->
+		<repository>
+			<id>releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://nexus.maxcar.com.cn/nexus/content/repositories/release/</url>
+		</repository>
+		<!-- 快照版方式 -->
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://nexus.maxcar.com.cn/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.taobao</groupId>
+			<artifactId>taoBaoApi</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.23</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<!-- 			<scope>test</scope> -->
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.2-GA</version>
+		</dependency>
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!--配置aop切面编程需要引入的包-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.18</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>3.2.5</version>
+		</dependency>
+		<!-- mybatis 包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.8</version>
+		</dependency>
+
+		<!--mybatis spring 插件 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<!-- mysql连接 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.34</version>
+		</dependency>
+
+		<!-- 数据源 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.24</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- commons -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils-core</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>${velocity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>${toolbox.version}</version>
+		</dependency>
+		<!-- 阿里云相关 -->
+		<dependency>
+			<groupId>com.aliyun.oss</groupId>
+			<artifactId>aliyun-sdk-oss</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-sts</artifactId>
+			<version>2.1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-core</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun</groupId>
+			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
+		<!-- quartz任务调度组件 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<!-- redis -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${redis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.7.1.RELEASE</version>
+		</dependency>
+		<!-- dubbo -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.1.Final</version>
+		</dependency>
+		<!-- zookeepr 用于分布式管理 -->
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.4.9</version>
+		</dependency>
+		<!-- dubbo 需要的jar start -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<version>2.8.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>5.1.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
+		<dependency>
+			<groupId>com.github.jsqlparser</groupId>
+			<artifactId>jsqlparser</artifactId>
+			<version>0.9</version>
+		</dependency>
+        <!--Excel导出-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-examples</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-excelant</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <!-- 开源多维码生成工具 -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<!--卡夫卡消息同步-->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+			<version>${kafka-version}</version>
+		</dependency>
+
+		<!--<dependency>
+			<groupId>com.sun.jna</groupId>
+			<artifactId>jna</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jna.examples</groupId>
+			<artifactId>examples</artifactId>
+			<version>1.0</version>
+		</dependency>-->
+	</dependencies>
+	<!-- 申明不同环境调用不同数据库连接参数 -->
+	<profiles>
+
+		<!-- 开发，默认激活 -->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<!--开发环境端口配置-->
+				<spring.profiles.active>dev</spring.profiles.active>
+				<!-- dubbo -->
+				<local.servers.address>localhost:7961/api</local.servers.address>
+				<dubbo.registry.address>zookeeper://localhost:2181</dubbo.registry.address>
+				<!-- datasource通用-->
+				<system.jdbc.prototypeCount>10</system.jdbc.prototypeCount>
+				<system.jdbc.maximumConnectionCount>50</system.jdbc.maximumConnectionCount>
+				<system.jdbc.minimumConnectionCount>10</system.jdbc.minimumConnectionCount>
+				<system.jdbc.houseKeepingTestSql>SELECT 'x'</system.jdbc.houseKeepingTestSql>
+				<!-- 云端数据源配置datasource库存、交易-->
+				<system.jdbc.driver.stock>com.mysql.jdbc.Driver</system.jdbc.driver.stock>
+				<system.jdbc.url.stock>jdbc:mysql://mysql-d.maxcar.com.cn:3306/maxcar_stock_l?characterEncoding=utf-8</system.jdbc.url.stock>
+				<system.jdbc.user.stock>root</system.jdbc.user.stock>
+				<system.jdbc.password.stock>Maxcar#2018d</system.jdbc.password.stock>
+				<!-- 云端数据源配置datasource物业、商户-->
+				<system.jdbc.driver.market>com.mysql.jdbc.Driver</system.jdbc.driver.market>
+				<system.jdbc.url.market>jdbc:mysql://mysql-d.maxcar.com.cn:3306/maxcar_market_l?characterEncoding=utf-8</system.jdbc.url.market>
+				<system.jdbc.user.market>root</system.jdbc.user.market>
+				<system.jdbc.password.market>Maxcar#2018d</system.jdbc.password.market>
+				<!-- 云端数据源配置datasource用户，配置-->
+				<system.jdbc.driver.user>com.mysql.jdbc.Driver</system.jdbc.driver.user>
+				<system.jdbc.url.user>jdbc:mysql://mysql-d.maxcar.com.cn:3306/maxcar_user_l?characterEncoding=utf-8</system.jdbc.url.user>
+				<system.jdbc.user.user>root</system.jdbc.user.user>
+				<system.jdbc.password.user>Maxcar#2018d</system.jdbc.password.user>
+				<!-- 云端数据源配置datasource道闸-->
+				<system.jdbc.driver.base>com.mysql.jdbc.Driver</system.jdbc.driver.base>
+				<system.jdbc.url.base>jdbc:mysql://mysql-d.maxcar.com.cn:3306/maxcar_base_l?characterEncoding=utf-8</system.jdbc.url.base>
+				<system.jdbc.user.base>root</system.jdbc.user.base>
+				<system.jdbc.password.base>Maxcar#2018d</system.jdbc.password.base>
+				<!-- 云端数据源配置datasource商户-->
+				<system.jdbc.driver.tenant>com.mysql.jdbc.Driver</system.jdbc.driver.tenant>
+				<system.jdbc.url.tenant>jdbc:mysql://mysql-d.maxcar.com.cn:3306/maxcar_tenant_l?characterEncoding=utf-8</system.jdbc.url.tenant>
+				<system.jdbc.user.tenant>root</system.jdbc.user.tenant>
+				<system.jdbc.password.tenant>Maxcar#2018d</system.jdbc.password.tenant>
+				<!-- 云端数据源配置datasource道闸-->
+				<system.jdbc.driver.barrier>com.mysql.jdbc.Driver</system.jdbc.driver.barrier>
+				<system.jdbc.url.barrier>jdbc:mysql://mysql-d.maxcar.com.cn:3306/maxcar_barrier_l?characterEncoding=utf-8</system.jdbc.url.barrier>
+				<system.jdbc.user.barrier>root</system.jdbc.user.barrier>
+				<system.jdbc.password.barrier>Maxcar#2018d</system.jdbc.password.barrier>
+
+
+				<!-- 商户app-->
+				<system.jdbc.driver.tenant.app>com.mysql.jdbc.Driver</system.jdbc.driver.tenant.app>
+				<system.jdbc.url.tenant.app>jdbc:mysql://mysql-d.maxcar.com.cn:3306/market_tenant_app_l?characterEncoding=utf-8</system.jdbc.url.tenant.app>
+				<system.jdbc.user.tenant.app>root</system.jdbc.user.tenant.app>
+				<system.jdbc.password.tenant.app>Maxcar#2018d</system.jdbc.password.tenant.app>
+
+				<!-- redis相关配置最大连接数：能够同时建立的“最大链接个数”  ，#最大空闲数：空闲链接数大于maxIdle时，将进行回收，#最小空闲数：低于minIdle时，将创建新的链接， #最大等待时间：单位ms  #使用连接时，检测连接是否成功 redis.pool.testOnReturn=true  #返回连接时，检测连接是否成功  -->
+				<redisMaxActive>200</redisMaxActive>
+				<redisMaxIdle>20</redisMaxIdle>
+				<redisMinIdle>5</redisMinIdle>
+				<redisMaxWait>100000</redisMaxWait>
+				<redisTestOnBorrow>true</redisTestOnBorrow>
+				<redisTestOnReturn>true</redisTestOnReturn>
+				<redisHost>localhost</redisHost>
+				<redis.password>maxcar2017</redis.password>
+				<redisPort>6379</redisPort>
+				<redisName>maxcar-redis</redisName>
+				<!--卡夫卡-->
+				<kafka.consumer.zookeeper.connect>192.168.3.45:2181,192.168.3.50:2181,192.168.3.51:2181</kafka.consumer.zookeeper.connect>
+				<kafka.consumer.servers>192.168.3.50:9092,192.168.3.51:9092</kafka.consumer.servers>
+				<kafka.producer.servers>192.168.3.50:9092,192.168.3.51:9092</kafka.producer.servers>
+				<kafka.producer.topic>sync_upload_data_dev</kafka.producer.topic>
+				<kafka.producer.parking.topic>sync_upload_data_parking_dev</kafka.producer.parking.topic>
+				<kafka.consumer.topic006>sync_download_006_data_dev</kafka.consumer.topic006>
+				<kafka.consumer.topic007>sync_download_007_data_dev</kafka.consumer.topic007>
+				<kafka.consumer.topic008>sync_download_008_data_dev</kafka.consumer.topic008>
+				<kafka.consumer.topic010>sync_download_010_data_dev</kafka.consumer.topic010>
+				<local.servers.address>http://localhost:7960</local.servers.address>
+				<local.servers.parking.address>http://localhost:7950</local.servers.parking.address>
+				<!-- 大搜车接口配置 -->
+				<app.key>84304e368d4153cfd0dbafc967187729</app.key>
+				<app.secret>43f4d794f3b5c95239a092a66bcbede8</app.secret>
+				<base.url>https://api.souche.com/v1/vin_code/car_model_candidates?</base.url>
+				<url>https://api.souche.com</url>
+				<detail.url>https://api.souche.com/v1/car_model/detail_info?</detail.url>
+				<brands.url>https://api.souche.com/v1/car_model/brands?</brands.url>
+				<sc.brand.code.url>https://api.souche.com/v1/car_model/brands/xxx/series?</sc.brand.code.url>
+				<sc.series.code.url>https://api.souche.com/v1/car_model/series/xxx/models?</sc.series.code.url>
+				<sc.model.code.url>https://api.souche.com/v1/car_model/models/xxx?</sc.model.code.url>
+				<brand.dictionaries.url>https://api.souche.com/v1/car_model/brand_dictionaries?</brand.dictionaries.url>
+				<price.url>https://api.souche.com/v1/car_model/price?</price.url>
+				<used.car.price>https://api.souche.com/v1/car_model/used_car_price?</used.car.price>
+				<areas>https://api.souche.com/v1/dictionary/areas?</areas>
+				<!-- 微信配置 -->
+				<access.token.url>https://api.weixin.qq.com/cgi-bin/token</access.token.url>
+				<paibo.app.id>wx880aa7250a756969</paibo.app.id>
+				<paibo.app.secret.weixin>f0103f4f490096af95ecb766a27b3077</paibo.app.secret.weixin>
+				<icar.app.id>wx66cc7db87a6bb651</icar.app.id>
+				<icar.app.secret.weixin>2bc02251c593caa3526efbe2e1832599</icar.app.secret.weixin>
+				<grant.type>client_credential</grant.type>
+				<ticket.url>https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=</ticket.url>
+				<expire.seconds>604800</expire.seconds>
+				<action.name>QR_SCENE</action.name>
+				<action.name.str>QR_STR_SCENE</action.name.str>
+				<action.name.limit>QR_LIMIT_SCENE</action.name.limit>
+				<action.name.limit.str>QR_LIMIT_STR_SCENE</action.name.limit.str>
+				<show.ticket.url>https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=</show.ticket.url>
+				<user.info.url>https://api.weixin.qq.com/cgi-bin/user/info?access_token=</user.info.url>
+				<lang>zh_CN</lang>
+				<welcome.icar>\u60a8\u597d\u002c\u6b22\u8fce\u007b\u0046\u004f\u004c\u004c\u004f\u0057\u007d\u0069\u0043\u0061\u0072\u7ba1\u5bb6\u516c\u4f17\u53f7\u0021</welcome.icar>
+				<welcome.paibo>\u60a8\u597d\uff0c\u6b22\u8fce\u007b\u0046\u004f\u004c\u004c\u004f\u0057\u007d\u6d3e\u52c3\u6c7d\u8f66\u516c\u4f17\u53f7\uff0c\u3010\u505c\u8f66\u7f34\u8d39\u3011\u007b\u0055\u0052\u004c\u007d\uff0c\u66f4\u591a\u670d\u52a1\u8bf7\u67e5\u770b\u4e0b\u65b9\u83dc\u5355\u3002</welcome.paibo>
+				<!-- 微信支付账号相关配置-->
+				<down.order.url>https://api.mch.weixin.qq.com/pay/unifiedorder</down.order.url>
+				<pay.account.app.id>wxcf5003ae31ab9bbf</pay.account.app.id>
+				<pay.tenant.num>1513688731</pay.tenant.num>
+				<pay.QR.url>weixin://wxpay/bizpayurl?</pay.QR.url>
+                <pay.account.app.secret>df64feec406058be81aca5ae3969e68d</pay.account.app.secret>
+				<weixin.pay.app.key>YLpaibo8618176438893861817643889</weixin.pay.app.key>
+				<save.img.file.path>/opt/image</save.img.file.path>
+				<!-- 模式一支付回调-->
+				<pay.notify.url>http://wxsf-t.maxcar.com.cn/api/wx/callback/pay</pay.notify.url>
+				<!-- 扫码支付标识-->
+				<trade.type>JSAPI</trade.type>
+				<!-- 发起支付的终端IP-->
+				<spbill.create.ip>60.12.250.54</spbill.create.ip>
+				<!-- 订单支付描述-->
+				<weixin.pay.order.body>\u7389\u6797\u6d3e\u52c3\u002d\u505c\u8f66\u6536\u8d39</weixin.pay.order.body>
+				<!-- 微信jsapi权限接口认证-->
+				<weixin.js.api.url>https://api.weixin.qq.com/cgi-bin/ticket/getticket</weixin.js.api.url>
+				<!-- 我们的js支付页面url-->
+				<weixin.pay.js.url>http://wxsf-t.maxcar.com.cn/weixin/pay</weixin.pay.js.url>
+				<!--mqtt道闸-->
+				<mqtt.server.host>tcp://192.168.3.59:1883</mqtt.server.host>
+				<mqtt.push.topic>MQTT_YL_UP</mqtt.push.topic>
+				<mqtt.server.username></mqtt.server.username>
+				<mqtt.server.password></mqtt.server.password>
+			</properties>
+			<activation><!-- 默认激活 -->
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+
+		<profile>
+			<id>test</id>
+			<properties>
+				<!--开发环境端口配置-->
+				<spring.profiles.active>test</spring.profiles.active>
+				<!-- dubbo 123-->
+				<dubbo.registry.address>zookeeper://192.168.3.60:5001</dubbo.registry.address>
+				<!-- datasource通用-->
+				<system.jdbc.prototypeCount>10</system.jdbc.prototypeCount>
+				<system.jdbc.maximumConnectionCount>50</system.jdbc.maximumConnectionCount>
+				<system.jdbc.minimumConnectionCount>10</system.jdbc.minimumConnectionCount>
+				<system.jdbc.houseKeepingTestSql>SELECT 'x'</system.jdbc.houseKeepingTestSql>
+				<!-- 云端数据源配置datasource库存、交易-->
+				<system.jdbc.driver.stock>com.mysql.jdbc.Driver</system.jdbc.driver.stock>
+				<system.jdbc.url.stock>jdbc:mysql://mysql-t.maxcar.com.cn:3306/maxcar_stock_l?characterEncoding=utf-8</system.jdbc.url.stock>
+				<system.jdbc.user.stock>root</system.jdbc.user.stock>
+				<system.jdbc.password.stock>Maxcar#2017</system.jdbc.password.stock>
+				<!-- 云端数据源配置datasource物业、商户-->
+				<system.jdbc.driver.market>com.mysql.jdbc.Driver</system.jdbc.driver.market>
+				<system.jdbc.url.market>jdbc:mysql://mysql-t.maxcar.com.cn:3306/maxcar_market_l?characterEncoding=utf-8</system.jdbc.url.market>
+				<system.jdbc.user.market>root</system.jdbc.user.market>
+				<system.jdbc.password.market>Maxcar#2017</system.jdbc.password.market>
+				<!-- 云端数据源配置datasource用户，配置-->
+				<system.jdbc.driver.user>com.mysql.jdbc.Driver</system.jdbc.driver.user>
+				<system.jdbc.url.user>jdbc:mysql://mysql-t.maxcar.com.cn:3306/maxcar_user_l?characterEncoding=utf-8</system.jdbc.url.user>
+				<system.jdbc.user.user>root</system.jdbc.user.user>
+				<system.jdbc.password.user>Maxcar#2017</system.jdbc.password.user>
+				<!-- 云端数据源配置datasource道闸-->
+				<system.jdbc.driver.base>com.mysql.jdbc.Driver</system.jdbc.driver.base>
+				<system.jdbc.url.base>jdbc:mysql://mysql-t.maxcar.com.cn:3306/maxcar_base_l?characterEncoding=utf-8</system.jdbc.url.base>
+				<system.jdbc.user.base>root</system.jdbc.user.base>
+				<system.jdbc.password.base>Maxcar#2017</system.jdbc.password.base>
+				<!-- 云端数据源配置datasource商户-->
+				<system.jdbc.driver.tenant>com.mysql.jdbc.Driver</system.jdbc.driver.tenant>
+				<system.jdbc.url.tenant>jdbc:mysql://mysql-t.maxcar.com.cn:3306/maxcar_tenant_l?characterEncoding=utf-8</system.jdbc.url.tenant>
+				<system.jdbc.user.tenant>root</system.jdbc.user.tenant>
+				<system.jdbc.password.tenant>Maxcar#2017</system.jdbc.password.tenant>
+				<!-- 云端数据源配置datasource道闸-->
+				<system.jdbc.driver.barrier>com.mysql.jdbc.Driver</system.jdbc.driver.barrier>
+				<system.jdbc.url.barrier>jdbc:mysql://mysql-t.maxcar.com.cn:3306/maxcar_barrier_l?characterEncoding=utf-8</system.jdbc.url.barrier>
+				<system.jdbc.user.barrier>root</system.jdbc.user.barrier>
+				<system.jdbc.password.barrier>Maxcar#2017</system.jdbc.password.barrier>
+				<!-- redis相关配置最大连接数：能够同时建立的“最大链接个数”  ，#最大空闲数：空闲链接数大于maxIdle时，将进行回收，#最小空闲数：低于minIdle时，将创建新的链接， #最大等待时间：单位ms  #使用连接时，检测连接是否成功 redis.pool.testOnReturn=true  #返回连接时，检测连接是否成功  -->
+				<redisMaxActive>200</redisMaxActive>
+				<redisMaxIdle>20</redisMaxIdle>
+				<redisMinIdle>5</redisMinIdle>
+				<redisMaxWait>100000</redisMaxWait>
+				<redisTestOnBorrow>true</redisTestOnBorrow>
+				<redisTestOnReturn>true</redisTestOnReturn>
+				<redisHost>192.168.3.61</redisHost>
+				<redis.password>lmaxcar2017t</redis.password>
+				<redisPort>6881</redisPort>
+				<redisName>market-redis</redisName>
+				<!--卡夫卡-->
+				<kafka.consumer.zookeeper.connect>192.168.3.60:3001,192.168.3.60:3002,192.168.3.60:3003</kafka.consumer.zookeeper.connect>
+				<kafka.consumer.servers>192.168.3.50:9092,192.168.3.51:9092</kafka.consumer.servers>
+				<kafka.producer.servers>192.168.3.50:9092,192.168.3.51:9092</kafka.producer.servers>
+				<kafka.producer.topic>sync_upload_data_test</kafka.producer.topic>
+				<kafka.producer.parking.topic>sync_upload_data_parking_test</kafka.producer.parking.topic>
+				<kafka.consumer.topic006>sync_download_006_data_test</kafka.consumer.topic006>
+				<kafka.consumer.topic007>sync_download_007_data_test</kafka.consumer.topic007>
+				<kafka.consumer.topic008>sync_download_008_data_test</kafka.consumer.topic008>
+				<kafka.consumer.topic010>sync_download_010_data_test</kafka.consumer.topic010>
+				<local.servers.address>http://ylc-t.maxcar.com.cn</local.servers.address>
+				<local.servers.parking.address>http://ylc-t.maxcar.com.cn</local.servers.parking.address>
+				<!-- 大搜车接口配置 -->
+				<app.key>84304e368d4153cfd0dbafc967187729</app.key>
+				<app.secret>43f4d794f3b5c95239a092a66bcbede8</app.secret>
+				<base.url>https://api.souche.com/v1/vin_code/car_model_candidates?</base.url>
+				<url>https://api.souche.com</url>
+				<detail.url>https://api.souche.com/v1/car_model/detail_info?</detail.url>
+				<brands.url>https://api.souche.com/v1/car_model/brands?</brands.url>
+				<sc.brand.code.url>https://api.souche.com/v1/car_model/brands/xxx/series?</sc.brand.code.url>
+				<sc.series.code.url>https://api.souche.com/v1/car_model/series/xxx/models?</sc.series.code.url>
+				<sc.model.code.url>https://api.souche.com/v1/car_model/models/xxx?</sc.model.code.url>
+				<brand.dictionaries.url>https://api.souche.com/v1/car_model/brand_dictionaries?</brand.dictionaries.url>
+				<price.url>https://api.souche.com/v1/car_model/price?</price.url>
+				<used.car.price>https://api.souche.com/v1/car_model/used_car_price?</used.car.price>
+				<areas>https://api.souche.com/v1/dictionary/areas?</areas>
+				<!-- 微信配置 -->
+				<access.token.url>https://api.weixin.qq.com/cgi-bin/token</access.token.url>
+				<paibo.app.id>wx880aa7250a756969</paibo.app.id>
+				<paibo.app.secret.weixin>f0103f4f490096af95ecb766a27b3077</paibo.app.secret.weixin>
+				<icar.app.id>wx035d31d28ad83427</icar.app.id>
+				<icar.app.secret.weixin>7aa135a141333deffb1ea99a634d1ce5</icar.app.secret.weixin>
+				<grant.type>client_credential</grant.type>
+				<ticket.url>https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=</ticket.url>
+				<expire.seconds>604800</expire.seconds>
+				<action.name>QR_SCENE</action.name>
+				<action.name.str>QR_STR_SCENE</action.name.str>
+				<action.name.limit>QR_LIMIT_SCENE</action.name.limit>
+				<action.name.limit.str>QR_LIMIT_STR_SCENE</action.name.limit.str>
+				<show.ticket.url>https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=</show.ticket.url>
+				<user.info.url>https://api.weixin.qq.com/cgi-bin/user/info?access_token=</user.info.url>
+				<lang>zh_CN</lang>
+				<welcome.icar>\u60a8\u597d\u002c\u6b22\u8fce\u007b\u0046\u004f\u004c\u004c\u004f\u0057\u007d\u0069\u0043\u0061\u0072\u7ba1\u5bb6\u516c\u4f17\u53f7\u0021</welcome.icar>
+				<welcome.paibo>\u60a8\u597d\uff0c\u6b22\u8fce\u007b\u0046\u004f\u004c\u004c\u004f\u0057\u007d\u6d3e\u52c3\u6c7d\u8f66\u516c\u4f17\u53f7\uff0c\u3010\u505c\u8f66\u7f34\u8d39\u3011\u007b\u0055\u0052\u004c\u007d\uff0c\u66f4\u591a\u670d\u52a1\u8bf7\u67e5\u770b\u4e0b\u65b9\u83dc\u5355\u3002</welcome.paibo>
+				<!-- 微信支付账号相关配置-->
+				<down.order.url>https://api.mch.weixin.qq.com/pay/unifiedorder</down.order.url>
+				<pay.account.app.id>wxcf5003ae31ab9bbf</pay.account.app.id>
+				<pay.tenant.num>1513688731</pay.tenant.num>
+				<pay.QR.url>weixin://wxpay/bizpayurl?</pay.QR.url>
+				<weixin.pay.app.key>YLpaibo8618176438893861817643889</weixin.pay.app.key>
+				<save.img.file.path>/opt/image</save.img.file.path>
+				<!-- 模式一支付回调-->
+				<pay.notify.url>http://wxsf-t.maxcar.com.cn/api/wx/callback/pay</pay.notify.url>
+				<!-- 扫码支付标识-->
+				<trade.type>JSAPI</trade.type>
+				<!-- 发起支付的终端IP-->
+				<spbill.create.ip>60.12.250.54</spbill.create.ip>
+				<!-- 订单支付描述-->
+				<weixin.pay.order.body>\u7389\u6797\u6d3e\u52c3\u002d\u505c\u8f66\u6536\u8d39</weixin.pay.order.body>
+				<!-- 微信jsapi权限接口认证-->
+				<weixin.js.api.url>https://api.weixin.qq.com/cgi-bin/ticket/getticket</weixin.js.api.url>
+				<!-- 我们的js支付页面url-->
+				<weixin.pay.js.url>http://wxsf-t.maxcar.com.cn/weixin/pay</weixin.pay.js.url>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				<!--mqtt-->
+				<mqtt.server.host>tcp://192.168.3.59:1883</mqtt.server.host>
+				<mqtt.push.topic>MQTT_YL_UP</mqtt.push.topic>
+				<mqtt.server.username></mqtt.server.username>
+				<mqtt.server.password></mqtt.server.password>
+			</properties>
+			<activation><!-- 默认激活 -->
+				<activeByDefault>false</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>pro</id>
+			<properties>
+				<!--开发环境端口配置-->
+				<spring.profiles.active>pro</spring.profiles.active>
+				<!-- dubbo 123-->
+				<dubbo.registry.address>zookeeper://172.16.110.107:3001?backup=172.16.110.106:3003,172.16.110.99:3002</dubbo.registry.address>
+				<!-- datasource通用-->
+				<system.jdbc.prototypeCount>10</system.jdbc.prototypeCount>
+				<system.jdbc.maximumConnectionCount>50</system.jdbc.maximumConnectionCount>
+				<system.jdbc.minimumConnectionCount>10</system.jdbc.minimumConnectionCount>
+				<system.jdbc.houseKeepingTestSql>SELECT 'x'</system.jdbc.houseKeepingTestSql>
+				<!-- 云端数据源配置datasource库存、交易-->
+				<system.jdbc.driver.stock>com.mysql.jdbc.Driver</system.jdbc.driver.stock>
+				<system.jdbc.url.stock>jdbc:mysql://mysql-o.maxcar.com.cn:3306/maxcar_stock_l?characterEncoding=utf-8</system.jdbc.url.stock>
+				<system.jdbc.user.stock>root</system.jdbc.user.stock>
+				<system.jdbc.password.stock>Maxcar#2017o</system.jdbc.password.stock>
+				<!-- 云端数据源配置datasource物业、商户-->
+				<system.jdbc.driver.market>com.mysql.jdbc.Driver</system.jdbc.driver.market>
+				<system.jdbc.url.market>jdbc:mysql://mysql-o.maxcar.com.cn:3306/maxcar_market_l?characterEncoding=utf-8</system.jdbc.url.market>
+				<system.jdbc.user.market>root</system.jdbc.user.market>
+				<system.jdbc.password.market>Maxcar#2017o</system.jdbc.password.market>
+				<!-- 云端数据源配置datasource用户，配置-->
+				<system.jdbc.driver.user>com.mysql.jdbc.Driver</system.jdbc.driver.user>
+				<system.jdbc.url.user>jdbc:mysql://mysql-o.maxcar.com.cn:3306/maxcar_user_l?characterEncoding=utf-8</system.jdbc.url.user>
+				<system.jdbc.user.user>root</system.jdbc.user.user>
+				<system.jdbc.password.user>Maxcar#2017o</system.jdbc.password.user>
+				<!-- 云端数据源配置datasource道闸-->
+				<system.jdbc.driver.base>com.mysql.jdbc.Driver</system.jdbc.driver.base>
+				<system.jdbc.url.base>jdbc:mysql://mysql-o.maxcar.com.cn:3306/maxcar_base_l?characterEncoding=utf-8</system.jdbc.url.base>
+				<system.jdbc.user.base>root</system.jdbc.user.base>
+				<system.jdbc.password.base>Maxcar#2017o</system.jdbc.password.base>
+				<!-- 云端数据源配置datasource商户-->
+				<system.jdbc.driver.tenant>com.mysql.jdbc.Driver</system.jdbc.driver.tenant>
+				<system.jdbc.url.tenant>jdbc:mysql://mysql-o.maxcar.com.cn:3306/maxcar_tenant_l?characterEncoding=utf-8</system.jdbc.url.tenant>
+				<system.jdbc.user.tenant>root</system.jdbc.user.tenant>
+				<system.jdbc.password.tenant>Maxcar#2017o</system.jdbc.password.tenant>
+				<!-- 云端数据源配置datasource道闸-->
+				<system.jdbc.driver.barrier>com.mysql.jdbc.Driver</system.jdbc.driver.barrier>
+				<system.jdbc.url.barrier>jdbc:mysql://mysql-o.maxcar.com.cn:3306/maxcar_barrier_l?characterEncoding=utf-8</system.jdbc.url.barrier>
+				<system.jdbc.user.barrier>root</system.jdbc.user.barrier>
+				<system.jdbc.password.barrier>Maxcar#2017o</system.jdbc.password.barrier>
+				<!-- redis相关配置最大连接数：能够同时建立的“最大链接个数”  ，#最大空闲数：空闲链接数大于maxIdle时，将进行回收，#最小空闲数：低于minIdle时，将创建新的链接， #最大等待时间：单位ms  #使用连接时，检测连接是否成功 redis.pool.testOnReturn=true  #返回连接时，检测连接是否成功  -->
+				<redisMaxActive>200</redisMaxActive>
+				<redisMaxIdle>20</redisMaxIdle>
+				<redisMinIdle>5</redisMinIdle>
+				<redisMaxWait>100000</redisMaxWait>
+				<redisTestOnBorrow>true</redisTestOnBorrow>
+				<redisTestOnReturn>true</redisTestOnReturn>
+				<redisHost>redis-o.maxcar.com.cn</redisHost>
+				<redis.password>lmaxcar2017o</redis.password>
+				<redisPort>10293</redisPort>
+				<redisName>market-redis</redisName>
+				<!--卡夫卡-->
+				<kafka.consumer.zookeeper.connect>172.16.110.107:3001,172.16.110.106:3003,172.16.110.99:3002</kafka.consumer.zookeeper.connect>
+				<kafka.consumer.servers>47.96.29.224:9092,116.62.20.142:9092</kafka.consumer.servers>
+				<kafka.producer.servers>47.96.29.224:9092,116.62.20.142:9092</kafka.producer.servers>
+				<kafka.producer.topic>sync_upload_data_pro</kafka.producer.topic>
+				<kafka.producer.parking.topic>sync_upload_data_parking_pro</kafka.producer.parking.topic>
+				<kafka.consumer.topic006>sync_download_006_data_pro</kafka.consumer.topic006>
+				<kafka.consumer.topic007>sync_download_007_data_pro</kafka.consumer.topic007>
+				<kafka.consumer.topic008>sync_download_008_data_pro</kafka.consumer.topic008>
+				<kafka.consumer.topic010>sync_download_010_data_pro</kafka.consumer.topic010>
+				<local.servers.address>http://ylc.maxcar.com.cn</local.servers.address>
+				<local.servers.parking.address>http://ylc.maxcar.com.cn</local.servers.parking.address>
+				<!-- 大搜车接口配置 -->
+				<app.key>84304e368d4153cfd0dbafc967187729</app.key>
+				<app.secret>43f4d794f3b5c95239a092a66bcbede8</app.secret>
+				<base.url>https://api.souche.com/v1/vin_code/car_model_candidates?</base.url>
+				<url>https://api.souche.com</url>
+				<detail.url>https://api.souche.com/v1/car_model/detail_info?</detail.url>
+				<brands.url>https://api.souche.com/v1/car_model/brands?</brands.url>
+				<sc.brand.code.url>https://api.souche.com/v1/car_model/brands/xxx/series?</sc.brand.code.url>
+				<sc.series.code.url>https://api.souche.com/v1/car_model/series/xxx/models?</sc.series.code.url>
+				<sc.model.code.url>https://api.souche.com/v1/car_model/models/xxx?</sc.model.code.url>
+				<brand.dictionaries.url>https://api.souche.com/v1/car_model/brand_dictionaries?</brand.dictionaries.url>
+				<price.url>https://api.souche.com/v1/car_model/price?</price.url>
+				<used.car.price>https://api.souche.com/v1/car_model/used_car_price?</used.car.price>
+				<areas>https://api.souche.com/v1/dictionary/areas?</areas>
+				<!-- 微信推送相关配置 -->
+				<!-- 微信推送相关配置 -->
+				<access.token.url>https://api.weixin.qq.com/cgi-bin/token</access.token.url>
+				<paibo.app.id>wx880aa7250a756969</paibo.app.id>
+				<paibo.app.secret.weixin>f0103f4f490096af95ecb766a27b3077</paibo.app.secret.weixin>
+				<icar.app.id>wx035d31d28ad83427</icar.app.id>
+				<icar.app.secret.weixin>7aa135a141333deffb1ea99a634d1ce5</icar.app.secret.weixin>
+				<grant.type>client_credential</grant.type>
+				<ticket.url>https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=</ticket.url>
+				<expire.seconds>604800</expire.seconds>
+				<action.name>QR_SCENE</action.name>
+				<action.name.str>QR_STR_SCENE</action.name.str>
+				<action.name.limit>QR_LIMIT_SCENE</action.name.limit>
+				<action.name.limit.str>QR_LIMIT_STR_SCENE</action.name.limit.str>
+				<show.ticket.url>https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=</show.ticket.url>
+				<user.info.url>https://api.weixin.qq.com/cgi-bin/user/info?access_token=</user.info.url>
+				<lang>zh_CN</lang>
+				<welcome.icar>\u60a8\u597d\u002c\u6b22\u8fce\u007b\u0046\u004f\u004c\u004c\u004f\u0057\u007d\u0069\u0043\u0061\u0072\u7ba1\u5bb6\u516c\u4f17\u53f7\u0021</welcome.icar>
+				<welcome.paibo>\u60a8\u597d\uff0c\u6b22\u8fce\u007b\u0046\u004f\u004c\u004c\u004f\u0057\u007d\u6d3e\u52c3\u6c7d\u8f66\u516c\u4f17\u53f7\uff0c\u3010\u505c\u8f66\u7f34\u8d39\u3011\u007b\u0055\u0052\u004c\u007d\uff0c\u66f4\u591a\u670d\u52a1\u8bf7\u67e5\u770b\u4e0b\u65b9\u83dc\u5355\u3002</welcome.paibo>
+				<!-- 微信支付账号相关配置-->
+				<down.order.url>https://api.mch.weixin.qq.com/pay/unifiedorder</down.order.url>
+				<pay.account.app.id>wx880aa7250a756969</pay.account.app.id>
+				<pay.account.app.secret>f0103f4f490096af95ecb766a27b3077</pay.account.app.secret>
+				<pay.tenant.num>1514674061</pay.tenant.num>
+				<pay.QR.url>weixin://wxpay/bizpayurl?</pay.QR.url>
+				<weixin.pay.app.key>YLpaibo8618176438893861817643889</weixin.pay.app.key>
+				<save.img.file.path>/opt/image</save.img.file.path>
+				<!-- 模式一支付回调-->
+				<pay.notify.url>http://wxsf.maxcar.com.cn/api-p/wx/callback/pay</pay.notify.url>
+				<!-- 扫码支付标识-->
+				<trade.type>JSAPI</trade.type>
+				<!-- 发起支付的终端IP-->
+				<spbill.create.ip>47.99.144.182</spbill.create.ip>
+				<!-- 订单支付描述-->
+				<weixin.pay.order.body>\u7389\u6797\u6d3e\u52c3\u002d\u505c\u8f66\u6536\u8d39</weixin.pay.order.body>
+				<!-- 微信jsapi权限接口认证-->
+				<weixin.js.api.url>https://api.weixin.qq.com/cgi-bin/ticket/getticket</weixin.js.api.url>
+				<!-- 我们的js支付页面url-->
+				<weixin.pay.js.url>http://wxsf.maxcar.com.cn/weixin/pay</weixin.pay.js.url>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+				<!--mqtt-->
+				<mqtt.server.host>tcp://192.168.7.130:1883</mqtt.server.host>
+				<mqtt.push.topic>MQTT_YL_UP</mqtt.push.topic>
+				<mqtt.server.username></mqtt.server.username>
+				<mqtt.server.password></mqtt.server.password>
+			</properties>
+			<activation><!-- 默认激活 -->
+				<activeByDefault>false</activeByDefault>
+			</activation>
+		</profile>
+
+		<!--公司-->
+		<profile>
+			<id>test-parking</id>
+			<properties>
+				<!--开发环境端口配置-->
+				<spring.profiles.active>test-parking</spring.profiles.active>
+				<!-- dubbo 2181-->
+				<dubbo.registry.address>zookeeper://localhost:3001</dubbo.registry.address>
+				<!-- datasource通用-->
+				<system.jdbc.prototypeCount>10</system.jdbc.prototypeCount>
+				<system.jdbc.maximumConnectionCount>50</system.jdbc.maximumConnectionCount>
+				<system.jdbc.minimumConnectionCount>10</system.jdbc.minimumConnectionCount>
+				<system.jdbc.houseKeepingTestSql>SELECT 'x'</system.jdbc.houseKeepingTestSql>
+				<!-- 云端数据源配置datasource库存、交易-->
+				<system.jdbc.driver.stock>com.mysql.jdbc.Driver</system.jdbc.driver.stock>
+				<system.jdbc.url.stock>jdbc:mysql://60.12.250.54:24785/maxcar_stock_l?characterEncoding=utf-8</system.jdbc.url.stock>
+				<system.jdbc.user.stock>root</system.jdbc.user.stock>
+				<system.jdbc.password.stock>Maxcar#2017</system.jdbc.password.stock>
+				<!-- 云端数据源配置datasource物业、商户-->
+				<system.jdbc.driver.market>com.mysql.jdbc.Driver</system.jdbc.driver.market>
+				<system.jdbc.url.market>jdbc:mysql://60.12.250.54:24785/maxcar_market_l?characterEncoding=utf-8</system.jdbc.url.market>
+				<system.jdbc.user.market>root</system.jdbc.user.market>
+				<system.jdbc.password.market>Maxcar#2017</system.jdbc.password.market>
+				<!-- 云端数据源配置datasource用户，配置-->
+				<system.jdbc.driver.user>com.mysql.jdbc.Driver</system.jdbc.driver.user>
+				<system.jdbc.url.user>jdbc:mysql://60.12.250.54:24785/maxcar_user_l?characterEncoding=utf-8</system.jdbc.url.user>
+				<system.jdbc.user.user>root</system.jdbc.user.user>
+				<system.jdbc.password.user>Maxcar#2017</system.jdbc.password.user>
+				<!-- 云端数据源配置datasource道闸-->
+				<system.jdbc.driver.base>com.mysql.jdbc.Driver</system.jdbc.driver.base>
+				<system.jdbc.url.base>jdbc:mysql://60.12.250.54:24785/maxcar_base_l?characterEncoding=utf-8</system.jdbc.url.base>
+				<system.jdbc.user.base>root</system.jdbc.user.base>
+				<system.jdbc.password.base>Maxcar#2017</system.jdbc.password.base>
+				<!-- 云端数据源配置datasource商户-->
+				<system.jdbc.driver.tenant>com.mysql.jdbc.Driver</system.jdbc.driver.tenant>
+				<system.jdbc.url.tenant>jdbc:mysql://60.12.250.54:24785/maxcar_tenant_l?characterEncoding=utf-8</system.jdbc.url.tenant>
+				<system.jdbc.user.tenant>root</system.jdbc.user.tenant>
+				<system.jdbc.password.tenant>Maxcar#2017</system.jdbc.password.tenant>
+				<!-- 云端数据源配置datasource道闸-->
+				<system.jdbc.driver.barrier>com.mysql.jdbc.Driver</system.jdbc.driver.barrier>
+				<system.jdbc.url.barrier>jdbc:mysql://60.12.250.54:24785/maxcar_barrier_l?characterEncoding=utf-8</system.jdbc.url.barrier>
+				<system.jdbc.user.barrier>root</system.jdbc.user.barrier>
+				<system.jdbc.password.barrier>Maxcar#2017</system.jdbc.password.barrier>
+				<!-- redis相关配置最大连接数：能够同时建立的“最大链接个数”  ，#最大空闲数：空闲链接数大于maxIdle时，将进行回收，#最小空闲数：低于minIdle时，将创建新的链接， #最大等待时间：单位ms  #使用连接时，检测连接是否成功 redis.pool.testOnReturn=true  #返回连接时，检测连接是否成功  -->
+				<redisMaxActive>200</redisMaxActive>
+				<redisMaxIdle>20</redisMaxIdle>
+				<redisMinIdle>5</redisMinIdle>
+				<redisMaxWait>100000</redisMaxWait>
+				<redisTestOnBorrow>true</redisTestOnBorrow>
+				<redisTestOnReturn>true</redisTestOnReturn>
+				<redisHost>60.12.250.54</redisHost>
+				<redis.password>lmaxcar2017t</redis.password>
+				<redisPort>5881</redisPort>
+				<redisName>maxcar-redis</redisName>
+				<!--卡夫卡-外网映射-停车收费-->
+				<!--<kafka.consumer.zookeeper.connect>60.12.250.54:3001,60.12.250.54:3002,60.12.250.54:3003</kafka.consumer.zookeeper.connect>
+				<kafka.consumer.servers>60.12.250.54:28378,60.12.250.54:28379</kafka.consumer.servers>
+				<kafka.producer.servers>60.12.250.54:28378,60.12.250.54:28379</kafka.producer.servers>-->
+				<kafka.consumer.zookeeper.connect>47.99.144.182:2181</kafka.consumer.zookeeper.connect>
+				<kafka.consumer.servers>47.99.144.182:9092</kafka.consumer.servers>
+				<kafka.producer.servers>47.99.144.182:9092</kafka.producer.servers>
+				<kafka.producer.topic>sync_upload_data_dev</kafka.producer.topic>
+
+				<kafka.producer.parking.topic>sync_upload_data_parking_dev</kafka.producer.parking.topic>
+				<kafka.consumer.topic006>sync_download_006_data_dev</kafka.consumer.topic006>
+				<kafka.consumer.topic007>sync_download_007_data_dev</kafka.consumer.topic007>
+				<kafka.consumer.topic008>sync_download_008_data_dev</kafka.consumer.topic008>
+				<kafka.consumer.topic010>sync_download_010_data_dev</kafka.consumer.topic010>
+
+				<local.servers.address>http://localhost:7960</local.servers.address>
+				<local.servers.parking.address>http://localhost:7950</local.servers.parking.address>
+				<!-- 大搜车接口配置 -->
+				<app.key>84304e368d4153cfd0dbafc967187729</app.key>
+				<app.secret>43f4d794f3b5c95239a092a66bcbede8</app.secret>
+				<base.url>https://api.souche.com/v1/vin_code/car_model_candidates?</base.url>
+				<url>https://api.souche.com</url>
+				<detail.url>https://api.souche.com/v1/car_model/detail_info?</detail.url>
+				<brands.url>https://api.souche.com/v1/car_model/brands?</brands.url>
+				<sc.brand.code.url>https://api.souche.com/v1/car_model/brands/xxx/series?</sc.brand.code.url>
+				<sc.series.code.url>https://api.souche.com/v1/car_model/series/xxx/models?</sc.series.code.url>
+				<sc.model.code.url>https://api.souche.com/v1/car_model/models/xxx?</sc.model.code.url>
+				<brand.dictionaries.url>https://api.souche.com/v1/car_model/brand_dictionaries?</brand.dictionaries.url>
+				<price.url>https://api.souche.com/v1/car_model/price?</price.url>
+				<used.car.price>https://api.souche.com/v1/car_model/used_car_price?</used.car.price>
+				<areas>https://api.souche.com/v1/dictionary/areas?</areas>
+				<!-- 微信推送相关配置 -->
+				<access.token.url>https://api.weixin.qq.com/cgi-bin/token</access.token.url>
+				<paibo.app.id>wx880aa7250a756969</paibo.app.id>
+				<paibo.app.secret.weixin>f0103f4f490096af95ecb766a27b3077</paibo.app.secret.weixin>
+				<icar.app.id>wx66cc7db87a6bb651</icar.app.id>
+				<icar.app.secret.weixin>2bc02251c593caa3526efbe2e1832599</icar.app.secret.weixin>
+				<grant.type>client_credential</grant.type>
+				<ticket.url>https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=</ticket.url>
+				<expire.seconds>604800</expire.seconds>
+				<action.name>QR_SCENE</action.name>
+				<action.name.str>QR_STR_SCENE</action.name.str>
+				<action.name.limit>QR_LIMIT_SCENE</action.name.limit>
+				<action.name.limit.str>QR_LIMIT_STR_SCENE</action.name.limit.str>
+				<show.ticket.url>https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=</show.ticket.url>
+				<user.info.url>https://api.weixin.qq.com/cgi-bin/user/info?access_token=</user.info.url>
+				<lang>zh_CN</lang>
+				<welcome.icar>\u60a8\u597d\u002c\u6b22\u8fce\u007b\u0046\u004f\u004c\u004c\u004f\u0057\u007d\u0069\u0043\u0061\u0072\u7ba1\u5bb6\u516c\u4f17\u53f7\u0021</welcome.icar>
+				<welcome.paibo>\u60a8\u597d\uff0c\u6b22\u8fce\u007b\u0046\u004f\u004c\u004c\u004f\u0057\u007d\u6d3e\u52c3\u6c7d\u8f66\u516c\u4f17\u53f7\uff0c\u3010\u505c\u8f66\u7f34\u8d39\u3011\u007b\u0055\u0052\u004c\u007d\uff0c\u66f4\u591a\u670d\u52a1\u8bf7\u67e5\u770b\u4e0b\u65b9\u83dc\u5355\u3002</welcome.paibo>
+				<!-- 微信支付账号相关配置-->
+				<down.order.url>https://api.mch.weixin.qq.com/pay/unifiedorder</down.order.url>
+				<pay.account.app.id>wx880aa7250a756969</pay.account.app.id>
+				<pay.account.app.secret>f0103f4f490096af95ecb766a27b3077</pay.account.app.secret>
+				<pay.tenant.num>1514674061</pay.tenant.num>
+				<pay.QR.url>weixin://wxpay/bizpayurl?</pay.QR.url>
+				<weixin.pay.app.key>YLpaibo8618176438893861817643889</weixin.pay.app.key>
+				<save.img.file.path>/opt/image</save.img.file.path>
+				<!-- 模式一支付回调-->
+				<pay.notify.url>http://wxsf-t.maxcar.com.cn/api-p/wx/callback/pay</pay.notify.url>
+				<!-- 扫码支付标识-->
+				<trade.type>JSAPI</trade.type>
+				<!-- 发起支付的终端IP-->
+				<spbill.create.ip>47.99.144.182</spbill.create.ip>
+				<!-- 订单支付描述-->
+				<weixin.pay.order.body>\u7389\u6797\u6d3e\u52c3\u002d\u505c\u8f66\u6536\u8d39</weixin.pay.order.body>
+				<!-- 微信jsapi权限接口认证-->
+				<weixin.js.api.url>https://api.weixin.qq.com/cgi-bin/ticket/getticket</weixin.js.api.url>
+				<!-- 我们的js支付页面url-->
+				<weixin.pay.js.url>http://wxsf-t.maxcar.com.cn/weixin/pay</weixin.pay.js.url>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+			</properties>
+			<activation><!-- 默认激活 -->
+				<activeByDefault>false</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>jdk1.8</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<jdk>1.8</jdk>
+			</activation>
+			<properties>
+				<maven.compiler.source>1.8</maven.compiler.source>
+				<maven.compiler.target>1.8</maven.compiler.target>
+				<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+			</properties>
+		</profile>
+	</profiles>
+
+
+	<build>
+		<!--<finalName>maxcar-util</finalName>-->
+		<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+		<resources>
+			<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+
+			<resource>
+				<targetPath>${project.build.directory}/classes</targetPath>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<!--使用IDEA时，导入的Maven项目默认的LanguageLevel和JavaCompiler都是1.5，1.5的情况下连最简单的@Override注解都不支持，所以项目可能出现一堆错。-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

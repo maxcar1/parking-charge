@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.user.dao.MarketMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.user.entity.Market" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="market_no" property="marketNo" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="simple_name" property="simpleName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="corporation_name" property="corporationName" jdbcType="VARCHAR" />
+    <result column="corporation_id" property="corporationId" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="taxno" property="taxno" jdbcType="VARCHAR" />
+    <result column="lt_lon" property="ltLon" jdbcType="DOUBLE" />
+    <result column="lt_lat" property="ltLat" jdbcType="DOUBLE" />
+    <result column="rb_lon" property="rbLon" jdbcType="DOUBLE" />
+    <result column="rb_lat" property="rbLat" jdbcType="DOUBLE" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="contacts1_name" property="contacts1Name" jdbcType="VARCHAR" />
+    <result column="contacts1_mobile" property="contacts1Mobile" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="contacts2_name" property="contacts2Name" jdbcType="VARCHAR" />
+    <result column="contacts2_mobile" property="contacts2Mobile" jdbcType="VARCHAR" />
+    <result column="contacts3_name" property="contacts3Name" jdbcType="VARCHAR" />
+    <result column="contacts3_mobile" property="contacts3Mobile" jdbcType="VARCHAR" />
+    <result column="contacts1_post" property="contacts1Post" jdbcType="VARCHAR" />
+    <result column="contacts2_post" property="contacts2Post" jdbcType="VARCHAR" />
+    <result column="contacts3_post" property="contacts3Post" jdbcType="VARCHAR" />
+    <result column="contacts1_mail" property="contacts1Mail" jdbcType="VARCHAR" />
+    <result column="contacts2_mail" property="contacts2Mail" jdbcType="VARCHAR" />
+    <result column="contacts3_mail" property="contacts3Mail" jdbcType="VARCHAR" />
+    <result column="tax_name" property="taxName" jdbcType="VARCHAR" />
+    <result column="tax_phone" property="taxPhone" jdbcType="VARCHAR" />
+    <result column="copy_file" property="copyFile" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="export" property="export" jdbcType="INTEGER" />
+    <result column="appId" property="appid" jdbcType="VARCHAR" />
+    <result column="appSecret" property="appsecret" jdbcType="VARCHAR" />
+    <result column="appId2" property="appid2" jdbcType="VARCHAR" />
+    <result column="appSecret2" property="appsecret2" jdbcType="VARCHAR" />
+    <result column="fmapID" property="fmapid" jdbcType="VARCHAR" />
+    <result column="e_lon" property="eLon" jdbcType="DOUBLE" />
+    <result column="e_lat" property="eLat" jdbcType="DOUBLE" />
+    <result column="market_test" property="market_test" jdbcType="INTEGER" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="carNumber" property="carNumber" jdbcType="VARCHAR" />
+    <result column="carManageName" property="carManageName" jdbcType="VARCHAR" />
+    <result column="stockControls" property="stockControls" jdbcType="INTEGER" />
+    <result column="tenantAppId" property="tenantappid" jdbcType="VARCHAR" />
+    <result column="tenantAppSecret" property="tenantappsecret" jdbcType="VARCHAR" />
+    <result column="pay_wechat_key" property="payWeChatKey" jdbcType="VARCHAR" />
+    <result column="pay_wechat_mchid" property="payWechatMchId" jdbcType="VARCHAR" />
+    <result column="pay_wechat_appid" property="payWechatAppId" jdbcType="VARCHAR" />
+
+    <result column="marketAppId" property="marketappid" jdbcType="VARCHAR" />
+    <result column="marketAppSecret" property="marketappsecret" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Example_Where_Clauses" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+      and isvalid = 1
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, market_no, name, simple_name, description, corporation_name, corporation_id,
+    city, address, bank, account, taxno, lt_lon, lt_lat, rb_lon, rb_lat, isvalid, version,
+    contacts1_name, contacts1_mobile, phone, contacts2_name, contacts2_mobile, contacts3_name,
+    contacts3_mobile, contacts1_post, contacts2_post, contacts3_post, contacts1_mail,
+    contacts2_mail, contacts3_mail, tax_name, tax_phone, copy_file, register_time, picture,
+    export, appId, appSecret, appId2, appSecret2, fmapID, e_lon, e_lat, market_test,
+    logo, carNumber, carManageName, stockControls, tenantAppId, tenantAppSecret,pay_wechat_key,pay_wechat_mchid,pay_wechat_appid,marketAppId, marketAppSecret,province
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.MarketExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from market 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clauses" />
+    </if>
+    <if test="orderByClause != null" >
+     order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from market
+    where id = #{id,jdbcType=VARCHAR}
+    and isvalid = 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from market
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.user.entity.MarketExample" >
+    delete from market
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.user.entity.Market" >
+    insert into market (id, market_no, name,
+    simple_name, description, corporation_name,
+    corporation_id, city, address,
+    bank, account, taxno,
+    lt_lon, lt_lat, rb_lon, rb_lat,
+    isvalid, version, contacts1_name,
+    contacts1_mobile, phone, contacts2_name,
+    contacts2_mobile, contacts3_name, contacts3_mobile,
+    contacts1_post, contacts2_post, contacts3_post,
+    contacts1_mail, contacts2_mail, contacts3_mail,
+    tax_name, tax_phone, copy_file,
+    register_time, picture, export,
+    appId, appSecret, appId2,
+    appSecret2, fmapID, e_lon,
+    e_lat, market_test, logo,
+    carNumber, carManageName, stockControls,
+    tenantAppId, tenantAppSecret,pay_wechat_key,pay_wechat_mchid,pay_wechat_appid, marketAppId,
+      marketAppSecret,province)
+    values (#{id,jdbcType=VARCHAR}, #{marketNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{simpleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{corporationName,jdbcType=VARCHAR},
+    #{corporationId,jdbcType=VARCHAR}, #{city,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+    #{bank,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{taxno,jdbcType=VARCHAR},
+    #{ltLon,jdbcType=DOUBLE}, #{ltLat,jdbcType=DOUBLE}, #{rbLon,jdbcType=DOUBLE}, #{rbLat,jdbcType=DOUBLE},
+    #{isvalid,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{contacts1Name,jdbcType=VARCHAR},
+    #{contacts1Mobile,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{contacts2Name,jdbcType=VARCHAR},
+    #{contacts2Mobile,jdbcType=VARCHAR}, #{contacts3Name,jdbcType=VARCHAR}, #{contacts3Mobile,jdbcType=VARCHAR},
+    #{contacts1Post,jdbcType=VARCHAR}, #{contacts2Post,jdbcType=VARCHAR}, #{contacts3Post,jdbcType=VARCHAR},
+    #{contacts1Mail,jdbcType=VARCHAR}, #{contacts2Mail,jdbcType=VARCHAR}, #{contacts3Mail,jdbcType=VARCHAR},
+    #{taxName,jdbcType=VARCHAR}, #{taxPhone,jdbcType=VARCHAR}, #{copyFile,jdbcType=VARCHAR},
+    #{registerTime,jdbcType=TIMESTAMP}, #{picture,jdbcType=VARCHAR}, #{export,jdbcType=INTEGER},
+    #{appid,jdbcType=VARCHAR}, #{appsecret,jdbcType=VARCHAR}, #{appid2,jdbcType=VARCHAR},
+    #{appsecret2,jdbcType=VARCHAR}, #{fmapid,jdbcType=VARCHAR}, #{eLon,jdbcType=DOUBLE},
+    #{eLat,jdbcType=DOUBLE}, #{market_test,jdbcType=INTEGER}, #{logo,jdbcType=VARCHAR},
+    #{carNumber,jdbcType=VARCHAR}, #{carManageName,jdbcType=VARCHAR}, #{stockControls,jdbcType=INTEGER},
+    #{tenantappid,jdbcType=VARCHAR}, #{tenantappsecret,jdbcType=VARCHAR},#{payWeChatKey},#{payWechatMchId},#{payWechatAppId},#{marketappid,jdbcType=VARCHAR},
+      #{marketappsecret,jdbcType=VARCHAR}, #{province,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.user.entity.Market" >
+    insert into market
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="marketNo != null" >
+        market_no,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="simpleName != null" >
+        simple_name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="corporationName != null" >
+        corporation_name,
+      </if>
+      <if test="corporationId != null" >
+        corporation_id,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="taxno != null" >
+        taxno,
+      </if>
+      <if test="ltLon != null" >
+        lt_lon,
+      </if>
+      <if test="ltLat != null" >
+        lt_lat,
+      </if>
+      <if test="rbLon != null" >
+        rb_lon,
+      </if>
+      <if test="rbLat != null" >
+        rb_lat,
+      </if>
+      <if test="isvalid != null" >
+        isvalid,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="contacts1Name != null" >
+        contacts1_name,
+      </if>
+      <if test="contacts1Mobile != null" >
+        contacts1_mobile,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="contacts2Name != null" >
+        contacts2_name,
+      </if>
+      <if test="contacts2Mobile != null" >
+        contacts2_mobile,
+      </if>
+      <if test="contacts3Name != null" >
+        contacts3_name,
+      </if>
+      <if test="contacts3Mobile != null" >
+        contacts3_mobile,
+      </if>
+      <if test="contacts1Post != null" >
+        contacts1_post,
+      </if>
+      <if test="contacts2Post != null" >
+        contacts2_post,
+      </if>
+      <if test="contacts3Post != null" >
+        contacts3_post,
+      </if>
+      <if test="contacts1Mail != null" >
+        contacts1_mail,
+      </if>
+      <if test="contacts2Mail != null" >
+        contacts2_mail,
+      </if>
+      <if test="contacts3Mail != null" >
+        contacts3_mail,
+      </if>
+      <if test="taxName != null" >
+        tax_name,
+      </if>
+      <if test="taxPhone != null" >
+        tax_phone,
+      </if>
+      <if test="copyFile != null" >
+        copy_file,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="export != null" >
+        export,
+      </if>
+      <if test="appid != null" >
+        appId,
+      </if>
+      <if test="appsecret != null" >
+        appSecret,
+      </if>
+      <if test="appid2 != null" >
+        appId2,
+      </if>
+      <if test="appsecret2 != null" >
+        appSecret2,
+      </if>
+      <if test="fmapid != null" >
+        fmapID,
+      </if>
+      <if test="eLon != null" >
+        e_lon,
+      </if>
+      <if test="eLat != null" >
+        e_lat,
+      </if>
+      <if test="market_test != null" >
+        market_test,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="carNumber != null" >
+        carNumber,
+      </if>
+      <if test="carManageName != null" >
+        carManageName,
+      </if>
+      <if test="stockControls != null" >
+        stockControls,
+      </if>
+      <if test="tenantappid != null" >
+        tenantAppId,
+      </if>
+      <if test="tenantappsecret != null" >
+        tenantAppSecret,
+      </if>
+      <if test="payWeChatKey != null" >
+        pay_wechat_key,
+      </if>
+      <if test="payWechatMchId != null" >
+        pay_wechat_mchid,
+      </if>
+      <if test="payWechatAppId != null" >
+        pay_wechat_appid,
+      </if>
+      <if test="marketappid != null" >
+        marketAppId,
+      </if>
+      <if test="marketappsecret != null" >
+        marketAppSecret,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="marketNo != null" >
+        #{marketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleName != null" >
+        #{simpleName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="corporationName != null" >
+        #{corporationName,jdbcType=VARCHAR},
+      </if>
+      <if test="corporationId != null" >
+        #{corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="taxno != null" >
+        #{taxno,jdbcType=VARCHAR},
+      </if>
+      <if test="ltLon != null" >
+        #{ltLon,jdbcType=DOUBLE},
+      </if>
+      <if test="ltLat != null" >
+        #{ltLat,jdbcType=DOUBLE},
+      </if>
+      <if test="rbLon != null" >
+        #{rbLon,jdbcType=DOUBLE},
+      </if>
+      <if test="rbLat != null" >
+        #{rbLat,jdbcType=DOUBLE},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="contacts1Name != null" >
+        #{contacts1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts1Mobile != null" >
+        #{contacts1Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts2Name != null" >
+        #{contacts2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts2Mobile != null" >
+        #{contacts2Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts3Name != null" >
+        #{contacts3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts3Mobile != null" >
+        #{contacts3Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts1Post != null" >
+        #{contacts1Post,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts2Post != null" >
+        #{contacts2Post,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts3Post != null" >
+        #{contacts3Post,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts1Mail != null" >
+        #{contacts1Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts2Mail != null" >
+        #{contacts2Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts3Mail != null" >
+        #{contacts3Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="taxName != null" >
+        #{taxName,jdbcType=VARCHAR},
+      </if>
+      <if test="taxPhone != null" >
+        #{taxPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="copyFile != null" >
+        #{copyFile,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="export != null" >
+        #{export,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="appid2 != null" >
+        #{appid2,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret2 != null" >
+        #{appsecret2,jdbcType=VARCHAR},
+      </if>
+      <if test="fmapid != null" >
+        #{fmapid,jdbcType=VARCHAR},
+      </if>
+      <if test="eLon != null" >
+        #{eLon,jdbcType=DOUBLE},
+      </if>
+      <if test="eLat != null" >
+        #{eLat,jdbcType=DOUBLE},
+      </if>
+      <if test="market_test != null" >
+        #{market_test,jdbcType=INTEGER},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carManageName != null" >
+        #{carManageName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockControls != null" >
+        #{stockControls,jdbcType=INTEGER},
+      </if>
+      <if test="tenantappid != null" >
+        #{tenantappid,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantappsecret != null" >
+        #{tenantappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="payWeChatKey != null" >
+        #{payWeChatKey},
+      </if>
+      <if test="payWechatMchId != null" >
+        #{payWechatMchId},
+      </if>
+      <if test="payWechatAppId != null" >
+        #{payWechatAppId},
+      </if>
+      <if test="marketappid != null" >
+        #{marketappid,jdbcType=VARCHAR},
+      </if>
+      <if test="marketappsecret != null" >
+        #{marketappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.user.entity.MarketExample" resultType="java.lang.Integer" >
+    select count(*) from market
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update market
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketNo != null" >
+        market_no = #{record.marketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.simpleName != null" >
+        simple_name = #{record.simpleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporationName != null" >
+        corporation_name = #{record.corporationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.corporationId != null" >
+        corporation_id = #{record.corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank != null" >
+        bank = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxno != null" >
+        taxno = #{record.taxno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltLon != null" >
+        lt_lon = #{record.ltLon,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ltLat != null" >
+        lt_lat = #{record.ltLat,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rbLon != null" >
+        rb_lon = #{record.rbLon,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rbLat != null" >
+        rb_lat = #{record.rbLat,jdbcType=DOUBLE},
+      </if>
+      <if test="record.isvalid != null" >
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.contacts1Name != null" >
+        contacts1_name = #{record.contacts1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts1Mobile != null" >
+        contacts1_mobile = #{record.contacts1Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts2Name != null" >
+        contacts2_name = #{record.contacts2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts2Mobile != null" >
+        contacts2_mobile = #{record.contacts2Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts3Name != null" >
+        contacts3_name = #{record.contacts3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts3Mobile != null" >
+        contacts3_mobile = #{record.contacts3Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts1Post != null" >
+        contacts1_post = #{record.contacts1Post,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts2Post != null" >
+        contacts2_post = #{record.contacts2Post,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts3Post != null" >
+        contacts3_post = #{record.contacts3Post,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts1Mail != null" >
+        contacts1_mail = #{record.contacts1Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts2Mail != null" >
+        contacts2_mail = #{record.contacts2Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacts3Mail != null" >
+        contacts3_mail = #{record.contacts3Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxName != null" >
+        tax_name = #{record.taxName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxPhone != null" >
+        tax_phone = #{record.taxPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.copyFile != null" >
+        copy_file = #{record.copyFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerTime != null" >
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.export != null" >
+        export = #{record.export,jdbcType=INTEGER},
+      </if>
+      <if test="record.appid != null" >
+        appId = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appsecret != null" >
+        appSecret = #{record.appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appid2 != null" >
+        appId2 = #{record.appid2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appsecret2 != null" >
+        appSecret2 = #{record.appsecret2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmapid != null" >
+        fmapID = #{record.fmapid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eLon != null" >
+        e_lon = #{record.eLon,jdbcType=DOUBLE},
+      </if>
+      <if test="record.eLat != null" >
+        e_lat = #{record.eLat,jdbcType=DOUBLE},
+      </if>
+      <if test="record.market_test != null" >
+        market_test = #{record.market_test,jdbcType=INTEGER},
+      </if>
+      <if test="record.logo != null" >
+        logo = #{record.logo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carNumber != null" >
+        carNumber = #{record.carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carManageName != null" >
+        carManageName = #{record.carManageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockControls != null" >
+        stockControls = #{record.stockControls,jdbcType=INTEGER},
+      </if>
+      <if test="record.tenantappid != null" >
+        tenantAppId = #{record.tenantappid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantappsecret != null" >
+        tenantAppSecret = #{record.tenantappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payWeChatKey != null" >
+        pay_wechat_key = #{record.payWeChatKey},
+      </if>
+      <if test="record.payWechatMchId != null" >
+        pay_wechat_mchid = #{record.payWechatMchId},
+      </if>
+      <if test="record.payWechatAppId != null" >
+        pay_wechat_appid = #{record.payWechatAppId},
+      </if>
+      <if test="record.marketappid != null" >
+        marketAppId = #{record.marketappid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketappsecret != null" >
+        marketAppSecret = #{record.marketappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        city = #{record.province,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update market
+    set id = #{record.id,jdbcType=VARCHAR},
+    market_no = #{record.marketNo,jdbcType=VARCHAR},
+    name = #{record.name,jdbcType=VARCHAR},
+    simple_name = #{record.simpleName,jdbcType=VARCHAR},
+    description = #{record.description,jdbcType=VARCHAR},
+    corporation_name = #{record.corporationName,jdbcType=VARCHAR},
+    corporation_id = #{record.corporationId,jdbcType=VARCHAR},
+    city = #{record.city,jdbcType=INTEGER},
+    address = #{record.address,jdbcType=VARCHAR},
+    bank = #{record.bank,jdbcType=VARCHAR},
+    account = #{record.account,jdbcType=VARCHAR},
+    taxno = #{record.taxno,jdbcType=VARCHAR},
+    lt_lon = #{record.ltLon,jdbcType=DOUBLE},
+    lt_lat = #{record.ltLat,jdbcType=DOUBLE},
+    rb_lon = #{record.rbLon,jdbcType=DOUBLE},
+    rb_lat = #{record.rbLat,jdbcType=DOUBLE},
+    isvalid = #{record.isvalid,jdbcType=INTEGER},
+    version = #{record.version,jdbcType=INTEGER},
+    contacts1_name = #{record.contacts1Name,jdbcType=VARCHAR},
+    contacts1_mobile = #{record.contacts1Mobile,jdbcType=VARCHAR},
+    phone = #{record.phone,jdbcType=VARCHAR},
+    contacts2_name = #{record.contacts2Name,jdbcType=VARCHAR},
+    contacts2_mobile = #{record.contacts2Mobile,jdbcType=VARCHAR},
+    contacts3_name = #{record.contacts3Name,jdbcType=VARCHAR},
+    contacts3_mobile = #{record.contacts3Mobile,jdbcType=VARCHAR},
+    contacts1_post = #{record.contacts1Post,jdbcType=VARCHAR},
+    contacts2_post = #{record.contacts2Post,jdbcType=VARCHAR},
+    contacts3_post = #{record.contacts3Post,jdbcType=VARCHAR},
+    contacts1_mail = #{record.contacts1Mail,jdbcType=VARCHAR},
+    contacts2_mail = #{record.contacts2Mail,jdbcType=VARCHAR},
+    contacts3_mail = #{record.contacts3Mail,jdbcType=VARCHAR},
+    tax_name = #{record.taxName,jdbcType=VARCHAR},
+    tax_phone = #{record.taxPhone,jdbcType=VARCHAR},
+    copy_file = #{record.copyFile,jdbcType=VARCHAR},
+    register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+    picture = #{record.picture,jdbcType=VARCHAR},
+    export = #{record.export,jdbcType=INTEGER},
+    appId = #{record.appid,jdbcType=VARCHAR},
+    appSecret = #{record.appsecret,jdbcType=VARCHAR},
+    appId2 = #{record.appid2,jdbcType=VARCHAR},
+    appSecret2 = #{record.appsecret2,jdbcType=VARCHAR},
+    fmapID = #{record.fmapid,jdbcType=VARCHAR},
+    e_lon = #{record.eLon,jdbcType=DOUBLE},
+    e_lat = #{record.eLat,jdbcType=DOUBLE},
+    market_test = #{record.market_test,jdbcType=INTEGER},
+    logo = #{record.logo,jdbcType=VARCHAR},
+    carNumber = #{record.carNumber,jdbcType=VARCHAR},
+    carManageName = #{record.carManageName,jdbcType=VARCHAR},
+    stockControls = #{record.stockControls,jdbcType=INTEGER},
+    tenantAppId = #{record.tenantappid,jdbcType=VARCHAR},
+    tenantAppSecret = #{record.tenantappsecret,jdbcType=VARCHAR},
+    pay_wechat_key =#{record.payWeChatKey},
+    pay_wechat_mchid = #{record.payWechatMchId},
+    pay_wechat_appid = #{record.payWechatAppId},
+    marketAppId = #{record.marketappid,jdbcType=VARCHAR},
+    marketAppSecret = #{record.marketappsecret,jdbcType=VARCHAR},
+    province = #{record.province,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.user.entity.Market" >
+    update market
+    <set >
+      <if test="marketNo != null" >
+        market_no = #{marketNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleName != null" >
+        simple_name = #{simpleName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="corporationName != null" >
+        corporation_name = #{corporationName,jdbcType=VARCHAR},
+      </if>
+      <if test="corporationId != null" >
+        corporation_id = #{corporationId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="taxno != null" >
+        taxno = #{taxno,jdbcType=VARCHAR},
+      </if>
+      <if test="ltLon != null" >
+        lt_lon = #{ltLon,jdbcType=DOUBLE},
+      </if>
+      <if test="ltLat != null" >
+        lt_lat = #{ltLat,jdbcType=DOUBLE},
+      </if>
+      <if test="rbLon != null" >
+        rb_lon = #{rbLon,jdbcType=DOUBLE},
+      </if>
+      <if test="rbLat != null" >
+        rb_lat = #{rbLat,jdbcType=DOUBLE},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="contacts1Name != null" >
+        contacts1_name = #{contacts1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts1Mobile != null" >
+        contacts1_mobile = #{contacts1Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts2Name != null" >
+        contacts2_name = #{contacts2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts2Mobile != null" >
+        contacts2_mobile = #{contacts2Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts3Name != null" >
+        contacts3_name = #{contacts3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts3Mobile != null" >
+        contacts3_mobile = #{contacts3Mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts1Post != null" >
+        contacts1_post = #{contacts1Post,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts2Post != null" >
+        contacts2_post = #{contacts2Post,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts3Post != null" >
+        contacts3_post = #{contacts3Post,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts1Mail != null" >
+        contacts1_mail = #{contacts1Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts2Mail != null" >
+        contacts2_mail = #{contacts2Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts3Mail != null" >
+        contacts3_mail = #{contacts3Mail,jdbcType=VARCHAR},
+      </if>
+      <if test="taxName != null" >
+        tax_name = #{taxName,jdbcType=VARCHAR},
+      </if>
+      <if test="taxPhone != null" >
+        tax_phone = #{taxPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="copyFile != null" >
+        copy_file = #{copyFile,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="export != null" >
+        export = #{export,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null" >
+        appId = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret != null" >
+        appSecret = #{appsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="appid2 != null" >
+        appId2 = #{appid2,jdbcType=VARCHAR},
+      </if>
+      <if test="appsecret2 != null" >
+        appSecret2 = #{appsecret2,jdbcType=VARCHAR},
+      </if>
+      <if test="fmapid != null" >
+        fmapID = #{fmapid,jdbcType=VARCHAR},
+      </if>
+      <if test="eLon != null" >
+        e_lon = #{eLon,jdbcType=DOUBLE},
+      </if>
+      <if test="eLat != null" >
+        e_lat = #{eLat,jdbcType=DOUBLE},
+      </if>
+      <if test="market_test != null" >
+        market_test = #{market_test,jdbcType=INTEGER},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        carNumber = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carManageName != null" >
+        carManageName = #{carManageName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockControls != null" >
+        stockControls = #{stockControls,jdbcType=INTEGER},
+      </if>
+      <if test="tenantappid != null" >
+        tenantAppId = #{tenantappid,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantappsecret != null" >
+        tenantAppSecret = #{tenantappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="payWeChatKey != null" >
+        pay_wechat_key = #{payWeChatKey},
+      </if>
+      <if test="payWechatMchId != null" >
+        pay_wechat_mchid = #{payWechatMchId},
+      </if>
+      <if test="payWechatAppId != null" >
+        pay_wechat_appid = #{payWechatAppId},
+      </if>
+      <if test="marketappid != null" >
+        marketAppId = #{marketappid,jdbcType=VARCHAR},
+      </if>
+      <if test="marketappsecret != null" >
+        marketAppSecret = #{marketappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.user.entity.Market" >
+    update market
+    set market_no = #{marketNo,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    simple_name = #{simpleName,jdbcType=VARCHAR},
+    description = #{description,jdbcType=VARCHAR},
+    corporation_name = #{corporationName,jdbcType=VARCHAR},
+    corporation_id = #{corporationId,jdbcType=VARCHAR},
+    city = #{city,jdbcType=INTEGER},
+    address = #{address,jdbcType=VARCHAR},
+    bank = #{bank,jdbcType=VARCHAR},
+    account = #{account,jdbcType=VARCHAR},
+    taxno = #{taxno,jdbcType=VARCHAR},
+    lt_lon = #{ltLon,jdbcType=DOUBLE},
+    lt_lat = #{ltLat,jdbcType=DOUBLE},
+    rb_lon = #{rbLon,jdbcType=DOUBLE},
+    rb_lat = #{rbLat,jdbcType=DOUBLE},
+    isvalid = #{isvalid,jdbcType=INTEGER},
+    version = #{version,jdbcType=INTEGER},
+    contacts1_name = #{contacts1Name,jdbcType=VARCHAR},
+    contacts1_mobile = #{contacts1Mobile,jdbcType=VARCHAR},
+    phone = #{phone,jdbcType=VARCHAR},
+    contacts2_name = #{contacts2Name,jdbcType=VARCHAR},
+    contacts2_mobile = #{contacts2Mobile,jdbcType=VARCHAR},
+    contacts3_name = #{contacts3Name,jdbcType=VARCHAR},
+    contacts3_mobile = #{contacts3Mobile,jdbcType=VARCHAR},
+    contacts1_post = #{contacts1Post,jdbcType=VARCHAR},
+    contacts2_post = #{contacts2Post,jdbcType=VARCHAR},
+    contacts3_post = #{contacts3Post,jdbcType=VARCHAR},
+    contacts1_mail = #{contacts1Mail,jdbcType=VARCHAR},
+    contacts2_mail = #{contacts2Mail,jdbcType=VARCHAR},
+    contacts3_mail = #{contacts3Mail,jdbcType=VARCHAR},
+    tax_name = #{taxName,jdbcType=VARCHAR},
+    tax_phone = #{taxPhone,jdbcType=VARCHAR},
+    copy_file = #{copyFile,jdbcType=VARCHAR},
+    register_time = #{registerTime,jdbcType=TIMESTAMP},
+    picture = #{picture,jdbcType=VARCHAR},
+    export = #{export,jdbcType=INTEGER},
+    appId = #{appid,jdbcType=VARCHAR},
+    appSecret = #{appsecret,jdbcType=VARCHAR},
+    appId2 = #{appid2,jdbcType=VARCHAR},
+    appSecret2 = #{appsecret2,jdbcType=VARCHAR},
+    fmapID = #{fmapid,jdbcType=VARCHAR},
+    e_lon = #{eLon,jdbcType=DOUBLE},
+    e_lat = #{eLat,jdbcType=DOUBLE},
+    market_test = #{market_test,jdbcType=INTEGER},
+    logo = #{logo,jdbcType=VARCHAR},
+    carNumber = #{carNumber,jdbcType=VARCHAR},
+    carManageName = #{carManageName,jdbcType=VARCHAR},
+    stockControls = #{stockControls,jdbcType=INTEGER},
+    tenantAppId = #{tenantappid,jdbcType=VARCHAR},
+    tenantAppSecret = #{tenantappsecret,jdbcType=VARCHAR},
+    pay_wechat_key = #{payWeChatKey},
+    pay_wechat_mchid = #{payWechatMchId},
+    pay_wechat_appid = #{payWechatAppId},
+      marketAppId = #{marketappid,jdbcType=VARCHAR},
+      marketAppSecret = #{marketappsecret,jdbcType=VARCHAR},
+      province = #{province,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="batchMarketSync" parameterType="java.util.List" flushCache="true">
+    insert into market (id,account,address,bank,market_no,contacts1_post,contacts1_mail,contacts2_mail,contacts3_mail,city,corporation_id,corporation_name,description,isvalid,name,simple_name,taxno,
+    tax_name,tax_phone,phone,contacts1_name,contacts1_mobile,contacts2_name,contacts2_mobile,contacts3_name,contacts3_mobile,contacts2_post,contacts3_post,register_time,version,copy_file,
+    picture,export,appId,appSecret,appId2,appSecret2,fmapID,lt_lat,lt_lon,rb_lat,rb_lon,car_control,market_test,pay_wechat_key,pay_wechat_mchid,pay_wechat_appid)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id},#{item.account},#{item.address},#{item.bank},#{item.market_no},
+      #{item.contacts1_post},#{item.contacts1_mail},#{item.contacts2_mail},#{item.contacts3_mail},#{item.city},#{item.corporation_id},#{item.corporation_name},#{item.description},
+      #{item.isvalid},#{item.name},#{item.simple_name},#{item.taxno},#{item.tax_name},#{item.tax_phone},#{item.phone},
+      #{item.contacts1_name},#{item.contacts1_mobile},#{item.contacts2_name},#{item.contacts2_mobile},#{item.contacts3_name},#{item.contacts3_mobile},#{item.contacts2_post},#{item.contacts3_post},#{item.register_time},#{item.version},#{item.copy_file},
+      #{item.picture},#{item.export},#{item.appId},#{item.appSecret},#{item.appId2},#{item.appSecret2},#{item.fmapID},#{item.lt_lat},
+      #{item.lt_lon},#{item.rb_lat},#{item.rb_lon},#{item.car_control},#{item.market_test},
+      #{item.pay_wechat_key},#{item.pay_wechat_mchid},#{item.pay_wechat_appid})
+    </foreach>
+    ON DUPLICATE KEY UPDATE
+    account = values(account),address = values(address),bank = values(bank),market_no=values(market_no),
+    contacts1_post = values(contacts1_post),contacts1_mail=values(contacts1_mail),contacts2_mail=values(contacts2_mail),contacts3_mail=values(contacts3_mail),city=values(city),corporation_id=values(corporation_id),corporation_name=values(corporation_name),description=values(description),
+    isvalid=values(isvalid),name =values(name),simple_name=values(simple_name),taxno=values(taxno),tax_phone=values(tax_phone),phone=values(phone),contacts1_name=values(contacts1_name),
+    contacts1_mobile=values(contacts1_mobile),contacts2_name=values(contacts2_name),contacts2_mobile=values(contacts2_mobile),contacts3_name=(contacts3_name),contacts3_mobile=values(contacts3_mobile),contacts2_post=values(contacts2_post),contacts3_post=values(contacts3_post),
+    register_time=values(register_time),version = values(version),copy_file=values(copy_file),picture=values(picture),export=values(export),appId=(appId),appSecret = values(appSecret),
+    appId2 = values(appId2),appSecret2 = values(appSecret2),fmapID = values(fmapID),lt_lat = values(lt_lat),lt_lon = values(lt_lon),
+    rb_lat = values(rb_lat),rb_lon = values(rb_lon),car_control = values(car_control),
+    market_test = values(market_test),pay_wechat_key=values(pay_wechat_key),pay_wechat_mchid=values(pay_wechat_mchid),pay_wechat_appid=values(pay_wechat_appid)
+  </update>
+  <select id="getMarket" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from market
+    where  market_no=#{id}
+  </select>
+</mapper>

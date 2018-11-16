@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">  
+    
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/' >  
+    
+  
+    <appender name="Console" class="org.apache.log4j.ConsoleAppender">  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern" value="%d [%p] %c{1} - %m%n" />  
+        </layout>  
+        <!--过滤器设置输出的级别 -->  
+        <filter class="com.maxcar.base.util.cuslogs.CustomerLogFilter">
+            <param name="levelMin" value="DEBUG" />  
+            <param name="levelMax" value="Customer" />  
+            <param name="AcceptOnMatch" value="true" />  
+        </filter>  
+    </appender>  
+    
+    <appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">  
+        <param name="encoding" value="UTF-8"></param>
+        <param name="File" value="logs/maxcar-user-service.log"></param>
+        <param name="DatePattern" value="'_'yyyyMMdd'.log'"></param>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss\} %m%n"></param>
+        </layout> 
+        <!--过滤器设置输出的级别 -->  
+        <filter class="com.maxcar.base.util.cuslogs.CustomerLogFilter">
+            <param name="levelMin" value="Customer" />  
+            <param name="levelMax" value="Customer" />  
+            <param name="AcceptOnMatch" value="true" />  
+        </filter>  
+    </appender>
+    
+    <appender name="dailyRollingFile_System" class="org.apache.log4j.DailyRollingFileAppender">  
+        <param name="encoding" value="UTF-8"></param>
+        <param name="File" value="systemlogs/maxcar-user-service.log"></param>
+        <param name="DatePattern" value="'_'yyyyMMdd'.log'"></param>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d [%p] %c{1} - %m%n"></param>
+        </layout> 
+        <!--过滤器设置输出的级别 -->  
+        <filter class="com.maxcar.base.util.cuslogs.CustomerLogFilter">
+            <param name="levelMin" value="DEBUG" />  
+            <param name="levelMax" value="Customer" />  
+            <param name="AcceptOnMatch" value="true" />  
+        </filter>  
+    </appender> 
+  
+    <!-- 根logger的设置-->  
+    <root>  
+        <priority value ="INFO"/>  
+        <priority value ="DEBUG"/>  
+        <appender-ref ref="Console"/>  
+        <appender-ref ref="dailyRollingFile"/>
+        <appender-ref ref="dailyRollingFile_System"/>
+    </root>  
+</log4j:configuration>

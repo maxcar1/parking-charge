@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.tenant.dao.IntegralStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.tenant.pojo.IntegralStatistics" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="tenant_no" property="tenantNo" jdbcType="VARCHAR" />
+      <result column="tenant_name" property="tenantName" jdbcType="VARCHAR"/>
+      <result column="time" property="time" jdbcType="DATE"/>
+    <result column="count_score" property="countScore" jdbcType="INTEGER" />
+      <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+      <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_operator" property="updateOperator" jdbcType="VARCHAR" />
+
+
+      <result column="months" property="months" jdbcType="INTEGER"/>
+      <result column="tenant_rowno" property="tenantRowno" jdbcType="VARCHAR"/>
+      <result column="area_rowno" property="areaRowno" jdbcType="VARCHAR"/>
+      <result column="month_time" property="monthTime" jdbcType="VARCHAR"/>
+      <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+      <where>
+          <foreach collection="oredCriteria" item="criteria" separator="or">
+              <if test="criteria.valid">
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion">
+                  <choose>
+                      <when test="criterion.noValue" >
+                          and ${criterion.condition}
+                </when>
+                      <when test="criterion.singleValue" >
+                          and ${criterion.condition} #{criterion.value}
+                      </when>
+                      <when test="criterion.betweenValue">
+                          and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                      </when>
+                      <when test="criterion.listValue">
+                          and ${criterion.condition}
+                          <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                              #{listItem}
+                          </foreach>
+                      </when>
+                  </choose>
+              </foreach>
+          </trim>
+        </if>
+          </foreach>
+      </where>
+  </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                  <when test="criterion.noValue">
+                      and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                      and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                      and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                  <when test="criterion.listValue">
+                      and ${criterion.condition}
+                      <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                          #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+    </sql>
+  <sql id="Base_Column_List" >
+    id, tenant_no, tenant_name, time, count_score, area, level, market_id, isvalid, remark,
+      insert_time, insert_operator, update_time, update_operator
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.tenant.pojo.IntegralStatisticsExample" >
+    select
+      <if test="distinct" >
+      distinct
+      </if>
+      'true' as QUERYID,
+    <include refid="Base_Column_List" />
+      from integral_statistics
+    <if test="_parameter != null" >
+        <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null" >
+        order by ${orderByClause}
+    </if>
+  </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+    from integral_statistics
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from integral_statistics
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.tenant.pojo.IntegralStatisticsExample" >
+      delete from integral_statistics
+      <if test="_parameter != null" >
+          <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.tenant.pojo.IntegralStatistics" >
+      insert into integral_statistics (id, tenant_no, tenant_name,
+      time, count_score, area,
+      level, market_id, isvalid,
+      remark, insert_time, insert_operator,
+      update_time, update_operator)
+      values (#{id,jdbcType=VARCHAR}, #{tenantNo,jdbcType=VARCHAR}, #{tenantName,jdbcType=VARCHAR},
+      #{time,jdbcType=DATE}, #{countScore,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR},
+      #{level,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{isvalid,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{insertOperator,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateOperator,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.tenant.pojo.IntegralStatistics" >
+    insert into integral_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null" >
+          id,
+      </if>
+            <if test="tenantNo != null" >
+                tenant_no,
+      </if>
+            <if test="tenantName != null">
+                tenant_name,
+            </if>
+            <if test="time != null">
+                time,
+      </if>
+            <if test="countScore != null">
+                count_score,
+      </if>
+            <if test="area != null" >
+                area,
+            </if>
+            <if test="level != null" >
+        level,
+            </if>
+            <if test="marketId != null" >
+                market_id,
+      </if>
+      <if test="isvalid != null" >
+          isvalid,
+      </if>
+      <if test="remark != null" >
+          remark,
+      </if>
+      <if test="insertTime != null" >
+          insert_time,
+      </if>
+      <if test="insertOperator != null" >
+          insert_operator,
+      </if>
+      <if test="updateTime != null" >
+          update_time,
+      </if>
+            <if test="updateOperator != null" >
+        update_operator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null">
+            #{id,jdbcType=VARCHAR},
+        </if>
+        <if test="tenantNo != null" >
+            #{tenantNo,jdbcType=VARCHAR},
+        </if>
+      <if test="tenantName != null" >
+          #{tenantName,jdbcType=VARCHAR},
+      </if>
+        <if test="time != null" >
+            #{time,jdbcType=DATE},
+      </if>
+        <if test="countScore != null" >
+            #{countScore,jdbcType=INTEGER},
+      </if>
+        <if test="area != null">
+            #{area,jdbcType=VARCHAR},
+      </if>
+        <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+        </if>
+      <if test="marketId != null">
+          #{marketId,jdbcType=VARCHAR},
+      </if>
+        <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+          #{remark,jdbcType=VARCHAR},
+      </if>
+        <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+          #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+          #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+          #{updateOperator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <select id="countByExample" parameterType="com.maxcar.tenant.pojo.IntegralStatisticsExample" resultType="java.lang.Integer" >
+    select count(*) from integral_statistics
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update integral_statistics
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantNo != null" >
+        tenant_no = #{record.tenantNo,jdbcType=VARCHAR},
+      </if>
+            <if test="record.tenantName != null" >
+                tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+          time = #{record.time,jdbcType=DATE},
+      </if>
+            <if test="record.countScore != null" >
+                count_score = #{record.countScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null" >
+          area = #{record.area,jdbcType=VARCHAR},
+      </if>
+            <if test="record.level != null">
+                level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketId != null">
+          market_id = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+            <if test="record.isvalid != null">
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+            </if>
+      <if test="record.remark != null" >
+          remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+            <if test="record.insertTime != null">
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+            <if test="record.insertOperator != null">
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateOperator != null">
+                update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+            </if>
+    </set>
+    <if test="_parameter != null">
+        <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+    update integral_statistics
+        set id = #{record.id,jdbcType=VARCHAR},
+      tenant_no = #{record.tenantNo,jdbcType=VARCHAR},
+        tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=DATE},
+      count_score = #{record.countScore,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=VARCHAR},
+        level = #{record.level,jdbcType=VARCHAR},
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+      isvalid = #{record.isvalid,jdbcType=INTEGER},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_operator = #{record.updateOperator,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.tenant.pojo.IntegralStatistics">
+    update integral_statistics
+        <set>
+            <if test="tenantNo != null" >
+                tenant_no = #{tenantNo,jdbcType=VARCHAR},
+      </if>
+            <if test="tenantName != null">
+        tenant_name = #{tenantName,jdbcType=VARCHAR},
+      </if>
+            <if test="time != null" >
+                time = #{time,jdbcType=DATE},
+      </if>
+            <if test="countScore != null">
+                count_score = #{countScore,jdbcType=INTEGER},
+            </if>
+      <if test="area != null" >
+          area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+          level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+          market_id = #{marketId,jdbcType=VARCHAR},
+      </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null" >
+                insert_operator = #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null">
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.tenant.pojo.IntegralStatistics" >
+      update integral_statistics
+      set tenant_no = #{tenantNo,jdbcType=VARCHAR},
+      tenant_name = #{tenantName,jdbcType=VARCHAR},
+      time = #{time,jdbcType=DATE},
+      count_score = #{countScore,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      market_id = #{marketId,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_operator = #{updateOperator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectTenantRowno" resultMap="BaseResultMap" parameterType="com.maxcar.tenant.pojo.IntegralStatistics">
+      SELECT
+	    aa.count_score,
+        aa.month_time,
+        aa.tenant_no,
+        aa.tenant_rowno
+      FROM
+	  (
+		SELECT
+        a.count_score,
+        a.month_time,
+        a.tenant_no,
+        (@rowno :=@rowno + 1) AS tenant_rowno
+		FROM
+        (
+        SELECT
+        sum(check_score) AS count_score,
+        DATE_FORMAT(check_time, '%Y-%m') AS month_time,
+        tenant_no
+        FROM
+        integral_detail
+        WHERE isvalid=1 and market_id = #{marketId,jdbcType=VARCHAR} and
+        date_format(check_time, '%Y %m') = date_format(
+        DATE_SUB(curdate(), INTERVAL #{months,jdbcType=INTEGER} MONTH),
+        '%Y %m'
+        )
+        GROUP BY
+        DATE_FORMAT(check_time, '%Y-%m'),
+        tenant_no
+        ORDER BY
+        count_score DESC
+        ) a,
+			(SELECT(@rowno := 0)) b
+        ) aa
+        WHERE 1=1 and
+        aa.tenant_no =#{tenantNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAreaRowno" resultMap="BaseResultMap" parameterType="com.maxcar.tenant.pojo.IntegralStatistics">
+         SELECT
+        aa.count_score,
+        aa.month_time,
+        aa.tenant_no,
+        bb.name as area_name,
+        aa.area_rowno
+        FROM
+        (
+        SELECT
+        a.count_score,
+        a.month_time,
+        a.tenant_no,
+        a.area_id,
+        (@rowno :=@rowno + 1) AS area_rowno
+        FROM
+        (
+        SELECT
+        sum(check_score) AS count_score,
+        DATE_FORMAT(check_time, '%Y-%m') AS month_time,
+        tenant_no,
+        region as area_id
+        FROM
+        integral_detail
+        WHERE region=#{area,jdbcType=VARCHAR} and market_id = #{marketId,jdbcType=VARCHAR} and
+        date_format(check_time, '%Y %m') = date_format(
+        DATE_SUB(curdate(), INTERVAL #{months,jdbcType=INTEGER} MONTH),
+        '%Y %m'
+        )
+        GROUP BY
+        DATE_FORMAT(check_time, '%Y-%m'),
+        tenant_no
+        ORDER BY
+        count_score DESC
+        ) a,
+        (SELECT(@rowno := 0)) b
+        ) aa,maxcar_market_l.area bb
+        WHERE
+        aa.area_id=bb.id and
+        aa.tenant_no =#{tenantNo,jdbcType=VARCHAR}
+    </select>
+
+    <!--批量删除当月数据-->
+    <delete id="deleteMonthList" parameterType="java.util.List">
+        delete from integral_statistics where id in (
+        <foreach collection="List" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
+
+    <select id="selectCountScore" parameterType="com.maxcar.tenant.pojo.IntegralStatistics" resultType="java.lang.Integer">
+        select COALESCE(sum(check_score),0) from maxcar_tenant_l.integral_detail
+        where isvalid = 1 and market_id = #{marketId} and tenant_no = #{tenantNo}
+    </select>
+
+</mapper>

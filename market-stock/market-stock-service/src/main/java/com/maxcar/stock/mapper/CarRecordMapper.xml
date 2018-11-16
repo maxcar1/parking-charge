@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.stock.dao.CarRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.stock.pojo.CarRecord" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="vin" property="vin" jdbcType="VARCHAR" />
+    <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+    <result column="rfid" property="rfid" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+
+
+    <result column="start_time" property="startTime" jdbcType="VARCHAR"/>
+    <result column="end_time" property="endTime" jdbcType="VARCHAR"/>
+    <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+    <result column="counts" property="counts" jdbcType="INTEGER"/>
+  </resultMap>
+
+    <resultMap id="CarOutResultMap" type="com.maxcar.stock.pojo.CarRecord" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+        <result column="vin" property="vin" jdbcType="VARCHAR" />
+        <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+        <result column="rfid" property="rfid" jdbcType="VARCHAR" />
+        <result column="channel" property="channel" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="pic" property="pic" jdbcType="VARCHAR" />
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+        <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+
+        <result column="carId" property="carId" jdbcType="VARCHAR" />
+        <result column="start_time" property="startTime" jdbcType="VARCHAR"/>
+        <result column="end_time" property="endTime" jdbcType="VARCHAR"/>
+        <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <result column="counts" property="counts" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+    id, market_id, vin, car_no, rfid, channel, type, pic, insert_time, channel_name
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.stock.pojo.CarRecordExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from car_record
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from car_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.maxcar.stock.pojo.CarRecordExample" >
+        delete from car_record
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maxcar.stock.pojo.CarRecord" >
+    insert into car_record (id, market_id, vin,
+      car_no, rfid, channel,
+      type, pic, insert_time,
+      channel_name)
+    values (#{id,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR},
+      #{carNo,jdbcType=VARCHAR}, #{rfid,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR},
+      #{type,jdbcType=INTEGER}, #{pic,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP},
+      #{channelName,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.stock.pojo.CarRecord" >
+        insert into car_record
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="marketId != null" >
+                market_id,
+            </if>
+            <if test="vin != null" >
+                vin,
+            </if>
+            <if test="carNo != null" >
+                car_no,
+            </if>
+            <if test="rfid != null" >
+                rfid,
+            </if>
+            <if test="channel != null" >
+                channel,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="pic != null" >
+                pic,
+            </if>
+            <if test="insertTime != null" >
+                insert_time,
+            </if>
+            <if test="channelName != null" >
+                channel_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null" >
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="vin != null" >
+                #{vin,jdbcType=VARCHAR},
+            </if>
+            <if test="carNo != null" >
+                #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rfid != null" >
+                #{rfid,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null" >
+                #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="pic != null" >
+                #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null" >
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="channelName != null" >
+                #{channelName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maxcar.stock.pojo.CarRecordExample" resultType="java.lang.Integer" >
+        select count(*) from car_record
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update car_record
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketId != null" >
+                market_id = #{record.marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vin != null" >
+                vin = #{record.vin,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carNo != null" >
+                car_no = #{record.carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rfid != null" >
+                rfid = #{record.rfid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.channel != null" >
+                channel = #{record.channel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null" >
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.pic != null" >
+                pic = #{record.pic,jdbcType=VARCHAR},
+            </if>
+            <if test="record.insertTime != null" >
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.channelName != null" >
+                channel_name = #{record.channelName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update car_record
+        set id = #{record.id,jdbcType=VARCHAR},
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+        vin = #{record.vin,jdbcType=VARCHAR},
+        car_no = #{record.carNo,jdbcType=VARCHAR},
+        rfid = #{record.rfid,jdbcType=VARCHAR},
+        channel = #{record.channel,jdbcType=VARCHAR},
+        type = #{record.type,jdbcType=INTEGER},
+        pic = #{record.pic,jdbcType=VARCHAR},
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+        channel_name = #{record.channelName,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.stock.pojo.CarRecord" >
+        update car_record
+        <set >
+            <if test="marketId != null" >
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="vin != null" >
+                vin = #{vin,jdbcType=VARCHAR},
+            </if>
+            <if test="carNo != null" >
+                car_no = #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="rfid != null" >
+                rfid = #{rfid,jdbcType=VARCHAR},
+            </if>
+            <if test="channel != null" >
+                channel = #{channel,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="pic != null" >
+                pic = #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null" >
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="channelName != null" >
+                channel_name = #{channelName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.stock.pojo.CarRecord" >
+    update car_record
+    set market_id = #{marketId,jdbcType=VARCHAR},
+      vin = #{vin,jdbcType=VARCHAR},
+      car_no = #{carNo,jdbcType=VARCHAR},
+      rfid = #{rfid,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      pic = #{pic,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      channel_name = #{channelName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="listCarRecord" resultMap="BaseResultMap" parameterType="com.maxcar.stock.pojo.CarRecord" >
+        select
+        <include refid="Base_Column_List" />
+        from car_record
+        <where>
+            <if test="vin != null" >
+                and  vin = #{vin,jdbcType=VARCHAR}
+            </if>
+            <if test="rfid != null" >
+                and  rfid = #{rfid,jdbcType=VARCHAR}
+            </if>
+            <if test="channel != null" >
+                channel = #{channel,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER}
+            </if>
+            <if test="pic != null" >
+                pic = #{pic,jdbcType=VARCHAR}
+            </if>
+            <if test="insertTime != null" >
+                insert_time = #{insertTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="channelName != null" >
+                channel_name = #{channelName,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by insert_time desc
+    </select>
+  <select id="listCarRecordCounts" resultMap="BaseResultMap" parameterType="com.maxcar.stock.pojo.CarRecord">
+    select
+    channel_name,
+    CASE
+      WHEN type = 0 THEN
+    '入场'
+    ELSE
+    '出场'
+    END type_name,
+    count(*) AS counts
+    from car_record
+    <where>
+      <if test="startTime != null and startTime !=''">
+          <![CDATA[  and insert_time >=  #{startTime} and TO_DAYS( insert_time) <= TO_DAYS(#{endTime})]]>
+      </if>
+
+    </where>
+    GROUP BY
+    type,
+    channel_name
+  </select>
+
+  <select id="getCarRecordList" parameterType="com.maxcar.stock.pojo.CarRecord" resultMap="BaseResultMap">
+    SELECT * from car_record
+    WHERE 1 = 1
+    <if test="rfid != null and rfid != ''">
+      AND rfid = #{rfid}
+    </if>
+    <if test="vin != null and vin != ''">
+      AND vin = #{vin}
+    </if>
+    <if test="carNo != null and carNo != ''">
+      AND carNo = #{carNo}
+    </if>
+    AND DATE_SUB(CURDATE(), INTERVAL 30 DAY) &lt;= insert_time
+    ORDER BY insert_time desc
+  </select>
+
+
+    <select id="getCarOutMarketDate" parameterType="java.lang.String" resultMap="CarOutResultMap">
+        SELECT a.*,b.id as carId from car_record a left join car b on a.vin = b.vin
+        WHERE 1 = 1
+        <if test="vin != null and vin != ''">
+            AND vin = #{vin}
+        </if>
+        ORDER BY insert_time desc limit 0,1
+    </select>
+
+
+</mapper>

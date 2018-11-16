@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.user.dao.ConfigurationMapper">
+    <resultMap id="BaseResultMap" type="com.maxcar.user.entity.Configuration">
+        <id column="configuration_id" property="configurationId" jdbcType="VARCHAR"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+        <result column="market_name" property="marketName" jdbcType="VARCHAR"/>
+        <result column="merants_id" property="merantsId" jdbcType="VARCHAR"/>
+        <result column="merants_name" property="merantsName" jdbcType="VARCHAR"/>
+        <result column="configuration_name" property="configurationName" jdbcType="VARCHAR"/>
+        <result column="configuration_key" property="configurationKey" jdbcType="VARCHAR"/>
+        <result column="configuration_value" property="configurationValue" jdbcType="VARCHAR"/>
+        <result column="configuration_desc" property="configurationDesc" jdbcType="VARCHAR"/>
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    configuration_id, market_id, market_name, merants_id, merants_name, configuration_name, 
+    configuration_key, configuration_value, configuration_desc, isvalid, version, register_time, 
+    unit
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.ConfigurationExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from configuration
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from configuration
+        where configuration_id = #{configurationId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from configuration
+    where configuration_id = #{configurationId,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.maxcar.user.entity.ConfigurationExample">
+        delete from configuration
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maxcar.user.entity.Configuration">
+    insert into configuration (configuration_id, market_id, market_name, 
+      merants_id, merants_name, configuration_name, 
+      configuration_key, configuration_value, configuration_desc, 
+      isvalid, version, register_time, 
+      unit)
+    values (#{configurationId,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{marketName,jdbcType=VARCHAR}, 
+      #{merantsId,jdbcType=VARCHAR}, #{merantsName,jdbcType=VARCHAR}, #{configurationName,jdbcType=VARCHAR}, 
+      #{configurationKey,jdbcType=VARCHAR}, #{configurationValue,jdbcType=VARCHAR}, #{configurationDesc,jdbcType=VARCHAR}, 
+      #{isvalid,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{registerTime,jdbcType=TIMESTAMP}, 
+      #{unit,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.user.entity.Configuration">
+        insert into configuration
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configurationId != null">
+                configuration_id,
+            </if>
+            <if test="marketId != null">
+                market_id,
+            </if>
+            <if test="marketName != null">
+                market_name,
+            </if>
+            <if test="merantsId != null">
+                merants_id,
+            </if>
+            <if test="merantsName != null">
+                merants_name,
+            </if>
+            <if test="configurationName != null">
+                configuration_name,
+            </if>
+            <if test="configurationKey != null">
+                configuration_key,
+            </if>
+            <if test="configurationValue != null">
+                configuration_value,
+            </if>
+            <if test="configurationDesc != null">
+                configuration_desc,
+            </if>
+            <if test="isvalid != null">
+                isvalid,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="registerTime != null">
+                register_time,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="configurationId != null">
+                #{configurationId,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="marketName != null">
+                #{marketName,jdbcType=VARCHAR},
+            </if>
+            <if test="merantsId != null">
+                #{merantsId,jdbcType=VARCHAR},
+            </if>
+            <if test="merantsName != null">
+                #{merantsName,jdbcType=VARCHAR},
+            </if>
+            <if test="configurationName != null">
+                #{configurationName,jdbcType=VARCHAR},
+            </if>
+            <if test="configurationKey != null">
+                #{configurationKey,jdbcType=VARCHAR},
+            </if>
+            <if test="configurationValue != null">
+                #{configurationValue,jdbcType=VARCHAR},
+            </if>
+            <if test="configurationDesc != null">
+                #{configurationDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isvalid != null">
+                #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="registerTime != null">
+                #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maxcar.user.entity.ConfigurationExample"
+            resultType="java.lang.Integer">
+        select count(*) from configuration
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update configuration
+        <set>
+            <if test="record.configurationId != null">
+                configuration_id = #{record.configurationId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketId != null">
+                market_id = #{record.marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketName != null">
+                market_name = #{record.marketName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.merantsId != null">
+                merants_id = #{record.merantsId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.merantsName != null">
+                merants_name = #{record.merantsName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.configurationName != null">
+                configuration_name = #{record.configurationName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.configurationKey != null">
+                configuration_key = #{record.configurationKey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.configurationValue != null">
+                configuration_value = #{record.configurationValue,jdbcType=VARCHAR},
+            </if>
+            <if test="record.configurationDesc != null">
+                configuration_desc = #{record.configurationDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isvalid != null">
+                isvalid = #{record.isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="record.version != null">
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.registerTime != null">
+                register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.unit != null">
+                unit = #{record.unit,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update configuration
+        set configuration_id = #{record.configurationId,jdbcType=VARCHAR},
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+        market_name = #{record.marketName,jdbcType=VARCHAR},
+        merants_id = #{record.merantsId,jdbcType=VARCHAR},
+        merants_name = #{record.merantsName,jdbcType=VARCHAR},
+        configuration_name = #{record.configurationName,jdbcType=VARCHAR},
+        configuration_key = #{record.configurationKey,jdbcType=VARCHAR},
+        configuration_value = #{record.configurationValue,jdbcType=VARCHAR},
+        configuration_desc = #{record.configurationDesc,jdbcType=VARCHAR},
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+        version = #{record.version,jdbcType=INTEGER},
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+        unit = #{record.unit,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.user.entity.Configuration">
+        update configuration
+        <set>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="marketName != null">
+                market_name = #{marketName,jdbcType=VARCHAR},
+            </if>
+            <if test="merantsId != null">
+                merants_id = #{merantsId,jdbcType=VARCHAR},
+            </if>
+            <if test="merantsName != null">
+                merants_name = #{merantsName,jdbcType=VARCHAR},
+            </if>
+            <if test="configurationName != null">
+                configuration_name = #{configurationName,jdbcType=VARCHAR},
+            </if>
+            <if test="configurationKey != null">
+                configuration_key = #{configurationKey,jdbcType=VARCHAR},
+            </if>
+            <if test="configurationValue != null">
+                configuration_value = #{configurationValue,jdbcType=VARCHAR},
+            </if>
+            <if test="configurationDesc != null">
+                configuration_desc = #{configurationDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="registerTime != null">
+                register_time = #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where configuration_id = #{configurationId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.user.entity.Configuration">
+    update configuration
+    set market_id = #{marketId,jdbcType=VARCHAR},
+      market_name = #{marketName,jdbcType=VARCHAR},
+      merants_id = #{merantsId,jdbcType=VARCHAR},
+      merants_name = #{merantsName,jdbcType=VARCHAR},
+      configuration_name = #{configurationName,jdbcType=VARCHAR},
+      configuration_key = #{configurationKey,jdbcType=VARCHAR},
+      configuration_value = #{configurationValue,jdbcType=VARCHAR},
+      configuration_desc = #{configurationDesc,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      unit = #{unit,jdbcType=VARCHAR}
+    where configuration_id = #{configurationId,jdbcType=VARCHAR}
+  </update>
+
+    <select id="searchConfiguration" resultType="String" parameterType="com.maxcar.user.entity.Configuration">
+        select configuration_key
+        from configuration
+        where isvalid =1
+        <if test="configurationKey != null">
+            and configuration_key = #{configurationKey,jdbcType=VARCHAR},
+        </if>
+        group by configuration_key
+    </select>
+
+    <!-- 根据 configuration_key 和 configuration_value 获取 configuration_name -->
+    <select id="getNameByKeyAndValue" resultType="java.lang.String" parameterType="java.lang.String">
+        select configuration_name
+        from configuration
+        where isvalid =1
+        and configuration_key = #{key,jdbcType=VARCHAR}
+        and configuration_value = #{value,jdbcType=VARCHAR}
+         limit 1
+    </select>
+
+</mapper>

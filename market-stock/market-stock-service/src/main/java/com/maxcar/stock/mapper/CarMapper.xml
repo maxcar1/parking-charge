@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.stock.dao.CarMapper">
+    <resultMap id="BaseResultMap" type="com.maxcar.stock.pojo.Car">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="car_no" property="carNo" jdbcType="VARCHAR"/>
+        <result column="vin" property="vin" jdbcType="VARCHAR"/>
+        <result column="rfid" property="rfid" jdbcType="VARCHAR"/>
+        <result column="tenant" property="tenant" jdbcType="VARCHAR"/>
+        <result column="area_id" property="areaId" jdbcType="VARCHAR"/>
+        <result column="is_new_car" property="isNewCar" jdbcType="INTEGER"/>
+        <result column="stock_status" property="stockStatus" jdbcType="INTEGER"/>
+        <result column="car_status" property="carStatus" jdbcType="INTEGER"/>
+        <result column="car_type" property="carType" jdbcType="INTEGER"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="initial_licence_time" property="initialLicenceTime" jdbcType="TIMESTAMP"/>
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+        <result column="staff_id" property="staffId" jdbcType="VARCHAR"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+        <result column="inster_operator" property="insterOperator" jdbcType="VARCHAR"/>
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="owner_name" property="ownerName" jdbcType="VARCHAR"/>
+        <result column="owner_idcard" property="ownerIdcard" jdbcType="VARCHAR"/>
+        <result column="no" property="no" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="limit_status" property="limitStatus" jdbcType="INTEGER"/>
+        <result column="check_result" property="checkResult" jdbcType="INTEGER"/>
+        <result column="taobao_id" property="taobaoId"/>
+    </resultMap>
+    <!-- carVo START -->
+    <resultMap id="CarVoResultMap" type="com.maxcar.stock.vo.CarVo">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="vin" property="vin" jdbcType="VARCHAR"/>
+        <result column="car_no" property="carNo" jdbcType="VARCHAR"/>
+        <result column="rfid" property="rfid" jdbcType="VARCHAR"/>
+        <result column="tenant" property="tenant" jdbcType="VARCHAR"/>
+        <result column="is_new_car" property="isNewCar" jdbcType="INTEGER"/>
+        <result column="area_id" property="areaId" jdbcType="VARCHAR"/>
+        <result column="stock_status" property="stockStatus" jdbcType="INTEGER"/>
+        <result column="car_status" property="carStatus" jdbcType="INTEGER"/>
+        <result column="staff_id" property="staffId" jdbcType="VARCHAR"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+        <result column="brand_code" property="brandCode" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="series_code" property="seriesCode" jdbcType="VARCHAR"/>
+        <result column="model_year" property="modelYear" jdbcType="VARCHAR"/>
+        <result column="model_name" property="modelName" jdbcType="VARCHAR"/>
+        <result column="model_code" property="modelCode" jdbcType="VARCHAR"/>
+        <result column="mileage" property="mileage" jdbcType="INTEGER"/>
+        <result column="evaluate_price" property="evaluatePrice" jdbcType="DECIMAL"/>
+        <result column="new_price" property="newPrice" jdbcType="DECIMAL"/>
+        <result column="market_price" property="marketPrice" jdbcType="DECIMAL"/>
+        <result column="color" property="color" jdbcType="VARCHAR"/>
+        <result column="engine_volume_unitl" property="engineVolumeUnitl" jdbcType="DOUBLE"/>
+        <result column="environmental_standards" property="environmentalStandards" jdbcType="VARCHAR"/>
+        <result column="gear_box" property="gearBox" jdbcType="INTEGER"/>
+        <result column="seat_number" property="seatNumber" jdbcType="INTEGER"/>
+        <result column="fuel_form" property="fuelForm" jdbcType="VARCHAR"/>
+        <result column="fuel_number" property="fuelNumber" jdbcType="INTEGER"/>
+        <result column="check_company_id" property="checkCompanyId" jdbcType="VARCHAR"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+        <result column="inster_operator" property="insterOperator" jdbcType="VARCHAR"/>
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="car_type" property="carType" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="VARCHAR"/>
+        <result column="initial_licence_time" property="initialLicenceTime" jdbcType="TIMESTAMP"/>
+        <result column="shelfNum" property="shelfNum" jdbcType="INTEGER"/>
+        <result column="taobao_id" property="taobaoId" jdbcType="VARCHAR"/>
+        <result column="taobao_url" property="taobaoUrl" jdbcType="VARCHAR"/>
+        <result column="owner_name" property="ownerName" jdbcType="VARCHAR"/>
+        <result column="shelfStatus" property="shelfStatus" jdbcType="INTEGER"/>
+        <result column="carChannelId" property="carChannelId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!-- carVo END -->
+    <resultMap id="taoBaoCarMap" type="com.maxcar.stock.pojo.TaoBaoCar">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="year_name" property="yearName" jdbcType="VARCHAR"/>
+        <result column="model_name" property="modelName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="CarPicMap" type="com.maxcar.stock.pojo.CarPic">
+        <id column="id" property="id"/>
+        <result column="car_id" property="car_id"/>
+        <result column="src" property="src"/>
+        <result column="type" property="type"/>
+    </resultMap>
+
+    <resultMap id="CarInfoMap" type="com.maxcar.stock.pojo.CarInfo">
+        <id column="id" property="id"/>
+        <result column="car_no" property="carNo"/>
+        <result column="register_time" property="register_time"/>
+        <result column="operation_time" property="operation_time"/>
+        <result column="type" property="type"/>
+        <result column="vin" property="vin"/>
+        <result column="no" property="no"/>
+        <result column="engine_no" property="engine_no"/>
+        <result column="tenant" property="tenant"/>
+        <result column="market_id" property="market_id"/>
+        <result column="rfid" property="rfid"/>
+        <result column="check_result" property="check_result"/>
+        <result column="limit_status" property="limit_status"/>
+        <result column="owner" property="owner"/>
+        <result column="is_mortgaged" property="is_mortgaged"/>
+        <result column="equip_id" property="equip_id"/>
+        <result column="evaluate_price" property="evaluate_price"/>
+        <result column="status" property="status"/>
+        <result column="version" property="version"/>
+        <result column="owner_name" property="ownerName"/>
+        <result column="owner_idcard" property="owner_idcard"/>
+        <result column="initial_licence_time" property="initial_licence_timeStr"/>
+        <result column="transfer_number" property="transferNumber"/>
+        <result column="taobao_id" property="taobaoId"/>
+        <result column="taobao_url" property="taobaoUrl"/>
+        <result column="environmental_standards" property="environmental_standards"/>
+        <result column="air_conditioner_control_type" property="air_conditioner_control_type"/>
+        <result column="displacement" property="displacement"/>
+        <result column="attribution" property="attribution"/>
+        <result column="model_code" property="modelCode"/>
+        <result column="fuel_form" property="fuel_form"/>
+        <result column="stock_day" property="stockDay"/>
+    </resultMap>
+    <!-- carVo END -->
+    <sql id="carInfo">
+            a.id,a.register_time,a.car_type,a.vin,a.no,a.car_no,a.engine_no,a.tenant,a.market_id ,a.rfid,a.check_result,
+            a.limit_status,a.car_status,a.equip_id,a.driving_licence_url,a.update_time,
+            a.is_publish,a.owner_name,a.owner_idcard,a.stock_day,a.initial_licence_time
+	</sql>
+    <sql id="carInfoNoId">
+            a.register_time,a.car_type,a.vin,a.no,a.car_no,a.engine_no,a.tenant,a.market_id ,a.rfid,a.check_result,
+            a.limit_status,a.car_status,a.equip_id,a.driving_licence_url,
+            a.is_publish,a.owner_name,a.owner_idcard,a.stock_day
+	</sql>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+    id, car_no, vin, rfid, tenant, area_id, is_new_car, stock_status, car_status, car_type,
+    register_time, initial_licence_time, isvalid, staff_id, market_id, update_operator,check_result,
+    inster_operator, insert_time, update_time, owner_name, owner_idcard, no, remark,limit_status,taobao_id
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.stock.pojo.CarExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from car
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <sql id="CarVo_Column_List">
+    cb.brand_name, cb.brand_code, cb.series_name, cb.series_code, cb.model_year,cb.model_name, cb.model_code, 
+    cb.mileage, cb.evaluate_price, cb.new_price, cb.market_price, cb.color, cb.engine_volume_unitl, cb.environmental_standards, 
+    cb.gear_box, cb.seat_number, cb.fuel_form, cb.fuel_number, cb.check_company_id,cb.model_data,cb.level,cb.accident_type as 'accidentType'
+  </sql>
+
+    <select id="selectCountsByCar" parameterType="com.maxcar.stock.pojo.Car" resultType="java.lang.Integer">
+        select count(*) from car where isvalid=1
+        <if test="marketId != null and marketId != ''">
+            and market_id = #{marketId}
+        </if>
+        <if test="carType != null and carType != ''">
+            and car_type = #{carType}
+        </if>
+        <if test="staffId != null and staffId != ''">
+            and staff_id = #{staffId}
+        </if>
+        <if test="tenant != null and tenant != ''">
+            and tenant = #{tenant}
+        </if>
+        <!-- 查询时 只查询未售出出的车辆 -->
+        <![CDATA[ and stock_status in (1,2,3)  ]]>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from car
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from car
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.maxcar.stock.pojo.CarExample">
+        delete from car
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maxcar.stock.pojo.Car">
+        insert into car (id, car_no, vin,
+        rfid, tenant, area_id,
+        is_new_car, stock_status, car_status,
+        car_type, register_time, initial_licence_time,
+        isvalid, staff_id, market_id,
+        update_operator, inster_operator, insert_time,
+        update_time, owner_name, owner_idcard,
+        no, remark)
+        values (#{id,jdbcType=VARCHAR}, #{carNo,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR},
+        #{rfid,jdbcType=VARCHAR}, #{tenant,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR},
+        #{isNewCar,jdbcType=INTEGER}, #{stockStatus,jdbcType=INTEGER}, #{carStatus,jdbcType=INTEGER},
+        #{carType,jdbcType=INTEGER}, #{registerTime,jdbcType=TIMESTAMP}, #{initialLicenceTime,jdbcType=TIMESTAMP},
+        #{isvalid,jdbcType=INTEGER}, #{staffId,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR},
+        #{updateOperator,jdbcType=VARCHAR}, #{insterOperator,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{ownerName,jdbcType=VARCHAR}, #{ownerIdcard,jdbcType=VARCHAR},
+        #{no,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.stock.pojo.Car">
+        insert into car
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="carNo != null">
+                car_no,
+            </if>
+            <if test="vin != null">
+                vin,
+            </if>
+            <if test="rfid != null">
+                rfid,
+            </if>
+            <if test="tenant != null">
+                tenant,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="isNewCar != null">
+                is_new_car,
+            </if>
+            <if test="stockStatus != null">
+                stock_status,
+            </if>
+            <if test="carStatus != null">
+                car_status,
+            </if>
+            <if test="carType != null">
+                car_type,
+            </if>
+            <if test="registerTime != null">
+                register_time,
+            </if>
+            <if test="initialLicenceTime != null">
+                initial_licence_time,
+            </if>
+            <if test="isvalid != null">
+                isvalid,
+            </if>
+            <if test="staffId != null">
+                staff_id,
+            </if>
+            <if test="marketId != null">
+                market_id,
+            </if>
+            <if test="updateOperator != null">
+                update_operator,
+            </if>
+            <if test="insterOperator != null">
+                inster_operator,
+            </if>
+            <if test="insertTime != null">
+                insert_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="ownerName != null">
+                owner_name,
+            </if>
+            <if test="ownerIdcard != null">
+                owner_idcard,
+            </if>
+            <if test="no != null">
+                no,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="limitStatus != null">
+                limit_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="carNo != null">
+                #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="vin != null">
+                #{vin,jdbcType=VARCHAR},
+            </if>
+            <if test="rfid != null">
+                #{rfid,jdbcType=VARCHAR},
+            </if>
+            <if test="tenant != null">
+                #{tenant,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=VARCHAR},
+            </if>
+            <if test="isNewCar != null">
+                #{isNewCar,jdbcType=INTEGER},
+            </if>
+            <if test="stockStatus != null">
+                #{stockStatus,jdbcType=INTEGER},
+            </if>
+            <if test="carStatus != null">
+                #{carStatus,jdbcType=INTEGER},
+            </if>
+            <if test="carType != null">
+                #{carType,jdbcType=INTEGER},
+            </if>
+            <if test="registerTime != null">
+                #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="initialLicenceTime != null">
+                #{initialLicenceTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isvalid != null">
+                #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="staffId != null">
+                #{staffId,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                #{updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="insterOperator != null">
+                #{insterOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ownerName != null">
+                #{ownerName,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerIdcard != null">
+                #{ownerIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="no != null">
+                #{no,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="limitStatus != null">
+                #{limitStatus,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maxcar.stock.pojo.CarExample" resultType="java.lang.Integer">
+        select count(*) from car
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update car
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.carNo != null">
+                car_no = #{record.carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vin != null">
+                vin = #{record.vin,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rfid != null">
+                rfid = #{record.rfid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenant != null">
+                tenant = #{record.tenant,jdbcType=VARCHAR},
+            </if>
+            <if test="record.areaId != null">
+                area_id = #{record.areaId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isNewCar != null">
+                is_new_car = #{record.isNewCar,jdbcType=INTEGER},
+            </if>
+            <if test="record.stockStatus != null">
+                stock_status = #{record.stockStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.carStatus != null">
+                car_status = #{record.carStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.carType != null">
+                car_type = #{record.carType,jdbcType=INTEGER},
+            </if>
+            <if test="record.registerTime != null">
+                register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.initialLicenceTime != null">
+                initial_licence_time = #{record.initialLicenceTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isvalid != null">
+                isvalid = #{record.isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="record.staffId != null">
+                staff_id = #{record.staffId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketId != null">
+                market_id = #{record.marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateOperator != null">
+                update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="record.insterOperator != null">
+                inster_operator = #{record.insterOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="record.insertTime != null">
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.ownerName != null">
+                owner_name = #{record.ownerName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ownerIdcard != null">
+                owner_idcard = #{record.ownerIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.no != null">
+                no = #{record.no,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update car
+        set id = #{record.id,jdbcType=VARCHAR},
+        car_no = #{record.carNo,jdbcType=VARCHAR},
+        vin = #{record.vin,jdbcType=VARCHAR},
+        rfid = #{record.rfid,jdbcType=VARCHAR},
+        tenant = #{record.tenant,jdbcType=VARCHAR},
+        area_id = #{record.areaId,jdbcType=VARCHAR},
+        is_new_car = #{record.isNewCar,jdbcType=INTEGER},
+        stock_status = #{record.stockStatus,jdbcType=INTEGER},
+        car_status = #{record.carStatus,jdbcType=INTEGER},
+        car_type = #{record.carType,jdbcType=INTEGER},
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+        initial_licence_time = #{record.initialLicenceTime,jdbcType=TIMESTAMP},
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+        staff_id = #{record.staffId,jdbcType=VARCHAR},
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+        inster_operator = #{record.insterOperator,jdbcType=VARCHAR},
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        owner_name = #{record.ownerName,jdbcType=VARCHAR},
+        owner_idcard = #{record.ownerIdcard,jdbcType=VARCHAR},
+        no = #{record.no,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.stock.pojo.Car">
+        update car
+        <set>
+            <if test="carNo != null">
+                car_no = #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="vin != null">
+                vin = #{vin,jdbcType=VARCHAR},
+            </if>
+            <if test="rfid != null">
+                rfid = #{rfid,jdbcType=VARCHAR},
+            </if>
+            <if test="tenant != null">
+                tenant = #{tenant,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=VARCHAR},
+            </if>
+            <if test="isNewCar != null">
+                is_new_car = #{isNewCar,jdbcType=INTEGER},
+            </if>
+            <if test="stockStatus != null">
+                stock_status = #{stockStatus,jdbcType=INTEGER},
+            </if>
+            <if test="carStatus != null">
+                car_status = #{carStatus,jdbcType=INTEGER},
+            </if>
+            <if test="carType != null">
+                car_type = #{carType,jdbcType=INTEGER},
+            </if>
+            <if test="registerTime != null">
+                register_time = #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="initialLicenceTime != null">
+                initial_licence_time = #{initialLicenceTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="staffId != null">
+                staff_id = #{staffId,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                update_operator = #{updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="insterOperator != null">
+                inster_operator = #{insterOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ownerName != null">
+                owner_name = #{ownerName,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerIdcard != null">
+                owner_idcard = #{ownerIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="no != null">
+                no = #{no,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.stock.pojo.Car">
+        update car
+        set car_no = #{carNo,jdbcType=VARCHAR},
+        vin = #{vin,jdbcType=VARCHAR},
+        rfid = #{rfid,jdbcType=VARCHAR},
+        tenant = #{tenant,jdbcType=VARCHAR},
+        area_id = #{areaId,jdbcType=VARCHAR},
+        is_new_car = #{isNewCar,jdbcType=INTEGER},
+        stock_status = #{stockStatus,jdbcType=INTEGER},
+        car_status = #{carStatus,jdbcType=INTEGER},
+        car_type = #{carType,jdbcType=INTEGER},
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+        initial_licence_time = #{initialLicenceTime,jdbcType=TIMESTAMP},
+        isvalid = #{isvalid,jdbcType=INTEGER},
+        staff_id = #{staffId,jdbcType=VARCHAR},
+        market_id = #{marketId,jdbcType=VARCHAR},
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+        inster_operator = #{insterOperator,jdbcType=VARCHAR},
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+        owner_idcard = #{ownerIdcard,jdbcType=VARCHAR},
+        no = #{no,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <update id="updateByVin" parameterType="com.maxcar.stock.pojo.Car">
+        update car
+        <set>
+            <if test="carNo != null">
+                car_no = #{carNo,jdbcType=VARCHAR},
+            </if>
+            <if test="vin != null">
+                vin = #{vin,jdbcType=VARCHAR},
+            </if>
+            <if test="rfid != null">
+                rfid = #{rfid,jdbcType=VARCHAR},
+            </if>
+            <if test="tenant != null">
+                tenant = #{tenant,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=VARCHAR},
+            </if>
+            <if test="isNewCar != null">
+                is_new_car = #{isNewCar,jdbcType=INTEGER},
+            </if>
+            <if test="stockStatus != null">
+                stock_status = #{stockStatus,jdbcType=INTEGER},
+            </if>
+            <if test="carStatus != null">
+                car_status = #{carStatus,jdbcType=INTEGER},
+            </if>
+            <if test="carType != null">
+                car_type = #{carType,jdbcType=INTEGER},
+            </if>
+            <if test="registerTime != null">
+                register_time = #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="initialLicenceTime != null">
+                initial_licence_time = #{initialLicenceTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="staffId != null">
+                staff_id = #{staffId,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                update_operator = #{updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="insterOperator != null">
+                inster_operator = #{insterOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ownerName != null">
+                owner_name = #{ownerName,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerIdcard != null">
+                owner_idcard = #{ownerIdcard,jdbcType=VARCHAR},
+            </if>
+            <if test="no != null">
+                no = #{no,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where vin = #{vin,jdbcType=VARCHAR}
+    </update>
+    <select id="listCarVo" resultMap="CarVoResultMap" parameterType="com.maxcar.stock.vo.CarVo">
+        SELECT
+        t.*,
+        DATEDIFF(now(),t.register_time) stockDays,
+        <include refid="CarVo_Column_List"/>
+        FROM
+        car t left join
+        car_base cb on t.id = cb.id
+        WHERE
+        t.isvalid=1 and t.market_id = #{marketId}
+        <include refid="car_vo_where"/>
+        order by t.register_time desc
+    </select>
+
+    <select id="listCarChannelVo" resultMap="CarVoResultMap" parameterType="com.maxcar.stock.vo.CarVo">
+        SELECT
+        t.*,
+        DATEDIFF(now(),t.register_time) stockDays,
+        <include refid="CarVo_Column_List"/>,
+        (
+        select ccr.id from car_channel_rel ccr
+        where ccr.car_id=t.id and ccr.channel_id='2'
+        ) as carChannelId,
+        (
+        select ccr.shelf_status from car_channel_rel ccr
+        where ccr.car_id=t.id and ccr.channel_id='2'
+        ) as shelfStatus
+        FROM
+        car t left join
+        car_base cb on t.id = cb.id
+        <if test="shelfStatus != null">
+            left join car_channel_rel ccr2 on ccr2.car_id=t.id
+        </if>
+        WHERE
+        t.isvalid=1 and t.market_id = #{marketId}
+        <include refid="car_vo_where"/>
+        and t.stock_status in (1,2,3)
+        <if test="shelfStatus != null">
+            <if test="shelfStatus == 0">
+                and (ccr2.shelf_status in (0,1) or ccr2.shelf_status is null)
+            </if>
+            <if test="shelfStatus == 2">
+                and ccr2.shelf_status = 2
+            </if>
+        </if>
+        order by t.register_time desc
+    </select>
+
+
+    <!--<select id="listCarChannelVo" resultMap="CarVoResultMap" parameterType="com.maxcar.stock.vo.CarVo">-->
+    <!--SELECT-->
+    <!--ca.*,DATEDIFF(now(),ca.register_time) stockDays,-->
+    <!--<include refid="CarVo_Column_List"/>,asd.shelfNum-->
+    <!--FROM car ca,car_base cb,-->
+    <!--(select t.id,-->
+    <!--(select COUNT(1) from car_channel_rel b where t.id=b.car_id-->
+    <!--AND b.shelf_status=1-->
+    <!--) as shelfNum-->
+    <!--from car t ,car_base cb-->
+    <!--<if test="channelId != null">-->
+    <!--,car_channel_rel ccr-->
+    <!--</if>-->
+    <!--where t.id=cb.id t.isvalid=1 and t.market_id = #{marketId}-->
+    <!--<if test="channelId != null">-->
+    <!--and ccr.car_id=t.id and ccr.id = #{channelId}-->
+    <!--</if>-->
+    <!--<include refid="car_vo_where"/>-->
+    <!--) asd-->
+    <!--WHERE ca.id=cb.id AND asd.id=ca.id-->
+    <!--<if test="shelfStatus != null">-->
+    <!--<if test="shelfStatus == 0">-->
+    <!--and asd.shelfNum = 0-->
+    <!--</if>-->
+    <!--<if test="shelfStatus == 1">-->
+    <!--and asd.shelfNum > 0-->
+    <!--</if>-->
+    <!--</if>-->
+    <!--order by ca.register_time desc-->
+    <!--</select>-->
+
+    <sql id="car_vo_where">
+        <if test="id != null and id != ''">
+            and t.id = #{id}
+        </if>
+        <if test="carType != null">
+            and t.car_type = #{carType}
+        </if>
+        <if test="vin != null and vin != ''">
+            and t.vin LIKE CONCAT(CONCAT('%', #{vin}), '%')
+        </if>
+        <if test="carNo != null and carNo != ''">
+            and t.car_no LIKE CONCAT(CONCAT('%', #{carNo}), '%')
+        </if>
+        <if test="areaId != null and areaId != ''">
+            and t.area_id = #{areaId}
+        </if>
+        <if test="tenant != null and tenant != ''">
+            and t.tenant = #{tenant}
+        </if>
+        <if test="stockStatus != null">
+            and t.stock_status = #{stockStatus}
+        </if>
+        <if test="brandCode != null and brandCode != ''">
+            and cb.brand_code = #{brandCode}
+        </if>
+        <if test="seriesCode != null and seriesCode != ''">
+            and cb.series_code = #{seriesCode}
+        </if>
+        <if test="level != null and level != ''">
+            and cb.level = #{level}
+        </if>
+        <if test="carAge != null and carAge != ''">
+            <if test="carAge ==1">
+                <![CDATA[  and t.initial_licence_time > DATE_SUB(now(), INTERVAL 1 YEAR) ]]>
+            </if>
+            <if test="carAge ==3">
+                <![CDATA[  and t.initial_licence_time > DATE_SUB(now(), INTERVAL 3 YEAR) ]]>
+            </if>
+            <if test="carAge ==5">
+                <![CDATA[  and t.initial_licence_time > DATE_SUB(now(), INTERVAL 5 YEAR) ]]>
+            </if>
+            <if test="carAge ==9">
+                <![CDATA[  and t.initial_licence_time < DATE_SUB(now(), INTERVAL 5 YEAR) ]]>
+            </if>
+
+        </if>
+        <if test="mileage != null and mileage != ''">
+            <if test="mileage ==1">
+                <![CDATA[  and cb.mileage <= 10000 ]]>
+            </if>
+            <if test="mileage ==3">
+                <![CDATA[  and cb.mileage <= 30000 ]]>
+            </if>
+            <if test="mileage ==5">
+                <![CDATA[  and cb.mileage <= 50000 ]]>
+            </if>
+            <if test="mileage ==8">
+                <![CDATA[  and cb.mileage <= 80000 ]]>
+            </if>
+            <if test="mileage ==9">
+                <![CDATA[  and cb.mileage >= 80000 ]]>
+            </if>
+        </if>
+        <if test="engineVolumeUnitl != null ">
+            <if test="engineVolumeUnitl ==0">
+                <!-- <![CDATA[  and cb.mileage <= 1.0 ]]>-->
+                <![CDATA[  and cb.engine_volume_unitl <= 1.0 ]]>
+            </if>
+            <if test="engineVolumeUnitl ==1">
+                <!-- <![CDATA[  and cb.mileage >= 1.0 and cb.mileage < 1.6 ]]>-->
+                <![CDATA[  and cb.engine_volume_unitl >= 1.0 and cb.engine_volume_unitl < 1.6 ]]>
+            </if>
+            <if test="engineVolumeUnitl ==2">
+                <![CDATA[  and cb.engine_volume_unitl >= 1.6 and cb.engine_volume_unitl < 2.0 ]]>
+            </if>
+            <if test="engineVolumeUnitl ==3">
+                <![CDATA[  and cb.engine_volume_unitl >= 2.0 and cb.engine_volume_unitl < 2.5 ]]>
+            </if>
+            <if test="engineVolumeUnitl ==4">
+                <![CDATA[  and cb.engine_volume_unitl >= 2.5 and cb.engine_volume_unitl < 3.0 ]]>
+            </if>
+            <if test="engineVolumeUnitl ==5">
+                <![CDATA[  and cb.engine_volume_unitl >= 3.0 and cb.engine_volume_unitl < 4.0 ]]>
+            </if>
+            <if test="engineVolumeUnitl ==6">
+                <![CDATA[   and cb.engine_volume_unitl >= 4.0 ]]>
+            </if>
+        </if>
+        <if test="environmentalStandards !=null and environmentalStandards != ''">
+            and cb.environmental_standards = #{environmentalStandards}
+        </if>
+        <if test="gearBox !=null and gearBox != ''">
+            <!-- 1 自动 2 手动 -->
+            <if test="gearBox== 1">
+                AND cb.gear_box not like '%手动%'
+            </if>
+            <if test="gearBox== 2">
+                AND cb.gear_box like '%手动%'
+            </if>
+        </if>
+        <if test="seatNumber !=null">
+            <choose>
+                <when test="seatNumber == 8">
+                    <![CDATA[ and cb.seat_number >= #{seatNumber} ]]>
+                </when>
+                <otherwise>
+                    <![CDATA[ and cb.seat_number = #{seatNumber} ]]>
+                </otherwise>
+            </choose>
+        </if>
+        <if test="fuelForm != null and fuelForm != ''">
+
+            <if test="fuelForm == 1">
+                <![CDATA[ and cb.fuel_form like '%汽%']]>
+            </if>
+            <if test="fuelForm == 2">
+                <![CDATA[  and cb.fuel_form like '%柴%']]>
+            </if>
+            <if test="fuelForm == 3">
+                <![CDATA[ and cb.fuel_form like '%纯电%']]>
+            </if>
+            <if test="fuelForm == 4">
+                <![CDATA[  and cb.fuel_form like '%混%']]>
+            </if>
+        </if>
+        <if test="carStatus !=null and carStatus != ''">
+            and t.car_status = #{carStatus}
+        </if>
+        <if test="isNewCar != null">
+            and t.is_new_car = #{isNewCar}
+        </if>
+        <if test="marketPrice != null and marketPrice != ''">
+            <if test="marketPrice ==1">
+                <![CDATA[  and cb.market_price < 5 ]]>
+            </if>
+            <if test="marketPrice ==2">
+                <![CDATA[  and cb.market_price >= 5 and cb.market_price < 10 ]]>
+            </if>
+            <if test="marketPrice ==3">
+                <![CDATA[  and cb.market_price >= 10 and cb.market_price < 15 ]]>
+            </if>
+            <if test="marketPrice ==4">
+                <!--<![CDATA[  and cb.market_price >= 10 and cb.market_price < 15 ]]>-->
+                <![CDATA[  and cb.market_price >= 15 and cb.market_price < 20 ]]>
+            </if>
+            <if test="marketPrice ==5">
+                <!-- <![CDATA[  and cb.market_price >= 15 and cb.market_price < 20 ]]>-->
+                <![CDATA[  and cb.market_price >= 20 and cb.market_price < 25 ]]>
+            </if>
+            <if test="marketPrice ==6">
+                <![CDATA[  and cb.market_price >= 25 and cb.market_price < 30 ]]>
+            </if>
+            <if test="marketPrice ==7">
+                <![CDATA[  and cb.market_price >= 30 and cb.market_price < 35 ]]>
+            </if>
+            <if test="marketPrice ==8">
+                <![CDATA[  and cb.market_price >= 35 and cb.market_price < 40 ]]>
+            </if>
+            <if test="marketPrice ==9">
+                <![CDATA[  and cb.market_price >= 40 and cb.market_price < 45 ]]>
+            </if>
+            <if test="marketPrice ==10">
+                <![CDATA[  and cb.market_price >= 45 and cb.market_price < 50 ]]>
+            </if>
+            <if test="marketPrice ==11">
+                <![CDATA[  and cb.market_price >= 50 ]]>
+            </if>
+        </if>
+        <if test="stockDays != null and stockDays != ''">
+            <if test="stockDays ==1">
+                <![CDATA[  and DATEDIFF(now(),t.register_time) < 45 ]]>
+            </if>
+            <if test="stockDays ==2">
+                <![CDATA[  and DATEDIFF(now(),t.register_time) >= 45 and DATEDIFF(now(),t.register_time) < 60 ]]>
+            </if>
+            <if test="stockDays ==3">
+                <![CDATA[  and DATEDIFF(now(),t.register_time) >= 60 and DATEDIFF(now(),t.register_time) < 90 ]]>
+            </if>
+            <if test="stockDays ==4">
+                <![CDATA[  and DATEDIFF(now(),t.register_time) >= 90  ]]>
+            </if>
+        </if>
+        <if test="registerTimeStart !=null and registerTimeStart != ''">
+            <![CDATA[  and t.register_time >=  #{registerTimeStart} ]]>
+        </if>
+        <if test="registerTimeEnd !=null and registerTimeEnd != ''">
+            <!-- <![CDATA[  and t.register_time <= #{rgisterTimeEnd} ]]>-->
+            <![CDATA[ and TO_DAYS( register_time) <= TO_DAYS(#{registerTimeEnd})]]>
+        </if>
+
+    </sql>
+
+    <select id="getCarVoById" resultMap="CarVoResultMap" parameterType="java.lang.String">
+        SELECT
+        t.*,
+        <include refid="CarVo_Column_List"/>
+        FROM
+        car t,
+        car_base cb
+        WHERE
+        t.id = cb.id
+        and t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="getCar" resultMap="BaseResultMap" parameterType="com.maxcar.stock.pojo.Car">
+        select
+        <include refid="Base_Column_List"/>
+        from car
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="vin != null">
+                and vin = #{vin,jdbcType=VARCHAR}
+            </if>
+            <if test="rfid != null">
+                and rfid = #{rfid,jdbcType=VARCHAR}
+            </if>
+            <if test="marketId != null and marketId!=''">
+                and market_id = #{marketId,jdbcType=VARCHAR}
+            </if>
+            <if test="carNo != null and carNo!=''">
+                and car_no = #{carNo,jdbcType=VARCHAR}
+            </if>
+            and stock_status in (1,2,3) and isvalid=1
+        </where>
+        limit 1
+    </select>
+
+
+    <select id="getSumMarketPrice" resultType="Double" parameterType="com.maxcar.stock.vo.CarVo">
+        SELECT
+        IFNULL(sum( cb.market_price ),0) sumPrice
+        FROM
+        car t left join car_base cb
+        on t.id = cb.id
+        WHERE
+        t.car_type = 1 and t.stock_status in (1,2,3)
+        AND t.isvalid = 1 and t.market_id = #{marketId}
+        <include refid="car_vo_where"/>
+    </select>
+    <select id="getCarList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select car_type,insert_time,tenant,vin,rfid,inster_operator,staff_id from car
+        <where>
+            and isvalid = 1
+            <if test="carType != null">
+                and car_type = #{carType,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <select id="getCarListByStaffId" resultMap="BaseResultMap">
+        select car_type,insert_time,tenant,vin,rfid,inster_operator,staff_id from car
+        <where>
+            and isvalid = 1
+            and car_type = 2
+            and staff_id in
+            <foreach collection="list" open="(" close=")" separator="," item="item">
+                #{item}
+            </foreach>
+        </where>
+        order by insert_time desc
+    </select>
+    <select id="getCarListByTenant" resultMap="BaseResultMap">
+        select car_type,insert_time,tenant,vin,rfid,inster_operator,staff_id from car
+        <where>
+            and isvalid = 1 and car_type = 3
+            and tenant in
+            <foreach collection="list" open="(" close=")" separator="," item="item">
+                #{item}
+            </foreach>
+        </where>
+        order by insert_time desc
+    </select>
+
+    <select id="countRepertoryByTenantId" parameterType="String" resultType="int">
+        SELECT count(*) FROM car
+        WHERE (stock_status = 1 OR stock_status = 2 OR stock_status = 3) AND car_type = 1 AND isvalid = 1
+        <if test="marketId != '' and marketId != null">
+            and market_id = #{marketId}
+        </if>
+        <if test="id != '' and id != null">
+            and tenant = #{id}
+        </if>
+    </select>
+
+
+    <select id="countCarNum" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM car
+        WHERE (stock_status = 1 OR stock_status = 2) AND car_type = 1 AND isvalid = 1
+        <if test="marketId != '' and marketId != null">
+            and market_id = #{marketId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <!-- lxy 统计商品车库存信息  -->
+    <select id="inventoryStatistical" parameterType="com.maxcar.stock.entity.Request.InventoryStatisticalRequest"
+            resultType="com.maxcar.stock.entity.Request.InventoryStatisticalResponse">
+        SELECT
+        IFNULL(COUNT(*),0) AS 'inventoryTotal',
+        COUNT(
+        IF(c.stock_status IN (1, 2, 3), TRUE, NULL)
+        ) AS 'inventoryNow' ,
+        COALESCE(SUM(cb.market_price),0) AS 'valuationTotal',
+        COALESCE(SUM(IF(c.stock_status IN (1, 2, 3),cb.evaluate_price, 0)),0) AS 'valuationNow',
+        COALESCE(SUM(IF(c.stock_status IN (1, 2, 3),DATEDIFF(NOW(),register_time), 0)),0) AS 'inventoryDayTotal'
+        FROM
+        car c
+        LEFT JOIN car_base cb
+        ON c.id = cb.id
+        WHERE c.isvalid =1 AND c.car_type =1 and c.market_id = #{marketId}
+        <if test="tenantId != null">
+            and c.tenant = #{tenantId,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getCarDetails" parameterType="com.maxcar.stock.pojo.Car" resultMap="BaseResultMap">
+        select * from car where 1=1
+        <if test="rfid != null and rfid != ''">
+            and rfid = #{rfid}
+        </if>
+        <if test="vin != null and vin != ''">
+            and vin = #{vin}
+        </if>
+        <if test="carNo != null and carNo != ''">
+            and car_no = #{carNo}
+        </if>
+        <if test="no != null and no != ''">
+            and no = #{no}
+        </if>
+        order by register_time desc limit 1
+
+    </select>
+    <select id="getTaoBaoBrand" resultType="String">
+		SELECT DISTINCT brand_name FROM `taobao_car`
+	</select>
+
+    <select id="getTaoBaoCarByKey" resultType="com.maxcar.stock.pojo.TaoBaoCar" resultMap="taoBaoCarMap"
+            parameterType="com.maxcar.stock.pojo.TaoBaoCar">
+        select
+        id,brand_name,brand_pid,brand_vid,series_name,series_pid,series_vid,year_name,year_pid,
+        year_vid,model_name,model_pid,model_vid,ali_value,ali_code from
+        taobao_car where 1=1
+        <if test="brandName != null and brandName != ''">
+            and brand_name=#{brandName}
+        </if>
+        <if test="seriesName != null and seriesName != ''">
+            and series_name=#{seriesName}
+        </if>
+        <if test="yearName != null and yearName != ''">
+            and year_name=#{yearName}
+        </if>
+
+    </select>
+
+    <select id="getCarInfoById" resultMap="CarInfoMap">
+        SELECT
+        IFNULL(st.stock_type,1) stockType,
+        <include refid="carInfo"></include>
+        ,
+        d.NO AS equipid_no,
+        e.evaluate_price,
+        e.series_code,
+        e.brand_code,
+        e.series_name,
+        e.displacement AS displacement,
+        e.air_conditioner_control_type,
+        e.model_year AS model_year,
+        e.environmental_standards,
+        e.fuel_form,
+        b.tenant_name,
+        e.attribution,
+        c. NAME AS market_name,
+        c.simple_name AS market_simplename,
+        e.model_name,
+        e.model_code,
+        e.level,
+        e.brand_name,
+        e.color,
+        e.initial_licence_time,
+        e.mileage,
+        e.seats,
+        e.market_price,
+        e.new_price,
+        to_days(now()) - to_days(a.register_time) AS register_day
+        FROM
+        maxcar_stock_l.car a
+        LEFT JOIN maxcar_tenant_l.user_tenant b ON a.tenant = b.id
+        LEFT JOIN maxcar_user_l.market c ON
+        a.market_id = c.id
+        LEFT JOIN maxcar_stock_l.stock_equip d ON a.equip_id = d.id
+        LEFT JOIN
+        maxcar_stock_l.car_base e ON a.id = e.id
+        left join maxcar_stock_l.stock_type st ON a.id = st.car_id
+        WHERE a.id=#{id}
+    </select>
+
+    <select id="getCarPic" resultMap="CarPicMap" parameterType="String">
+		SELECT id,src,car_id,type from car_pic where car_id=#{car} and src is
+		not null <![CDATA[ and src <>''
+
+
+
+
+
+
+
+
+        ]]>
+    </select>
+
+    <update id="modifyCarInfo" parameterType="com.maxcar.stock.pojo.CarInfo"
+            flushCache="true">
+        update car
+        <if test="taobao_id != null and taobao_id != ''">
+            set taobao_id = #{taobao_id},
+        </if>
+        <if test="taobao_url != null and taobao_url != ''">
+            taobao_url = #{taobao_url}
+        </if>
+        where id=#{id}
+    </update>
+
+    <select id="selectCarList" parameterType="com.maxcar.stock.vo.CarVo" resultMap="CarVoResultMap">
+        SELECT  <include refid="carInfoNoId"/>,b.*
+        from car a LEFT join car_base b on a.id=b.id
+        where a.isvalid =1 and a.market_id=#{marketId} and a.stock_status in ('1','2','3')
+        <if test="brandCode != null and brandCode != ''">
+            and b.brand_code = #{brandCode}
+        </if>
+        <if test="seriesCode != null and seriesCode != ''">
+            and b.series_code = #{seriesCode}
+        </if>
+        <if test="seats != null and seats == 8">
+            and b.seat_number &gt;= 7
+        </if>
+        <if test="seats != null and seats != 0">
+            and b.seat_number = #{seats}
+        </if>
+        <!-- 1 手动 2 自动 -->
+        <if test="airConditionerControlType != null and airConditionerControlType != '' and airConditionerControlType==1">
+            and b.air_conditioner_control_type like "%手动%"
+        </if>
+        <if test="airConditionerControlType != null and airConditionerControlType != '' and airConditionerControlType==2">
+            and b.air_conditioner_control_type like "%自%"
+        </if>
+
+        <if test="level != null and level != '' and level == '小型轿车'">
+            and b.level REGEXP '^紧凑型车|^微型车|^小型车|^小型轿车|^两厢车'
+        </if>
+        <if test="level != null and level != '' and level == '中大型轿车'">
+            and b.level REGEXP '^中型车|^大型车|^中大型车|^三厢车'
+        </if>
+        <if test="level != null and level != '' and level == '跑车'">
+            and b.level REGEXP '硬顶跑车|^软顶敞篷车|^硬顶敞篷车|^跑车'
+        </if>
+        <if test="level != null and level != '' and level == '商用车'">
+            and b.level REGEXP '^MPV|^轻客'
+        </if>
+        <if test="level != null and level != '' and level == 'SUV'">
+            and b.level like "%SUV%"
+        </if>
+        <if test="level != null and level != '' and level == '其他'">
+            and (b.level in ('皮卡','微面','微卡','null') or b.level='')
+        </if>
+
+        <choose>
+            <when test="disType != null and disType == 1">
+                and b.engine_volume_unitl &lt;= #{displacement2}
+            </when>
+            <when test="disType != null and disType == 2">
+                and b.engine_volume_unitl &gt; #{displacement1}
+            </when>
+            <otherwise>
+                <if test="disType != null and disType == 3">
+                    and b.engine_volume_unitl &gt; #{displacement1} and b.engine_volume_unitl &lt;= #{displacement2}
+                </if>
+            </otherwise>
+        </choose>
+
+
+        <if test="mileageStart != null and mileageStart  !=0">
+            and <![CDATA[  b.mileage > #{mileageStart} ]]>
+        </if>
+        <if test="mileageEnd != null and mileageEnd  !=0 and mileageEnd !=25">
+            and <![CDATA[  b.mileage < #{mileageEnd} ]]>
+        </if>
+        <if test="initialLicenceTimeStart != null and initialLicenceTimeStart != ''">
+            and <![CDATA[   date_format(a.initial_licence_time,'%Y-%m-%d %H:%i:%s') > #{initialLicenceTimeStart}]]>
+        </if>
+        <if test="initialLicenceTimeEnd != null and initialLicenceTimeEnd != ''">
+            and <![CDATA[  date_format(a.initial_licence_time,'%Y-%m-%d %H:%i:%s') < #{initialLicenceTimeEnd}]]>
+        </if>
+        <if test="carType != null and carType != ''">
+            and a.car_type = #{carType}
+        </if>
+        <if test="tenant != null and tenant != ''">
+            and a.tenant = #{tenant}
+        </if>
+        <if test="priceType !=null and priceType==2">
+            and b.market_price <![CDATA[ < 3 ]]>
+        </if>
+        <if test="priceType !=null and priceType==3">
+            and b.market_price <![CDATA[ >= 3  and b.market_price <5 ]]>
+        </if>
+        <if test="priceType !=null and priceType==4">
+            and b.market_price <![CDATA[ >= 5  and b.market_price <8 ]]>
+        </if>
+        <if test="priceType !=null and priceType==5">
+            and b.market_price <![CDATA[ >= 8 and b.market_price <12 ]]>
+        </if>
+        <if test="priceType !=null and priceType==6">
+            and b.market_price <![CDATA[ >= 12 and b.market_price < 20 ]]>
+        </if>
+        <if test="priceType !=null and priceType==7">
+            and b.market_price <![CDATA[ >= 20]]>
+        </if>
+        <if test="orderType != null and orderType == 2">
+            order by b.market_price asc
+        </if>
+        <!-- 321 -->
+        <if test="orderType != null and orderType == 3">
+            order by b.market_price desc
+        </if>
+        <!-- 123 -->
+        <if test="orderType != null and orderType == 4">
+            order by b.mileage asc
+        </if>
+        <!-- 321 -->
+        <if test="orderType != null and orderType == 5">
+            order by b.mileage desc
+        </if>
+        <if test="orderType != null and orderType == 6">
+            order by a.initial_licence_time asc
+        </if>
+        <if test="orderType != null and orderType == 7">
+            order by a.initial_licence_time desc
+        </if>
+        <if test="orderType != null and orderType == 0">
+            order by a.insert_time desc
+        </if>
+    </select>
+
+    <!-- 根据 marketId 查询可以过户的车辆列表 可分页  -->
+    <select id="getCarListByMarketIdAndTenant" resultType="com.maxcar.stock.entity.Response.GetCarListByMarketIdAndTenantResponse"
+            parameterType="com.maxcar.stock.entity.Request.GetCarListByMarketIdAndTenantRequest">
+        SELECT c.id,c.vin,cb.model_name as 'modelName'
+         FROM car c
+          LEFT JOIN car_base cb ON c.id= cb.id
+          WHERE  c.id NOT IN (SELECT car_id FROM  market_tenant_app_l.transfer_car  WHERE isvalid = 1)
+            and c.isvalid = 1
+            and c.car_type = 1
+            and tenant = #{tenant}
+            and market_id = #{marketId}
+    </select>
+
+    <!-- 根据marketid查询状态为出场状态的车辆 -->
+    <select id="getAllMarketCarByStatus" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from car
+        where isvalid = 1 and market_id = #{marketId} and stock_status in
+        <foreach collection="status" open="(" close=")" separator="," item="s">
+            #{s}
+        </foreach>
+    </select>
+
+    <!-- 根据vin码和rfid删除车辆 -->
+    <update id="deleteByVinAndRfid" parameterType="com.maxcar.stock.pojo.CarRecord">
+        update car set stock_status= -1 where isvalid = 1 and vin = #{vin} and rfid = #{rfid}
+    </update>
+
+    <!-- 根据商户id和车型品牌查询车辆 -->
+    <sql id="Barrier_Control_Car_List" >
+        a.id as carId,a.vin,a.rfid,a.tenant as tenantId,b.brand_name as brandName,b.series_name as seriesName,
+        b.color,b.mileage,c.tenant_name as tenantName
+    </sql>
+
+    <select id="selectCarByTenant" parameterType="com.maxcar.stock.entity.Request.BarrierListCarRequest" resultType="com.maxcar.stock.entity.Response.BarrierCarListResponse">
+        SELECT
+        <include refid="Barrier_Control_Car_List"/>
+        FROM car a LEFT JOIN car_base b ON a.id = b.id
+                   LEFT JOIN maxcar_tenant_l.user_tenant c on a.tenant = c.id
+        WHERE a.isvalid = 1 and a.stock_status not in (-1,4,5)
+        <if test="tenantId != null and tenantId != '' ">
+          and  a.tenant = #{tenantId}
+        </if>
+        <if test="brandName != null and brandName != '' ">
+          and  b.brand_name like '%' #{brandName} '%'
+        </if>
+        <if test="seriesName != null and seriesName != '' ">
+          and  b.series_name like '%' #{seriesName} '%'
+        </if>
+        order by a.register_time desc
+    </select>
+
+</mapper>

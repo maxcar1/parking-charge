@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.stock.dao.CarPicMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.stock.pojo.CarPic" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_id" property="carId" jdbcType="VARCHAR" />
+    <result column="src" property="src" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="inster_operator" property="insterOperator" jdbcType="VARCHAR" />
+    <result column="update_operator" property="updateOperator" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_id, src, `type`, inster_operator, update_operator, insert_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.stock.pojo.CarPicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from car_pic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from car_pic
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_pic
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByCarId" parameterType="java.lang.String" >
+    delete from car_pic
+    where car_id = #{carId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.stock.pojo.CarPicExample" >
+    delete from car_pic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.stock.pojo.CarPic" >
+    insert into car_pic (id, car_id, src,
+    type, inster_operator, update_operator,
+    insert_time, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{carId,jdbcType=VARCHAR}, #{src,jdbcType=VARCHAR},
+    #{type,jdbcType=INTEGER}, #{insterOperator,jdbcType=VARCHAR}, #{updateOperator,jdbcType=VARCHAR},
+    #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.stock.pojo.CarPic" >
+    insert into car_pic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="src != null" >
+        src,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="insterOperator != null" >
+        inster_operator,
+      </if>
+      <if test="updateOperator != null" >
+        update_operator,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=VARCHAR},
+      </if>
+      <if test="src != null" >
+        #{src,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="insterOperator != null" >
+        #{insterOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOperator != null" >
+        #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.stock.pojo.CarPicExample" resultType="java.lang.Integer" >
+    select count(*) from car_pic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update car_pic
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carId != null" >
+        car_id = #{record.carId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.src != null" >
+        src = #{record.src,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.insterOperator != null" >
+        inster_operator = #{record.insterOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateOperator != null" >
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update car_pic
+    set id = #{record.id,jdbcType=VARCHAR},
+    car_id = #{record.carId,jdbcType=VARCHAR},
+    src = #{record.src,jdbcType=VARCHAR},
+    type = #{record.type,jdbcType=INTEGER},
+    inster_operator = #{record.insterOperator,jdbcType=VARCHAR},
+    update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+    insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.stock.pojo.CarPic" >
+    update car_pic
+    <set >
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=VARCHAR},
+      </if>
+      <if test="src != null" >
+        src = #{src,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="insterOperator != null" >
+        inster_operator = #{insterOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOperator != null" >
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.stock.pojo.CarPic" >
+    update car_pic
+    set car_id = #{carId,jdbcType=VARCHAR},
+    src = #{src,jdbcType=VARCHAR},
+    type = #{type,jdbcType=INTEGER},
+    inster_operator = #{insterOperator,jdbcType=VARCHAR},
+    update_operator = #{updateOperator,jdbcType=VARCHAR},
+    insert_time = #{insertTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="listCarPic" resultMap="BaseResultMap" parameterType="com.maxcar.stock.pojo.CarPic" >
+    select
+    <include refid="Base_Column_List" />
+    from car_pic
+    <where>
+      <if test="carId != null" >
+        and car_id = #{carId,jdbcType=VARCHAR}
+      </if>
+      <if test="src != null" >
+        src = #{src,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="insterOperator != null" >
+        inster_operator = #{insterOperator,jdbcType=VARCHAR}
+      </if>
+      <if test="updateOperator != null" >
+        update_operator = #{updateOperator,jdbcType=VARCHAR}
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+    order by type asc
+  </select>
+
+  <insert id="insertCarPicList" parameterType="java.util.List" >
+    insert into car_pic (id, car, src,
+    type, inster_operator, update_operator,
+    insert_time, update_time)
+    values
+    <foreach collection="listCarPic" item="emp" separator=",">
+      (#{emp.id,jdbcType=VARCHAR}, #{emp.car,jdbcType=VARCHAR}, #{emp.src,jdbcType=VARCHAR},
+      #{emp.type,jdbcType=INTEGER}, #{emp.insterOperator,jdbcType=VARCHAR}, #{emp.updateOperator,jdbcType=VARCHAR},
+      #{emp.insertTime,jdbcType=TIMESTAMP}, #{emp.updateTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+
+  <select id="selectByCarIdType" resultMap="BaseResultMap" >
+    select * from car_pic where car_id = #{carId} and `type` = #{type}
+  </select>
+</mapper>

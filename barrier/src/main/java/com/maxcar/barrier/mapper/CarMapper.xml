@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.barrier.dao.CarMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.barrier.pojo.Car" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+    <result column="vin" property="vin" jdbcType="VARCHAR" />
+    <result column="rfid" property="rfid" jdbcType="VARCHAR" />
+    <result column="stock_status" property="stockStatus" jdbcType="INTEGER" />
+    <result column="car_status" property="carStatus" jdbcType="INTEGER" />
+    <result column="car_type" property="carType" jdbcType="INTEGER" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="tenant" property="tenant" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_no, vin, rfid, stock_status, car_status, car_type, register_time, isvalid,
+    market_id, insert_time, area_id, tenant
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.barrier.pojo.CarExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from car
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.barrier.pojo.CarExample" >
+    delete from car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.barrier.pojo.Car" >
+    insert into car (id, car_no, vin,
+    rfid, stock_status, car_status,
+    car_type, register_time, isvalid,
+    market_id, insert_time, area_id,
+    tenant)
+    values (#{id,jdbcType=VARCHAR}, #{carNo,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR},
+    #{rfid,jdbcType=VARCHAR}, #{stockStatus,jdbcType=INTEGER}, #{carStatus,jdbcType=INTEGER},
+    #{carType,jdbcType=INTEGER}, #{registerTime,jdbcType=TIMESTAMP}, #{isvalid,jdbcType=INTEGER},
+    #{marketId,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{areaId,jdbcType=VARCHAR},
+    #{tenant,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.barrier.pojo.Car" >
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carNo != null" >
+        car_no,
+      </if>
+      <if test="vin != null" >
+        vin,
+      </if>
+      <if test="rfid != null" >
+        rfid,
+      </if>
+      <if test="stockStatus != null" >
+        stock_status,
+      </if>
+      <if test="carStatus != null" >
+        car_status,
+      </if>
+      <if test="carType != null" >
+        car_type,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+      <if test="isvalid != null" >
+        isvalid,
+      </if>
+      <if test="marketId != null" >
+        market_id,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="tenant != null" >
+        tenant,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carNo != null" >
+        #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="rfid != null" >
+        #{rfid,jdbcType=VARCHAR},
+      </if>
+      <if test="stockStatus != null" >
+        #{stockStatus,jdbcType=INTEGER},
+      </if>
+      <if test="carStatus != null" >
+        #{carStatus,jdbcType=INTEGER},
+      </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenant != null" >
+        #{tenant,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.barrier.pojo.CarExample" resultType="java.lang.Integer" >
+    select count(*) from car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update car
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carNo != null" >
+        car_no = #{record.carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vin != null" >
+        vin = #{record.vin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rfid != null" >
+        rfid = #{record.rfid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockStatus != null" >
+        stock_status = #{record.stockStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.carStatus != null" >
+        car_status = #{record.carStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.carType != null" >
+        car_type = #{record.carType,jdbcType=INTEGER},
+      </if>
+      <if test="record.registerTime != null" >
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isvalid != null" >
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.marketId != null" >
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.areaId != null" >
+        area_id = #{record.areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenant != null" >
+        tenant = #{record.tenant,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update car
+    set id = #{record.id,jdbcType=VARCHAR},
+    car_no = #{record.carNo,jdbcType=VARCHAR},
+    vin = #{record.vin,jdbcType=VARCHAR},
+    rfid = #{record.rfid,jdbcType=VARCHAR},
+    stock_status = #{record.stockStatus,jdbcType=INTEGER},
+    car_status = #{record.carStatus,jdbcType=INTEGER},
+    car_type = #{record.carType,jdbcType=INTEGER},
+    register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+    isvalid = #{record.isvalid,jdbcType=INTEGER},
+    market_id = #{record.marketId,jdbcType=VARCHAR},
+    insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+    area_id = #{record.areaId,jdbcType=VARCHAR},
+    tenant = #{record.tenant,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.barrier.pojo.Car" >
+    update car
+    <set >
+      <if test="carNo != null" >
+        car_no = #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="rfid != null" >
+        rfid = #{rfid,jdbcType=VARCHAR},
+      </if>
+      <if test="stockStatus != null" >
+        stock_status = #{stockStatus,jdbcType=INTEGER},
+      </if>
+      <if test="carStatus != null" >
+        car_status = #{carStatus,jdbcType=INTEGER},
+      </if>
+      <if test="carType != null" >
+        car_type = #{carType,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="marketId != null" >
+        market_id = #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="tenant != null" >
+        tenant = #{tenant,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.barrier.pojo.Car" >
+    update car
+    set car_no = #{carNo,jdbcType=VARCHAR},
+    vin = #{vin,jdbcType=VARCHAR},
+    rfid = #{rfid,jdbcType=VARCHAR},
+    stock_status = #{stockStatus,jdbcType=INTEGER},
+    car_status = #{carStatus,jdbcType=INTEGER},
+    car_type = #{carType,jdbcType=INTEGER},
+    register_time = #{registerTime,jdbcType=TIMESTAMP},
+    isvalid = #{isvalid,jdbcType=INTEGER},
+    market_id = #{marketId,jdbcType=VARCHAR},
+    insert_time = #{insertTime,jdbcType=TIMESTAMP},
+    area_id = #{areaId,jdbcType=VARCHAR},
+    tenant = #{tenant,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

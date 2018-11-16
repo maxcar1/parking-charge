@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.user.dao.NoticeDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.user.entity.NoticeDetails" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="message_title" property="messageTitle" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="message_content" property="messageContent" jdbcType="VARCHAR" />
+    <result column="push_time" property="pushTime" jdbcType="TIMESTAMP" />
+    <result column="push_peo" property="pushPeo" jdbcType="VARCHAR" />
+    <result column="push_status" property="pushStatus" jdbcType="INTEGER" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_operator" property="updateOperator" jdbcType="VARCHAR" />
+    <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="NoticeRequestMap" type="com.maxcar.user.vo.NoticeRequest" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="message_title" property="messageTitle" jdbcType="VARCHAR" />
+    <result column="message_content" property="messageContent" jdbcType="VARCHAR" />
+    <result column="push_time" property="pushTime" jdbcType="TIMESTAMP" />
+    <result column="push_peo" property="pushPeo" jdbcType="VARCHAR" />
+    <result column="push_status" property="pushStatus" jdbcType="VARCHAR" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, message_title, message_content, push_time, push_peo, push_status, isvalid, version,
+    insert_time, update_operator, insert_operator, update_time, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.NoticeDetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from notice_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from notice_details
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from notice_details
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.user.entity.NoticeDetailsExample" >
+    delete from notice_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.user.entity.NoticeDetails" >
+    insert into notice_details (id, message_title, message_content,
+      push_time, push_peo, push_status,
+      isvalid, version, insert_time,
+      update_operator, insert_operator, update_time,
+      status)
+    values (#{id,jdbcType=VARCHAR}, #{messageTitle,jdbcType=VARCHAR}, #{messageContent,jdbcType=VARCHAR},
+      #{pushTime,jdbcType=TIMESTAMP}, #{pushPeo,jdbcType=VARCHAR}, #{pushStatus,jdbcType=INTEGER},
+      #{isvalid,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP},
+      #{updateOperator,jdbcType=VARCHAR}, #{insertOperator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.user.entity.NoticeDetails" >
+    insert into notice_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="messageTitle != null" >
+        message_title,
+      </if>
+      <if test="messageContent != null" >
+        message_content,
+      </if>
+      <if test="pushTime != null" >
+        push_time,
+      </if>
+      <if test="pushPeo != null" >
+        push_peo,
+      </if>
+      <if test="pushStatus != null" >
+        push_status,
+      </if>
+      <if test="isvalid != null" >
+        isvalid,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="updateOperator != null" >
+        update_operator,
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+        <if test="marketId != null">
+            market_id,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTitle != null" >
+        #{messageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="messageContent != null" >
+        #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushTime != null" >
+        #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushPeo != null" >
+        #{pushPeo,jdbcType=VARCHAR},
+      </if>
+      <if test="pushStatus != null" >
+        #{pushStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+        #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="insertOperator != null" >
+        #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="status != null">
+            #{status,jdbcType=INTEGER},
+        </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+        <if test="marketId != null">
+            #{marketId,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.user.entity.NoticeDetailsExample" resultType="java.lang.Integer" >
+    select count(*) from notice_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update notice_details
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageTitle != null" >
+        message_title = #{record.messageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messageContent != null" >
+        message_content = #{record.messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pushTime != null" >
+        push_time = #{record.pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pushPeo != null" >
+        push_peo = #{record.pushPeo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pushStatus != null" >
+        push_status = #{record.pushStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.isvalid != null" >
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateOperator != null" >
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertOperator != null" >
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update notice_details
+    set id = #{record.id,jdbcType=VARCHAR},
+    message_title = #{record.messageTitle,jdbcType=VARCHAR},
+    message_content = #{record.messageContent,jdbcType=VARCHAR},
+    push_time = #{record.pushTime,jdbcType=TIMESTAMP},
+    push_peo = #{record.pushPeo,jdbcType=VARCHAR},
+    push_status = #{record.pushStatus,jdbcType=INTEGER},
+    isvalid = #{record.isvalid,jdbcType=INTEGER},
+    version = #{record.version,jdbcType=INTEGER},
+    insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+    update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+    insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+    status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.user.entity.NoticeDetails" >
+    update notice_details
+    <set >
+      <if test="messageTitle != null" >
+        message_title = #{messageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="messageContent != null" >
+        message_content = #{messageContent,jdbcType=VARCHAR},
+      </if>
+      <if test="pushTime != null" >
+        push_time = #{pushTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pushPeo != null" >
+        push_peo = #{pushPeo,jdbcType=VARCHAR},
+      </if>
+      <if test="pushStatus != null" >
+        push_status = #{pushStatus,jdbcType=INTEGER},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.user.entity.NoticeDetails" >
+    update notice_details
+    set message_title = #{messageTitle,jdbcType=VARCHAR},
+      message_content = #{messageContent,jdbcType=VARCHAR},
+      push_time = #{pushTime,jdbcType=TIMESTAMP},
+      push_peo = #{pushPeo,jdbcType=VARCHAR},
+      push_status = #{pushStatus,jdbcType=INTEGER},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_operator = #{updateOperator,jdbcType=VARCHAR},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!-- 查询系统消息列表 -->
+   <select id="searchNoticeDetails" resultMap="NoticeRequestMap"
+   		    parameterType="com.maxcar.user.vo.NoticeRequest">
+        SELECT * FROM notice_details WHERE isvalid= 1 
+        <if test="messageTitle != null and messageTitle != ''" >
+        	and message_title like CONCAT('%',#{messageTitle},'%')
+      	</if>
+      	<!--<if test="marketId != null and marketId !=''">-->
+      		<!--and market_id = #{marketId}-->
+      	<!--</if>-->
+       <!--如果非管理员，只能查看自己名下账号-->
+       <if test="managerFlag != null and managerFlag==1">
+         and market_id = #{marketId}
+       </if>
+      	<if test="pushPeo != null and pushPeo !=''" >
+        	and push_peo like concat('%',#{pushPeo},'%')
+      	</if>
+      	<if test="pushStatus != null and pushStatus !=''" >
+        	and push_status = #{pushStatus}
+     	</if>
+     	<if test="pushTime != null and pushTime !=''" >
+        	and DATE_FORMAT(push_time,'%Y-%m-%d') = #{pushTime}
+      	</if>
+      	ORDER BY push_time DESC
+      	<if test="startRow != null and pageSize != null and pageSize != 0">
+            limit #{startRow},#{pageSize}
+        </if>
+    </select>
+
+	<!-- 查询系统消息列表总数 -->
+    <select id="countNoticeRequest" resultType="java.lang.Integer"
+            parameterType="com.maxcar.user.vo.NoticeRequest">
+        select count(1) from notice_details WHERE isvalid= 1 
+    </select>
+  
+  	<!-- 撤回消息 -->
+  	<update id="updateById" parameterType="java.lang.String">
+  		update notice_details set push_status=0 where id = #{id,jdbcType=VARCHAR}
+  	</update>
+  	
+  	<!-- <insert id="insertAll" parameterType="com.maxcar.user.entity.NoticeDetails">
+  		INSERT INTO notice_details (id,message_title,message_content)
+		VALUES (#{id,jdbcType=VARCHAR}, #{messageTitle,jdbcType=VARCHAR}, #{messageContent,jdbcType=VARCHAR})
+  	</insert> -->
+</mapper>

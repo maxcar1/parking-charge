@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.tenant.dao.IntegralDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.tenant.pojo.IntegralDetail" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="tenant_no" property="tenantNo" jdbcType="VARCHAR" />
+    <result column="tenant_name" property="tenantName" jdbcType="VARCHAR" />
+    <result column="check_score" property="checkScore" jdbcType="DOUBLE" />
+    <result column="check_items" property="checkItems" jdbcType="VARCHAR" />
+    <result column="check_time" property="checkTime" jdbcType="TIMESTAMP" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="region" property="region" jdbcType="VARCHAR" />
+    <result column="check_id" property="checkId" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="base_score" property="baseScore" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_operator" property="updateOperator" jdbcType="VARCHAR" />
+
+    <result column="check_time_string" property="checkTimeString" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, tenant_no, tenant_name, check_score, check_items, check_time, market_id, region, 
+    check_id, type, base_score, status, remark, isvalid, insert_time, insert_operator, 
+    update_time, update_operator
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.tenant.pojo.IntegralDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from integral_datil
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from integral_datil
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from integral_datil
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.tenant.pojo.IntegralDetailExample" >
+    delete from integral_datil
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.tenant.pojo.IntegralDetail" >
+    insert into integral_datil (id, tenant_no, tenant_name, 
+      check_score, check_items, check_time, 
+      market_id, region, check_id, 
+      type, base_score, status, 
+      remark, isvalid, insert_time, 
+      insert_operator, update_time, update_operator
+      )
+    values (#{id,jdbcType=VARCHAR}, #{tenantNo,jdbcType=VARCHAR}, #{tenantName,jdbcType=VARCHAR}, 
+      #{checkScore,jdbcType=DOUBLE}, #{checkItems,jdbcType=VARCHAR}, #{checkTime,jdbcType=TIMESTAMP},
+      #{marketId,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{checkId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{baseScore,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{isvalid,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{insertOperator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateOperator,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.tenant.pojo.IntegralDetail" >
+    insert into integral_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tenantNo != null" >
+        tenant_no,
+      </if>
+      <if test="tenantName != null" >
+        tenant_name,
+      </if>
+      <if test="checkScore != null" >
+        check_score,
+      </if>
+      <if test="checkItems != null" >
+        check_items,
+      </if>
+      <if test="checkTime != null" >
+        check_time,
+      </if>
+      <if test="marketId != null" >
+        market_id,
+      </if>
+      <if test="region != null" >
+        region,
+      </if>
+      <if test="checkId != null" >
+        check_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="baseScore != null" >
+        base_score,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="isvalid != null" >
+        isvalid,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateOperator != null" >
+        update_operator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantNo != null" >
+        #{tenantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantName != null" >
+        #{tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkScore != null" >
+        #{checkScore,jdbcType=DOUBLE},
+      </if>
+      <if test="checkItems != null" >
+        #{checkItems,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="checkId != null" >
+        #{checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="baseScore != null" >
+        #{baseScore,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+        #{updateOperator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.tenant.pojo.IntegralDetailExample" resultType="java.lang.Integer" >
+    select count(*) from integral_datil
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update integral_datil
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantNo != null" >
+        tenant_no = #{record.tenantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantName != null" >
+        tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkScore != null" >
+        check_score = #{record.checkScore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.checkItems != null" >
+        check_items = #{record.checkItems,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkTime != null" >
+        check_time = #{record.checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.marketId != null" >
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.region != null" >
+        region = #{record.region,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkId != null" >
+        check_id = #{record.checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.baseScore != null" >
+        base_score = #{record.baseScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isvalid != null" >
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.insertOperator != null" >
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateOperator != null" >
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update integral_datil
+    set id = #{record.id,jdbcType=VARCHAR},
+      tenant_no = #{record.tenantNo,jdbcType=VARCHAR},
+      tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+      check_score = #{record.checkScore,jdbcType=DOUBLE},
+      check_items = #{record.checkItems,jdbcType=VARCHAR},
+      check_time = #{record.checkTime,jdbcType=TIMESTAMP},
+      market_id = #{record.marketId,jdbcType=VARCHAR},
+      region = #{record.region,jdbcType=VARCHAR},
+      check_id = #{record.checkId,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      base_score = #{record.baseScore,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      isvalid = #{record.isvalid,jdbcType=INTEGER},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_operator = #{record.updateOperator,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.tenant.pojo.IntegralDetail" >
+    update integral_datil
+    <set >
+      <if test="tenantNo != null" >
+        tenant_no = #{tenantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantName != null" >
+        tenant_name = #{tenantName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkScore != null" >
+        check_score = #{checkScore,jdbcType=DOUBLE},
+      </if>
+      <if test="checkItems != null" >
+        check_items = #{checkItems,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marketId != null" >
+        market_id = #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="checkId != null" >
+        check_id = #{checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="baseScore != null" >
+        base_score = #{baseScore,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.tenant.pojo.IntegralDetail" >
+    update integral_datil
+    set tenant_no = #{tenantNo,jdbcType=VARCHAR},
+      tenant_name = #{tenantName,jdbcType=VARCHAR},
+      check_score = #{checkScore,jdbcType=DOUBLE},
+      check_items = #{checkItems,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      market_id = #{marketId,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      check_id = #{checkId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      base_score = #{baseScore,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_operator = #{updateOperator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByTenantNo" parameterType="com.maxcar.tenant.pojo.IntegralDetail" resultMap="BaseResultMap">
+    select * from integral_detail where tenant_no=#{tenantNo} and date_format(check_time, '%Y-%m') = #{checkTimeString}
+    and isvalid=1
+  </select>
+
+  <!--查询积分统计-->
+  <select id="selectByNowMonth" resultType="com.maxcar.tenant.pojo.IntegralStatistics">
+
+
+  </select>
+</mapper>

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.market.dao.AreaShopMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.market.pojo.AreaShop" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="area_no" property="areaNo" jdbcType="VARCHAR" />
+    <result column="park_space" property="parkSpace" jdbcType="DOUBLE" />
+    <result column="rent_status" property="rentStatus" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR" />
+    <result column="update_operator" property="updateOperator" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, area_id, market_id, area_no, park_space, rent_status, remarks, isvalid, insert_time, 
+    update_time, insert_operator, update_operator
+  </sql>
+
+  <!-- 查询市场下车位和展厅的物业信息 -->
+  <select id="getCarSpaceAndOfficeByMarketId" resultMap="BaseResultMap"
+          parameterType="com.maxcar.market.model.request.GetCarSpaceAndOfficeByMarketIdOrAreaIdRequest">
+    SELECT ap.*,a.type FROM area_shop ap
+    LEFT JOIN `area` a
+    ON ap.`area_id` = a.`id`
+    WHERE
+    ap.isvalid =1
+    and a.isvalid =1
+    and a.type in (0,1)
+    <if test="marketId != null and marketId != ''">
+      and ap.market_id =#{marketId}
+    </if>
+    <if test="areaId != null and areaId != '' ">
+      and ap.area_id =#{areaId}
+    </if>
+
+  </select>
+
+  <select id="getAreaCountTotal" resultType="java.lang.Double" parameterType="java.lang.String">
+    select
+    COALESCE(sum(park_space),0)
+    from area_shop
+    where area_id = #{areaId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.market.pojo.AreaShopExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from area_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from area_shop
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from area_shop
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.market.pojo.AreaShopExample" >
+    delete from area_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.market.pojo.AreaShop" >
+    insert into area_shop (id, area_id, market_id, 
+      area_no, park_space, rent_status, 
+      remarks, isvalid, insert_time, 
+      update_time, insert_operator, update_operator
+      )
+    values (#{id,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, 
+      #{areaNo,jdbcType=VARCHAR}, #{parkSpace,jdbcType=DOUBLE}, #{rentStatus,jdbcType=INTEGER}, 
+      #{remarks,jdbcType=VARCHAR}, #{isvalid,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{insertOperator,jdbcType=VARCHAR}, #{updateOperator,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.market.pojo.AreaShop" >
+    insert into area_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="marketId != null" >
+        market_id,
+      </if>
+      <if test="areaNo != null" >
+        area_no,
+      </if>
+      <if test="parkSpace != null" >
+        park_space,
+      </if>
+      <if test="rentStatus != null" >
+        rent_status,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="isvalid != null" >
+        isvalid,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator,
+      </if>
+      <if test="updateOperator != null" >
+        update_operator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNo != null" >
+        #{areaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parkSpace != null" >
+        #{parkSpace,jdbcType=DOUBLE},
+      </if>
+      <if test="rentStatus != null" >
+        #{rentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOperator != null" >
+        #{updateOperator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.market.pojo.AreaShopExample" resultType="java.lang.Integer" >
+    select count(*) from area_shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <!-- select start -->
+  <select id="countParkSpaceByType" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT
+	SUM(ap.park_space)
+    FROM
+    area_shop ap
+    LEFT JOIN area a ON ap.area_id = a.id where a.type = #{type,jdbcType=INTEGER};
+  </select>
+  <!-- select end -->
+
+  <update id="updateByExampleSelective" parameterType="map" >
+    update area_shop
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaId != null" >
+        area_id = #{record.areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketId != null" >
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaNo != null" >
+        area_no = #{record.areaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parkSpace != null" >
+        park_space = #{record.parkSpace,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rentStatus != null" >
+        rent_status = #{record.rentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isvalid != null" >
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.insertOperator != null" >
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateOperator != null" >
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update area_shop
+    set id = #{record.id,jdbcType=VARCHAR},
+      area_id = #{record.areaId,jdbcType=VARCHAR},
+      market_id = #{record.marketId,jdbcType=VARCHAR},
+      area_no = #{record.areaNo,jdbcType=VARCHAR},
+      park_space = #{record.parkSpace,jdbcType=DOUBLE},
+      rent_status = #{record.rentStatus,jdbcType=INTEGER},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      isvalid = #{record.isvalid,jdbcType=INTEGER},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      update_operator = #{record.updateOperator,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.market.pojo.AreaShop" >
+    update area_shop
+    <set >
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+        market_id = #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNo != null" >
+        area_no = #{areaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parkSpace != null" >
+        park_space = #{parkSpace,jdbcType=DOUBLE},
+      </if>
+      <if test="rentStatus != null" >
+        rent_status = #{rentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOperator != null" >
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.market.pojo.AreaShop" >
+    update area_shop
+    set area_id = #{areaId,jdbcType=VARCHAR},
+      market_id = #{marketId,jdbcType=VARCHAR},
+      area_no = #{areaNo,jdbcType=VARCHAR},
+      park_space = #{parkSpace,jdbcType=DOUBLE},
+      rent_status = #{rentStatus,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      update_operator = #{updateOperator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="countPark" resultType="java.lang.Integer">
+      SELECT COUNT(s.park_space) area a , area_shop s
+      WHERE a.type = 1 AND a.id = s.area_id AND a.isvalid = 1 AND s.isvalid = 1
+  </select>
+</mapper>

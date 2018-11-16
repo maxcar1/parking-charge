@@ -1,0 +1,3717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maxcar.market.dao.InvoiceMapper">
+  <resultMap id="BaseResultMap" type="com.maxcar.market.pojo.Invoice">
+    <id column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="market_id" jdbcType="VARCHAR" property="marketId"/>
+    <result column="bill_time" jdbcType="TIMESTAMP" property="billTime"/>
+    <result column="invoice_no" jdbcType="VARCHAR" property="invoiceNo"/>
+    <result column="current_no" jdbcType="VARCHAR" property="currentNo"/>
+    <result column="contract" jdbcType="VARCHAR" property="contract"/>
+    <result column="purchacer_tax_no" jdbcType="VARCHAR" property="purchacerTaxNo"/>
+    <result column="purchacer_nationality" jdbcType="VARCHAR" property="purchacerNationality"/>
+    <result column="purchacer_name" jdbcType="VARCHAR" property="purchacerName"/>
+    <result column="purchacer_type" jdbcType="INTEGER" property="purchacerType"/>
+    <result column="purchacer_passport" jdbcType="VARCHAR" property="purchacerPassport"/>
+    <result column="purchacer_id_card" jdbcType="VARCHAR" property="purchacerIdCard"/>
+    <result column="is_purchacer_code" jdbcType="INTEGER" property="isPurchacerCode"/>
+    <result column="purchacer_no" jdbcType="VARCHAR" property="purchacerNo"/>
+    <result column="purchacer_address" jdbcType="VARCHAR" property="purchacerAddress"/>
+    <result column="purchacer_nation" jdbcType="VARCHAR" property="purchacerNation"/>
+    <result column="purchacer_mobile" jdbcType="VARCHAR" property="purchacerMobile"/>
+    <result column="tenant_id" jdbcType="VARCHAR" property="tenantId"/>
+    <result column="is_seller_code" jdbcType="INTEGER" property="isSellerCode"/>
+    <result column="seller_nationality" jdbcType="VARCHAR" property="sellerNationality"/>
+    <result column="seller_tax_no" jdbcType="VARCHAR" property="sellerTaxNo"/>
+    <result column="seller_id_card" jdbcType="VARCHAR" property="sellerIdCard"/>
+    <result column="seller_passport" jdbcType="VARCHAR" property="sellerPassport"/>
+    <result column="seller_nation" jdbcType="VARCHAR" property="sellerNation"/>
+    <result column="seller_name" jdbcType="VARCHAR" property="sellerName"/>
+    <result column="seller_type" jdbcType="INTEGER" property="sellerType"/>
+    <result column="seller_no" jdbcType="VARCHAR" property="sellerNo"/>
+    <result column="seller_address" jdbcType="VARCHAR" property="sellerAddress"/>
+    <result column="seller_mobile" jdbcType="VARCHAR" property="sellerMobile"/>
+    <result column="transfer_type" jdbcType="INTEGER" property="transferType"/>
+    <result column="factory_plate" jdbcType="VARCHAR" property="factoryPlate"/>
+    <result column="certificate_number" jdbcType="VARCHAR" property="certificateNumber"/>
+    <result column="invoice_portof" jdbcType="INTEGER" property="invoicePortof"/>
+    <result column="invoice_status" jdbcType="INTEGER" property="invoiceStatus"/>
+    <result column="invoice_code" jdbcType="VARCHAR" property="invoiceCode"/>
+    <result column="car_sources" jdbcType="INTEGER" property="carSources"/>
+    <result column="car_id" jdbcType="VARCHAR" property="carId"/>
+    <result column="car_no" jdbcType="VARCHAR" property="carNo"/>
+    <result column="price" jdbcType="INTEGER" property="price"/>
+    <result column="registration_no" jdbcType="VARCHAR" property="registrationNo"/>
+    <result column="type" jdbcType="INTEGER" property="type"/>
+    <result column="vin" jdbcType="VARCHAR" property="vin"/>
+    <result column="series" jdbcType="VARCHAR" property="series"/>
+    <result column="series_name" jdbcType="VARCHAR" property="seriesName"/>
+    <result column="operater" jdbcType="VARCHAR" property="operater"/>
+    <result column="status" jdbcType="INTEGER" property="status"/>
+    <result column="version" jdbcType="INTEGER" property="version"/>
+    <result column="taxno" jdbcType="VARCHAR" property="taxno"/>
+    <result column="address" jdbcType="VARCHAR" property="address"/>
+    <result column="bank" jdbcType="VARCHAR" property="bank"/>
+    <result column="account" jdbcType="VARCHAR" property="account"/>
+    <result column="operator_name" jdbcType="VARCHAR" property="operatorName"/>
+    <result column="auction" jdbcType="VARCHAR" property="auction"/>
+    <result column="auction_address" jdbcType="VARCHAR" property="auctionAddress"/>
+    <result column="auction_no" jdbcType="VARCHAR" property="auctionNo"/>
+    <result column="auction_bank" jdbcType="VARCHAR" property="auctionBank"/>
+    <result column="auction_mobile" jdbcType="VARCHAR" property="auctionMobile"/>
+    <result column="market_taxNo" jdbcType="VARCHAR" property="marketTaxno"/>
+    <result column="market_address" jdbcType="VARCHAR" property="marketAddress"/>
+    <result column="market_bank" jdbcType="VARCHAR" property="marketBank"/>
+    <result column="market_phone" jdbcType="VARCHAR" property="marketPhone"/>
+    <result column="comment" jdbcType="VARCHAR" property="comment"/>
+    <result column="ticket_operator" jdbcType="VARCHAR" property="ticketOperator"/>
+    <result column="ticket_market" jdbcType="VARCHAR" property="ticketMarket"/>
+    <result column="office" jdbcType="VARCHAR" property="office"/>
+    <result column="sync_time" jdbcType="TIMESTAMP" property="syncTime"/>
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <result column="pay_type" jdbcType="VARCHAR" property="payType"/>
+    <result column="is_new_energy" jdbcType="INTEGER" property="isNewEnergy"/>
+    <result column="agent_id_card" jdbcType="VARCHAR" property="agentIdCard"/>
+    <result column="agent_name" jdbcType="VARCHAR" property="agentName"/>
+    <result column="agent_type" jdbcType="INTEGER" property="agentType"/>
+    <result column="agent_address" jdbcType="VARCHAR" property="agentAddress"/>
+    <result column="agent_tax_no" jdbcType="VARCHAR" property="agentTaxNo"/>
+    <result column="agent_mobile" jdbcType="VARCHAR" property="agentMobile"/>
+    <result column="agent_nationality" jdbcType="VARCHAR" property="agentNationality"/>
+    <result column="agent_no" jdbcType="VARCHAR" property="agentNo"/>
+    <result column="agent_passport" jdbcType="VARCHAR" property="agentPassport"/>
+    <result column="agent_nation" jdbcType="VARCHAR" property="agentNation"/>
+    <result column="is_agent_code" jdbcType="INTEGER" property="isAgentCode"/>
+    <result column="is_agent" jdbcType="INTEGER" property="isAgent"/>
+    <result column="car_invoice_type" jdbcType="VARCHAR" property="carInvoiceType"/>
+    <result column="initial_registration_date" jdbcType="TIMESTAMP" property="initialRegistrationDate"/>
+    <result column="invoice_purchase_id" jdbcType="VARCHAR" property="invoicePurchaseId"/>
+    <result column="car_stock_status" jdbcType="INTEGER" property="carStockStatus"/>
+
+    <result column="current_time" property="currentTime" jdbcType="VARCHAR"/>
+    <result column="tenant_name" property="tenantName" jdbcType="VARCHAR"/>
+    <result column="contact_name" property="contactName" jdbcType="VARCHAR"/>
+    <result column="tenant_area" property="tenantArea" jdbcType="VARCHAR"/>
+    <result column="invoice_counts" property="invoiceCounts" jdbcType="INTEGER"/>
+    <result column="current_time" property="currentTime" jdbcType="VARCHAR"/>
+    <result column="total_counts" property="totalCounts" jdbcType="INTEGER"/>
+    <result column="total_price" property="totalPrice" jdbcType="INTEGER"/>
+  </resultMap>
+
+  <!-- 交易列表的返回的实体类 -->
+  <resultMap id="DealResultMap" type="com.maxcar.market.model.response.DealResponse" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+    <result column="ivin" property="ivin" jdbcType="TIMESTAMP" />
+    <result column="cvin" property="cvin" jdbcType="VARCHAR" />
+    <result column="tenant" property="tenantId" jdbcType="VARCHAR" />
+    <result column="is_new_car" property="isNewCar" jdbcType="VARCHAR" />
+    <result column="stock_status" property="stockStatus" jdbcType="VARCHAR" />
+    <result column="bill_time" property="billTime" jdbcType="VARCHAR" />
+    <result column="register_day" property="registerDay" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="VARCHAR" />
+    <result column="series" property="series" jdbcType="VARCHAR" />
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+    <result column="initial_licence_time" property="initialLicenceTime" jdbcType="VARCHAR" />
+    <result column="mileage" property="mileage" jdbcType="VARCHAR" />
+    <result column="evaluate_price" property="evaluatePrice" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- 开票管理所有信息实体类 -->
+  <resultMap id="TradeInformationMap" type="com.maxcar.market.pojo.TradeInformation">
+    <result column="purchacer_name" property="purchacerName" jdbcType="VARCHAR"/>
+    <result column="purchacer_type" property="purchacerType" jdbcType="VARCHAR"/>
+    <result column="is_purchacer_code" property="isPurchacerCode" jdbcType="VARCHAR"/>
+    <result column="purchacer_nationality" property="purchacerNationality" jdbcType="VARCHAR"/>
+    <result column="purchacer_no" property="purchacerNo" jdbcType="VARCHAR"/>
+    <result column="purchacer_tax_no" property="purchacerTaxNo" jdbcType="VARCHAR"/>
+    <result column="purchacer_id_card" property="purchacerIdCard" jdbcType="VARCHAR"/>
+    <result column="purchacer_passport" property="purchacerPassport" jdbcType="VARCHAR"/>
+    <result column="purchacer_nation" property="purchacerNation" jdbcType="VARCHAR"/>
+    <result column="purchacer_address" property="purchacerAddress" jdbcType="VARCHAR"/>
+    <result column="purchacer_mobile" property="purchacerMobile" jdbcType="VARCHAR"/>
+    <result column="seller_name" property="sellerName" jdbcType="VARCHAR"/>
+    <result column="seller_type" property="sellerType" jdbcType="VARCHAR"/>
+    <result column="is_seller_code" property="isSellerCode" jdbcType="VARCHAR"/>
+    <result column="seller_nationality" property="sellerNationality" jdbcType="VARCHAR"/>
+    <result column="seller_tax_no" property="sellerTaxNo" jdbcType="VARCHAR"/>
+    <result column="seller_no" property="sellerNo" jdbcType="VARCHAR"/>
+    <result column="seller_id_card" property="sellerIdCard" jdbcType="VARCHAR"/>
+    <result column="seller_passport" property="sellerPassport" jdbcType="VARCHAR"/>
+    <result column="seller_nation" property="sellerNation" jdbcType="VARCHAR"/>
+    <result column="seller_address" property="sellerAddress" jdbcType="VARCHAR"/>
+    <result column="seller_mobile" property="sellerMobile" jdbcType="VARCHAR"/>
+    <result column="is_agent" property="isAgent" jdbcType="VARCHAR"/>
+    <result column="agent_name" property="agentName" jdbcType="VARCHAR"/>
+    <result column="agent_type" property="agentType" jdbcType="VARCHAR"/>
+    <result column="is_agent_code" property="isAgentCode" jdbcType="VARCHAR"/>
+    <result column="agent_nationality" property="agentNationality" jdbcType="VARCHAR"/>
+    <result column="agent_tax_no" property="agentTaxNo" jdbcType="VARCHAR"/>
+    <result column="agent_no" property="agentNo" jdbcType="VARCHAR"/>
+    <result column="agent_id_card" property="agentIdCard" jdbcType="VARCHAR"/>
+    <result column="agent_passport" property="agentPassport" jdbcType="VARCHAR"/>
+    <result column="agent_nation" property="agentNation" jdbcType="VARCHAR"/>
+    <result column="agent_address" property="agentAddress" jdbcType="VARCHAR"/>
+    <result column="agent_mobile" property="agentMobile" jdbcType="VARCHAR"/>
+    <result column="car_no" property="carNo" jdbcType="VARCHAR"/>
+    <result column="certificate_number" property="certificateNumber" jdbcType="VARCHAR"/>
+    <result column="vin" property="vin" jdbcType="VARCHAR"/>
+    <result column="factory_plate" property="factoryPlate" jdbcType="VARCHAR"/>
+    <result column="level" property="level" jdbcType="VARCHAR"/>
+    <result column="is_new_energy" property="isNewEnergy" jdbcType="VARCHAR"/>
+    <result column="office" property="office" jdbcType="VARCHAR"/>
+    <result column="price" property="price" jdbcType="INTEGER"/>
+    <result column="auction" property="auction" jdbcType="VARCHAR"/>
+    <result column="auction_address" property="auctionAddress" jdbcType="VARCHAR"/>
+    <result column="bill_time" property="billTime" jdbcType="TIMESTAMP"/>
+    <result column="initial_licence_time" property="initialLicenceTime" jdbcType="TIMESTAMP"/>
+    <result column="new_price" property="newPrice" jdbcType="DOUBLE"/>
+    <result column="mileage" property="mileage" jdbcType="INTEGER"/>
+    <result column="name" property="marketName" jdbcType="VARCHAR"/>
+    <result column="address" property="marketAddress" jdbcType="VARCHAR"/>
+    <result column="taxno" property="marketTaxno" jdbcType="VARCHAR"/>
+    <!-- 以下两个暂缺字段 -->
+    <result column="auction_tax_no" property="auctionTaxNo" jdbcType="VARCHAR"/>
+    <result column="deal_time" property="dealTime" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="("
+                           separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="("
+                           separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, market_id, bill_time, invoice_no, current_no, contract, purchacer_tax_no, purchacer_nationality,
+    purchacer_name, purchacer_type, purchacer_passport, purchacer_id_card, is_purchacer_code,
+    purchacer_no, purchacer_address, purchacer_nation, purchacer_mobile, tenant_id, is_seller_code,
+    seller_nationality, seller_tax_no, seller_id_card, seller_passport, seller_nation,
+    seller_name, seller_type, seller_no, seller_address, seller_mobile, transfer_type,
+    factory_plate, certificate_number, invoice_portof, invoice_status, invoice_code,
+    car_sources, car_id, car_no, price, registration_no, type, vin, series, series_name,
+    operater, status, version, taxno, address, bank, account, operator_name, auction,
+    auction_address, auction_no, auction_bank, auction_mobile, market_taxNo, market_address,
+    market_bank, market_phone, comment, ticket_operator, ticket_market, office, sync_time,
+    insert_time, update_time, pay_type, is_new_energy, agent_id_card, agent_name, agent_type,
+    agent_address, agent_tax_no, agent_mobile, agent_nationality, agent_no, agent_passport,
+    agent_nation, is_agent_code, is_agent,
+    car_invoice_type,initial_registration_date,invoice_purchase_id,car_stock_status
+  </sql>
+  <select id="selectByExample" parameterType="com.maxcar.market.pojo.InvoiceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List"/>
+    from invoice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from invoice
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from invoice
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.market.pojo.InvoiceExample">
+    delete from invoice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.market.pojo.Invoice">
+    insert into invoice (id, market_id, bill_time,
+    invoice_no, current_no, contract,
+    purchacer_tax_no, purchacer_nationality, purchacer_name,
+    purchacer_type, purchacer_passport, purchacer_id_card,
+    is_purchacer_code, purchacer_no, purchacer_address,
+    purchacer_nation, purchacer_mobile, tenant_id,
+    is_seller_code, seller_nationality, seller_tax_no,
+    seller_id_card, seller_passport, seller_nation,
+    seller_name, seller_type, seller_no,
+    seller_address, seller_mobile, transfer_type,
+    factory_plate, certificate_number, invoice_portof,
+    invoice_status, invoice_code, car_sources,
+    car_id, car_no, price,
+    registration_no, type, vin,
+    series, series_name, operater,
+    status, version, taxno,
+    address, bank, account,
+    operator_name, auction, auction_address,
+    auction_no, auction_bank, auction_mobile,
+    market_taxNo, market_address, market_bank,
+    market_phone, comment, ticket_operator,
+    ticket_market, office, sync_time,
+    insert_time, update_time, pay_type,
+    is_new_energy, agent_id_card, agent_name,
+    agent_type, agent_address, agent_tax_no,
+    agent_mobile, agent_nationality, agent_no,
+    agent_passport, agent_nation, is_agent_code,
+    is_agent, car_invoice_type,initial_registration_date,invoice_purchase_id,car_stock_status)
+    values (#{id,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{billTime,jdbcType=TIMESTAMP},
+    #{invoiceNo,jdbcType=VARCHAR}, #{currentNo,jdbcType=VARCHAR}, #{contract,jdbcType=VARCHAR},
+    #{purchacerTaxNo,jdbcType=VARCHAR}, #{purchacerNationality,jdbcType=VARCHAR}, #{purchacerName,jdbcType=VARCHAR},
+    #{purchacerType,jdbcType=INTEGER}, #{purchacerPassport,jdbcType=VARCHAR}, #{purchacerIdCard,jdbcType=VARCHAR},
+    #{isPurchacerCode,jdbcType=INTEGER}, #{purchacerNo,jdbcType=VARCHAR}, #{purchacerAddress,jdbcType=VARCHAR},
+    #{purchacerNation,jdbcType=VARCHAR}, #{purchacerMobile,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR},
+    #{isSellerCode,jdbcType=INTEGER}, #{sellerNationality,jdbcType=VARCHAR}, #{sellerTaxNo,jdbcType=VARCHAR},
+    #{sellerIdCard,jdbcType=VARCHAR}, #{sellerPassport,jdbcType=VARCHAR}, #{sellerNation,jdbcType=VARCHAR},
+    #{sellerName,jdbcType=VARCHAR}, #{sellerType,jdbcType=INTEGER}, #{sellerNo,jdbcType=VARCHAR},
+    #{sellerAddress,jdbcType=VARCHAR}, #{sellerMobile,jdbcType=VARCHAR}, #{transferType,jdbcType=INTEGER},
+    #{factoryPlate,jdbcType=VARCHAR}, #{certificateNumber,jdbcType=VARCHAR}, #{invoicePortof,jdbcType=INTEGER},
+    #{invoiceStatus,jdbcType=INTEGER}, #{invoiceCode,jdbcType=VARCHAR}, #{carSources,jdbcType=INTEGER},
+    #{carId,jdbcType=VARCHAR}, #{carNo,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
+    #{registrationNo,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{vin,jdbcType=VARCHAR},
+    #{series,jdbcType=VARCHAR}, #{seriesName,jdbcType=VARCHAR}, #{operater,jdbcType=VARCHAR},
+    #{status,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{taxno,jdbcType=VARCHAR},
+    #{address,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR},
+    #{operatorName,jdbcType=VARCHAR}, #{auction,jdbcType=VARCHAR}, #{auctionAddress,jdbcType=VARCHAR},
+    #{auctionNo,jdbcType=VARCHAR}, #{auctionBank,jdbcType=VARCHAR}, #{auctionMobile,jdbcType=VARCHAR},
+    #{marketTaxno,jdbcType=VARCHAR}, #{marketAddress,jdbcType=VARCHAR}, #{marketBank,jdbcType=VARCHAR},
+    #{marketPhone,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{ticketOperator,jdbcType=VARCHAR},
+    #{ticketMarket,jdbcType=VARCHAR}, #{office,jdbcType=VARCHAR}, #{syncTime,jdbcType=TIMESTAMP},
+    #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=VARCHAR},
+    #{isNewEnergy,jdbcType=INTEGER}, #{agentIdCard,jdbcType=VARCHAR}, #{agentName,jdbcType=VARCHAR},
+    #{agentType,jdbcType=INTEGER}, #{agentAddress,jdbcType=VARCHAR}, #{agentTaxNo,jdbcType=VARCHAR},
+    #{agentMobile,jdbcType=VARCHAR}, #{agentNationality,jdbcType=VARCHAR}, #{agentNo,jdbcType=VARCHAR},
+    #{agentPassport,jdbcType=VARCHAR}, #{agentNation,jdbcType=VARCHAR}, #{isAgentCode,jdbcType=INTEGER},
+    #{isAgent,jdbcType=INTEGER}, #{carInvoiceType,jdbcType=VARCHAR}, #{initialRegistrationDate,jdbcType=TIMESTAMP},
+    #{invoicePurchaseId,jdbcType=VARCHAR},#{carStockStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.market.pojo.Invoice">
+    insert into invoice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="marketId != null">
+        market_id,
+      </if>
+      <if test="billTime != null">
+        bill_time,
+      </if>
+      <if test="invoiceNo != null">
+        invoice_no,
+      </if>
+      <if test="currentNo != null">
+        current_no,
+      </if>
+      <if test="contract != null">
+        contract,
+      </if>
+      <if test="purchacerTaxNo != null">
+        purchacer_tax_no,
+      </if>
+      <if test="purchacerNationality != null">
+        purchacer_nationality,
+      </if>
+      <if test="purchacerName != null">
+        purchacer_name,
+      </if>
+      <if test="purchacerType != null">
+        purchacer_type,
+      </if>
+      <if test="purchacerPassport != null">
+        purchacer_passport,
+      </if>
+      <if test="purchacerIdCard != null">
+        purchacer_id_card,
+      </if>
+      <if test="isPurchacerCode != null">
+        is_purchacer_code,
+      </if>
+      <if test="purchacerNo != null">
+        purchacer_no,
+      </if>
+      <if test="purchacerAddress != null">
+        purchacer_address,
+      </if>
+      <if test="purchacerNation != null">
+        purchacer_nation,
+      </if>
+      <if test="purchacerMobile != null">
+        purchacer_mobile,
+      </if>
+      <if test="tenantId != null">
+        tenant_id,
+      </if>
+      <if test="isSellerCode != null">
+        is_seller_code,
+      </if>
+      <if test="sellerNationality != null">
+        seller_nationality,
+      </if>
+      <if test="sellerTaxNo != null">
+        seller_tax_no,
+      </if>
+      <if test="sellerIdCard != null">
+        seller_id_card,
+      </if>
+      <if test="sellerPassport != null">
+        seller_passport,
+      </if>
+      <if test="sellerNation != null">
+        seller_nation,
+      </if>
+      <if test="sellerName != null">
+        seller_name,
+      </if>
+      <if test="sellerType != null">
+        seller_type,
+      </if>
+      <if test="sellerNo != null">
+        seller_no,
+      </if>
+      <if test="sellerAddress != null">
+        seller_address,
+      </if>
+      <if test="sellerMobile != null">
+        seller_mobile,
+      </if>
+      <if test="transferType != null">
+        transfer_type,
+      </if>
+      <if test="factoryPlate != null">
+        factory_plate,
+      </if>
+      <if test="certificateNumber != null">
+        certificate_number,
+      </if>
+      <if test="invoicePortof != null">
+        invoice_portof,
+      </if>
+      <if test="invoiceStatus != null">
+        invoice_status,
+      </if>
+      <if test="invoiceCode != null">
+        invoice_code,
+      </if>
+      <if test="carSources != null">
+        car_sources,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+      <if test="carNo != null">
+        car_no,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="registrationNo != null">
+        registration_no,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="vin != null">
+        vin,
+      </if>
+      <if test="series != null">
+        series,
+      </if>
+      <if test="seriesName != null">
+        series_name,
+      </if>
+      <if test="operater != null">
+        operater,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="taxno != null">
+        taxno,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="bank != null">
+        bank,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="operatorName != null">
+        operator_name,
+      </if>
+      <if test="auction != null">
+        auction,
+      </if>
+      <if test="auctionAddress != null">
+        auction_address,
+      </if>
+      <if test="auctionNo != null">
+        auction_no,
+      </if>
+      <if test="auctionBank != null">
+        auction_bank,
+      </if>
+      <if test="auctionMobile != null">
+        auction_mobile,
+      </if>
+      <if test="marketTaxno != null">
+        market_taxNo,
+      </if>
+      <if test="marketAddress != null">
+        market_address,
+      </if>
+      <if test="marketBank != null">
+        market_bank,
+      </if>
+      <if test="marketPhone != null">
+        market_phone,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="ticketOperator != null">
+        ticket_operator,
+      </if>
+      <if test="ticketMarket != null">
+        ticket_market,
+      </if>
+      <if test="office != null">
+        office,
+      </if>
+      <if test="syncTime != null">
+        sync_time,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="isNewEnergy != null">
+        is_new_energy,
+      </if>
+      <if test="agentIdCard != null">
+        agent_id_card,
+      </if>
+      <if test="agentName != null">
+        agent_name,
+      </if>
+      <if test="agentType != null">
+        agent_type,
+      </if>
+      <if test="agentAddress != null">
+        agent_address,
+      </if>
+      <if test="agentTaxNo != null">
+        agent_tax_no,
+      </if>
+      <if test="agentMobile != null">
+        agent_mobile,
+      </if>
+      <if test="agentNationality != null">
+        agent_nationality,
+      </if>
+      <if test="agentNo != null">
+        agent_no,
+      </if>
+      <if test="agentPassport != null">
+        agent_passport,
+      </if>
+      <if test="agentNation != null">
+        agent_nation,
+      </if>
+      <if test="isAgentCode != null">
+        is_agent_code,
+      </if>
+      <if test="isAgent != null">
+        is_agent,
+      </if>
+      <if test="carInvoiceType != null">
+        car_invoice_type,
+      </if>
+      <if test="initialRegistrationDate != null">
+        initial_registration_date,
+      </if>
+      <if test="invoicePurchaseId != null">
+        invoice_purchase_id,
+      </if>
+      <if test="carStockStatus != null">
+        car_stock_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null">
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        #{billTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invoiceNo != null">
+        #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currentNo != null">
+        #{currentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contract != null">
+        #{contract,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerTaxNo != null">
+        #{purchacerTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerNationality != null">
+        #{purchacerNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerName != null">
+        #{purchacerName,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerType != null">
+        #{purchacerType,jdbcType=INTEGER},
+      </if>
+      <if test="purchacerPassport != null">
+        #{purchacerPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerIdCard != null">
+        #{purchacerIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isPurchacerCode != null">
+        #{isPurchacerCode,jdbcType=INTEGER},
+      </if>
+      <if test="purchacerNo != null">
+        #{purchacerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerAddress != null">
+        #{purchacerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerNation != null">
+        #{purchacerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerMobile != null">
+        #{purchacerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSellerCode != null">
+        #{isSellerCode,jdbcType=INTEGER},
+      </if>
+      <if test="sellerNationality != null">
+        #{sellerNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerTaxNo != null">
+        #{sellerTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerIdCard != null">
+        #{sellerIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerPassport != null">
+        #{sellerPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerNation != null">
+        #{sellerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null">
+        #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerType != null">
+        #{sellerType,jdbcType=INTEGER},
+      </if>
+      <if test="sellerNo != null">
+        #{sellerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerAddress != null">
+        #{sellerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerMobile != null">
+        #{sellerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null">
+        #{transferType,jdbcType=INTEGER},
+      </if>
+      <if test="factoryPlate != null">
+        #{factoryPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNumber != null">
+        #{certificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicePortof != null">
+        #{invoicePortof,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceStatus != null">
+        #{invoiceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceCode != null">
+        #{invoiceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="carSources != null">
+        #{carSources,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=VARCHAR},
+      </if>
+      <if test="carNo != null">
+        #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="registrationNo != null">
+        #{registrationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null">
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="series != null">
+        #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null">
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="operater != null">
+        #{operater,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="taxno != null">
+        #{taxno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null">
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null">
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="auction != null">
+        #{auction,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionAddress != null">
+        #{auctionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionNo != null">
+        #{auctionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionBank != null">
+        #{auctionBank,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionMobile != null">
+        #{auctionMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="marketTaxno != null">
+        #{marketTaxno,jdbcType=VARCHAR},
+      </if>
+      <if test="marketAddress != null">
+        #{marketAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="marketBank != null">
+        #{marketBank,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPhone != null">
+        #{marketPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketOperator != null">
+        #{ticketOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketMarket != null">
+        #{ticketMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null">
+        #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="syncTime != null">
+        #{syncTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="isNewEnergy != null">
+        #{isNewEnergy,jdbcType=INTEGER},
+      </if>
+      <if test="agentIdCard != null">
+        #{agentIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="agentName != null">
+        #{agentName,jdbcType=VARCHAR},
+      </if>
+      <if test="agentType != null">
+        #{agentType,jdbcType=INTEGER},
+      </if>
+      <if test="agentAddress != null">
+        #{agentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="agentTaxNo != null">
+        #{agentTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentMobile != null">
+        #{agentMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNationality != null">
+        #{agentNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNo != null">
+        #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentPassport != null">
+        #{agentPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNation != null">
+        #{agentNation,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgentCode != null">
+        #{isAgentCode,jdbcType=INTEGER},
+      </if>
+      <if test="isAgent != null">
+        #{isAgent,jdbcType=INTEGER},
+      </if>
+      <if test="carInvoiceType != null">
+        #{carInvoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="initialRegistrationDate != null">
+        #{initialRegistrationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invoicePurchaseId != null">
+        #{invoicePurchaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="carStockStatus != null">
+        #{carStockStatus ,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.market.pojo.InvoiceExample" resultType="java.lang.Integer">
+    select count(*) from invoice
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update invoice
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketId != null">
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billTime != null">
+        bill_time = #{record.billTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.invoiceNo != null">
+        invoice_no = #{record.invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentNo != null">
+        current_no = #{record.currentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contract != null">
+        contract = #{record.contract,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchacerTaxNo != null">
+        purchacer_tax_no = #{record.purchacerTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchacerNationality != null">
+        purchacer_nationality = #{record.purchacerNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchacerName != null">
+        purchacer_name = #{record.purchacerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchacerType != null">
+        purchacer_type = #{record.purchacerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.purchacerPassport != null">
+        purchacer_passport = #{record.purchacerPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchacerIdCard != null">
+        purchacer_id_card = #{record.purchacerIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isPurchacerCode != null">
+        is_purchacer_code = #{record.isPurchacerCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.purchacerNo != null">
+        purchacer_no = #{record.purchacerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchacerAddress != null">
+        purchacer_address = #{record.purchacerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchacerNation != null">
+        purchacer_nation = #{record.purchacerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchacerMobile != null">
+        purchacer_mobile = #{record.purchacerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantId != null">
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isSellerCode != null">
+        is_seller_code = #{record.isSellerCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellerNationality != null">
+        seller_nationality = #{record.sellerNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerTaxNo != null">
+        seller_tax_no = #{record.sellerTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerIdCard != null">
+        seller_id_card = #{record.sellerIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerPassport != null">
+        seller_passport = #{record.sellerPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerNation != null">
+        seller_nation = #{record.sellerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerName != null">
+        seller_name = #{record.sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerType != null">
+        seller_type = #{record.sellerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.sellerNo != null">
+        seller_no = #{record.sellerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerAddress != null">
+        seller_address = #{record.sellerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellerMobile != null">
+        seller_mobile = #{record.sellerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferType != null">
+        transfer_type = #{record.transferType,jdbcType=INTEGER},
+      </if>
+      <if test="record.factoryPlate != null">
+        factory_plate = #{record.factoryPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificateNumber != null">
+        certificate_number = #{record.certificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoicePortof != null">
+        invoice_portof = #{record.invoicePortof,jdbcType=INTEGER},
+      </if>
+      <if test="record.invoiceStatus != null">
+        invoice_status = #{record.invoiceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.invoiceCode != null">
+        invoice_code = #{record.invoiceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carSources != null">
+        car_sources = #{record.carSources,jdbcType=INTEGER},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carNo != null">
+        car_no = #{record.carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.registrationNo != null">
+        registration_no = #{record.registrationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.vin != null">
+        vin = #{record.vin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.series != null">
+        series = #{record.series,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seriesName != null">
+        series_name = #{record.seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operater != null">
+        operater = #{record.operater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.taxno != null">
+        taxno = #{record.taxno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank != null">
+        bank = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null">
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operatorName != null">
+        operator_name = #{record.operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auction != null">
+        auction = #{record.auction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auctionAddress != null">
+        auction_address = #{record.auctionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auctionNo != null">
+        auction_no = #{record.auctionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auctionBank != null">
+        auction_bank = #{record.auctionBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auctionMobile != null">
+        auction_mobile = #{record.auctionMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketTaxno != null">
+        market_taxNo = #{record.marketTaxno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketAddress != null">
+        market_address = #{record.marketAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketBank != null">
+        market_bank = #{record.marketBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketPhone != null">
+        market_phone = #{record.marketPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null">
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketOperator != null">
+        ticket_operator = #{record.ticketOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ticketMarket != null">
+        ticket_market = #{record.ticketMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.office != null">
+        office = #{record.office,jdbcType=VARCHAR},
+      </if>
+      <if test="record.syncTime != null">
+        sync_time = #{record.syncTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.insertTime != null">
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isNewEnergy != null">
+        is_new_energy = #{record.isNewEnergy,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentIdCard != null">
+        agent_id_card = #{record.agentIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentName != null">
+        agent_name = #{record.agentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentType != null">
+        agent_type = #{record.agentType,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentAddress != null">
+        agent_address = #{record.agentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentTaxNo != null">
+        agent_tax_no = #{record.agentTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentMobile != null">
+        agent_mobile = #{record.agentMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentNationality != null">
+        agent_nationality = #{record.agentNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentNo != null">
+        agent_no = #{record.agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentPassport != null">
+        agent_passport = #{record.agentPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentNation != null">
+        agent_nation = #{record.agentNation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAgentCode != null">
+        is_agent_code = #{record.isAgentCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.isAgent != null">
+        is_agent = #{record.isAgent,jdbcType=INTEGER},
+      </if>
+      <if test="record.carInvoiceType != null">
+        car_invoice_type = #{record.carInvoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.initialRegistrationDate != null">
+        initial_registration_date = #{record.initialRegistrationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.invoicePurchaseId != null">
+        invoice_purchase_id = #{record.invoicePurchaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carStockStatus != null">
+        car_stock_status = #{record.carStockStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update invoice
+    set id = #{record.id,jdbcType=VARCHAR},
+    market_id = #{record.marketId,jdbcType=VARCHAR},
+    bill_time = #{record.billTime,jdbcType=TIMESTAMP},
+    invoice_no = #{record.invoiceNo,jdbcType=VARCHAR},
+    current_no = #{record.currentNo,jdbcType=VARCHAR},
+    contract = #{record.contract,jdbcType=VARCHAR},
+    purchacer_tax_no = #{record.purchacerTaxNo,jdbcType=VARCHAR},
+    purchacer_nationality = #{record.purchacerNationality,jdbcType=VARCHAR},
+    purchacer_name = #{record.purchacerName,jdbcType=VARCHAR},
+    purchacer_type = #{record.purchacerType,jdbcType=INTEGER},
+    purchacer_passport = #{record.purchacerPassport,jdbcType=VARCHAR},
+    purchacer_id_card = #{record.purchacerIdCard,jdbcType=VARCHAR},
+    is_purchacer_code = #{record.isPurchacerCode,jdbcType=INTEGER},
+    purchacer_no = #{record.purchacerNo,jdbcType=VARCHAR},
+    purchacer_address = #{record.purchacerAddress,jdbcType=VARCHAR},
+    purchacer_nation = #{record.purchacerNation,jdbcType=VARCHAR},
+    purchacer_mobile = #{record.purchacerMobile,jdbcType=VARCHAR},
+    tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+    is_seller_code = #{record.isSellerCode,jdbcType=INTEGER},
+    seller_nationality = #{record.sellerNationality,jdbcType=VARCHAR},
+    seller_tax_no = #{record.sellerTaxNo,jdbcType=VARCHAR},
+    seller_id_card = #{record.sellerIdCard,jdbcType=VARCHAR},
+    seller_passport = #{record.sellerPassport,jdbcType=VARCHAR},
+    seller_nation = #{record.sellerNation,jdbcType=VARCHAR},
+    seller_name = #{record.sellerName,jdbcType=VARCHAR},
+    seller_type = #{record.sellerType,jdbcType=INTEGER},
+    seller_no = #{record.sellerNo,jdbcType=VARCHAR},
+    seller_address = #{record.sellerAddress,jdbcType=VARCHAR},
+    seller_mobile = #{record.sellerMobile,jdbcType=VARCHAR},
+    transfer_type = #{record.transferType,jdbcType=INTEGER},
+    factory_plate = #{record.factoryPlate,jdbcType=VARCHAR},
+    certificate_number = #{record.certificateNumber,jdbcType=VARCHAR},
+    invoice_portof = #{record.invoicePortof,jdbcType=INTEGER},
+    invoice_status = #{record.invoiceStatus,jdbcType=INTEGER},
+    invoice_code = #{record.invoiceCode,jdbcType=VARCHAR},
+    car_sources = #{record.carSources,jdbcType=INTEGER},
+    car_id = #{record.carId,jdbcType=VARCHAR},
+    car_no = #{record.carNo,jdbcType=VARCHAR},
+    price = #{record.price,jdbcType=INTEGER},
+    registration_no = #{record.registrationNo,jdbcType=VARCHAR},
+    type = #{record.type,jdbcType=INTEGER},
+    vin = #{record.vin,jdbcType=VARCHAR},
+    series = #{record.series,jdbcType=VARCHAR},
+    series_name = #{record.seriesName,jdbcType=VARCHAR},
+    operater = #{record.operater,jdbcType=VARCHAR},
+    status = #{record.status,jdbcType=INTEGER},
+    version = #{record.version,jdbcType=INTEGER},
+    taxno = #{record.taxno,jdbcType=VARCHAR},
+    address = #{record.address,jdbcType=VARCHAR},
+    bank = #{record.bank,jdbcType=VARCHAR},
+    account = #{record.account,jdbcType=VARCHAR},
+    operator_name = #{record.operatorName,jdbcType=VARCHAR},
+    auction = #{record.auction,jdbcType=VARCHAR},
+    auction_address = #{record.auctionAddress,jdbcType=VARCHAR},
+    auction_no = #{record.auctionNo,jdbcType=VARCHAR},
+    auction_bank = #{record.auctionBank,jdbcType=VARCHAR},
+    auction_mobile = #{record.auctionMobile,jdbcType=VARCHAR},
+    market_taxNo = #{record.marketTaxno,jdbcType=VARCHAR},
+    market_address = #{record.marketAddress,jdbcType=VARCHAR},
+    market_bank = #{record.marketBank,jdbcType=VARCHAR},
+    market_phone = #{record.marketPhone,jdbcType=VARCHAR},
+    comment = #{record.comment,jdbcType=VARCHAR},
+    ticket_operator = #{record.ticketOperator,jdbcType=VARCHAR},
+    ticket_market = #{record.ticketMarket,jdbcType=VARCHAR},
+    office = #{record.office,jdbcType=VARCHAR},
+    sync_time = #{record.syncTime,jdbcType=TIMESTAMP},
+    insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+    pay_type = #{record.payType,jdbcType=VARCHAR},
+    is_new_energy = #{record.isNewEnergy,jdbcType=INTEGER},
+    agent_id_card = #{record.agentIdCard,jdbcType=VARCHAR},
+    agent_name = #{record.agentName,jdbcType=VARCHAR},
+    agent_type = #{record.agentType,jdbcType=INTEGER},
+    agent_address = #{record.agentAddress,jdbcType=VARCHAR},
+    agent_tax_no = #{record.agentTaxNo,jdbcType=VARCHAR},
+    agent_mobile = #{record.agentMobile,jdbcType=VARCHAR},
+    agent_nationality = #{record.agentNationality,jdbcType=VARCHAR},
+    agent_no = #{record.agentNo,jdbcType=VARCHAR},
+    agent_passport = #{record.agentPassport,jdbcType=VARCHAR},
+    agent_nation = #{record.agentNation,jdbcType=VARCHAR},
+    is_agent_code = #{record.isAgentCode,jdbcType=INTEGER},
+    is_agent = #{record.isAgent,jdbcType=INTEGER},
+    car_invoice_type = #{record.carInvoiceType,jdbcType=VARCHAR},
+    initial_registration_date = #{record.initialRegistrationDate,jdbcType=TIMESTAMP},
+    invoice_purchase_id = #{record.invoicePurchaseId,jdbcType=VARCHAR},
+    car_stock_status = #{record.carStockStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.market.pojo.Invoice">
+    update invoice
+    <set>
+      <if test="marketId != null">
+        market_id = #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="billTime != null">
+        bill_time = #{billTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invoiceNo != null">
+        invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="currentNo != null">
+        current_no = #{currentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contract != null">
+        contract = #{contract,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerTaxNo != null">
+        purchacer_tax_no = #{purchacerTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerNationality != null">
+        purchacer_nationality = #{purchacerNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerName != null">
+        purchacer_name = #{purchacerName,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerType != null">
+        purchacer_type = #{purchacerType,jdbcType=INTEGER},
+      </if>
+      <if test="purchacerPassport != null">
+        purchacer_passport = #{purchacerPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerIdCard != null">
+        purchacer_id_card = #{purchacerIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isPurchacerCode != null">
+        is_purchacer_code = #{isPurchacerCode,jdbcType=INTEGER},
+      </if>
+      <if test="purchacerNo != null">
+        purchacer_no = #{purchacerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerAddress != null">
+        purchacer_address = #{purchacerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerNation != null">
+        purchacer_nation = #{purchacerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="purchacerMobile != null">
+        purchacer_mobile = #{purchacerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        tenant_id = #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSellerCode != null">
+        is_seller_code = #{isSellerCode,jdbcType=INTEGER},
+      </if>
+      <if test="sellerNationality != null">
+        seller_nationality = #{sellerNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerTaxNo != null">
+        seller_tax_no = #{sellerTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerIdCard != null">
+        seller_id_card = #{sellerIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerPassport != null">
+        seller_passport = #{sellerPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerNation != null">
+        seller_nation = #{sellerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null">
+        seller_name = #{sellerName,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerType != null">
+        seller_type = #{sellerType,jdbcType=INTEGER},
+      </if>
+      <if test="sellerNo != null">
+        seller_no = #{sellerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerAddress != null">
+        seller_address = #{sellerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerMobile != null">
+        seller_mobile = #{sellerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null">
+        transfer_type = #{transferType,jdbcType=INTEGER},
+      </if>
+      <if test="factoryPlate != null">
+        factory_plate = #{factoryPlate,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNumber != null">
+        certificate_number = #{certificateNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicePortof != null">
+        invoice_portof = #{invoicePortof,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceStatus != null">
+        invoice_status = #{invoiceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceCode != null">
+        invoice_code = #{invoiceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="carSources != null">
+        car_sources = #{carSources,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        car_id = #{carId,jdbcType=VARCHAR},
+      </if>
+      <if test="carNo != null">
+        car_no = #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="registrationNo != null">
+        registration_no = #{registrationNo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="vin != null">
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="series != null">
+        series = #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null">
+        series_name = #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="operater != null">
+        operater = #{operater,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="taxno != null">
+        taxno = #{taxno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null">
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorName != null">
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="auction != null">
+        auction = #{auction,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionAddress != null">
+        auction_address = #{auctionAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionNo != null">
+        auction_no = #{auctionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionBank != null">
+        auction_bank = #{auctionBank,jdbcType=VARCHAR},
+      </if>
+      <if test="auctionMobile != null">
+        auction_mobile = #{auctionMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="marketTaxno != null">
+        market_taxNo = #{marketTaxno,jdbcType=VARCHAR},
+      </if>
+      <if test="marketAddress != null">
+        market_address = #{marketAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="marketBank != null">
+        market_bank = #{marketBank,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPhone != null">
+        market_phone = #{marketPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketOperator != null">
+        ticket_operator = #{ticketOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketMarket != null">
+        ticket_market = #{ticketMarket,jdbcType=VARCHAR},
+      </if>
+      <if test="office != null">
+        office = #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="syncTime != null">
+        sync_time = #{syncTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="isNewEnergy != null">
+        is_new_energy = #{isNewEnergy,jdbcType=INTEGER},
+      </if>
+      <if test="agentIdCard != null">
+        agent_id_card = #{agentIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="agentName != null">
+        agent_name = #{agentName,jdbcType=VARCHAR},
+      </if>
+      <if test="agentType != null">
+        agent_type = #{agentType,jdbcType=INTEGER},
+      </if>
+      <if test="agentAddress != null">
+        agent_address = #{agentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="agentTaxNo != null">
+        agent_tax_no = #{agentTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentMobile != null">
+        agent_mobile = #{agentMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNationality != null">
+        agent_nationality = #{agentNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNo != null">
+        agent_no = #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentPassport != null">
+        agent_passport = #{agentPassport,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNation != null">
+        agent_nation = #{agentNation,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgentCode != null">
+        is_agent_code = #{isAgentCode,jdbcType=INTEGER},
+      </if>
+      <if test="isAgent != null">
+        is_agent = #{isAgent,jdbcType=INTEGER},
+      </if>
+      <if test="carInvoiceType != null">
+        car_invoice_type = #{carInvoiceType,jdbcType=VARCHAR},
+      </if>
+      <if test="initialRegistrationDate != null">
+        initial_registration_date = #{initialRegistrationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invoicePurchaseId != null">
+        invoice_purchase_id = #{invoicePurchaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="carStockStatus    != null">
+        car_stock_status = #{carStockStatus ,jdbcType=INTEGER},
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.market.pojo.Invoice">
+    update invoice
+    set market_id = #{marketId,jdbcType=VARCHAR},
+    bill_time = #{billTime,jdbcType=TIMESTAMP},
+    invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+    current_no = #{currentNo,jdbcType=VARCHAR},
+    contract = #{contract,jdbcType=VARCHAR},
+    purchacer_tax_no = #{purchacerTaxNo,jdbcType=VARCHAR},
+    purchacer_nationality = #{purchacerNationality,jdbcType=VARCHAR},
+    purchacer_name = #{purchacerName,jdbcType=VARCHAR},
+    purchacer_type = #{purchacerType,jdbcType=INTEGER},
+    purchacer_passport = #{purchacerPassport,jdbcType=VARCHAR},
+    purchacer_id_card = #{purchacerIdCard,jdbcType=VARCHAR},
+    is_purchacer_code = #{isPurchacerCode,jdbcType=INTEGER},
+    purchacer_no = #{purchacerNo,jdbcType=VARCHAR},
+    purchacer_address = #{purchacerAddress,jdbcType=VARCHAR},
+    purchacer_nation = #{purchacerNation,jdbcType=VARCHAR},
+    purchacer_mobile = #{purchacerMobile,jdbcType=VARCHAR},
+    tenant_id = #{tenantId,jdbcType=VARCHAR},
+    is_seller_code = #{isSellerCode,jdbcType=INTEGER},
+    seller_nationality = #{sellerNationality,jdbcType=VARCHAR},
+    seller_tax_no = #{sellerTaxNo,jdbcType=VARCHAR},
+    seller_id_card = #{sellerIdCard,jdbcType=VARCHAR},
+    seller_passport = #{sellerPassport,jdbcType=VARCHAR},
+    seller_nation = #{sellerNation,jdbcType=VARCHAR},
+    seller_name = #{sellerName,jdbcType=VARCHAR},
+    seller_type = #{sellerType,jdbcType=INTEGER},
+    seller_no = #{sellerNo,jdbcType=VARCHAR},
+    seller_address = #{sellerAddress,jdbcType=VARCHAR},
+    seller_mobile = #{sellerMobile,jdbcType=VARCHAR},
+    transfer_type = #{transferType,jdbcType=INTEGER},
+    factory_plate = #{factoryPlate,jdbcType=VARCHAR},
+    certificate_number = #{certificateNumber,jdbcType=VARCHAR},
+    invoice_portof = #{invoicePortof,jdbcType=INTEGER},
+    invoice_status = #{invoiceStatus,jdbcType=INTEGER},
+    invoice_code = #{invoiceCode,jdbcType=VARCHAR},
+    car_sources = #{carSources,jdbcType=INTEGER},
+    car_id = #{carId,jdbcType=VARCHAR},
+    car_no = #{carNo,jdbcType=VARCHAR},
+    price = #{price,jdbcType=INTEGER},
+    registration_no = #{registrationNo,jdbcType=VARCHAR},
+    type = #{type,jdbcType=INTEGER},
+    vin = #{vin,jdbcType=VARCHAR},
+    series = #{series,jdbcType=VARCHAR},
+    series_name = #{seriesName,jdbcType=VARCHAR},
+    operater = #{operater,jdbcType=VARCHAR},
+    status = #{status,jdbcType=INTEGER},
+    version = #{version,jdbcType=INTEGER},
+    taxno = #{taxno,jdbcType=VARCHAR},
+    address = #{address,jdbcType=VARCHAR},
+    bank = #{bank,jdbcType=VARCHAR},
+    account = #{account,jdbcType=VARCHAR},
+    operator_name = #{operatorName,jdbcType=VARCHAR},
+    auction = #{auction,jdbcType=VARCHAR},
+    auction_address = #{auctionAddress,jdbcType=VARCHAR},
+    auction_no = #{auctionNo,jdbcType=VARCHAR},
+    auction_bank = #{auctionBank,jdbcType=VARCHAR},
+    auction_mobile = #{auctionMobile,jdbcType=VARCHAR},
+    market_taxNo = #{marketTaxno,jdbcType=VARCHAR},
+    market_address = #{marketAddress,jdbcType=VARCHAR},
+    market_bank = #{marketBank,jdbcType=VARCHAR},
+    market_phone = #{marketPhone,jdbcType=VARCHAR},
+    comment = #{comment,jdbcType=VARCHAR},
+    ticket_operator = #{ticketOperator,jdbcType=VARCHAR},
+    ticket_market = #{ticketMarket,jdbcType=VARCHAR},
+    office = #{office,jdbcType=VARCHAR},
+    sync_time = #{syncTime,jdbcType=TIMESTAMP},
+    insert_time = #{insertTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    pay_type = #{payType,jdbcType=VARCHAR},
+    is_new_energy = #{isNewEnergy,jdbcType=INTEGER},
+    agent_id_card = #{agentIdCard,jdbcType=VARCHAR},
+    agent_name = #{agentName,jdbcType=VARCHAR},
+    agent_type = #{agentType,jdbcType=INTEGER},
+    agent_address = #{agentAddress,jdbcType=VARCHAR},
+    agent_tax_no = #{agentTaxNo,jdbcType=VARCHAR},
+    agent_mobile = #{agentMobile,jdbcType=VARCHAR},
+    agent_nationality = #{agentNationality,jdbcType=VARCHAR},
+    agent_no = #{agentNo,jdbcType=VARCHAR},
+    agent_passport = #{agentPassport,jdbcType=VARCHAR},
+    agent_nation = #{agentNation,jdbcType=VARCHAR},
+    is_agent_code = #{isAgentCode,jdbcType=INTEGER},
+    is_agent = #{isAgent,jdbcType=INTEGER},
+    car_invoice_type = #{carInvoiceType,jdbcType=VARCHAR},
+    initial_registration_date = #{initialRegistrationDate,jdbcType=TIMESTAMP},
+    invoice_purchase_id = #{invoicePurchaseId,jdbcType=VARCHAR},
+    car_stock_status = #{carStockStatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--查询统计商户开票-->
+  <select id="selectInvoiceCountList" parameterType="com.maxcar.market.pojo.Invoice" resultMap="BaseResultMap">
+    SELECT
+    aa.tenant_id,
+    aa.tenant_name,
+    aa.contact_name,
+    aa.tenant_area,
+    aa.price,
+    bb.invoice_counts
+    FROM
+    (
+    SELECT
+    a.tenant_id,
+    b.tenant_name,
+    b.contact_name,
+    b.tenant_area,
+    sum(a.price) price
+    FROM
+    maxcar_market_l.invoice a
+    LEFT JOIN maxcar_tenant_l.user_tenant b ON a.tenant_id = b.id
+    WHERE 1=1
+    <if test="tenantName != null">
+      and b.tenant_name = #{tenantName,jdbcType=VARCHAR}
+    </if>
+    <choose>
+      <when test="status==1">
+        AND DATE_FORMAT(a.bill_time,'%Y-%m-%d') = #{currentTime}
+      </when>
+      <when test="status==2">
+        AND DATE_FORMAT(a.bill_time,'%Y-%m') =#{currentTime}
+      </when>
+      <when test="status==3">
+        AND DATE_FORMAT(a.bill_time,'%Y') = #{currentTime}
+      </when>
+    </choose>
+    GROUP BY
+    a.tenant_id,
+    b.tenant_name,
+    b.contact_name,
+    b.tenant_area
+    ) aa,
+    (
+    SELECT
+    count(*) invoice_counts,
+    a.tenant_id
+    FROM
+    maxcar_market_l.invoice a
+    WHERE 1=1
+    <choose>
+      <when test="status==1">
+        AND DATE_FORMAT(a.bill_time,'%Y-%m-%d') = #{currentTime}
+      </when>
+      <when test="status==2">
+        AND DATE_FORMAT(a.bill_time,'%Y-%m') =#{currentTime}
+      </when>
+      <when test="status==3">
+        AND DATE_FORMAT(a.bill_time,'%Y') = #{currentTime}
+      </when>
+    </choose>
+    GROUP BY
+    a.tenant_id
+    ) bb
+    WHERE
+    aa.tenant_id = bb.tenant_id
+  </select>
+
+  <select id="selectInvoiceTotalCount" resultMap="BaseResultMap">
+    SELECT count(*) as total_counts,sum(price) as total_price from invoice
+  </select>
+
+
+
+
+  <!--查询开票列表-->
+  <select id="selectDeal" parameterType="com.maxcar.market.model.request.DealRequest" resultMap="DealResultMap">
+    SELECT aa.* FROM (
+    SELECT
+    c.id,
+    c.car_no,
+    i.vin AS ivin,
+    c.vin AS cvin,
+    c.tenant,
+    c.is_new_car,
+    c.stock_status,
+    DATE_FORMAT(i.bill_time ,'%Y-%m-%d %H:%i:%s') as bill_time,
+    TO_DAYS(NOW()) - TO_DAYS(c.register_time) AS register_day,
+    DATE_FORMAT(c.register_time,'%Y-%m-%d %H:%i:%s') as register_time,
+    i.series,
+    i.series_name,
+    DATE_FORMAT(c.initial_licence_time, '%Y-%m-%d' ) as initial_licence_time,
+    b.mileage,
+    b.evaluate_price,
+    i.price
+    FROM
+    maxcar_market_l.invoice i
+    LEFT JOIN maxcar_stock_l.car c
+    ON i.car_id = c.id
+    LEFT JOIN maxcar_stock_l.car_base b
+    ON c.id = b.id
+    WHERE 1 = 1
+    <if test="marketId != null and marketId != ''">
+      AND i.market_id = #{marketId}
+    </if>
+    <if test="carNo != null and carNo != ''">
+      AND c.car_no LIKE #{carNo}
+    </if>
+    <if test="vin != null and vin != ''">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      AND c.tenant = #{tenantId}
+    </if>
+    <if test="dealState != 0 ">
+      <if test="dealState == -1 ">
+        AND c.stock_status = -1 -- 交易状态
+      </if>
+      <if test="dealState == 1 ">
+        AND c.stock_status = 1 -- 交易状态
+      </if>
+      <if test="dealState == 2 ">
+        AND c.stock_status = 2 -- 交易状态
+      </if>
+      <if test="dealState == 3 ">
+        AND c.stock_status = 3   					-- 交易状态
+      </if>
+      <if test="dealState == 4 ">
+        AND c.stock_status = 4   					-- 交易状态
+      </if>
+      <if test="dealState == 5 ">
+        AND c.stock_status = 5   					-- 交易状态
+      </if>
+    </if>
+    <if test="storeHoldDays != ''  and storeHoldDays != null">
+      <if test="storeHoldDays == 1 ">
+        -- 库存天数
+        <![CDATA[  AND 0 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 45 ]]>
+      </if>
+      <if test="storeHoldDays == 2 ">
+        <![CDATA[  AND 45 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 60  ]]>
+      </if>
+      <if test="storeHoldDays == 3 ">
+        <![CDATA[  AND 60 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 90 ]]>
+      </if>
+      <if test="storeHoldDays == 4 ">
+        <![CDATA[  AND  90 <= TO_DAYS(NOW()) - TO_DAYS(c.register_time) ]]>
+      </if>
+    </if>
+
+    <if test="dealTimeStart != null and dealTimeStart != '' and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND  #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="dealTimeStart != null and dealTimeStart != '' and (dealTimeEnd == null or dealTimeEnd == '')">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND '2050-12-31'		-- 交易时间
+    </if>
+    <if test="(dealTimeStart == null or dealTimeStart == '') and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN '2010-01-01' AND #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="brandName != null and brandName != ''">
+      AND b.brand_code = #{brandName}  					-- 品牌
+    </if>
+    <if test="seriesName != null and seriesName != ''">
+      AND b.series_code = #{seriesName} -- 车系
+    </if>
+    <if test="modelName != null and modelName != ''">
+      AND b.level = #{modelName}  					-- 车型
+    </if>
+    <if test="carAge != null and carAge != ''">
+      <if test="carAge == 1">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 1 ]]>
+      </if>
+      <if test="carAge == 3">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 3 ]]>
+      </if>
+      <if test="carAge == 5">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 5 ]]>
+      </if>
+      <if test="carAge == 9">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) > 5 ]]>
+      </if>
+    </if>
+    <if test="mileage != null and mileage != ''">
+      <if test="mileage == 1">
+        AND b.mileage BETWEEN 0 AND 10000 -- 里程
+      </if>
+      <if test="mileage == 3">
+        AND b.mileage BETWEEN 0 AND 30000 -- 里程
+      </if>
+      <if test="mileage == 5">
+        AND b.mileage BETWEEN 0 AND 50000 -- 里程
+      </if>
+      <if test="mileage == 8">
+        AND b.mileage BETWEEN 0 AND 80000 -- 里程
+      </if>
+      <if test="mileage == 9">
+        AND b.mileage > 80000
+      </if>
+    </if>
+    <if test="engineVolumeUnitl != null and engineVolumeUnitl != ''">
+      <if test="engineVolumeUnitl == 0">
+        <![CDATA[ AND b.engine_volume_unitl <= 1.0 ]]>
+      </if>
+      <if test="engineVolumeUnitl == 1">
+        AND b.engine_volume_unitl BETWEEN 1.0 AND 1.6						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 2">
+        AND b.engine_volume_unitl BETWEEN 1.6 AND 2.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 3">
+        AND b.engine_volume_unitl BETWEEN 2.0 AND 2.5						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 4">
+        AND b.engine_volume_unitl BETWEEN 2.5 AND 3.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 5">
+        AND b.engine_volume_unitl BETWEEN 3.0 AND 4.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 6">
+        <![CDATA[   AND b.engine_volume_unitl >  4.0 ]]>	                        -- 排量
+      </if>
+    </if>
+    <if test="environmentalStandards != null and environmentalStandards != ''">
+      AND b.environmental_standards = #{environmentalStandards}				-- 排放标准
+    </if>
+    <if test="isNewCar != null and isNewCar != ''">
+      AND c.is_new_car = #{isNewCar}					-- 是否新车
+    </if>
+    <if test="gearBox != null and gearBox != ''">
+      <if test="gearBox== 1">
+        AND b.gear_box not like '%手动%'					-- 变数箱
+      </if>
+      <if test="gearBox== 2">
+        AND b.gear_box like '%手动%'					-- 变数箱
+      </if>
+    </if>
+    <if test="seatNumber != null and seatNumber != ''">
+      <if test="seatNumber == 2 or seatNumber == 4 or seatNumber == 5 or seatNumber == 7">
+        AND b.seat_number = #{seatNumber}						-- 座位数
+      </if>
+      <if test="seatNumber == 8">
+        AND b.seat_number > 7						-- 座位数
+      </if>
+    </if>
+    <if test="fuelForm != null and fuelForm != ''">
+      AND b.fuel_form =#{fuelForm}						-- 燃料类型
+    </if>
+    <if test="tradingPrice != null and tradingPrice != ''">
+      <if test="tradingPrice == 1 ">
+        AND i.price BETWEEN 0 AND 50000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 2 ">
+        AND i.price BETWEEN 50000 AND 100000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 3 ">
+        AND i.price BETWEEN 100000 AND 150000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 4 ">
+        AND i.price BETWEEN 150000 AND 200000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 5 ">
+        AND i.price BETWEEN 200000 AND 250000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 6 ">
+        AND i.price BETWEEN 250000 AND 300000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 7 ">
+        AND i.price BETWEEN 300000 AND 350000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 8 ">
+        AND i.price BETWEEN 350000 AND 400000 -- 开票价格
+      </if>
+      <if test="tradingPrice == 9 ">
+        AND i.price BETWEEN 400000 AND 450000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 10 ">
+        AND i.price BETWEEN 450000 AND 500000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 11 ">
+        AND i.price  > 500000				-- 开票价格
+      </if>
+    </if>
+    ORDER BY i.insert_time DESC) AS aa
+    <if test="unsoldCar == 1  or tenantCar == 2 or elseCar == 3 ">
+      WHERE
+    </if>
+    <if test="unsoldCar == 1 ">
+      aa.cvin is not null  -- 库存车
+    </if>
+    <if test="tenantCar == 2 ">
+      <if test="unsoldCar == 1 ">
+        or
+      </if>
+      aa.cvin is null and aa.tenant != '0' and aa.tenant !='' AND aa.tenant IS NOT NULL -- 挂靠车商
+    </if>
+    <if test="elseCar == 3 ">
+      <if test="unsoldCar == 1 or  tenantCar == 2">
+        or
+      </if>
+      aa.cvin IS NULL AND (aa.tenant = '0' OR aa.tenant = '' OR aa.tenant IS NULL)  -- 非车商
+    </if>
+    LIMIT #{curPage},#{pageSize}
+  </select>
+
+  <!--查询开票列表 无分页-->
+  <select id="selectDealExport" parameterType="com.maxcar.market.model.request.DealRequest" resultMap="DealResultMap">
+    SELECT aa.* FROM (
+    SELECT
+    c.id,
+    c.car_no,
+    i.vin AS ivin,
+    c.vin AS cvin,
+    c.tenant,
+    c.is_new_car,
+    c.stock_status,
+    DATE_FORMAT(i.bill_time ,'%Y-%m-%d %H:%i:%s') as bill_time,
+    TO_DAYS(NOW()) - TO_DAYS(c.register_time) AS register_day,
+    DATE_FORMAT(c.register_time,'%Y-%m-%d %H:%i:%s') as register_time,
+    i.series,
+    i.series_name,
+    DATE_FORMAT(c.initial_licence_time, '%Y-%m-%d' ) as initial_licence_time,
+    b.mileage,
+    b.evaluate_price,
+    i.price
+    FROM
+    maxcar_market_l.invoice i
+    LEFT JOIN maxcar_stock_l.car c
+    ON i.car_id = c.id
+    LEFT JOIN maxcar_stock_l.car_base b
+    ON c.id = b.id
+    WHERE 1 = 1
+    <if test="marketId != null and marketId != ''">
+      AND i.market_id = #{marketId}
+    </if>
+    <if test="carNo != null and carNo != ''">
+      AND c.car_no LIKE #{carNo}
+    </if>
+    <if test="vin != null and vin != ''">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      AND c.tenant = #{tenantId}
+    </if>
+    <if test="dealState != 0 ">
+      <if test="dealState == -1 ">
+        AND c.stock_status = -1   					-- 交易状态
+      </if>
+      <if test="dealState == 1 ">
+        AND c.stock_status = 1  					-- 交易状态
+      </if>
+      <if test="dealState == 2 ">
+        AND c.stock_status = 2   					-- 交易状态
+      </if>
+      <if test="dealState == 3 ">
+        AND c.stock_status = 3   					-- 交易状态
+      </if>
+      <if test="dealState == 4 ">
+        AND c.stock_status = 4   					-- 交易状态
+      </if>
+      <if test="dealState == 5 ">
+        AND c.stock_status = 5   					-- 交易状态
+      </if>
+    </if>
+    <if test="storeHoldDays != ''  and storeHoldDays != null">
+      <if test="storeHoldDays == 1 ">
+        -- 库存天数
+        <![CDATA[  AND 0 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 45 ]]>
+      </if>
+      <if test="storeHoldDays == 2 ">
+        <![CDATA[  AND 45 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 60  ]]>
+      </if>
+      <if test="storeHoldDays == 3 ">
+        <![CDATA[  AND 60 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 90 ]]>
+      </if>
+      <if test="storeHoldDays == 4 ">
+        <![CDATA[  AND  90 <= TO_DAYS(NOW()) - TO_DAYS(c.register_time) ]]>
+      </if>
+    </if>
+
+    <if test="dealTimeStart != null and dealTimeStart != '' and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND  #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="dealTimeStart != null and dealTimeStart != '' and (dealTimeEnd == null or dealTimeEnd == '')">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND '2050-12-31'		-- 交易时间
+    </if>
+    <if test="(dealTimeStart == null or dealTimeStart == '') and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN '2010-01-01' AND #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="brandName != null and brandName != ''">
+      AND b.brand_code = #{brandName}  					-- 品牌
+    </if>
+    <if test="seriesName != null and seriesName != ''">
+      AND b.series_code = #{seriesName} 					-- 车系
+    </if>
+    <if test="modelName != null and modelName != ''">
+      AND b.level = #{modelName}  					-- 车型
+    </if>
+    <if test="carAge != null and carAge != ''">
+      <if test="carAge == 1">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 1 ]]>
+      </if>
+      <if test="carAge == 3">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 3 ]]>
+      </if>
+      <if test="carAge == 5">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 5 ]]>
+      </if>
+      <if test="carAge == 9">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) > 5 ]]>
+      </if>
+    </if>
+    <if test="mileage != null and mileage != ''">
+      <if test="mileage == 1">
+        AND b.mileage BETWEEN 0 AND 10000		   --  里程
+      </if>
+      <if test="mileage == 3">
+        AND b.mileage BETWEEN 0 AND 30000		   --  里程
+      </if>
+      <if test="mileage == 5">
+        AND b.mileage BETWEEN 0 AND 50000		   --  里程
+      </if>
+      <if test="mileage == 8">
+        AND b.mileage BETWEEN 0 AND 80000		   --  里程
+      </if>
+      <if test="mileage == 9">
+        AND b.mileage > 80000
+      </if>
+    </if>
+    <if test="engineVolumeUnitl != null and engineVolumeUnitl != ''">
+      <if test="engineVolumeUnitl == 0">
+        <![CDATA[ AND b.engine_volume_unitl <= 1.0 ]]>
+      </if>
+      <if test="engineVolumeUnitl == 1">
+        AND b.engine_volume_unitl BETWEEN 1.0 AND 1.6						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 2">
+        AND b.engine_volume_unitl BETWEEN 1.6 AND 2.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 3">
+        AND b.engine_volume_unitl BETWEEN 2.0 AND 2.5						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 4">
+        AND b.engine_volume_unitl BETWEEN 2.5 AND 3.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 5">
+        AND b.engine_volume_unitl BETWEEN 3.0 AND 4.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 6">
+        <![CDATA[   AND b.engine_volume_unitl >  4.0 ]]>	                        -- 排量
+      </if>
+    </if>
+    <if test="environmentalStandards != null and environmentalStandards != ''">
+      AND b.environmental_standards = #{environmentalStandards}				-- 排放标准
+    </if>
+    <if test="isNewCar != null and isNewCar != ''">
+      AND c.is_new_car = #{isNewCar}					-- 是否新车
+    </if>
+    <if test="gearBox != null and gearBox != ''">
+      <if test="gearBox== 1">
+        AND b.gear_box not like '%手动%'					-- 变数箱
+      </if>
+      <if test="gearBox== 2">
+        AND b.gear_box like '%手动%'					-- 变数箱
+      </if>
+    </if>
+    <if test="seatNumber != null and seatNumber != ''">
+      <if test="seatNumber == 2 or seatNumber == 4 or seatNumber == 5 or seatNumber == 7">
+        AND b.seat_number = #{seatNumber}						-- 座位数
+      </if>
+      <if test="seatNumber == 8">
+        AND b.seat_number > 7						-- 座位数
+      </if>
+    </if>
+    <if test="fuelForm != null and fuelForm != ''">
+      AND b.fuel_form =#{fuelForm}						-- 燃料类型
+    </if>
+    <if test="tradingPrice != null and tradingPrice != ''">
+      <if test="tradingPrice == 1 ">
+        AND i.price BETWEEN 0 AND 50000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 2 ">
+        AND i.price BETWEEN 50000 AND 100000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 3 ">
+        AND i.price BETWEEN 100000 AND 150000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 4 ">
+        AND i.price BETWEEN 150000 AND 200000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 5 ">
+        AND i.price BETWEEN 200000 AND 250000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 6 ">
+        AND i.price BETWEEN 250000 AND 300000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 7 ">
+        AND i.price BETWEEN 300000 AND 350000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 8 ">
+        AND i.price BETWEEN 350000 AND 400000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 9 ">
+        AND i.price BETWEEN 400000 AND 450000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 10 ">
+        AND i.price BETWEEN 450000 AND 500000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 11 ">
+        AND i.price  > 500000				-- 开票价格
+      </if>
+    </if>
+    ORDER BY i.insert_time DESC) AS aa
+    <if test="unsoldCar == 1  or tenantCar == 2 or elseCar == 3 ">
+      WHERE
+    </if>
+    <if test="unsoldCar == 1 ">
+      aa.cvin is not null  -- 库存车
+    </if>
+    <if test="tenantCar == 2 ">
+      <if test="unsoldCar == 1 ">
+        or
+      </if>
+      aa.cvin is null and aa.tenant != '0' and aa.tenant !='' AND aa.tenant IS NOT NULL -- 挂靠车商
+    </if>
+    <if test="elseCar == 3 ">
+      <if test="unsoldCar == 1 or  tenantCar == 2">
+        or
+      </if>
+      aa.cvin IS NULL AND (aa.tenant = '0' OR aa.tenant = '' OR aa.tenant IS NULL)  -- 非车商
+    </if>
+  </select>
+
+  <!-- 市场总交易量 -->
+  <select id="countDealNum" resultType="int" parameterType="com.maxcar.market.model.request.DealRequest">
+    /*SELECT COUNT(*) FROM invoice*/
+    select count(*) from(
+    SELECT aa.* FROM (
+    SELECT
+    c.id,
+    c.car_no,
+    i.vin AS ivin,
+    c.vin AS cvin,
+    c.tenant,
+    c.is_new_car,
+    c.stock_status,
+    DATE_FORMAT(i.bill_time ,'%Y-%m-%d %H:%i:%s') as bill_time,
+    TO_DAYS(NOW()) - TO_DAYS(c.register_time) AS register_day,
+    DATE_FORMAT(c.register_time,'%Y-%m-%d %H:%i:%s') as register_time,
+    i.series,
+    i.series_name,
+    DATE_FORMAT(c.initial_licence_time, '%Y-%m-%d' ) as initial_licence_time,
+    b.mileage,
+    b.evaluate_price,
+    i.price
+    FROM
+    maxcar_market_l.invoice i
+    LEFT JOIN maxcar_stock_l.car c
+    ON i.car_id = c.id
+    LEFT JOIN maxcar_stock_l.car_base b
+    ON c.id = b.id
+    WHERE 1 = 1
+    <if test="marketId != null and marketId != ''">
+      AND i.market_id = #{marketId}
+    </if>
+    <if test="carNo != null and carNo != ''">
+      AND c.car_no LIKE #{carNo}
+    </if>
+    <if test="vin != null and vin != ''">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      AND c.tenant = #{tenantId}
+    </if>
+    <if test="dealState != 0 ">
+      <if test="dealState == -1 ">
+        AND c.stock_status = -1   					-- 交易状态
+      </if>
+      <if test="dealState == 1 ">
+        AND c.stock_status = 1  					-- 交易状态
+      </if>
+      <if test="dealState == 2 ">
+        AND c.stock_status = 2   					-- 交易状态
+      </if>
+      <if test="dealState == 3 ">
+        AND c.stock_status = 3   					-- 交易状态
+      </if>
+      <if test="dealState == 4 ">
+        AND c.stock_status = 4   					-- 交易状态
+      </if>
+      <if test="dealState == 5 ">
+        AND c.stock_status = 5   					-- 交易状态
+      </if>
+    </if>
+    <if test="storeHoldDays != ''  and storeHoldDays != null">
+      <if test="storeHoldDays == 1 ">
+        -- 库存天数
+        <![CDATA[  AND 0 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 45 ]]>
+      </if>
+      <if test="storeHoldDays == 2 ">
+        <![CDATA[  AND 45 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 60  ]]>
+      </if>
+      <if test="storeHoldDays == 3 ">
+        <![CDATA[  AND 60 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 90 ]]>
+      </if>
+      <if test="storeHoldDays == 4 ">
+        <![CDATA[  AND  90 <= TO_DAYS(NOW()) - TO_DAYS(c.register_time) ]]>
+      </if>
+    </if>
+
+    <if test="dealTimeStart != null and dealTimeStart != '' and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND  #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="dealTimeStart != null and dealTimeStart != '' and (dealTimeEnd == null or dealTimeEnd == '')">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND '2050-12-31'		-- 交易时间
+    </if>
+    <if test="(dealTimeStart == null or dealTimeStart == '') and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN '2010-01-01' AND #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="brandName != null and brandName != ''">
+      AND b.brand_code = #{brandName}  					-- 品牌
+    </if>
+    <if test="seriesName != null and seriesName != ''">
+      AND b.series_code = #{seriesName} 					-- 车系
+    </if>
+    <if test="modelName != null and modelName != ''">
+      AND b.level = #{modelName}  					-- 车型
+    </if>
+    <if test="carAge != null and carAge != ''">
+      <if test="carAge == 1">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 1 ]]>
+      </if>
+      <if test="carAge == 3">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 3 ]]>
+      </if>
+      <if test="carAge == 5">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 5 ]]>
+      </if>
+      <if test="carAge == 9">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) > 5 ]]>
+      </if>
+    </if>
+    <if test="mileage != null and mileage != ''">
+      <if test="mileage == 1">
+        AND b.mileage BETWEEN 0 AND 10000		   --  里程
+      </if>
+      <if test="mileage == 3">
+        AND b.mileage BETWEEN 0 AND 30000		   --  里程
+      </if>
+      <if test="mileage == 5">
+        AND b.mileage BETWEEN 0 AND 50000		   --  里程
+      </if>
+      <if test="mileage == 8">
+        AND b.mileage BETWEEN 0 AND 80000		   --  里程
+      </if>
+      <if test="mileage == 9">
+        AND b.mileage > 80000
+      </if>
+    </if>
+    <if test="engineVolumeUnitl != null and engineVolumeUnitl != ''">
+      <if test="engineVolumeUnitl == 0">
+        <![CDATA[ AND b.engine_volume_unitl <= 1.0 ]]>
+      </if>
+      <if test="engineVolumeUnitl == 1">
+        AND b.engine_volume_unitl BETWEEN 1.0 AND 1.6						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 2">
+        AND b.engine_volume_unitl BETWEEN 1.6 AND 2.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 3">
+        AND b.engine_volume_unitl BETWEEN 2.0 AND 2.5						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 4">
+        AND b.engine_volume_unitl BETWEEN 2.5 AND 3.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 5">
+        AND b.engine_volume_unitl BETWEEN 3.0 AND 4.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 6">
+        <![CDATA[   AND b.engine_volume_unitl >  4.0 ]]>	                        -- 排量
+      </if>
+    </if>
+    <if test="environmentalStandards != null and environmentalStandards != ''">
+      AND b.environmental_standards = #{environmentalStandards}				-- 排放标准
+    </if>
+    <if test="isNewCar != null and isNewCar != ''">
+      AND c.is_new_car = #{isNewCar}					-- 是否新车
+    </if>
+    <if test="gearBox != null and gearBox != ''">
+      <if test="gearBox== 1">
+        AND b.gear_box not like '%手动%'					-- 变数箱
+      </if>
+      <if test="gearBox== 2">
+        AND b.gear_box like '%手动%'					-- 变数箱
+      </if>
+    </if>
+    <if test="seatNumber != null and seatNumber != ''">
+      <if test="seatNumber == 2 or seatNumber == 4 or seatNumber == 5 or seatNumber == 7">
+        AND b.seat_number = #{seatNumber}						-- 座位数
+      </if>
+      <if test="seatNumber == 8">
+        AND b.seat_number > 7						-- 座位数
+      </if>
+    </if>
+    <if test="fuelForm != null and fuelForm != ''">
+      AND b.fuel_form =#{fuelForm}						-- 燃料类型
+    </if>
+    <if test="tradingPrice != null and tradingPrice != ''">
+      <if test="tradingPrice == 1 ">
+        AND i.price BETWEEN 0 AND 50000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 2 ">
+        AND i.price BETWEEN 50000 AND 100000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 3 ">
+        AND i.price BETWEEN 100000 AND 150000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 4 ">
+        AND i.price BETWEEN 150000 AND 200000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 5 ">
+        AND i.price BETWEEN 200000 AND 250000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 6 ">
+        AND i.price BETWEEN 250000 AND 300000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 7 ">
+        AND i.price BETWEEN 300000 AND 350000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 8 ">
+        AND i.price BETWEEN 350000 AND 400000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 9 ">
+        AND i.price BETWEEN 400000 AND 450000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 10 ">
+        AND i.price BETWEEN 450000 AND 500000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 11 ">
+        AND i.price  > 500000				-- 开票价格
+      </if>
+    </if>
+    ORDER BY i.insert_time DESC) AS aa
+    <if test="unsoldCar == 1  or tenantCar == 2 or elseCar == 3 ">
+      WHERE
+    </if>
+    <if test="unsoldCar == 1 ">
+      aa.cvin is not null  -- 库存车
+    </if>
+    <if test="tenantCar == 2 ">
+      <if test="unsoldCar == 1 ">
+        or
+      </if>
+      aa.cvin is null and aa.tenant != '0' and aa.tenant !='' AND aa.tenant IS NOT NULL -- 挂靠车商
+    </if>
+    <if test="elseCar == 3 ">
+      <if test="unsoldCar == 1 or  tenantCar == 2">
+        or
+      </if>
+      aa.cvin IS NULL AND (aa.tenant = '0' OR aa.tenant = '' OR aa.tenant IS NULL)  -- 非车商
+    </if>
+    )  as  dd
+  </select>
+
+  <!-- 交易总价值 -->
+  <select id="sumDealMoney" resultType="Double"  parameterType="com.maxcar.market.model.request.DealRequest">
+    /*SELECT SUM(price) FROM invoice*/
+
+    select  IFNULL(SUM(price),0) from(
+    SELECT aa.* FROM (
+    SELECT
+    c.id,
+    c.car_no,
+    i.vin AS ivin,
+    c.vin AS cvin,
+    c.tenant,
+    c.is_new_car,
+    c.stock_status,
+    DATE_FORMAT(i.bill_time ,'%Y-%m-%d %H:%i:%s') as bill_time,
+    TO_DAYS(NOW()) - TO_DAYS(c.register_time) AS register_day,
+    DATE_FORMAT(c.register_time,'%Y-%m-%d %H:%i:%s') as register_time,
+    i.series,
+    i.series_name,
+    DATE_FORMAT(c.initial_licence_time, '%Y-%m-%d' ) as initial_licence_time,
+    b.mileage,
+    b.evaluate_price,
+    i.price
+    FROM
+    maxcar_market_l.invoice i
+    LEFT JOIN maxcar_stock_l.car c
+    ON i.car_id = c.id
+    LEFT JOIN maxcar_stock_l.car_base b
+    ON c.id = b.id
+    WHERE 1 = 1
+    <if test="marketId != null and marketId != ''">
+      AND i.market_id = #{marketId}
+    </if>
+    <if test="carNo != null and carNo != ''">
+      AND c.car_no LIKE #{carNo}
+    </if>
+    <if test="vin != null and vin != ''">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      AND c.tenant = #{tenantId}
+    </if>
+    <if test="dealState != 0 ">
+      <if test="dealState == -1 ">
+        AND c.stock_status = -1   					-- 交易状态
+      </if>
+      <if test="dealState == 1 ">
+        AND c.stock_status = 1  					-- 交易状态
+      </if>
+      <if test="dealState == 2 ">
+        AND c.stock_status = 2   					-- 交易状态
+      </if>
+      <if test="dealState == 3 ">
+        AND c.stock_status = 3   					-- 交易状态
+      </if>
+      <if test="dealState == 4 ">
+        AND c.stock_status = 4   					-- 交易状态
+      </if>
+      <if test="dealState == 5 ">
+        AND c.stock_status = 5   					-- 交易状态
+      </if>
+    </if>
+    <if test="storeHoldDays != ''  and storeHoldDays != null">
+      <if test="storeHoldDays == 1 ">
+        -- 库存天数
+        <![CDATA[  AND 0 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 45 ]]>
+      </if>
+      <if test="storeHoldDays == 2 ">
+        <![CDATA[  AND 45 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 60  ]]>
+      </if>
+      <if test="storeHoldDays == 3 ">
+        <![CDATA[  AND 60 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 90 ]]>
+      </if>
+      <if test="storeHoldDays == 4 ">
+        <![CDATA[  AND  90 <= TO_DAYS(NOW()) - TO_DAYS(c.register_time) ]]>
+      </if>
+    </if>
+
+    <if test="dealTimeStart != null and dealTimeStart != '' and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND  #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="dealTimeStart != null and dealTimeStart != '' and (dealTimeEnd == null or dealTimeEnd == '')">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND '2050-12-31'		-- 交易时间
+    </if>
+    <if test="(dealTimeStart == null or dealTimeStart == '') and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN '2010-01-01' AND #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="brandName != null and brandName != ''">
+      AND b.brand_code = #{brandName}  					-- 品牌
+    </if>
+    <if test="seriesName != null and seriesName != ''">
+      AND b.series_code = #{seriesName} 					-- 车系
+    </if>
+    <if test="modelName != null and modelName != ''">
+      AND b.level = #{modelName}  					-- 车型
+    </if>
+    <if test="carAge != null and carAge != ''">
+      <if test="carAge == 1">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 1 ]]>
+      </if>
+      <if test="carAge == 3">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 3 ]]>
+      </if>
+      <if test="carAge == 5">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 5 ]]>
+      </if>
+      <if test="carAge == 9">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) > 5 ]]>
+      </if>
+    </if>
+    <if test="mileage != null and mileage != ''">
+      <if test="mileage == 1">
+        AND b.mileage BETWEEN 0 AND 10000		   --  里程
+      </if>
+      <if test="mileage == 3">
+        AND b.mileage BETWEEN 0 AND 30000		   --  里程
+      </if>
+      <if test="mileage == 5">
+        AND b.mileage BETWEEN 0 AND 50000		   --  里程
+      </if>
+      <if test="mileage == 8">
+        AND b.mileage BETWEEN 0 AND 80000		   --  里程
+      </if>
+      <if test="mileage == 9">
+        AND b.mileage > 80000
+      </if>
+    </if>
+    <if test="engineVolumeUnitl != null and engineVolumeUnitl != ''">
+      <if test="engineVolumeUnitl == 0">
+        <![CDATA[ AND b.engine_volume_unitl <= 1.0 ]]>
+      </if>
+      <if test="engineVolumeUnitl == 1">
+        AND b.engine_volume_unitl BETWEEN 1.0 AND 1.6						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 2">
+        AND b.engine_volume_unitl BETWEEN 1.6 AND 2.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 3">
+        AND b.engine_volume_unitl BETWEEN 2.0 AND 2.5						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 4">
+        AND b.engine_volume_unitl BETWEEN 2.5 AND 3.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 5">
+        AND b.engine_volume_unitl BETWEEN 3.0 AND 4.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 6">
+        <![CDATA[   AND b.engine_volume_unitl >  4.0 ]]>	                        -- 排量
+      </if>
+    </if>
+    <if test="environmentalStandards != null and environmentalStandards != ''">
+      AND b.environmental_standards = #{environmentalStandards}				-- 排放标准
+    </if>
+    <if test="isNewCar != null and isNewCar != ''">
+      AND c.is_new_car = #{isNewCar}					-- 是否新车
+    </if>
+    <if test="gearBox != null and gearBox != ''">
+      <if test="gearBox== 1">
+        AND b.gear_box not like '%手动%'					-- 变数箱
+      </if>
+      <if test="gearBox== 2">
+        AND b.gear_box like '%手动%'					-- 变数箱
+      </if>
+    </if>
+    <if test="seatNumber != null and seatNumber != ''">
+      <if test="seatNumber == 2 or seatNumber == 4 or seatNumber == 5 or seatNumber == 7">
+        AND b.seat_number = #{seatNumber}						-- 座位数
+      </if>
+      <if test="seatNumber == 8">
+        AND b.seat_number > 7						-- 座位数
+      </if>
+    </if>
+    <if test="fuelForm != null and fuelForm != ''">
+      AND b.fuel_form =#{fuelForm}						-- 燃料类型
+    </if>
+    <if test="tradingPrice != null and tradingPrice != ''">
+      <if test="tradingPrice == 1 ">
+        AND i.price BETWEEN 0 AND 50000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 2 ">
+        AND i.price BETWEEN 50000 AND 100000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 3 ">
+        AND i.price BETWEEN 100000 AND 150000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 4 ">
+        AND i.price BETWEEN 150000 AND 200000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 5 ">
+        AND i.price BETWEEN 200000 AND 250000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 6 ">
+        AND i.price BETWEEN 250000 AND 300000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 7 ">
+        AND i.price BETWEEN 300000 AND 350000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 8 ">
+        AND i.price BETWEEN 350000 AND 400000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 9 ">
+        AND i.price BETWEEN 400000 AND 450000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 10 ">
+        AND i.price BETWEEN 450000 AND 500000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 11 ">
+        AND i.price  > 500000				-- 开票价格
+      </if>
+    </if>
+    ORDER BY i.insert_time DESC) AS aa
+    <if test="unsoldCar == 1  or tenantCar == 2 or elseCar == 3 ">
+      WHERE
+    </if>
+    <if test="unsoldCar == 1 ">
+      aa.cvin is not null  -- 库存车
+    </if>
+    <if test="tenantCar == 2 ">
+      <if test="unsoldCar == 1 ">
+        or
+      </if>
+      aa.cvin is null and aa.tenant != '0' and aa.tenant !='' AND aa.tenant IS NOT NULL -- 挂靠车商
+    </if>
+    <if test="elseCar == 3 ">
+      <if test="unsoldCar == 1 or  tenantCar == 2">
+        or
+      </if>
+      aa.cvin IS NULL AND (aa.tenant = '0' OR aa.tenant = '' OR aa.tenant IS NULL)  -- 非车商
+    </if>
+    )  as  dd
+  </select>
+
+  <!-- 库存车总交易量 -->
+  <select id="countStockCarNum" resultType="int"   parameterType="com.maxcar.market.model.request.DealRequest">
+    /*SELECT COUNT(*) FROM (
+    SELECT
+    i.vin AS ivin,
+    c.vin AS cvin
+    FROM
+    maxcar_market_l.invoice AS i
+    LEFT JOIN maxcar_stock_l.car AS c
+    ON i.car_id = c.id
+    WHERE i.market_id = '007' ) AS aa
+    WHERE aa.cvin IS NOT NULL -- 库存车*/
+
+    select  COUNT(*) from(
+    SELECT aa.* FROM (
+    SELECT
+    c.id,
+    c.car_no,
+    i.vin AS ivin,
+    c.vin AS cvin,
+    c.tenant,
+    c.is_new_car,
+    c.stock_status,
+    DATE_FORMAT(i.bill_time ,'%Y-%m-%d %H:%i:%s') as bill_time,
+    TO_DAYS(NOW()) - TO_DAYS(c.register_time) AS register_day,
+    DATE_FORMAT(c.register_time,'%Y-%m-%d %H:%i:%s') as register_time,
+    i.series,
+    i.series_name,
+    DATE_FORMAT(c.initial_licence_time, '%Y-%m-%d' ) as initial_licence_time,
+    b.mileage,
+    b.evaluate_price,
+    i.price
+    FROM
+    maxcar_market_l.invoice i
+    LEFT JOIN maxcar_stock_l.car c
+    ON i.car_id = c.id
+    LEFT JOIN maxcar_stock_l.car_base b
+    ON c.id = b.id
+    WHERE 1 = 1
+    <if test="marketId != null and marketId != ''">
+      AND i.market_id = #{marketId}
+    </if>
+    <if test="carNo != null and carNo != ''">
+      AND c.car_no LIKE #{carNo}
+    </if>
+    <if test="vin != null and vin != ''">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      AND c.tenant = #{tenantId}
+    </if>
+    <if test="dealState != 0 ">
+      <if test="dealState == -1 ">
+        AND c.stock_status = -1   					-- 交易状态
+      </if>
+      <if test="dealState == 1 ">
+        AND c.stock_status = 1  					-- 交易状态
+      </if>
+      <if test="dealState == 2 ">
+        AND c.stock_status = 2   					-- 交易状态
+      </if>
+      <if test="dealState == 3 ">
+        AND c.stock_status = 3   					-- 交易状态
+      </if>
+      <if test="dealState == 4 ">
+        AND c.stock_status = 4   					-- 交易状态
+      </if>
+      <if test="dealState == 5 ">
+        AND c.stock_status = 5   					-- 交易状态
+      </if>
+    </if>
+    <if test="storeHoldDays != ''  and storeHoldDays != null">
+      <if test="storeHoldDays == 1 ">
+        -- 库存天数
+        <![CDATA[  AND 0 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 45 ]]>
+      </if>
+      <if test="storeHoldDays == 2 ">
+        <![CDATA[  AND 45 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 60  ]]>
+      </if>
+      <if test="storeHoldDays == 3 ">
+        <![CDATA[  AND 60 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 90 ]]>
+      </if>
+      <if test="storeHoldDays == 4 ">
+        <![CDATA[  AND  90 <= TO_DAYS(NOW()) - TO_DAYS(c.register_time) ]]>
+      </if>
+    </if>
+
+    <if test="dealTimeStart != null and dealTimeStart != '' and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND  #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="dealTimeStart != null and dealTimeStart != '' and (dealTimeEnd == null or dealTimeEnd == '')">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND '2050-12-31'		-- 交易时间
+    </if>
+    <if test="(dealTimeStart == null or dealTimeStart == '') and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN '2010-01-01' AND #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="brandName != null and brandName != ''">
+      AND b.brand_code = #{brandName}  					-- 品牌
+    </if>
+    <if test="seriesName != null and seriesName != ''">
+      AND b.series_code = #{seriesName} 					-- 车系
+    </if>
+    <if test="modelName != null and modelName != ''">
+      AND b.level = #{modelName}  					-- 车型
+    </if>
+    <if test="carAge != null and carAge != ''">
+      <if test="carAge == 1">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 1 ]]>
+      </if>
+      <if test="carAge == 3">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 3 ]]>
+      </if>
+      <if test="carAge == 5">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 5 ]]>
+      </if>
+      <if test="carAge == 9">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) > 5 ]]>
+      </if>
+    </if>
+    <if test="mileage != null and mileage != ''">
+      <if test="mileage == 1">
+        AND b.mileage BETWEEN 0 AND 10000		   --  里程
+      </if>
+      <if test="mileage == 3">
+        AND b.mileage BETWEEN 0 AND 30000		   --  里程
+      </if>
+      <if test="mileage == 5">
+        AND b.mileage BETWEEN 0 AND 50000		   --  里程
+      </if>
+      <if test="mileage == 8">
+        AND b.mileage BETWEEN 0 AND 80000		   --  里程
+      </if>
+      <if test="mileage == 9">
+        AND b.mileage > 80000
+      </if>
+    </if>
+    <if test="engineVolumeUnitl != null and engineVolumeUnitl != ''">
+      <if test="engineVolumeUnitl == 0">
+        <![CDATA[ AND b.engine_volume_unitl <= 1.0 ]]>
+      </if>
+      <if test="engineVolumeUnitl == 1">
+        AND b.engine_volume_unitl BETWEEN 1.0 AND 1.6						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 2">
+        AND b.engine_volume_unitl BETWEEN 1.6 AND 2.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 3">
+        AND b.engine_volume_unitl BETWEEN 2.0 AND 2.5						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 4">
+        AND b.engine_volume_unitl BETWEEN 2.5 AND 3.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 5">
+        AND b.engine_volume_unitl BETWEEN 3.0 AND 4.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 6">
+        <![CDATA[   AND b.engine_volume_unitl >  4.0 ]]>	                        -- 排量
+      </if>
+    </if>
+    <if test="environmentalStandards != null and environmentalStandards != ''">
+      AND b.environmental_standards = #{environmentalStandards}				-- 排放标准
+    </if>
+    <if test="isNewCar != null and isNewCar != ''">
+      AND c.is_new_car = #{isNewCar}					-- 是否新车
+    </if>
+    <if test="gearBox != null and gearBox != ''">
+      <if test="gearBox== 1">
+        AND b.gear_box not like '%手动%'					-- 变数箱
+      </if>
+      <if test="gearBox== 2">
+        AND b.gear_box like '%手动%'					-- 变数箱
+      </if>
+    </if>
+    <if test="seatNumber != null and seatNumber != ''">
+      <if test="seatNumber == 2 or seatNumber == 4 or seatNumber == 5 or seatNumber == 7">
+        AND b.seat_number = #{seatNumber}						-- 座位数
+      </if>
+      <if test="seatNumber == 8">
+        AND b.seat_number > 7						-- 座位数
+      </if>
+    </if>
+    <if test="fuelForm != null and fuelForm != ''">
+      AND b.fuel_form =#{fuelForm}						-- 燃料类型
+    </if>
+    <if test="tradingPrice != null and tradingPrice != ''">
+      <if test="tradingPrice == 1 ">
+        AND i.price BETWEEN 0 AND 50000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 2 ">
+        AND i.price BETWEEN 50000 AND 100000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 3 ">
+        AND i.price BETWEEN 100000 AND 150000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 4 ">
+        AND i.price BETWEEN 150000 AND 200000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 5 ">
+        AND i.price BETWEEN 200000 AND 250000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 6 ">
+        AND i.price BETWEEN 250000 AND 300000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 7 ">
+        AND i.price BETWEEN 300000 AND 350000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 8 ">
+        AND i.price BETWEEN 350000 AND 400000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 9 ">
+        AND i.price BETWEEN 400000 AND 450000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 10 ">
+        AND i.price BETWEEN 450000 AND 500000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 11 ">
+        AND i.price  > 500000				-- 开票价格
+      </if>
+    </if>
+    ORDER BY i.insert_time DESC) AS aa
+    WHERE
+    aa.cvin is not null -- 库存车
+    )  as  dd
+  </select>
+
+  <!-- 库存车交易总价值 -->
+  <select id="sumStockCarMoney" resultType="Double" parameterType="com.maxcar.market.model.request.DealRequest">
+    /*SELECT SUM(price) FROM (
+    SELECT
+    i.vin AS ivin,
+    c.vin AS cvin,
+    i.price
+    FROM
+    maxcar_market_l.invoice AS i
+    LEFT JOIN maxcar_stock_l.car AS c
+    ON i.car_id = c.id ) AS aa
+    WHERE aa.cvin IS NOT NULL  -- 库存车*/
+
+    select   IFNULL(SUM(price),0) from(
+    SELECT aa.* FROM (
+    SELECT
+    c.id,
+    c.car_no,
+    i.vin AS ivin,
+    c.vin AS cvin,
+    c.tenant,
+    c.is_new_car,
+    c.stock_status,
+    DATE_FORMAT(i.bill_time ,'%Y-%m-%d %H:%i:%s') as bill_time,
+    TO_DAYS(NOW()) - TO_DAYS(c.register_time) AS register_day,
+    DATE_FORMAT(c.register_time,'%Y-%m-%d %H:%i:%s') as register_time,
+    i.series,
+    i.series_name,
+    DATE_FORMAT(c.initial_licence_time, '%Y-%m-%d' ) as initial_licence_time,
+    b.mileage,
+    b.evaluate_price,
+    i.price
+    FROM
+    maxcar_market_l.invoice i
+    LEFT JOIN maxcar_stock_l.car c
+    ON i.car_id = c.id
+    LEFT JOIN maxcar_stock_l.car_base b
+    ON c.id = b.id
+    WHERE 1 = 1
+    <if test="marketId != null and marketId != ''">
+      and i.market_id = #{marketId}
+    </if>
+    <if test="carNo != null and carNo != ''">
+      AND c.car_no LIKE #{carNo}
+    </if>
+    <if test="vin != null and vin != ''">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      AND c.tenant = #{tenantId}
+    </if>
+    <if test="dealState != 0 ">
+      <if test="dealState == -1 ">
+        AND c.stock_status = -1   					-- 交易状态
+      </if>
+      <if test="dealState == 1 ">
+        AND c.stock_status = 1  					-- 交易状态
+      </if>
+      <if test="dealState == 2 ">
+        AND c.stock_status = 2   					-- 交易状态
+      </if>
+      <if test="dealState == 3 ">
+        AND c.stock_status = 3   					-- 交易状态
+      </if>
+      <if test="dealState == 4 ">
+        AND c.stock_status = 4   					-- 交易状态
+      </if>
+      <if test="dealState == 5 ">
+        AND c.stock_status = 5   					-- 交易状态
+      </if>
+    </if>
+    <if test="storeHoldDays != ''  and storeHoldDays != null">
+      <if test="storeHoldDays == 1 ">
+        -- 库存天数
+        <![CDATA[  AND 0 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 45 ]]>
+      </if>
+      <if test="storeHoldDays == 2 ">
+        <![CDATA[  AND 45 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 60  ]]>
+      </if>
+      <if test="storeHoldDays == 3 ">
+        <![CDATA[  AND 60 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 90 ]]>
+      </if>
+      <if test="storeHoldDays == 4 ">
+        <![CDATA[  AND  90 <= TO_DAYS(NOW()) - TO_DAYS(c.register_time) ]]>
+      </if>
+    </if>
+
+    <if test="dealTimeStart != null and dealTimeStart != '' and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND  #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="dealTimeStart != null and dealTimeStart != '' and (dealTimeEnd == null or dealTimeEnd == '')">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND '2050-12-31'		-- 交易时间
+    </if>
+    <if test="(dealTimeStart == null or dealTimeStart == '') and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN '2010-01-01' AND #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="brandName != null and brandName != ''">
+      AND b.brand_code = #{brandName}  					-- 品牌
+    </if>
+    <if test="seriesName != null and seriesName != ''">
+      AND b.series_code = #{seriesName} 					-- 车系
+    </if>
+    <if test="modelName != null and modelName != ''">
+      AND b.level = #{modelName}  					-- 车型
+    </if>
+    <if test="carAge != null and carAge != ''">
+      <if test="carAge == 1">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 1 ]]>
+      </if>
+      <if test="carAge == 3">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 3 ]]>
+      </if>
+      <if test="carAge == 5">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 5 ]]>
+      </if>
+      <if test="carAge == 9">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) > 5 ]]>
+      </if>
+    </if>
+    <if test="mileage != null and mileage != ''">
+      <if test="mileage == 1">
+        AND b.mileage BETWEEN 0 AND 10000		   --  里程
+      </if>
+      <if test="mileage == 3">
+        AND b.mileage BETWEEN 0 AND 30000		   --  里程
+      </if>
+      <if test="mileage == 5">
+        AND b.mileage BETWEEN 0 AND 50000		   --  里程
+      </if>
+      <if test="mileage == 8">
+        AND b.mileage BETWEEN 0 AND 80000		   --  里程
+      </if>
+      <if test="mileage == 9">
+        AND b.mileage > 80000
+      </if>
+    </if>
+    <if test="engineVolumeUnitl != null and engineVolumeUnitl != ''">
+      <if test="engineVolumeUnitl == 0">
+        <![CDATA[ AND b.engine_volume_unitl <= 1.0 ]]>
+      </if>
+      <if test="engineVolumeUnitl == 1">
+        AND b.engine_volume_unitl BETWEEN 1.0 AND 1.6						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 2">
+        AND b.engine_volume_unitl BETWEEN 1.6 AND 2.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 3">
+        AND b.engine_volume_unitl BETWEEN 2.0 AND 2.5						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 4">
+        AND b.engine_volume_unitl BETWEEN 2.5 AND 3.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 5">
+        AND b.engine_volume_unitl BETWEEN 3.0 AND 4.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 6">
+        <![CDATA[   AND b.engine_volume_unitl >  4.0 ]]>	                        -- 排量
+      </if>
+    </if>
+    <if test="environmentalStandards != null and environmentalStandards != ''">
+      AND b.environmental_standards = #{environmentalStandards}				-- 排放标准
+    </if>
+    <if test="isNewCar != null and isNewCar != ''">
+      AND c.is_new_car = #{isNewCar}					-- 是否新车
+    </if>
+    <if test="gearBox != null and gearBox != ''">
+      <if test="gearBox== 1">
+        AND b.gear_box not like '%手动%'					-- 变数箱
+      </if>
+      <if test="gearBox== 2">
+        AND b.gear_box like '%手动%'					-- 变数箱
+      </if>
+    </if>
+    <if test="seatNumber != null and seatNumber != ''">
+      <if test="seatNumber == 2 or seatNumber == 4 or seatNumber == 5 or seatNumber == 7">
+        AND b.seat_number = #{seatNumber}						-- 座位数
+      </if>
+      <if test="seatNumber == 8">
+        AND b.seat_number > 7						-- 座位数
+      </if>
+    </if>
+    <if test="fuelForm != null and fuelForm != ''">
+      AND b.fuel_form =#{fuelForm}						-- 燃料类型
+    </if>
+    <if test="tradingPrice != null and tradingPrice != ''">
+      <if test="tradingPrice == 1 ">
+        AND i.price BETWEEN 0 AND 50000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 2 ">
+        AND i.price BETWEEN 50000 AND 100000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 3 ">
+        AND i.price BETWEEN 100000 AND 150000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 4 ">
+        AND i.price BETWEEN 150000 AND 200000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 5 ">
+        AND i.price BETWEEN 200000 AND 250000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 6 ">
+        AND i.price BETWEEN 250000 AND 300000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 7 ">
+        AND i.price BETWEEN 300000 AND 350000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 8 ">
+        AND i.price BETWEEN 350000 AND 400000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 9 ">
+        AND i.price BETWEEN 400000 AND 450000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 10 ">
+        AND i.price BETWEEN 450000 AND 500000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 11 ">
+        AND i.price  > 500000				-- 开票价格
+      </if>
+    </if>
+    ORDER BY i.insert_time DESC) AS aa
+    WHERE
+    aa.cvin is not null  -- 库存车
+    )  as  dd
+
+  </select>
+
+
+
+
+  <!--查询开票总数-->
+  <select id="countDeal" parameterType="com.maxcar.market.model.request.DealRequest" resultType="java.lang.Integer">
+    select count(*) from(
+    SELECT aa.* FROM (
+    SELECT
+    c.id,
+    c.car_no,
+    i.vin AS ivin,
+    c.vin AS cvin,
+    c.tenant,
+    c.is_new_car,
+    c.stock_status,
+    DATE_FORMAT(i.bill_time ,'%Y-%m-%d %H:%i:%s') as bill_time,
+    TO_DAYS(NOW()) - TO_DAYS(c.register_time) AS register_day,
+    DATE_FORMAT(c.register_time,'%Y-%m-%d %H:%i:%s') as register_time,
+    i.series,
+    i.series_name,
+    DATE_FORMAT(c.initial_licence_time, '%Y-%m-%d' ) as initial_licence_time,
+    b.mileage,
+    b.evaluate_price,
+    i.price
+    FROM
+    maxcar_market_l.invoice i
+    LEFT JOIN maxcar_stock_l.car c
+    ON i.car_id = c.id
+    LEFT JOIN maxcar_stock_l.car_base b
+    ON c.id = b.id
+    WHERE 1 = 1
+    <if test="marketId != null and marketId != ''">
+      and i.market_id = #{marketId}
+    </if>
+    <if test="carNo != null and carNo != ''">
+      AND c.car_no LIKE #{carNo}
+    </if>
+    <if test="vin != null and vin != ''">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      AND c.tenant = #{tenantId}
+    </if>
+    <if test="dealState != 0 ">
+      <if test="dealState == -1 ">
+        AND c.stock_status = -1   					-- 交易状态
+      </if>
+      <if test="dealState == 1 ">
+        AND c.stock_status = 1  					-- 交易状态
+      </if>
+      <if test="dealState == 2 ">
+        AND c.stock_status = 2   					-- 交易状态
+      </if>
+      <if test="dealState == 3 ">
+        AND c.stock_status = 3   					-- 交易状态
+      </if>
+      <if test="dealState == 4 ">
+        AND c.stock_status = 4   					-- 交易状态
+      </if>
+      <if test="dealState == 5 ">
+        AND c.stock_status = 5   					-- 交易状态
+      </if>
+    </if>
+    <if test="storeHoldDays != ''  and storeHoldDays != null">
+      <if test="storeHoldDays == 1 ">
+        -- 库存天数
+        <![CDATA[  AND 0 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 45 ]]>
+      </if>
+      <if test="storeHoldDays == 2 ">
+        <![CDATA[  AND 45 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 60  ]]>
+      </if>
+      <if test="storeHoldDays == 3 ">
+        <![CDATA[  AND 60 <= (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+            )
+            AND (
+              TO_DAYS(NOW()) - TO_DAYS(c.register_time)
+        ) < 90 ]]>
+      </if>
+      <if test="storeHoldDays == 4 ">
+        <![CDATA[  AND  90 <= TO_DAYS(NOW()) - TO_DAYS(c.register_time) ]]>
+      </if>
+    </if>
+
+    <if test="dealTimeStart != null and dealTimeStart != '' and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND  #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="dealTimeStart != null and dealTimeStart != '' and (dealTimeEnd == null or dealTimeEnd == '')">
+      AND i.bill_time BETWEEN #{dealTimeStart} AND '2050-12-31'		-- 交易时间
+    </if>
+    <if test="(dealTimeStart == null or dealTimeStart == '') and dealTimeEnd != null and dealTimeEnd != ''">
+      AND i.bill_time BETWEEN '2010-01-01' AND #{dealTimeEnd}		-- 交易时间
+    </if>
+    <if test="brandName != null and brandName != ''">
+      AND b.brand_code = #{brandName}  					-- 品牌
+    </if>
+    <if test="seriesName != null and seriesName != ''">
+      AND b.series_code = #{seriesName} 					-- 车系
+    </if>
+    <if test="modelName != null and modelName != ''">
+      AND b.level = #{modelName}  					-- 车型
+    </if>
+    <if test="carAge != null and carAge != ''">
+      <if test="carAge == 1">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 1 ]]>
+      </if>
+      <if test="carAge == 3">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 3 ]]>
+      </if>
+      <if test="carAge == 5">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) < 5 ]]>
+      </if>
+      <if test="carAge == 9">
+        <![CDATA[ AND FLOOR(DATEDIFF(CURDATE(), c.initial_licence_time)/365.2422) > 5 ]]>
+      </if>
+    </if>
+    <if test="mileage != null and mileage != ''">
+      <if test="mileage == 1">
+        AND b.mileage BETWEEN 0 AND 10000		   --  里程
+      </if>
+      <if test="mileage == 3">
+        AND b.mileage BETWEEN 0 AND 30000		   --  里程
+      </if>
+      <if test="mileage == 5">
+        AND b.mileage BETWEEN 0 AND 50000		   --  里程
+      </if>
+      <if test="mileage == 8">
+        AND b.mileage BETWEEN 0 AND 80000		   --  里程
+      </if>
+      <if test="mileage == 9">
+        AND b.mileage > 80000
+      </if>
+    </if>
+    <if test="engineVolumeUnitl != null and engineVolumeUnitl != ''">
+      <if test="engineVolumeUnitl == 0">
+        <![CDATA[ AND b.engine_volume_unitl <= 1.0 ]]>
+      </if>
+      <if test="engineVolumeUnitl == 1">
+        AND b.engine_volume_unitl BETWEEN 1.0 AND 1.6						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 2">
+        AND b.engine_volume_unitl BETWEEN 1.6 AND 2.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 3">
+        AND b.engine_volume_unitl BETWEEN 2.0 AND 2.5						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 4">
+        AND b.engine_volume_unitl BETWEEN 2.5 AND 3.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 5">
+        AND b.engine_volume_unitl BETWEEN 3.0 AND 4.0						-- 排量
+      </if>
+      <if test="engineVolumeUnitl == 6">
+        <![CDATA[   AND b.engine_volume_unitl >  4.0 ]]>	                        -- 排量
+      </if>
+    </if>
+    <if test="environmentalStandards != null and environmentalStandards != ''">
+      AND b.environmental_standards = #{environmentalStandards}				-- 排放标准
+    </if>
+    <if test="isNewCar != null and isNewCar != ''">
+      AND c.is_new_car = #{isNewCar}					-- 是否新车
+    </if>
+    <if test="gearBox != null and gearBox != ''">
+      <if test="gearBox== 1">
+        AND b.gear_box not like '%手动%'					-- 变数箱
+      </if>
+      <if test="gearBox== 2">
+        AND b.gear_box like '%手动%'					-- 变数箱
+      </if>
+    </if>
+    <if test="seatNumber != null and seatNumber != ''">
+      <if test="seatNumber == 2 or seatNumber == 4 or seatNumber == 5 or seatNumber == 7">
+        AND b.seat_number = #{seatNumber}						-- 座位数
+      </if>
+      <if test="seatNumber == 8">
+        AND b.seat_number > 7						-- 座位数
+      </if>
+    </if>
+    <if test="fuelForm != null and fuelForm != ''">
+      AND b.fuel_form =#{fuelForm}						-- 燃料类型
+    </if>
+    <if test="tradingPrice != null and tradingPrice != ''">
+      <if test="tradingPrice == 1 ">
+        AND i.price BETWEEN 0 AND 50000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 2 ">
+        AND i.price BETWEEN 50000 AND 100000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 3 ">
+        AND i.price BETWEEN 100000 AND 150000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 4 ">
+        AND i.price BETWEEN 150000 AND 200000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 5 ">
+        AND i.price BETWEEN 200000 AND 250000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 6 ">
+        AND i.price BETWEEN 250000 AND 300000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 7 ">
+        AND i.price BETWEEN 300000 AND 350000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 8 ">
+        AND i.price BETWEEN 350000 AND 400000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 9 ">
+        AND i.price BETWEEN 400000 AND 450000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 10 ">
+        AND i.price BETWEEN 450000 AND 500000				-- 开票价格
+      </if>
+      <if test="tradingPrice == 11 ">
+        AND i.price  > 500000				-- 开票价格
+      </if>
+    </if>
+    ORDER BY i.insert_time DESC) AS aa
+    <if test="unsoldCar == 1  or tenantCar == 2 or elseCar == 3 ">
+      WHERE
+    </if>
+    <if test="unsoldCar == 1 ">
+      aa.cvin is not null  -- 库存车
+    </if>
+    <if test="tenantCar == 2 ">
+      <if test="unsoldCar == 1 ">
+        or
+      </if>
+      aa.cvin is null and aa.tenant != '0' and aa.tenant !='' AND aa.tenant IS NOT NULL -- 挂靠车商
+    </if>
+    <if test="elseCar == 3 ">
+      <if test="unsoldCar == 1 or  tenantCar == 2">
+        or
+      </if>
+      aa.cvin IS NULL AND (aa.tenant = '0' OR aa.tenant = '' OR aa.tenant IS NULL)  -- 非车商
+    </if>
+    )  as  dd
+  </select>
+
+  <!--根据vin查询车辆交易记录-->
+  <select id="selectByVin" parameterType="map" resultMap="DealResultMap">
+    SELECT c.id,
+    DATE_FORMAT(i.bill_time,'%Y-%m-%d') as billTime,
+    i.price,
+    i.tenant_id as tenant,
+    c.stock_status,
+    i.vin AS ivin,
+    c.vin AS cvin
+    FROM maxcar_market_l.invoice AS i LEFT JOIN maxcar_stock_l.car AS c
+    ON i.car_id = c.id
+    WHERE
+    <if test="vin != null and vin != ''">
+      i.vin = #{vin}
+    </if>
+    LIMIT #{curPage},#{pageSize}
+  </select>
+
+  <!--根据vin查询车辆交易记录总数-->
+  <select id="countByVin" parameterType="String" resultType="int">
+    select count(*) from (
+    SELECT c.id,
+    i.bill_time,
+    i.price,
+    i.tenant_id as tenant,
+    c.stock_status,
+    i.vin AS ivin,
+    c.vin AS cvin
+    FROM maxcar_market_l.invoice AS i LEFT JOIN maxcar_stock_l.car AS c
+    ON i.car_id = c.id
+    WHERE
+    <if test="_parameter != null and _parameter != ''">
+      i.vin = #{vin}
+    </if>
+    ) as aa
+  </select>
+
+  <select id="selectInvoiceDetail" parameterType="com.maxcar.market.pojo.Invoice" resultMap="BaseResultMap">
+    SELECT * from invoice where 1=1
+    <if test="id != null and id != ''">
+      and id=#{id}
+    </if>
+    <if test="tenantId != null and tenantId != ''">
+      and tenant_id=#{tenantId}
+    </if>
+    <choose>
+      <when test="status==1">
+        AND DATE_FORMAT(bill_time,'%Y-%m-%d') = #{currentTime}
+      </when>
+      <when test="status==2">
+        AND DATE_FORMAT(bill_time,'%Y-%m') =#{currentTime}
+      </when>
+      <when test="status==3">
+        AND DATE_FORMAT(bill_time,'%Y') = #{currentTime}
+      </when>
+      <otherwise>
+        and 1=1
+      </otherwise>
+    </choose>
+  </select>
+
+  <!--开票查询-->
+  <select id="selectInvoice" parameterType="com.maxcar.market.model.request.SelectInvoice" resultType="com.maxcar.market.model.response.DealResponse">
+    SELECT
+    u.id AS id,
+    i.vin AS ivin,
+    u.tenant_name AS tenantName,
+    i.invoice_no AS invoiceNo,
+    DATE_FORMAT(i.bill_time,'%Y-%m-%d %H:%i:%s') AS billTime
+    FROM
+    maxcar_market_l.invoice i left JOIN maxcar_tenant_l.user_tenant u
+    ON i.tenant_id = u.id
+    WHERE 1 = 1
+    <if test="vin != null and vin != '' ">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="marketId != null and marketId != '' ">
+      AND i.market_id = #{marketId}
+    </if>
+    <if test="tenantType != null and tenantType != '' ">
+      AND u.tenant_type = #{tenantType}
+    </if>
+    <if test="billTimeStart != null and billTimeStart != '' and billTimeEnd != null and billTimeEnd != '' ">
+      AND i.bill_time BETWEEN #{billTimeStart} AND #{billTimeEnd}
+    </if>
+    <if test="invoiceNo != null and invoiceNo != ''">
+      AND i.invoice_no LIKE #{invoiceNo}
+    </if>
+    ORDER BY i.bill_time DESC
+    LIMIT #{curPage},#{pageSize}
+  </select>
+
+  <!--开票查询2-->
+  <select id="selectInvoice2" parameterType="com.maxcar.market.model.request.SelectInvoice" resultMap="BaseResultMap">
+SELECT
+  i.*,
+  t.tenant_name
+FROM
+  maxcar_market_l.invoice i
+  LEFT JOIN maxcar_tenant_l.user_tenant t
+    ON i.tenant_id = t.id
+WHERE 1 = 1
+    <if test="vin != null and vin != '' ">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="tenantId != null and tenantId != '' ">
+      AND i.tenant_id = #{tenantId}
+    </if>
+    <if test="invoiceNo != null and invoiceNo != '' ">
+      AND i.invoice_no LIKE #{invoiceNo}
+    </if>
+    <if test="billTimeStart != null and billTimeStart != '' and billTimeEnd != null and billTimeEnd != '' ">
+      AND i.bill_time BETWEEN #{billTimeStart} AND #{billTimeEnd}
+    </if>
+ORDER BY bill_time DESC
+  </select>
+
+  <!--开票查询  导出-->
+  <select id="selectInvoiceExport" parameterType="com.maxcar.market.model.request.SelectInvoice" resultType="com.maxcar.market.model.response.DealResponse">
+    SELECT
+    --   u.id AS id,
+    i.vin AS ivin,
+    u.tenant_name AS tenantName,
+    i.invoice_no AS invoiceNo,
+    DATE_FORMAT(i.bill_time,'%Y-%m-%d %H:%i:%s') AS billTime
+    FROM
+    maxcar_market_l.invoice i left JOIN maxcar_tenant_l.user_tenant u
+    ON i.tenant_id = u.id
+    WHERE 1 = 1
+    <if test="vin != null and vin != '' ">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="marketId != null and marketId != '' ">
+      AND i.market_id = #{marketId}
+    </if>
+    <if test="tenantType != null and tenantType != '' ">
+      AND u.tenant_type = #{tenantType}
+    </if>
+    <if test="billTimeStart != null and billTimeStart != '' and billTimeEnd != null and billTimeEnd != '' ">
+      AND i.bill_time BETWEEN #{billTimeStart} AND #{billTimeEnd}
+    </if>
+    <if test="invoiceNo != null and invoiceNo != ''">
+      AND i.invoice_no LIKE #{invoiceNo}
+    </if>
+    ORDER BY i.bill_time DESC
+  </select>
+
+  <!--开票查询总数-->
+  <select id="countInvoice" parameterType="com.maxcar.market.model.request.SelectInvoice" resultType="int">
+    select count(*) from (
+    SELECT
+    u.id AS tenantId,
+    i.vin AS vin,
+    u.tenant_name AS tenantName,
+    i.invoice_no AS invoiceNo,
+    i.bill_time AS billTime
+    FROM
+    maxcar_market_l.invoice i left JOIN maxcar_tenant_l.user_tenant u
+    ON i.tenant_id = u.id
+    WHERE 1 = 1
+    <if test="vin != null and vin != '' ">
+      AND i.vin LIKE #{vin}
+    </if>
+    <if test="marketId != null and marketId != '' ">
+      AND i.market_id = #{marketId}
+    </if>
+    <if test="tenantType != null and tenantType != '' ">
+      AND u.tenant_type = #{tenantType}
+    </if>
+    <if test="billTimeStart != null and billTimeStart != '' and billTimeEnd != null and billTimeEnd != '' ">
+      AND i.bill_time BETWEEN #{billTimeStart} AND #{billTimeEnd}
+    </if>
+    <if test="invoiceNo != null and invoiceNo != ''">
+      AND i.invoice_no LIKE #{invoiceNo}
+    </if>
+    ) as abc
+  </select>
+
+
+  <!--开票排名-->
+  <select id="selectRanking" parameterType="string" resultType="map">
+    SELECT
+    s.*
+    FROM
+    (SELECT (@i := @i + 1) AS rownum,
+    t.*
+    FROM
+    (SELECT
+    tenant_id,
+    COUNT(*) AS COUNT
+    FROM
+    invoice
+    where market_id = #{marketId}
+    GROUP BY tenant_id
+    ORDER BY COUNT DESC) AS t,
+    (SELECT @i := 0) AS t2
+    WHERE tenant_id != ""
+    AND tenant_id != '0') AS s
+    <if test="tenantId != null and tenantId != '' ">
+      WHERE tenant_id = #{tenantId}
+    </if>
+  </select>
+
+  <select id="selectInvoiceDetailById" resultMap="BaseResultMap">
+    select * from invoice where id =#{id};
+  </select>
+
+  <!--开票管理所有信息-->
+  <select id="detailsExcel" parameterType="com.maxcar.market.pojo.Invoice" resultMap="TradeInformationMap">
+    SELECT
+    iv.purchacer_name,
+    (CASE iv.purchacer_type
+    WHEN 1 THEN '单位'
+    WHEN 0 THEN '个人'
+    END) AS purchacer_type,
+    (CASE iv.is_purchacer_code
+    WHEN 1 THEN '否'
+    WHEN 0 THEN '是'
+    END) AS is_purchacer_code,
+    iv.purchacer_nationality,
+    iv.purchacer_no,
+    iv.purchacer_tax_no,
+    iv.purchacer_id_card,
+    iv.purchacer_passport,
+    iv.purchacer_nation,
+    iv.purchacer_address,
+    iv.purchacer_mobile,
+    iv.seller_name,
+    (CASE iv.seller_type
+    WHEN 1 THEN '单位'
+    WHEN 0 THEN '个人'
+    END) AS seller_type,
+    (CASE iv.is_seller_code
+    WHEN 1 THEN '否'
+    WHEN 0 THEN '是'
+    END) AS is_seller_code,
+    iv.seller_nationality,
+    iv.seller_tax_no,
+    iv.seller_no,
+    iv.seller_id_card,
+    iv.seller_passport,
+    iv.seller_nation,
+    iv.seller_address,
+    iv.seller_mobile,
+    (CASE iv.is_agent
+    WHEN 1 THEN '否'
+    WHEN 0 THEN '是'
+    END) AS is_agent,
+    iv.agent_name,
+    (CASE iv.agent_type
+    WHEN 1 THEN '单位'
+    WHEN 0 THEN '个人'
+    END) AS agent_type,
+    (CASE iv.is_agent_code
+    WHEN 1 THEN '否'
+    WHEN 0 THEN '是'
+    END) AS is_agent_code,
+    iv.agent_nationality,
+    iv.agent_tax_no,
+    iv.agent_no,
+    iv.agent_id_card,
+    iv.agent_passport,
+    iv.agent_nation,
+    iv.agent_address,
+    iv.agent_mobile,
+    iv.car_no,
+    iv.certificate_number,
+    iv.vin,
+    iv.factory_plate,
+    (CASE iv.level
+    WHEN 1 THEN 'SUV'
+    WHEN 2 THEN '三厢轿车'
+    WHEN 3 THEN '两厢轿车'
+    WHEN 4 THEN 'MPV'
+    WHEN 5 THEN '跑车'
+    WHEN 6 THEN '面包车'
+    WHEN 7 THEN '皮卡'
+    WHEN 'MPV' THEN 'MPV'
+    WHEN 'SUV' THEN 'SUV'
+    WHEN '两厢车' THEN '两厢车'
+    WHEN '中型SUV' THEN '中型SUV'
+    WHEN '中型车' THEN '中型车'
+    WHEN '中大型SUV' THEN '中大型SUV'
+    WHEN '中大型车' THEN '中大型车'
+    WHEN '其他' THEN '其他'
+    WHEN '大型车' THEN '大型车'
+    WHEN '小型SUV' THEN '小型SUV'
+    WHEN '小型车' THEN '小型车'
+    WHEN '微卡' THEN '微卡'
+    WHEN '微型车' THEN '微型车'
+    WHEN '微小型车' THEN '微小型车'
+    WHEN '微面' THEN '微面'
+    WHEN '皮卡' THEN '皮卡'
+    WHEN '紧凑型SUV' THEN '紧凑型SUV'
+    WHEN '紧凑型车' THEN '紧凑型车'
+    WHEN '跑车' THEN '跑车'
+    WHEN '轻客' THEN '轻客'
+    END) AS `level`,
+    (CASE iv.is_new_energy
+    WHEN 1 THEN '否'
+    WHEN 0 THEN '是'
+    END) AS is_new_energy,
+    iv.office,
+    iv.price,
+    iv.auction,
+    iv.auction_address,
+    iv.bill_time,
+    iv.initial_licence_time,
+    iv.new_price,
+    iv.mileage,
+    m.name,
+    m.address,
+    m.taxno
+    FROM (
+    SELECT
+    i.*,
+    c.initial_licence_time,
+    c.new_price,
+    c.mileage,
+    c.level
+    FROM maxcar_market_l.invoice i LEFT JOIN maxcar_stock_l.car_base c
+    ON i.car_id = c.id WHERE 1=1
+    <if test="marketId != null and marketId != '' ">
+      and i.market_id = #{marketId}
+    </if>
+    <if test="purchacerName != null and purchacerName != '' ">
+      and i.purchacer_name = #{purchacerName}
+    </if>
+    <if test="sellerName != null and sellerName != '' ">
+      and i.seller_name = #{sellerName}
+    </if>
+    <if test="invoiceNo != null and invoiceNo != '' ">
+      and i.invoice_no = #{invoiceNo}
+    </if>
+    <if test="billTimeStart != null and billTimeEnd !=null ">
+      and i.bill_time BETWEEN STR_TO_DATE(#{billTimeStart},"%Y-%m-%d") and
+      STR_TO_DATE(#{#{billTimeEnd}},"%Y-%m-%d")
+    </if>
+    <if test="invoicePortof != null  ">
+      and i.invoice_portof = #{invoicePortof}
+    </if>
+    <if test="invoiceStatus != null">
+      and i.invoice_status = #{invoiceStatus}
+    </if>
+    <if test="carSources != null">
+      and i.car_sources = #{carSources}
+    </if>
+    ) iv LEFT JOIN maxcar_user_l.market m
+    ON iv.market_id = m.market_no
+  </select>
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.barrier.dao.CarRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.barrier.pojo.CarRecord" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="vin" property="vin" jdbcType="VARCHAR" />
+    <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+    <result column="rfid" property="rfid" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="channel_name" property="channelName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, vin, car_no, rfid, channel, type, pic, insert_time, channel_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.barrier.pojo.CarRecord" >
+    insert into car_record (id, vin, car_no, 
+      rfid, channel, type, 
+      pic, insert_time, channel_name
+      )
+    values (#{id,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR}, #{carNo,jdbcType=VARCHAR}, 
+      #{rfid,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{pic,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{channelName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.barrier.pojo.CarRecord" >
+    insert into car_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="vin != null" >
+        vin,
+      </if>
+      <if test="carNo != null" >
+        car_no,
+      </if>
+      <if test="rfid != null" >
+        rfid,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="vin != null" >
+        #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="carNo != null" >
+        #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="rfid != null" >
+        #{rfid,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.barrier.pojo.CarRecord" >
+    update car_record
+    <set >
+      <if test="vin != null" >
+        vin = #{vin,jdbcType=VARCHAR},
+      </if>
+      <if test="carNo != null" >
+        car_no = #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="rfid != null" >
+        rfid = #{rfid,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.barrier.pojo.CarRecord" >
+    update car_record
+    set vin = #{vin,jdbcType=VARCHAR},
+      car_no = #{carNo,jdbcType=VARCHAR},
+      rfid = #{rfid,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      pic = #{pic,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      channel_name = #{channelName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

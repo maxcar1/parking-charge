@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.user.dao.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.user.entity.Resource" >
+    <id column="resource_id" property="resourceId" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
+    <result column="resource_desc" property="resourceDesc" jdbcType="VARCHAR" />
+    <result column="resource_level" property="resourceLevel" jdbcType="INTEGER" />
+    <result column="ind" property="ind" jdbcType="INTEGER" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="resource_type" property="resourceType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    resource_id, parent_id, resource_name, resource_url, resource_desc, resource_level,
+    ind, isvalid, version, register_time, resource_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.ResourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from resource
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from resource
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.user.entity.ResourceExample" >
+    delete from resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.user.entity.Resource" >
+    insert into resource (resource_id, parent_id, resource_name,
+    resource_url, resource_desc, resource_level,
+    ind, isvalid, version,
+    register_time, resource_type)
+    values (#{resourceId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR},
+    #{resourceUrl,jdbcType=VARCHAR}, #{resourceDesc,jdbcType=VARCHAR}, #{resourceLevel,jdbcType=INTEGER},
+    #{ind,jdbcType=INTEGER}, #{isvalid,jdbcType=INTEGER}, #{version,jdbcType=INTEGER},
+    #{registerTime,jdbcType=TIMESTAMP}, #{resourceType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.user.entity.Resource" >
+    insert into resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceId != null" >
+        resource_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="resourceName != null" >
+        resource_name,
+      </if>
+      <if test="resourceUrl != null" >
+        resource_url,
+      </if>
+      <if test="resourceDesc != null" >
+        resource_desc,
+      </if>
+      <if test="resourceLevel != null" >
+        resource_level,
+      </if>
+      <if test="ind != null" >
+        ind,
+      </if>
+      <if test="isvalid != null" >
+        isvalid,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+      <if test="resourceType != null" >
+        resource_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceId != null" >
+        #{resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceDesc != null" >
+        #{resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceLevel != null" >
+        #{resourceLevel,jdbcType=INTEGER},
+      </if>
+      <if test="ind != null" >
+        #{ind,jdbcType=INTEGER},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.user.entity.ResourceExample" resultType="java.lang.Integer" >
+    select count(*) from resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update resource
+    <set >
+      <if test="record.resourceId != null" >
+        resource_id = #{record.resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceName != null" >
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceUrl != null" >
+        resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceDesc != null" >
+        resource_desc = #{record.resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceLevel != null" >
+        resource_level = #{record.resourceLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.ind != null" >
+        ind = #{record.ind,jdbcType=INTEGER},
+      </if>
+      <if test="record.isvalid != null" >
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.registerTime != null" >
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.resourceType != null" >
+        resource_type = #{record.resourceType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update resource
+    set resource_id = #{record.resourceId,jdbcType=VARCHAR},
+    parent_id = #{record.parentId,jdbcType=VARCHAR},
+    resource_name = #{record.resourceName,jdbcType=VARCHAR},
+    resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
+    resource_desc = #{record.resourceDesc,jdbcType=VARCHAR},
+    resource_level = #{record.resourceLevel,jdbcType=INTEGER},
+    ind = #{record.ind,jdbcType=INTEGER},
+    isvalid = #{record.isvalid,jdbcType=INTEGER},
+    version = #{record.version,jdbcType=INTEGER},
+    register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+    resource_type = #{record.resourceType,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.user.entity.Resource" >
+    update resource
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null" >
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceDesc != null" >
+        resource_desc = #{resourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceLevel != null" >
+        resource_level = #{resourceLevel,jdbcType=INTEGER},
+      </if>
+      <if test="ind != null" >
+        ind = #{ind,jdbcType=INTEGER},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resourceType != null" >
+        resource_type = #{resourceType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.user.entity.Resource" >
+    update resource
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+    resource_name = #{resourceName,jdbcType=VARCHAR},
+    resource_url = #{resourceUrl,jdbcType=VARCHAR},
+    resource_desc = #{resourceDesc,jdbcType=VARCHAR},
+    resource_level = #{resourceLevel,jdbcType=INTEGER},
+    ind = #{ind,jdbcType=INTEGER},
+    isvalid = #{isvalid,jdbcType=INTEGER},
+    version = #{version,jdbcType=INTEGER},
+    register_time = #{registerTime,jdbcType=TIMESTAMP},
+    resource_type = #{resourceType,jdbcType=INTEGER}
+    where resource_id = #{resourceId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="findResourceByRoleId" parameterType="Map" resultType="com.maxcar.user.entity.Resource">
+    select resource_id as resourceId,resource_name as resourceName,resource_url as resourceUrl
+    ,parent_id as parentId,ind,resource_Level as resourceLevel
+    ,true as checked,
+    (select trr.resource_data from role_resource trr where  trr.resource_id=rr.resource_id and trr.role_id=#{roleId,jdbcType=VARCHAR}) as resourceData
+    from resource rr
+    where
+    exists
+    (
+    select tr.resource_id from role_resource tr,role r,user_role tur where tur.role_id=#{roleId,jdbcType=VARCHAR}
+    and tr.role_id=r.role_id and rr.resource_id=tr.resource_id
+    ) and resource_type=0
+    <if test="level !=null">
+      and resource_Level=#{level,jdbcType=VARCHAR}
+    </if>
+    <if test="ifAll">
+      union
+      select resource_id as resourceId,resource_name as resourceName,resource_url as resourceUrl
+      ,parent_id as parentId,ind,resource_Level as resourceLevel
+      ,false as checked
+      (select trr.resource_data from role_resource trr where  trr.resource_id=rr.resource_id and trr.role_id=#{roleId,jdbcType=VARCHAR}) as resourceData
+      from resource rr
+      where
+      not exists
+      (
+      select tr.resource_id from role_resource tr,role r,user_role tur where tur.role_id=#{roleId,jdbcType=VARCHAR}
+      and tr.role_id=r.role_id and rr.resource_id=tr.resource_id
+      ) and resource_type=0
+      <if test="level !=null">
+        and resource_Level=#{level,jdbcType=VARCHAR}
+      </if>
+    </if>
+  </select>
+</mapper>

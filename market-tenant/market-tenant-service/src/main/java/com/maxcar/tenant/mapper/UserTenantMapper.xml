@@ -1,0 +1,1212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.tenant.dao.UserTenantMapper">
+    <resultMap id="BaseResultMap" type="com.maxcar.tenant.pojo.UserTenant">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="tenant_no" property="tenantNo" jdbcType="VARCHAR"/>
+        <result column="tenant_name" property="tenantName" jdbcType="VARCHAR"/>
+        <result column="tenant_type" property="tenantType" jdbcType="VARCHAR"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="enter_system_time" property="enterSystemTime" jdbcType="TIMESTAMP"/>
+        <result column="corporate_name" property="corporateName" jdbcType="VARCHAR"/>
+        <result column="corporate_id_card" property="corporateIdCard" jdbcType="VARCHAR"/>
+        <result column="licence_no" property="licenceNo" jdbcType="VARCHAR"/>
+        <result column="tenant_address" property="tenantAddress" jdbcType="VARCHAR"/>
+        <result column="tenant_phone" property="tenantPhone" jdbcType="VARCHAR"/>
+        <result column="contact_name" property="contactName" jdbcType="VARCHAR"/>
+        <result column="contact_mobile" property="contactMobile" jdbcType="VARCHAR"/>
+        <result column="contact_duty" property="contactDuty" jdbcType="VARCHAR"/>
+        <result column="contact_email" property="contactEmail" jdbcType="VARCHAR"/>
+        <result column="copy_business_license" property="copyBusinessLicense" jdbcType="VARCHAR"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+        <result column="Integral" property="integral" jdbcType="VARCHAR"/>
+        <result column="tenant_shop_id" property="tenantShopId" jdbcType="VARCHAR"/>
+        <result column="check_in_time" property="checkInTime" jdbcType="TIMESTAMP"/>
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+        <result column="corporate_photo_face" property="corporatePhotoFace" jdbcType="VARCHAR"/>
+        <result column="corporate_photo_back" property="corporatePhotoBack" jdbcType="VARCHAR"/>
+        <result column="corporate_phone" property="corporatePhone" jdbcType="VARCHAR"/>
+        <result column="contact_photo_face" property="contactPhotoFace" jdbcType="VARCHAR"/>
+        <result column="contact_photo_back" property="contactPhotoBack" jdbcType="VARCHAR"/>
+        <result column="tenant_shop_name" property="tenantShopName" jdbcType="VARCHAR"/>
+        <result column="tenant_area" property="tenantArea" jdbcType="VARCHAR"/>
+        <result column="contact_id_card" property="contactIdCard" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="catering_image" property="cateringImage" jdbcType="VARCHAR"/>
+        <result column="health_image" property="healthImage" jdbcType="VARCHAR"/>
+
+        <!--辅助字段-->
+        <result column="count_score" property="countScore" jdbcType="INTEGER"/>
+        <result column="shop_no" property="shopNo" jdbcType="VARCHAR"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="shop_area" property="shopArea" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="TenantInvoiceResultMap" type="com.maxcar.tenant.entity.TenantInvoiceResponse">
+        <id column="id" property="tenantNo" jdbcType="VARCHAR"/>
+        <result column="tenant_name" property="tenantName" jdbcType="VARCHAR"/>
+        <result column="corporate_name" property="tenantHead" jdbcType="VARCHAR"/>
+        <result column="area" property="tenantArea" jdbcType="VARCHAR"/>
+        <result column="count" property="invoiceNum" jdbcType="VARCHAR"/>
+        <result column="sum" property="business" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="InvoiceDetailsResultMap" type="com.maxcar.tenant.entity.InvoiceDetailsResponse">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="tenant_name" property="tenantName" jdbcType="VARCHAR"/>
+        <result column="corporate_name" property="corporateName" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="vin" property="vin" jdbcType="VARCHAR"/>
+        <result column="car_type" property="carType" jdbcType="INTEGER"/>
+        <result column="initial_licence_time" property="initialLicenceTime" jdbcType="TIMESTAMP"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+        <result column="bill_time" property="billTime" jdbcType="TIMESTAMP"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, tenant_no, tenant_name, tenant_type, register_time, enter_system_time, corporate_name,
+    corporate_id_card, licence_no, tenant_address, tenant_phone, contact_name, contact_mobile,
+    contact_duty, contact_email, copy_business_license, company, market_id, Integral,
+    tenant_shop_id, check_in_time, isvalid, remark, insert_time, insert_operator, update_time,
+    update_operator, corporate_photo_face, corporate_photo_back, corporate_phone, contact_photo_face,
+    contact_photo_back,tenant_shop_name,tenant_area,contact_id_card,status,catering_image,health_image
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.tenant.pojo.UserTenantExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from user_tenant
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user_tenant
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_tenant
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.maxcar.tenant.pojo.UserTenantExample">
+        delete from user_tenant
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maxcar.tenant.pojo.UserTenant">
+    insert into user_tenant (id, tenant_no, tenant_name,
+    tenant_type, register_time, enter_system_time,
+    corporate_name, corporate_id_card, licence_no,
+    tenant_address, tenant_phone, contact_name,
+    contact_mobile, contact_duty, contact_email,
+    copy_business_license, company, market_id,
+    Integral, tenant_shop_id, check_in_time,
+    isvalid, remark, insert_time,
+    insert_operator, update_time, update_operator,
+    corporate_photo_face, corporate_photo_back,
+    corporate_phone, contact_photo_face, contact_photo_back,tenant_shop_name,tenant_area,contact_id_card,status
+    )
+    values (#{id,jdbcType=VARCHAR}, #{tenantNo,jdbcType=VARCHAR}, #{tenantName,jdbcType=VARCHAR},
+    #{tenantType,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, #{enterSystemTime,jdbcType=TIMESTAMP},
+    #{corporateName,jdbcType=VARCHAR}, #{corporateIdCard,jdbcType=VARCHAR}, #{licenceNo,jdbcType=VARCHAR},
+    #{tenantAddress,jdbcType=VARCHAR}, #{tenantPhone,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR},
+    #{contactMobile,jdbcType=VARCHAR}, #{contactDuty,jdbcType=VARCHAR}, #{contactEmail,jdbcType=VARCHAR},
+    #{copyBusinessLicense,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR},
+    #{integral,jdbcType=VARCHAR}, #{tenantShopId,jdbcType=VARCHAR}, #{checkInTime,jdbcType=TIMESTAMP},
+    #{isvalid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP},
+    #{insertOperator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateOperator,jdbcType=VARCHAR},
+    #{corporatePhotoFace,jdbcType=VARCHAR}, #{corporatePhotoBack,jdbcType=VARCHAR},
+    #{corporatePhone,jdbcType=VARCHAR}, #{contactPhotoFace,jdbcType=VARCHAR}, #{contactPhotoBack,jdbcType=VARCHAR},
+    #{tenantShopName,jdbcType=VARCHAR}, #{tenantArea,jdbcType=VARCHAR}, #{contactIdCard,jdbcType=VARCHAR},
+    #{status,jdbcType=VARCHAR}
+    )
+  </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.tenant.pojo.UserTenant">
+        insert into user_tenant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tenantNo != null">
+                tenant_no,
+            </if>
+            <if test="tenantName != null">
+                tenant_name,
+            </if>
+            <if test="tenantType != null">
+                tenant_type,
+            </if>
+            <if test="registerTime != null">
+                register_time,
+            </if>
+            <if test="enterSystemTime != null">
+                enter_system_time,
+            </if>
+            <if test="corporateName != null">
+                corporate_name,
+            </if>
+            <if test="corporateIdCard != null">
+                corporate_id_card,
+            </if>
+            <if test="licenceNo != null">
+                licence_no,
+            </if>
+            <if test="tenantAddress != null">
+                tenant_address,
+            </if>
+            <if test="tenantPhone != null">
+                tenant_phone,
+            </if>
+            <if test="contactName != null">
+                contact_name,
+            </if>
+            <if test="contactMobile != null">
+                contact_mobile,
+            </if>
+            <if test="contactDuty != null">
+                contact_duty,
+            </if>
+            <if test="contactEmail != null">
+                contact_email,
+            </if>
+            <if test="copyBusinessLicense != null">
+                copy_business_license,
+            </if>
+            <if test="company != null">
+                company,
+            </if>
+            <if test="marketId != null">
+                market_id,
+            </if>
+            <if test="integral != null">
+                Integral,
+            </if>
+            <if test="tenantShopId != null">
+                tenant_shop_id,
+            </if>
+            <if test="checkInTime != null">
+                check_in_time,
+            </if>
+            <if test="isvalid != null">
+                isvalid,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="insertTime != null">
+                insert_time,
+            </if>
+            <if test="insertOperator != null">
+                insert_operator,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateOperator != null">
+                update_operator,
+            </if>
+            <if test="corporatePhotoFace != null">
+                corporate_photo_face,
+            </if>
+            <if test="corporatePhotoBack != null">
+                corporate_photo_back,
+            </if>
+            <if test="corporatePhone != null">
+                corporate_phone,
+            </if>
+            <if test="contactPhotoFace != null">
+                contact_photo_face,
+            </if>
+            <if test="contactPhotoBack != null">
+                contact_photo_back,
+            </if>
+            <if test="tenantShopName != null">
+                tenant_shop_name,
+            </if>
+            <if test="tenantArea != null">
+                tenant_area,
+            </if>
+            <if test="contactIdCard != null">
+                contact_id_card,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantNo != null">
+                #{tenantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantName != null">
+                #{tenantName,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantType != null">
+                #{tenantType,jdbcType=VARCHAR},
+            </if>
+            <if test="registerTime != null">
+                #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enterSystemTime != null">
+                #{enterSystemTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="corporateName != null">
+                #{corporateName,jdbcType=VARCHAR},
+            </if>
+            <if test="corporateIdCard != null">
+                #{corporateIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="licenceNo != null">
+                #{licenceNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantAddress != null">
+                #{tenantAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantPhone != null">
+                #{tenantPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactName != null">
+                #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactMobile != null">
+                #{contactMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="contactDuty != null">
+                #{contactDuty,jdbcType=VARCHAR},
+            </if>
+            <if test="contactEmail != null">
+                #{contactEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="copyBusinessLicense != null">
+                #{copyBusinessLicense,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="integral != null">
+                #{integral,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantShopId != null">
+                #{tenantShopId,jdbcType=VARCHAR},
+            </if>
+            <if test="checkInTime != null">
+                #{checkInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isvalid != null">
+                #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateOperator != null">
+                #{updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="corporatePhotoFace != null">
+                #{corporatePhotoFace,jdbcType=VARCHAR},
+            </if>
+            <if test="corporatePhotoBack != null">
+                #{corporatePhotoBack,jdbcType=VARCHAR},
+            </if>
+            <if test="corporatePhone != null">
+                #{corporatePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhotoFace != null">
+                #{contactPhotoFace,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhotoBack != null">
+                #{contactPhotoBack,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantShopName != null">
+                #{tenantShopName,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantArea != null">
+                #{tenantArea,jdbcType=VARCHAR},
+            </if>
+            <if test="contactIdCard != null">
+                #{contactIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maxcar.tenant.pojo.UserTenantExample" resultType="java.lang.Integer">
+        select count(*) from user_tenant
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update user_tenant
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenantNo != null">
+                tenant_no = #{record.tenantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenantName != null">
+                tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenantType != null">
+                tenant_type = #{record.tenantType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.registerTime != null">
+                register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.enterSystemTime != null">
+                enter_system_time = #{record.enterSystemTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.corporateName != null">
+                corporate_name = #{record.corporateName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.corporateIdCard != null">
+                corporate_id_card = #{record.corporateIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.licenceNo != null">
+                licence_no = #{record.licenceNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenantAddress != null">
+                tenant_address = #{record.tenantAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenantPhone != null">
+                tenant_phone = #{record.tenantPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactName != null">
+                contact_name = #{record.contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactMobile != null">
+                contact_mobile = #{record.contactMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactDuty != null">
+                contact_duty = #{record.contactDuty,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactEmail != null">
+                contact_email = #{record.contactEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.copyBusinessLicense != null">
+                copy_business_license = #{record.copyBusinessLicense,jdbcType=VARCHAR},
+            </if>
+            <if test="record.company != null">
+                company = #{record.company,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketId != null">
+                market_id = #{record.marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.integral != null">
+                Integral = #{record.integral,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenantShopId != null">
+                tenant_shop_id = #{record.tenantShopId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.checkInTime != null">
+                check_in_time = #{record.checkInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isvalid != null">
+                isvalid = #{record.isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.insertTime != null">
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.insertOperator != null">
+                insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateOperator != null">
+                update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="record.corporatePhotoFace != null">
+                corporate_photo_face = #{record.corporatePhotoFace,jdbcType=VARCHAR},
+            </if>
+            <if test="record.corporatePhotoBack != null">
+                corporate_photo_back = #{record.corporatePhotoBack,jdbcType=VARCHAR},
+            </if>
+            <if test="record.corporatePhone != null">
+                corporate_phone = #{record.corporatePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactPhotoFace != null">
+                contact_photo_face = #{record.contactPhotoFace,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactPhotoBack != null">
+                contact_photo_back = #{record.contactPhotoBack,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update user_tenant
+        set id = #{record.id,jdbcType=VARCHAR},
+        tenant_no = #{record.tenantNo,jdbcType=VARCHAR},
+        tenant_name = #{record.tenantName,jdbcType=VARCHAR},
+        tenant_type = #{record.tenantType,jdbcType=VARCHAR},
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+        enter_system_time = #{record.enterSystemTime,jdbcType=TIMESTAMP},
+        corporate_name = #{record.corporateName,jdbcType=VARCHAR},
+        corporate_id_card = #{record.corporateIdCard,jdbcType=VARCHAR},
+        licence_no = #{record.licenceNo,jdbcType=VARCHAR},
+        tenant_address = #{record.tenantAddress,jdbcType=VARCHAR},
+        tenant_phone = #{record.tenantPhone,jdbcType=VARCHAR},
+        contact_name = #{record.contactName,jdbcType=VARCHAR},
+        contact_mobile = #{record.contactMobile,jdbcType=VARCHAR},
+        contact_duty = #{record.contactDuty,jdbcType=VARCHAR},
+        contact_email = #{record.contactEmail,jdbcType=VARCHAR},
+        copy_business_license = #{record.copyBusinessLicense,jdbcType=VARCHAR},
+        company = #{record.company,jdbcType=VARCHAR},
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+        Integral = #{record.integral,jdbcType=VARCHAR},
+        tenant_shop_id = #{record.tenantShopId,jdbcType=VARCHAR},
+        check_in_time = #{record.checkInTime,jdbcType=TIMESTAMP},
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+        corporate_photo_face = #{record.corporatePhotoFace,jdbcType=VARCHAR},
+        corporate_photo_back = #{record.corporatePhotoBack,jdbcType=VARCHAR},
+        corporate_phone = #{record.corporatePhone,jdbcType=VARCHAR},
+        contact_photo_face = #{record.contactPhotoFace,jdbcType=VARCHAR},
+        contact_photo_back = #{record.contactPhotoBack,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.tenant.pojo.UserTenant">
+        update user_tenant
+        <set>
+            <if test="tenantNo != null">
+                tenant_no = #{tenantNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantName != null">
+                tenant_name = #{tenantName,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantType != null">
+                tenant_type = #{tenantType,jdbcType=VARCHAR},
+            </if>
+            <if test="registerTime != null">
+                register_time = #{registerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enterSystemTime != null">
+                enter_system_time = #{enterSystemTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="corporateName != null">
+                corporate_name = #{corporateName,jdbcType=VARCHAR},
+            </if>
+            <if test="corporateIdCard != null">
+                corporate_id_card = #{corporateIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="licenceNo != null">
+                licence_no = #{licenceNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantAddress != null">
+                tenant_address = #{tenantAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantPhone != null">
+                tenant_phone = #{tenantPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactName != null">
+                contact_name = #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactMobile != null">
+                contact_mobile = #{contactMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="contactDuty != null">
+                contact_duty = #{contactDuty,jdbcType=VARCHAR},
+            </if>
+            <if test="contactEmail != null">
+                contact_email = #{contactEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="copyBusinessLicense != null">
+                copy_business_license = #{copyBusinessLicense,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="integral != null">
+                Integral = #{integral,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantShopId != null">
+                tenant_shop_id = #{tenantShopId,jdbcType=VARCHAR},
+            </if>
+            <if test="checkInTime != null">
+                check_in_time = #{checkInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                insert_operator = #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateOperator != null">
+                update_operator = #{updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="corporatePhotoFace != null">
+                corporate_photo_face = #{corporatePhotoFace,jdbcType=VARCHAR},
+            </if>
+            <if test="corporatePhotoBack != null">
+                corporate_photo_back = #{corporatePhotoBack,jdbcType=VARCHAR},
+            </if>
+            <if test="corporatePhone != null">
+                corporate_phone = #{corporatePhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhotoFace != null">
+                contact_photo_face = #{contactPhotoFace,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhotoBack != null">
+                contact_photo_back = #{contactPhotoBack,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantShopName != null">
+                tenant_shop_name = #{tenantShopName,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantArea != null">
+                tenant_area = #{tenantArea,jdbcType=VARCHAR},
+            </if>
+            <if test="contactIdCard != null">
+                contact_id_card = #{contactIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="cateringImage != null">
+                catering_image = #{cateringImage,jdbcType=VARCHAR},
+            </if>
+            <if test="healthImage != null">
+                health_image = #{healthImage,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.tenant.pojo.UserTenant">
+    update user_tenant
+    set tenant_no = #{tenantNo,jdbcType=VARCHAR},
+    tenant_name = #{tenantName,jdbcType=VARCHAR},
+    tenant_type = #{tenantType,jdbcType=VARCHAR},
+    register_time = #{registerTime,jdbcType=TIMESTAMP},
+    enter_system_time = #{enterSystemTime,jdbcType=TIMESTAMP},
+    corporate_name = #{corporateName,jdbcType=VARCHAR},
+    corporate_id_card = #{corporateIdCard,jdbcType=VARCHAR},
+    licence_no = #{licenceNo,jdbcType=VARCHAR},
+    tenant_address = #{tenantAddress,jdbcType=VARCHAR},
+    tenant_phone = #{tenantPhone,jdbcType=VARCHAR},
+    contact_name = #{contactName,jdbcType=VARCHAR},
+    contact_mobile = #{contactMobile,jdbcType=VARCHAR},
+    contact_duty = #{contactDuty,jdbcType=VARCHAR},
+    contact_email = #{contactEmail,jdbcType=VARCHAR},
+    copy_business_license = #{copyBusinessLicense,jdbcType=VARCHAR},
+    company = #{company,jdbcType=VARCHAR},
+    market_id = #{marketId,jdbcType=VARCHAR},
+    Integral = #{integral,jdbcType=VARCHAR},
+    tenant_shop_id = #{tenantShopId,jdbcType=VARCHAR},
+    check_in_time = #{checkInTime,jdbcType=TIMESTAMP},
+    isvalid = #{isvalid,jdbcType=INTEGER},
+    remark = #{remark,jdbcType=VARCHAR},
+    insert_time = #{insertTime,jdbcType=TIMESTAMP},
+    insert_operator = #{insertOperator,jdbcType=VARCHAR},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    update_operator = #{updateOperator,jdbcType=VARCHAR},
+    corporate_photo_face = #{corporatePhotoFace,jdbcType=VARCHAR},
+    corporate_photo_back = #{corporatePhotoBack,jdbcType=VARCHAR},
+    corporate_phone = #{corporatePhone,jdbcType=VARCHAR},
+    contact_photo_face = #{contactPhotoFace,jdbcType=VARCHAR},
+    contact_photo_back = #{contactPhotoBack,jdbcType=VARCHAR},
+    tenant_shop_name = #{tenantShopName,jdbcType=VARCHAR},
+    tenant_area = #{tenantArea,jdbcType=VARCHAR},
+    contact_id_card = #{contactIdCard,jdbcType=VARCHAR},
+    status = #{status,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <!-- 查询商户列表-->
+    <select id="selectUserTenantList" parameterType="com.maxcar.tenant.pojo.UserTenant" resultMap="BaseResultMap">
+        SELECT d.* FROM (
+        SELECT
+        a.*,
+        case when c.count_score is null then 0 ELSE c.count_score end count_score
+        FROM
+        user_tenant a
+        LEFT JOIN
+        (
+        SELECT b.* FROM(
+        SELECT sum(check_score) AS count_score,
+        tenant_no
+        FROM
+        integral_detail
+        WHERE
+        isvalid = 1 and market_id = #{marketId}
+        AND check_time BETWEEN date_sub(now(), INTERVAL 13 MONTH)
+        AND date_add(NOW(), INTERVAL 1 MONTH)
+        GROUP BY
+        tenant_no
+        )b
+        ) c on a.id = c.tenant_no
+        WHERE a.isvalid=1
+        and a.market_id =#{marketId}
+        <if test="tenantArea !=null and tenantArea !=''">
+            and a.tenant_area = #{tenantArea}
+        </if>
+        <if test="status !=null and status !=''">
+            and a.status = #{status}
+        </if>
+        <if test="tenantName !=null and tenantName !=''">
+            and a.tenant_name like concat(concat('%',#{tenantName}),'%')
+        </if>
+        <if test="tenantType !=null and tenantType !=''">
+            and a.tenant_type = #{tenantType}
+        </if>
+        <if test="tenantShopName !=null and tenantShopName !=''">
+            and a.tenant_shop_name = #{tenantShopName}
+        </if>
+        <choose>
+            <when test=" tenantAge != null and tenantAge==0">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 1 YEAR) AND now()
+            </when>
+            <when test=" tenantAge != null and tenantAge==1">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 2 YEAR) AND date_sub(now(), INTERVAL 1 YEAR)
+            </when>
+            <when test=" tenantAge != null and tenantAge==2">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 3 YEAR) AND date_sub(now(), INTERVAL 2 YEAR)
+            </when>
+            <when test=" tenantAge != null and tenantAge==3">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 4 YEAR) AND date_sub(now(), INTERVAL 3 YEAR)
+            </when>
+            <when test=" tenantAge != null and tenantAge==4">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 5 YEAR) AND date_sub(now(), INTERVAL 4 YEAR)
+            </when>
+            <when test=" tenantAge != null and tenantAge==5">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 50 YEAR) AND date_sub(now(), INTERVAL 5 YEAR)
+            </when>
+        </choose>
+        order by a.check_in_time desc
+        ) d
+        WHERE 1 = 1
+        <if test="integralStart !=null and integralEnd != null and integralStart == integralEnd">
+            and count_score = #{integralStart,jdbcType=INTEGER}
+        </if>
+        <if test="integralStart !=null and integralEnd != null and integralStart != integralEnd">
+            and count_score &gt;= #{integralStart,jdbcType=INTEGER} and count_score &lt; #{integralEnd,jdbcType=INTEGER}
+        </if>
+        <if test="integralStart !=null and integralEnd == null">
+            and count_score &gt;= #{integralStart,jdbcType=INTEGER}
+        </if>
+        <if test="integralStart ==null and integralEnd != null">
+            and count_score &lt; #{integralEnd,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectUserTenantCount" resultType="java.util.LinkedHashMap"
+            parameterType="com.maxcar.tenant.pojo.UserTenant">
+        SELECT IFNULL(f.count,0) as count , g.tenant_type FROM (
+        SELECT COUNT(*) AS COUNT ,e.tenant_type FROM(
+        SELECT d.* FROM (
+        SELECT
+        a.*,
+        case when c.count_score is null then 0 ELSE c.count_score end count_score
+        FROM
+        user_tenant a
+        LEFT JOIN
+        (
+        SELECT b.* FROM(
+        SELECT sum(check_score) AS count_score,
+        tenant_no
+        FROM
+        integral_detail
+        WHERE
+        isvalid = 1 and market_id = #{marketId}
+        AND check_time BETWEEN date_sub(now(), INTERVAL 13 MONTH)
+        AND date_add(NOW(), INTERVAL 1 MONTH)
+        GROUP BY
+        tenant_no
+        )b
+        ) c on a.id = c.tenant_no
+        WHERE a.isvalid=1
+        and a.market_id =#{marketId}
+        <if test="tenantArea !=null and tenantArea !=''">
+            and a.tenant_area = #{tenantArea}
+        </if>
+        <if test="status !=null and status !=''">
+            and a.status = #{status}
+        </if>
+        <if test="tenantName !=null and tenantName !=''">
+            and a.tenant_name like concat(concat('%',#{tenantName}),'%')
+        </if>
+        <if test="tenantType !=null and tenantType !=''">
+            and a.tenant_type = #{tenantType}
+        </if>
+        <if test="tenantShopName !=null and tenantShopName !=''">
+            and a.tenant_shop_name = #{tenantShopName}
+        </if>
+        <choose>
+            <when test=" tenantAge != null and tenantAge==0">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 1 YEAR) AND now()
+            </when>
+            <when test=" tenantAge != null and tenantAge==1">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 2 YEAR) AND date_sub(now(), INTERVAL 1 YEAR)
+            </when>
+            <when test=" tenantAge != null and tenantAge==2">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 3 YEAR) AND date_sub(now(), INTERVAL 2 YEAR)
+            </when>
+            <when test=" tenantAge != null and tenantAge==3">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 4 YEAR) AND date_sub(now(), INTERVAL 3 YEAR)
+            </when>
+            <when test=" tenantAge != null and tenantAge==4">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 5 YEAR) AND date_sub(now(), INTERVAL 4 YEAR)
+            </when>
+            <when test=" tenantAge != null and tenantAge==5">
+                AND a.check_in_time BETWEEN date_sub(now(), INTERVAL 50 YEAR) AND date_sub(now(), INTERVAL 5 YEAR)
+            </when>
+        </choose>
+        order by a.check_in_time desc
+        ) d
+        WHERE 1 = 1
+        <if test="integralStart !=null and integralEnd != null and integralStart == integralEnd">
+            and count_score = #{integralStart,jdbcType=INTEGER}
+        </if>
+        <if test="integralStart !=null and integralEnd != null and integralStart != integralEnd">
+            and count_score &gt;= #{integralStart,jdbcType=INTEGER} and count_score &lt; #{integralEnd,jdbcType=INTEGER}
+        </if>
+        <if test="integralStart !=null and integralEnd == null">
+            and count_score &gt;= #{integralStart,jdbcType=INTEGER}
+        </if>
+        <if test="integralStart ==null and integralEnd != null">
+            and count_score &lt; #{integralEnd,jdbcType=INTEGER}
+        </if>
+        ) e GROUP BY e.tenant_type
+        ) f
+        RIGHT JOIN
+        (SELECT tenant_type FROM maxcar_tenant_l.user_tenant
+        GROUP BY tenant_type) g
+        ON f.tenant_type = g.tenant_type
+        ORDER BY tenant_type
+    </select>
+
+    <select id="selectUserTenant" parameterType="com.maxcar.tenant.pojo.UserTenant" resultMap="BaseResultMap">
+        select b.`name` as shopArea,a.*
+        from maxcar_tenant_l.user_tenant a
+          LEFT JOIN maxcar_market_l.area b
+           ON a.tenant_area = b.id
+        where a.isvalid=1
+
+        <if test="id !=null and id !=''">
+            and a.id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="tenantName !=null and tenantName !=''">
+            and a.tenant_name =#{tenantName}
+        </if>
+    </select>
+
+    <select id="getAllTenantName" resultMap="BaseResultMap">
+        select id,tenant_name from user_tenant
+        <where>
+            isvalid = 1
+            and market_id = #{marketId}
+        </where>
+    </select>
+    <select id="getTenantNameLike" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select id,tenant_name from user_tenant
+        <where>
+            and isvalid = 1
+            <if test="tenantName != null and tenantName != ''">
+                and tenant_name like concat('%',#{tenantName},'%')
+            </if>
+        </where>
+    </select>
+
+
+    <!--<select id="countTenant" parameterType="java.lang.String" resultType="java.lang.Integer" >-->
+    <!--SELECT COUNT(*) FROM user_tenant-->
+    <!--WHERE isvalid = 1 AND  STATUS = 1-->
+    <!--<if test="marketId != null and marketId != ''">-->
+    <!--and market_id = #{marketId}-->
+    <!--</if>-->
+    <!--</select>-->
+
+    <select id="selectAreaByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT u.id,u.tenant_name FROM maxcar_tenant_l.user_tenant u
+        LEFT JOIN maxcar_market_l.area a
+        ON u.tenant_area=a.id WHERE u.STATUS = 1 AND u.isvalid = 1
+        <if test="tenantArea != null and tenantArea != ''">
+            and u.tenant_area = #{tenantArea}
+        </if>
+        <if test="marketId != null and marketId != ''">
+            and u.market_id = #{marketId}
+        </if>
+    </select>
+
+    <select id="selectByTenanId" parameterType="java.lang.String" resultType="String">
+    SELECT tenant_name FROM user_tenant
+      where isvalid=1 and id = #{tenanId}
+  </select>
+
+    <select id="selectAll" parameterType="java.lang.Object" resultMap="BaseResultMap">
+        SELECT u.*,a.name FROM maxcar_tenant_l.user_tenant u LEFT JOIN
+        maxcar_market_l.area a ON u.tenant_area=a.id
+        where u.STATUS = 1 AND u.isvalid != 2
+        <if test="marketId != null and marketId != ''">
+            and u.market_id = #{marketId}
+        </if>
+        <if test="tenant != null and tenant != ''">
+            and u.id = #{tenant}
+        </if>
+        ORDER BY u.insert_time DESC
+        LIMIT #{pageNum} , #{pageSize}
+    </select>
+
+    <!--  <select id="selectAllList" parameterType="java.lang.Object" resultMap="BaseResultMap" >
+     SELECT * FROM user_tenant
+     <if test="marketId != null and marketId != ''">
+       WHERE market_id = #{marketId}
+     </if>
+     <if test="tenant != null and tenant != ''">
+       and tenant_name = #{tenant}
+     </if>
+   </select> -->
+
+    <select id="selectByTenantArea" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT u.*,a.name FROM maxcar_tenant_l.user_tenant u LEFT JOIN
+        maxcar_market_l.area a ON u.tenant_area=a.id WHERE
+        u.STATUS = 1 AND u.isvalid != 2
+        <if test="tenantArea != null and tenantArea != ''">
+            and u.tenant_area = #{tenantArea}
+        </if>
+        <if test="marketId != null and marketId != ''">
+            and u.market_id = #{marketId}
+        </if>
+        ORDER BY u.insert_time DESC
+    </select>
+
+    <select id="selectTenantInvoice" parameterType="map" resultMap="TenantInvoiceResultMap">
+        SELECT
+        a.id,
+        a.tenant_name,
+        a.corporate_name,
+        (SELECT
+        NAME
+        FROM
+        maxcar_market_l.area
+        WHERE id = a.tenant_area
+        <if test="marketId != null and marketId != '' ">
+            AND market_id = #{marketId}
+        </if>
+        ) AS AREA,
+        (SELECT
+        COUNT(*)
+        FROM
+        maxcar_market_l.invoice
+        WHERE tenant_id = a.id
+        <if test="marketId != null and marketId != '' ">
+            AND market_id = #{marketId}
+        </if>
+        <if test="first != null and first != '' and last != null and last != ''">
+            AND bill_time BETWEEN #{first} AND #{last}
+        </if>
+        ) AS COUNT,
+        (SELECT
+        SUM(price)
+        FROM
+        maxcar_market_l.invoice
+        WHERE tenant_id = a.id
+        <if test="marketId != null and marketId != '' ">
+            AND market_id = #{marketId}
+        </if>
+        <if test="first != null and first != '' and last != null and last != ''">
+            AND bill_time BETWEEN #{first} AND #{last}
+        </if>
+        ) AS SUM
+        FROM
+        (SELECT
+        u.id,
+        u.tenant_name,
+        u.corporate_name,
+        u.tenant_area,
+        i.tenant_id
+        FROM
+        maxcar_tenant_l.user_tenant u
+        RIGHT JOIN
+        maxcar_market_l.invoice i
+        ON i.tenant_id = u.id
+        WHERE u.isvalid = 1
+        <if test="marketId != null and marketId != '' ">
+            AND u.market_id = #{marketId}
+        </if>
+        <if test="first != null and first != '' and last != null and last != ''">
+            AND i.bill_time BETWEEN #{first} AND #{last}
+        </if>
+        GROUP BY i.tenant_id) a
+        WHERE 1 = 1
+        <if test="tenantName != null and tenantName != '' ">
+            AND a.tenant_name LIKE #{tenantName}
+        </if>
+
+        <!--SELECT-->
+        <!--u.id,-->
+        <!--u.tenant_name,-->
+        <!--u.corporate_name,-->
+        <!--(SELECT-->
+        <!--NAME-->
+        <!--FROM-->
+        <!--maxcar_market_l.area-->
+        <!--WHERE id = u.tenant_area-->
+        <!--<if test="marketId != null and marketId != '' ">-->
+        <!--AND market_id = #{marketId}-->
+        <!--</if>-->
+        <!--) AS AREA,-->
+        <!--(SELECT-->
+        <!--COUNT(*)-->
+        <!--FROM-->
+        <!--maxcar_market_l.invoice-->
+        <!--WHERE  tenant_id = a.tenant_id-->
+        <!--<if test="marketId != null and marketId != '' ">-->
+        <!--AND market_id = #{marketId}-->
+        <!--</if>-->
+        <!--<if test="first != null and first != '' and last != null and last != '' ">-->
+        <!--AND bill_time BETWEEN #{first} AND #{last}-->
+        <!--</if>-->
+        <!--) AS COUNT,-->
+        <!--(SELECT-->
+        <!--SUM(price)-->
+        <!--FROM-->
+        <!--maxcar_market_l.invoice-->
+        <!--WHERE  tenant_id = a.tenant_id-->
+        <!--<if test="marketId != null and marketId != '' ">-->
+        <!--AND market_id = #{marketId}-->
+        <!--</if>-->
+        <!--<if test="first != null and first != '' and last != null and last != '' ">-->
+        <!--AND bill_time BETWEEN #{first} AND #{last}-->
+        <!--</if>-->
+        <!--) AS SUM-->
+        <!--FROM-->
+        <!--(SELECT-->
+        <!--tenant_id-->
+        <!--FROM-->
+        <!--maxcar_market_l.invoice-->
+        <!--WHERE  tenant_id IS NOT NULL-->
+        <!--AND tenant_id != ''-->
+        <!--AND tenant_id != 0-->
+        <!--<if test="first != null and first != '' and last != null and last != '' ">-->
+        <!--AND bill_time BETWEEN #{first} AND #{last}-->
+        <!--</if>-->
+        <!--<if test="marketId != null and marketId != '' ">-->
+        <!--AND market_id = #{marketId}-->
+        <!--</if>-->
+        <!--GROUP BY tenant_id-->
+        <!--ORDER BY insert_time DESC) a-->
+        <!--RIGHT JOIN maxcar_tenant_l.user_tenant u-->
+        <!--ON u.id = a.tenant_id-->
+        <!--WHERE  u.status = 1-->
+        <!--AND u.isvalid = 1-->
+        <!--<if test="tenantName != null and tenantName != '' ">-->
+        <!--AND u.tenant_name LIKE #{tenantName}-->
+        <!--</if>-->
+        <!--<if test="marketId != null and marketId != '' ">-->
+        <!--AND u.market_id = #{marketId}-->
+        <!--</if>-->
+    </select>
+
+    <select id="selectTenantInvoiceSum" parameterType="map" resultType="java.lang.String">
+        select ifnull(sum(SUM),0) from (
+        SELECT
+        a.id,
+        a.tenant_name,
+        a.corporate_name,
+        (SELECT
+        NAME
+        FROM
+        maxcar_market_l.area
+        WHERE id = a.tenant_area
+        <if test="marketId != null and marketId != '' ">
+            AND market_id = #{marketId}
+        </if>
+        ) AS AREA,
+        (SELECT
+        COUNT(*)
+        FROM
+        maxcar_market_l.invoice
+        WHERE tenant_id = a.id
+        <if test="marketId != null and marketId != '' ">
+            AND market_id = #{marketId}
+        </if>
+        ) AS COUNT,
+        (SELECT
+        SUM(price)
+        FROM
+        maxcar_market_l.invoice
+        WHERE tenant_id = a.id
+        <if test="marketId != null and marketId != '' ">
+            AND market_id = #{marketId}
+        </if>
+        ) AS SUM
+        FROM
+        (SELECT
+        u.id,
+        u.tenant_name,
+        u.corporate_name,
+        u.tenant_area,
+        i.tenant_id
+        FROM
+        maxcar_tenant_l.user_tenant u
+        RIGHT JOIN
+        maxcar_market_l.invoice i
+        ON i.tenant_id = u.id
+        WHERE u.isvalid = 1
+        <if test="marketId != null and marketId != '' ">
+            AND u.market_id = #{marketId}
+        </if>
+        GROUP BY i.tenant_id) a
+        WHERE 1 = 1
+        <if test="tenantName != null and tenantName != '' ">
+            AND a.tenant_name LIKE #{tenantName}
+        </if>
+        ) b
+    </select>
+
+    <select id="selectDetails" parameterType="java.lang.Integer" resultMap="InvoiceDetailsResultMap">
+        SELECT
+        ut.id,
+        ut.tenant_name,
+        ut.corporate_name,
+        area.name,
+        c.vin,
+        c.car_type,
+        c.initial_licence_time,
+        invo.bill_time,
+        invo.price,
+        car.brand_name
+        FROM maxcar_tenant_l.user_tenant ut
+        LEFT JOIN maxcar_market_l.area AREA ON ut.tenant_area=area.id
+        LEFT JOIN maxcar_stock_l.car c ON ut.id=c.tenant
+        LEFT JOIN maxcar_market_l.invoice invo ON invo.car_id=c.id
+        LEFT JOIN maxcar_stock_l.car_base car ON car.id=c.id
+        WHERE
+        <if test="id != null and id != ''">
+            ut.id=#{id}
+        </if>
+        ORDER BY invo.insert_time DESC
+    </select>
+
+    <select id="countTenantArea" parameterType="string" resultType="java.lang.Integer">
+        select count(*) from user_tenant
+        WHERE
+        `status` = 1 and isvalid != 2
+        <if test="marketId != null and marketId != '' ">
+            and market_id = #{marketId}
+        </if>
+        <if test="areaName != null and areaName != '' ">
+            AND tenant_area = #{areaName}
+        </if>
+    </select>
+
+</mapper>

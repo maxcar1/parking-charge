@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- quartz的定时任务的factorybean,自定义使其能够获取springbean -->
+    <bean id="jobFactory" class="com.maxcar.market.quartz.JobFactory"></bean>
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobFactory" ref="jobFactory"></property>
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+        <property name="applicationContextSchedulerContextKey" value="applicationContextKey" />
+        <property name="configLocation" value="classpath:quartz.properties" />
+        <property name="triggers">
+            <list>
+                <ref bean="dayReportTrigger" />
+            </list>
+        </property>
+    </bean>
+    <!--定义job-->
+    <bean id="dayReport" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass">
+            <value>com.maxcar.market.quartz.SyncCenter</value>
+        </property>
+        <property name="durability" value="true" />
+        <property name="requestsRecovery" value="true" />
+    </bean>
+    <!--定义任务时间-->
+    <bean id="dayReportTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="dayReport" />
+        <property name="cronExpression" value="0/10 * * * * ?" />
+    </bean>
+</beans>

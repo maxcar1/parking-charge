@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.base.dao.CarModelMapper" >
+    <cache  eviction="LRU"  flushInterval="600000"  size="512"  readOnly="true"/>
+  <resultMap id="BaseResultMap" type="com.maxcar.base.pojo.CarModel" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="series_id" property="seriesId" jdbcType="VARCHAR" />
+    <result column="model_code" property="modelCode" jdbcType="VARCHAR" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, series_id, model_code, model_name, insert_time, update_time,remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_model
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_model
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.base.pojo.CarModel" >
+    insert into car_model (id, series_id, model_code, 
+      model_name, insert_time, update_time, 
+      remark)
+    values (#{id,jdbcType=VARCHAR}, #{seriesId,jdbcType=VARCHAR}, #{modelCode,jdbcType=VARCHAR}, 
+      #{modelName,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.base.pojo.CarModel" >
+    insert into car_model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="seriesId != null" >
+        series_id,
+      </if>
+      <if test="modelCode != null" >
+        model_code,
+      </if>
+      <if test="modelName != null" >
+        model_name,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesId != null" >
+        #{seriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.base.pojo.CarModel" >
+    update car_model
+    <set >
+      <if test="seriesId != null" >
+        series_id = #{seriesId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        model_code = #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maxcar.base.pojo.CarModel" >
+    update car_model
+    set series_id = #{seriesId,jdbcType=VARCHAR},
+      model_code = #{modelCode,jdbcType=VARCHAR},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.base.pojo.CarModel" >
+    update car_model
+    set series_id = #{seriesId,jdbcType=VARCHAR},
+      model_code = #{modelCode,jdbcType=VARCHAR},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="syncDaSouCheModel" parameterType="com.maxcar.base.pojo.CarModel">
+    replace into car_model(id, series_id, model_code, model_name, insert_time, update_time) values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id},#{item.seriesId},#{item.modelCode},#{item.modelName},
+      #{item.insertTime},#{item.updateTime})
+    </foreach>
+  </insert>
+  <select id="getCarModel" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from car_model where model_code = #{modelCode,jdbcType=VARCHAR}
+  </select>
+  <select id="getCarModelBySeriesCode" resultType="java.util.Map">
+    select c.brand_code 'brandCode',c.brand_name 'brandName',a.series_code 'seriesCode',
+    a.series_name 'seriesName',b.model_code 'modelCode',b.model_name 'modelName'
+    from car_series a left join car_model b on a.id = b.series_id
+    left join car_brand c on c.id = a.brand_id
+    <where>
+      <if test="seriesCode != null and seriesCode != ''">
+       and a.series_code = #{seriesCode}
+      </if>
+    </where>
+  </select>
+  <select id="getAllModel" resultMap="BaseResultMap" useCache="true">
+    select <include refid="Base_Column_List"/> from car_model where series_id = #{seriesId}
+  </select>
+</mapper>

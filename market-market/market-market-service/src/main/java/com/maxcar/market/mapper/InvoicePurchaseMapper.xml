@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.market.dao.InvoicePurchaseMapper">
+    <resultMap id="BaseResultMap" type="com.maxcar.market.pojo.InvoicePurchase">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="invoice_id" property="invoiceId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="invoice_code" property="invoiceCode" jdbcType="BIGINT"/>
+        <result column="invoice_no" property="invoiceNo" jdbcType="INTEGER"/>
+        <result column="buy_ticket_name" property="buyTicketName" jdbcType="VARCHAR"/>
+        <result column="poll_all" property="pollAll" jdbcType="INTEGER"/>
+        <result column="poll_residue" property="pollResidue" jdbcType="INTEGER"/>
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="invoice_start_no" property="invoiceStartNo" jdbcType="INTEGER"/>
+        <result column="invoice_end_no" property="invoiceEndNo" jdbcType="INTEGER"/>
+        <result column="bill_time" property="billTime" jdbcType="DATE"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+      id, invoice_id, user_id, invoice_code, invoice_no, buy_ticket_name, poll_all, poll_residue,
+      insert_time, insert_operator, update_time, update_operator, isvalid, status, invoice_start_no,
+      invoice_end_no, bill_time, market_id
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.market.pojo.InvoicePurchase">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from invoice_purchase
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from invoice_purchase
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from invoice_purchase
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.maxcar.market.pojo.InvoicePurchase">
+        delete from invoice_purchase
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maxcar.market.pojo.InvoicePurchase">
+        insert into invoice_purchase (id, invoice_id, user_id,
+        invoice_code, invoice_no, buy_ticket_name,
+        poll_all, poll_residue, insert_time,
+        insert_operator, update_time, update_operator,
+        isvalid, status, invoice_start_no,
+        invoice_end_no, bill_time, market_id
+        )
+        values (#{id,jdbcType=VARCHAR}, #{invoiceId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+        #{invoiceCode,jdbcType=INTEGER}, #{invoiceNo,jdbcType=INTEGER}, #{buyTicketName,jdbcType=VARCHAR},
+        #{pollAll,jdbcType=INTEGER}, #{pollResidue,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP},
+        #{insertOperator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateOperator,jdbcType=VARCHAR},
+        #{isvalid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{invoiceStartNo,jdbcType=INTEGER},
+        #{invoiceEndNo,jdbcType=INTEGER}, #{billTime,jdbcType=DATE}, #{marketId,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.market.pojo.InvoicePurchase">
+        insert into invoice_purchase
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="invoiceId != null">
+                invoice_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="invoiceCode != null">
+                invoice_code,
+            </if>
+            <if test="invoiceNo != null">
+                invoice_no,
+            </if>
+            <if test="buyTicketName != null">
+                buy_ticket_name,
+            </if>
+            <if test="pollAll != null">
+                poll_all,
+            </if>
+            <if test="pollResidue != null">
+                poll_residue,
+            </if>
+            <if test="insertTime != null">
+                insert_time,
+            </if>
+            <if test="insertOperator != null">
+                insert_operator,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateOperator != null">
+                update_operator,
+            </if>
+            <if test="isvalid != null">
+                isvalid,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="invoiceStartNo != null">
+                invoice_start_no,
+            </if>
+            <if test="invoiceEndNo != null">
+                invoice_end_no,
+            </if>
+            <if test="billTime != null">
+                bill_time,
+            </if>
+            <if test="marketId != null">
+                market_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceId != null">
+                #{invoiceId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceCode != null">
+                #{invoiceCode,jdbcType=BIGINT},
+            </if>
+            <if test="invoiceNo != null">
+                #{invoiceNo,jdbcType=INTEGER},
+            </if>
+            <if test="buyTicketName != null">
+                #{buyTicketName,jdbcType=VARCHAR},
+            </if>
+            <if test="pollAll != null">
+                #{pollAll,jdbcType=INTEGER},
+            </if>
+            <if test="pollResidue != null">
+                #{pollResidue,jdbcType=INTEGER},
+            </if>
+            <if test="insertTime != null">
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateOperator != null">
+                #{updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="isvalid != null">
+                #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceStartNo != null">
+                #{invoiceStartNo,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceEndNo != null">
+                #{invoiceEndNo,jdbcType=INTEGER},
+            </if>
+            <if test="billTime != null">
+                #{billTime,jdbcType=DATE},
+            </if>
+            <if test="marketId != null">
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maxcar.market.pojo.InvoicePurchase" resultType="java.lang.Integer">
+        select count(*) from invoice_purchase
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update invoice_purchase
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.invoiceId != null">
+                invoice_id = #{record.invoiceId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.invoiceCode != null">
+                invoice_code = #{record.invoiceCode,jdbcType=INTEGER},
+            </if>
+            <if test="record.invoiceNo != null">
+                invoice_no = #{record.invoiceNo,jdbcType=INTEGER},
+            </if>
+            <if test="record.buyTicketName != null">
+                buy_ticket_name = #{record.buyTicketName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pollAll != null">
+                poll_all = #{record.pollAll,jdbcType=INTEGER},
+            </if>
+            <if test="record.pollResidue != null">
+                poll_residue = #{record.pollResidue,jdbcType=INTEGER},
+            </if>
+            <if test="record.insertTime != null">
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.insertOperator != null">
+                insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateOperator != null">
+                update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isvalid != null">
+                isvalid = #{record.isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.invoiceStartNo != null">
+                invoice_start_no = #{record.invoiceStartNo,jdbcType=INTEGER},
+            </if>
+            <if test="record.invoiceEndNo != null">
+                invoice_end_no = #{record.invoiceEndNo,jdbcType=INTEGER},
+            </if>
+            <if test="record.billTime != null">
+                bill_time = #{record.billTime,jdbcType=DATE},
+            </if>
+            <if test="record.marketId != null">
+                market_id = #{record.marketId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update invoice_purchase
+        set id = #{record.id,jdbcType=VARCHAR},
+        invoice_id = #{record.invoiceId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=VARCHAR},
+        invoice_code = #{record.invoiceCode,jdbcType=INTEGER},
+        invoice_no = #{record.invoiceNo,jdbcType=INTEGER},
+        buy_ticket_name = #{record.buyTicketName,jdbcType=VARCHAR},
+        poll_all = #{record.pollAll,jdbcType=INTEGER},
+        poll_residue = #{record.pollResidue,jdbcType=INTEGER},
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        invoice_start_no = #{record.invoiceStartNo,jdbcType=INTEGER},
+        invoice_end_no = #{record.invoiceEndNo,jdbcType=INTEGER},
+        bill_time = #{record.billTime,jdbcType=DATE},
+        market_id = #{record.marketId,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.market.pojo.InvoicePurchase">
+        update invoice_purchase
+        <set>
+            <if test="invoiceId != null">
+                invoice_id = #{invoiceId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceCode != null">
+                invoice_code = #{invoiceCode,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceNo != null">
+                invoice_no = #{invoiceNo,jdbcType=INTEGER},
+            </if>
+            <if test="buyTicketName != null">
+                buy_ticket_name = #{buyTicketName,jdbcType=VARCHAR},
+            </if>
+            <if test="pollAll != null">
+                poll_all = #{pollAll,jdbcType=INTEGER},
+            </if>
+            <if test="pollResidue != null">
+                poll_residue = #{pollResidue,jdbcType=INTEGER},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                insert_operator = #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateOperator != null">
+                update_operator = #{updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceStartNo != null">
+                invoice_start_no = #{invoiceStartNo,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceEndNo != null">
+                invoice_end_no = #{invoiceEndNo,jdbcType=INTEGER},
+            </if>
+            <if test="billTime != null">
+                bill_time = #{billTime,jdbcType=DATE},
+            </if>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.market.pojo.InvoicePurchase">
+        update invoice_purchase
+        set invoice_id = #{invoiceId,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=VARCHAR},
+        invoice_code = #{invoiceCode,jdbcType=INTEGER},
+        invoice_no = #{invoiceNo,jdbcType=INTEGER},
+        buy_ticket_name = #{buyTicketName,jdbcType=VARCHAR},
+        poll_all = #{pollAll,jdbcType=INTEGER},
+        poll_residue = #{pollResidue,jdbcType=INTEGER},
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+        insert_operator = #{insertOperator,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+        isvalid = #{isvalid,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        invoice_start_no = #{invoiceStartNo,jdbcType=INTEGER},
+        invoice_end_no = #{invoiceEndNo,jdbcType=INTEGER},
+        bill_time = #{billTime,jdbcType=DATE},
+        market_id = #{marketId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectTicketList" resultMap="BaseResultMap" parameterType="com.maxcar.market.vo.InvoicePurchaseRequest">
+        SELECT u.user_name,p.* FROM maxcar_market_l.invoice_purchase p
+        LEFT JOIN maxcar_user_l.user u ON u.user_id=p.user_id
+        where p.isvalid = 1
+        <if test="invoiceCode != null">
+            and p.invoice_code like CONCAT(CONCAT('%',#{invoiceCode},'%'))
+        </if>
+        <if test="buyTicketName != null and buyTicketName != ''">
+            and p.buy_ticket_name like CONCAT(CONCAT('%',#{buyTicketName},'%'))
+        </if>
+        <if test="userId != null and userId != ''">
+            and u.user_id = #{userId}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and <![CDATA[ DATE_FORMAT(p.bill_time, '%Y-%m-%d') >= #{startTime}]]>
+            <if test="endTime != null and endTime != ''">
+                and <![CDATA[ DATE_FORMAT(p.bill_time, '%Y-%m-%d') <= #{endTime}]]>
+            </if>
+        </if>
+        ORDER BY p.insert_time DESC
+    </select>
+
+    <update id="updateTicketById" parameterType="java.lang.String">
+        update invoice_purchase set status = 0 where id = #{id} and isvalid = 1
+    </update>
+
+    <select id="selectTicketName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT DISTINCT buy_ticket_name,user_id FROM invoice_purchase
+        where isvalid = 1
+        <if test="marketId != null and marketId != ''">
+            and market_id = #{marketId}
+        </if>
+    </select>
+</mapper>

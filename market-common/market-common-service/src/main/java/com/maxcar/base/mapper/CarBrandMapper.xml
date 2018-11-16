@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.base.dao.CarBrandMapper" >
+  <cache  eviction="LRU"  flushInterval="600000"  size="512"  readOnly="true"/>
+  <resultMap id="BaseResultMap" type="com.maxcar.base.pojo.CarBrand" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="car_index" property="carIndex" jdbcType="CHAR" />
+    <result column="brand_code" property="brandCode" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="logo_url" property="logoUrl" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, car_index, brand_code, brand_name, logo_url, insert_time, update_time,remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_brand
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_brand
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.base.pojo.CarBrand" >
+    insert into car_brand (id, car_index, brand_code, 
+      brand_name, logo_url, insert_time, 
+      update_time, remark)
+    values (#{id,jdbcType=VARCHAR}, #{carIndex,jdbcType=CHAR}, #{brandCode,jdbcType=VARCHAR}, 
+      #{brandName,jdbcType=VARCHAR}, #{logoUrl,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.base.pojo.CarBrand" >
+    insert into car_brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carIndex != null" >
+        car_index,
+      </if>
+      <if test="brandCode != null" >
+        brand_code,
+      </if>
+      <if test="brandName != null" >
+        brand_name,
+      </if>
+      <if test="logoUrl != null" >
+        logo_url,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="carIndex != null" >
+        #{carIndex,jdbcType=CHAR},
+      </if>
+      <if test="brandCode != null" >
+        #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null" >
+        #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.base.pojo.CarBrand" >
+    update car_brand
+    <set >
+      <if test="carIndex != null" >
+        car_index = #{carIndex,jdbcType=CHAR},
+      </if>
+      <if test="brandCode != null" >
+        brand_code = #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null" >
+        logo_url = #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maxcar.base.pojo.CarBrand" >
+    update car_brand
+    set car_index = #{carIndex,jdbcType=CHAR},
+      brand_code = #{brandCode,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      logo_url = #{logoUrl,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.base.pojo.CarBrand" >
+    update car_brand
+    set car_index = #{carIndex,jdbcType=CHAR},
+      brand_code = #{brandCode,jdbcType=VARCHAR},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      logo_url = #{logoUrl,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="syncDaSouCheBrand" parameterType="com.maxcar.base.pojo.CarBrand">
+    replace into car_brand(id, car_index, brand_code, brand_name, logo_url, insert_time, update_time) values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id},#{item.carIndex},#{item.brandCode},#{item.brandName},
+      #{item.logoUrl},#{item.insertTime},#{item.updateTime})
+    </foreach>
+  </insert>
+  <select id="getCarBrand" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from car_brand where brand_code = #{brandCode,jdbcType=VARCHAR}
+  </select>
+  <select id="getAllBrand" resultMap="BaseResultMap" useCache="true">
+    select <include refid="Base_Column_List" /> from car_brand order by orderByCarIndex(car_index) ASC
+  </select>
+</mapper>

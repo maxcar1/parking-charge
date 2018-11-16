@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="market-tenant-interface"  />
+    <!-- 注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="9004" />
+    <!--引入缓存-->
+    <dubbo:reference interface="com.maxcar.redis.service.SsoService" id="ssoService"   timeout="1200000" check="false"/>
+    <dubbo:reference interface="com.maxcar.base.service.CityService" id="cityService"   timeout="1200000" check="false"/>
+    <!--暴露接口-->
+
+    <dubbo:service interface="com.maxcar.tenant.service.UserTenantService" ref="userTenantService" timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.tenant.service.IntegralDetailService" ref="integralDetailService" timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.tenant.service.IntegralStatisticsService" ref="integralStatisticsService" timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.tenant.service.IntegralEvaluationService" ref="integralEvaluationService" timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.tenant.service.TenantInvoiceService" ref="tenantInvoiceService" timeout="1200000"/>
+</beans>

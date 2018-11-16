@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="market-api-customer"/>
+
+	<dubbo:registry address="${dubbo.registry.address}" register="true"></dubbo:registry>
+	<!--不采用kryo，避免泛型无法使用-->
+	<!--<dubbo:protocol name="dubbo" port="10001" serialization="kryo" optimizer="com.maxcar.statistics.util.SerializationOptimizerImpl" />-->
+	<dubbo:protocol name="dubbo" port="10001"></dubbo:protocol>
+	<dubbo:reference
+			interface="com.maxcar.user.service.UserService"
+			id="userService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference interface="com.maxcar.user.service.UserRoleService"
+			id="userRoleService"
+			check="false" retries="0" timeout="20000" />
+	<!--<dubbo:reference
+			interface="com.maxcar.invoice.service.TicketPurchaseService"
+			id="ticketPurchaseService"
+			check="false" retries="0" timeout="20000" />-->
+	<dubbo:reference
+			interface="com.maxcar.user.service.RoleService"
+			id="roleService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.user.service.RoleResourceService"
+			id="roleResourceService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.user.service.ResourceService"
+			id="resourceService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.user.service.ConfigurationService"
+			id="configurationService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+	interface="com.maxcar.user.service.RoleResourceOptionService"
+	id="RoleResourceOptionService"
+	check="false" retries="0" timeout="20000" />
+
+	<!-- 商户开票统计和开票详情 -->
+	<dubbo:reference
+			interface="com.maxcar.tenant.service.TenantInvoiceService"
+			id="TenantInvoiceService"
+			check="false" retries="0" timeout="20000" />
+
+    <dubbo:reference
+            interface="com.maxcar.user.service.OperationRecordService"
+            id="operationRecordService"
+            check="false" retries="0" timeout="20000"/>
+	<dubbo:reference
+			interface="com.maxcar.user.service.MarketService"
+			id="marketService"
+			check="false" retries="0" timeout="20000"/>
+    <dubbo:reference
+            interface="com.maxcar.market.service.PropertyContractService"
+            id="propertyContractService"
+            check="false" retries="0" timeout="20000"/>
+    <dubbo:reference
+            interface="com.maxcar.market.service.PropertyContractPayService"
+            id="propertyContractPayService"
+            check="false" retries="0" timeout="20000"/>
+    <dubbo:reference
+            interface="com.maxcar.user.service.NoticeDetailsService"
+            id="noticeDetailsService"
+            check="false" retries="0" timeout="20000"/>
+
+	<!--调用查询交易-->
+	<dubbo:reference
+			interface="com.maxcar.market.service.DealService"
+			id="dealService"
+			check="false" retries="0" timeout="20000"/>
+
+	<!--调用车辆基本信息-->
+	<dubbo:reference
+			interface="com.maxcar.stock.service.CarBaseService"
+			id="carBaseService"
+			check="false" retries="0" timeout="20000"/>
+
+	<!--调用缓存-->
+	<dubbo:reference
+			interface="com.maxcar.redis.service.SsoService"
+			id="ssoService"
+			check="false" retries="0" timeout="20000" />
+	<!--调用省市的接口  -->
+	<dubbo:reference
+			interface="com.maxcar.base.service.ProvinceService"
+			id="provinceService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.base.service.CityService"
+			id="cityService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.base.service.UploadService"
+			id="uploadService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.user.service.OrganizationsService"
+			id="organizationsService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.tenant.service.UserTenantService"
+			id="userTenantService"
+			check="false" retries="0" timeout="20000" />
+		<dubbo:reference
+			interface="com.maxcar.tenant.service.IntegralDetailService"
+			id="integralDetailService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.tenant.service.IntegralStatisticsService"
+			id="integralStatisticsService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.tenant.service.IntegralEvaluationService"
+			id="integralEvaluationService"
+			check="false" retries="0" timeout="20000" />
+
+	<dubbo:reference
+			interface="com.maxcar.market.service.AreaService"
+			id="areaService"
+			check="false" retries="0" timeout="20000" />
+
+	<dubbo:reference
+			interface="com.maxcar.market.service.AreaShopService"
+			id="areaShopService"
+			check="false" retries="0" timeout="20000" />
+
+	<dubbo:reference
+			interface="com.maxcar.stock.service.CarChannelService"
+			id="carChannelService"
+			check="false" retries="0" timeout="20000" />
+
+	<!-- 库存 START -->
+	<dubbo:reference
+			interface="com.maxcar.stock.service.CarService"
+			id="carService"
+			check="false" retries="0" timeout="120000" />
+	<dubbo:reference
+			interface="com.maxcar.stock.service.CarRecordService"
+			id="carRecordService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.stock.service.CarPicService"
+			id="carPicService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.stock.service.CarCheckService"
+			id="carCheckService"
+			check="false" retries="0" timeout="20000" />
+	<!-- 库存 END -->
+	<!-- 电子标签service -->
+	<dubbo:reference
+			interface="com.maxcar.market.service.EleLabelService"
+			id="eleLabelService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.market.service.EleLabelRecordService"
+			id="eleLabelRecordService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.stock.service.CarStaffService"
+			id="carStaffService"
+			check="false" retries="0" timeout="20000" />
+	<!-- 员工service-->
+	<dubbo:reference
+			interface="com.maxcar.user.service.StaffService"
+			id="staffService"
+			check="false" retries="0" timeout="20000" />
+	<!--导购统计 -->
+	<dubbo:reference
+			interface="com.maxcar.stock.service.ShoppingGuideService"
+			id="shoppingGuideService"
+			check="false" retries="0" timeout="20000" />
+	<!--发票统计 -->
+	<dubbo:reference
+			interface="com.maxcar.market.service.InvoiceService"
+			id="invoiceService"
+			check="false" retries="0" timeout="20000"/>
+    <dubbo:reference
+            interface="com.maxcar.market.service.InvoicePurchaseService"
+            id="invoicePurchaseService"
+            check="false" retries="0" timeout="20000"/>
+    <dubbo:reference
+            interface="com.maxcar.market.service.TransactionService"
+            id="transactionService"
+            check="false" retries="0" timeout="20000"/>
+
+	<dubbo:reference
+            interface="com.maxcar.base.service.TopicService"
+            id="topicService"
+            check="false" retries="0" timeout="20000"/>
+
+	<!--道闸-->
+	<dubbo:reference
+			interface="com.maxcar.barrier.service.BarrierService"
+			id="barrierService"
+			check="false" retries="0" timeout="20000" />
+	<!-- 大搜车服务-->
+	<dubbo:reference
+			interface="com.maxcar.base.service.DaSouCheService"
+			id="daSouCheService"
+			check="false" retries="0" timeout="20000" />
+	<!--停车收费-->
+	<dubbo:reference
+			interface="com.maxcar.market.service.ParkingFeeService"
+			id="parkingFeeService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.market.service.ParkingFeeRuleService"
+			id="parkingFeeRuleService"
+			check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+		interface="com.maxcar.market.service.ParkingFeeDetailService"
+		id="parkingFeeDetailService"
+		check="false" retries="0" timeout="20000" />
+	<dubbo:reference
+			interface="com.maxcar.market.service.OpenBarrierRecordService"
+			id="openBarrierRecordService"
+			check="false" retries="0" timeout="20000" />
+
+
+	<dubbo:reference
+			interface="com.maxcar.kafka.service.MessageProducerService"
+			id="messageProducerService"
+			check="false" retries="0" timeout="20000" />
+
+	<!-- 出场时间管理 -->
+	<dubbo:reference
+			interface="com.maxcar.user.service.OutMarketManageService"
+			id="outMarketManageService"
+			check="false" retries="0" timeout="20000" />
+
+</beans>

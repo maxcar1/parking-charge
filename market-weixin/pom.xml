@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.maxcar</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+  <artifactId>market-weixin</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>market-weixin-interface</module>
+  	<module>market-weixin-service</module>
+  </modules>
+
+    <!--仓库地址-->
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>public</id>
+            <name>public</name>
+            <url>http://nexus.maxcar.com.cn/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <!-- 加载的是maven生命周期插件的jar包 -->
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>public</id>
+            <name>public</name>
+            <url>http://nexus.maxcar.com.cn/nexus/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!-- 配置部署的远程仓库 -->
+    <distributionManagement>
+        <!-- 正式版方式 -->
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://nexus.maxcar.com.cn/nexus/content/repositories/release/</url>
+        </repository>
+        <!-- 快照版方式 -->
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://nexus.maxcar.com.cn/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+   <dependencyManagement>
+  	<dependencies>
+        <dependency>
+            <groupId>com.maxcar</groupId>
+            <artifactId>market-stock-interface</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <!--排除使用util引起jar冲突问题-->
+                <exclusion>
+                    <groupId>com.maxcar</groupId>
+                    <artifactId>market-util</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+  		
+  	</dependencies>
+  </dependencyManagement>
+    <!-- 引入公共模块 -->
+  <dependencies>
+	<dependency>
+  		<groupId>com.maxcar</groupId>
+  		<artifactId>market-util</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+  </dependencies>
+       <profiles>  
+        <profile>  
+            <id>jdk1.8</id>  
+            <activation>  
+                <activeByDefault>true</activeByDefault>  
+                <jdk>1.8</jdk>  
+            </activation>  
+            <properties>  
+                <maven.compiler.source>1.8</maven.compiler.source>  
+                <maven.compiler.target>1.8</maven.compiler.target>  
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>  
+            </properties>  
+        </profile>  
+    </profiles>
+
+
+    <build>
+        <plugins>
+            <!--使用IDEA时，导入的Maven项目默认的LanguageLevel和JavaCompiler都是1.5，1.5的情况下连最简单的@Override注解都不支持，所以项目可能出现一堆错。-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

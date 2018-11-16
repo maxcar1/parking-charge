@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.barrier.dao.BarrierMapper" >
+    <resultMap id="BaseResultMap" type="com.maxcar.barrier.pojo.Barrier" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="barrier_id" property="barrierId" jdbcType="VARCHAR" />
+        <result column="gateway_ip" property="gatewayIp" jdbcType="VARCHAR" />
+        <result column="subnet_mask" property="subnetMask" jdbcType="VARCHAR" />
+        <result column="mac_address" property="macAddress" jdbcType="VARCHAR" />
+        <result column="client_ip" property="clientIp" jdbcType="VARCHAR" />
+        <result column="server_ip" property="serverIp" jdbcType="VARCHAR" />
+        <result column="client_port" property="clientPort" jdbcType="VARCHAR" />
+        <result column="server_port" property="serverPort" jdbcType="VARCHAR" />
+        <result column="barrier_type" property="barrierType" jdbcType="CHAR" />
+        <result column="barrier_position" property="barrierPosition" jdbcType="VARCHAR" />
+        <result column="in_out_car" property="inOutCar" jdbcType="VARCHAR" />
+        <result column="in_out_type" property="inOutType" jdbcType="INTEGER" />
+        <result column="park_limit" property="parkLimit" jdbcType="VARCHAR" />
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="static_speech" property="staticSpeech" jdbcType="VARCHAR" />
+        <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+        <result column="mqtt_topic" property="mqttTopic" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        id, barrier_id, gateway_ip, subnet_mask, mac_address, client_ip, server_ip, client_port,
+        server_port, barrier_type, barrier_position, in_out_car, in_out_type, park_limit,
+        isvalid, status, remark, update_time, create_time, static_speech, market_id, mqtt_topic
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.barrier.pojo.BarrierExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from barrier
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from barrier
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from barrier
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.maxcar.barrier.pojo.BarrierExample" >
+        delete from barrier
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maxcar.barrier.pojo.Barrier" >
+        insert into barrier (id, barrier_id, gateway_ip,
+        subnet_mask, mac_address, client_ip,
+        server_ip, client_port, server_port,
+        barrier_type, barrier_position, in_out_car,
+        in_out_type, park_limit, isvalid,
+        status, remark, update_time,
+        create_time, static_speech, market_id,
+        mqtt_topic)
+        values (#{id,jdbcType=INTEGER}, #{barrierId,jdbcType=VARCHAR}, #{gatewayIp,jdbcType=VARCHAR},
+        #{subnetMask,jdbcType=VARCHAR}, #{macAddress,jdbcType=VARCHAR}, #{clientIp,jdbcType=VARCHAR},
+        #{serverIp,jdbcType=VARCHAR}, #{clientPort,jdbcType=VARCHAR}, #{serverPort,jdbcType=VARCHAR},
+        #{barrierType,jdbcType=CHAR}, #{barrierPosition,jdbcType=VARCHAR}, #{inOutCar,jdbcType=VARCHAR},
+        #{inOutType,jdbcType=INTEGER}, #{parkLimit,jdbcType=VARCHAR}, #{isvalid,jdbcType=INTEGER},
+        #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=TIMESTAMP}, #{staticSpeech,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR},
+        #{mqttTopic,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.barrier.pojo.Barrier" >
+        insert into barrier
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="barrierId != null" >
+                barrier_id,
+            </if>
+            <if test="gatewayIp != null" >
+                gateway_ip,
+            </if>
+            <if test="subnetMask != null" >
+                subnet_mask,
+            </if>
+            <if test="macAddress != null" >
+                mac_address,
+            </if>
+            <if test="clientIp != null" >
+                client_ip,
+            </if>
+            <if test="serverIp != null" >
+                server_ip,
+            </if>
+            <if test="clientPort != null" >
+                client_port,
+            </if>
+            <if test="serverPort != null" >
+                server_port,
+            </if>
+            <if test="barrierType != null" >
+                barrier_type,
+            </if>
+            <if test="barrierPosition != null" >
+                barrier_position,
+            </if>
+            <if test="inOutCar != null" >
+                in_out_car,
+            </if>
+            <if test="inOutType != null" >
+                in_out_type,
+            </if>
+            <if test="parkLimit != null" >
+                park_limit,
+            </if>
+            <if test="isvalid != null" >
+                isvalid,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="staticSpeech != null" >
+                static_speech,
+            </if>
+            <if test="marketId != null" >
+                market_id,
+            </if>
+            <if test="mqttTopic != null" >
+                mqtt_topic,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="barrierId != null" >
+                #{barrierId,jdbcType=VARCHAR},
+            </if>
+            <if test="gatewayIp != null" >
+                #{gatewayIp,jdbcType=VARCHAR},
+            </if>
+            <if test="subnetMask != null" >
+                #{subnetMask,jdbcType=VARCHAR},
+            </if>
+            <if test="macAddress != null" >
+                #{macAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="clientIp != null" >
+                #{clientIp,jdbcType=VARCHAR},
+            </if>
+            <if test="serverIp != null" >
+                #{serverIp,jdbcType=VARCHAR},
+            </if>
+            <if test="clientPort != null" >
+                #{clientPort,jdbcType=VARCHAR},
+            </if>
+            <if test="serverPort != null" >
+                #{serverPort,jdbcType=VARCHAR},
+            </if>
+            <if test="barrierType != null" >
+                #{barrierType,jdbcType=CHAR},
+            </if>
+            <if test="barrierPosition != null" >
+                #{barrierPosition,jdbcType=VARCHAR},
+            </if>
+            <if test="inOutCar != null" >
+                #{inOutCar,jdbcType=VARCHAR},
+            </if>
+            <if test="inOutType != null" >
+                #{inOutType,jdbcType=INTEGER},
+            </if>
+            <if test="parkLimit != null" >
+                #{parkLimit,jdbcType=VARCHAR},
+            </if>
+            <if test="isvalid != null" >
+                #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="staticSpeech != null" >
+                #{staticSpeech,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null" >
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="mqttTopic != null" >
+                #{mqttTopic,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maxcar.barrier.pojo.BarrierExample" resultType="java.lang.Integer" >
+        select count(*) from barrier
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update barrier
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.barrierId != null" >
+                barrier_id = #{record.barrierId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gatewayIp != null" >
+                gateway_ip = #{record.gatewayIp,jdbcType=VARCHAR},
+            </if>
+            <if test="record.subnetMask != null" >
+                subnet_mask = #{record.subnetMask,jdbcType=VARCHAR},
+            </if>
+            <if test="record.macAddress != null" >
+                mac_address = #{record.macAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.clientIp != null" >
+                client_ip = #{record.clientIp,jdbcType=VARCHAR},
+            </if>
+            <if test="record.serverIp != null" >
+                server_ip = #{record.serverIp,jdbcType=VARCHAR},
+            </if>
+            <if test="record.clientPort != null" >
+                client_port = #{record.clientPort,jdbcType=VARCHAR},
+            </if>
+            <if test="record.serverPort != null" >
+                server_port = #{record.serverPort,jdbcType=VARCHAR},
+            </if>
+            <if test="record.barrierType != null" >
+                barrier_type = #{record.barrierType,jdbcType=CHAR},
+            </if>
+            <if test="record.barrierPosition != null" >
+                barrier_position = #{record.barrierPosition,jdbcType=VARCHAR},
+            </if>
+            <if test="record.inOutCar != null" >
+                in_out_car = #{record.inOutCar,jdbcType=VARCHAR},
+            </if>
+            <if test="record.inOutType != null" >
+                in_out_type = #{record.inOutType,jdbcType=INTEGER},
+            </if>
+            <if test="record.parkLimit != null" >
+                park_limit = #{record.parkLimit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isvalid != null" >
+                isvalid = #{record.isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null" >
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.staticSpeech != null" >
+                static_speech = #{record.staticSpeech,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketId != null" >
+                market_id = #{record.marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mqttTopic != null" >
+                mqtt_topic = #{record.mqttTopic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update barrier
+        set id = #{record.id,jdbcType=INTEGER},
+        barrier_id = #{record.barrierId,jdbcType=VARCHAR},
+        gateway_ip = #{record.gatewayIp,jdbcType=VARCHAR},
+        subnet_mask = #{record.subnetMask,jdbcType=VARCHAR},
+        mac_address = #{record.macAddress,jdbcType=VARCHAR},
+        client_ip = #{record.clientIp,jdbcType=VARCHAR},
+        server_ip = #{record.serverIp,jdbcType=VARCHAR},
+        client_port = #{record.clientPort,jdbcType=VARCHAR},
+        server_port = #{record.serverPort,jdbcType=VARCHAR},
+        barrier_type = #{record.barrierType,jdbcType=CHAR},
+        barrier_position = #{record.barrierPosition,jdbcType=VARCHAR},
+        in_out_car = #{record.inOutCar,jdbcType=VARCHAR},
+        in_out_type = #{record.inOutType,jdbcType=INTEGER},
+        park_limit = #{record.parkLimit,jdbcType=VARCHAR},
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        static_speech = #{record.staticSpeech,jdbcType=VARCHAR},
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+        mqtt_topic = #{record.mqttTopic,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.barrier.pojo.Barrier" >
+        update barrier
+        <set >
+            <if test="barrierId != null" >
+                barrier_id = #{barrierId,jdbcType=VARCHAR},
+            </if>
+            <if test="gatewayIp != null" >
+                gateway_ip = #{gatewayIp,jdbcType=VARCHAR},
+            </if>
+            <if test="subnetMask != null" >
+                subnet_mask = #{subnetMask,jdbcType=VARCHAR},
+            </if>
+            <if test="macAddress != null" >
+                mac_address = #{macAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="clientIp != null" >
+                client_ip = #{clientIp,jdbcType=VARCHAR},
+            </if>
+            <if test="serverIp != null" >
+                server_ip = #{serverIp,jdbcType=VARCHAR},
+            </if>
+            <if test="clientPort != null" >
+                client_port = #{clientPort,jdbcType=VARCHAR},
+            </if>
+            <if test="serverPort != null" >
+                server_port = #{serverPort,jdbcType=VARCHAR},
+            </if>
+            <if test="barrierType != null" >
+                barrier_type = #{barrierType,jdbcType=CHAR},
+            </if>
+            <if test="barrierPosition != null" >
+                barrier_position = #{barrierPosition,jdbcType=VARCHAR},
+            </if>
+            <if test="inOutCar != null" >
+                in_out_car = #{inOutCar,jdbcType=VARCHAR},
+            </if>
+            <if test="inOutType != null" >
+                in_out_type = #{inOutType,jdbcType=INTEGER},
+            </if>
+            <if test="parkLimit != null" >
+                park_limit = #{parkLimit,jdbcType=VARCHAR},
+            </if>
+            <if test="isvalid != null" >
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="staticSpeech != null" >
+                static_speech = #{staticSpeech,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null" >
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="mqttTopic != null" >
+                mqtt_topic = #{mqttTopic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.barrier.pojo.Barrier" >
+        update barrier
+        set barrier_id = #{barrierId,jdbcType=VARCHAR},
+        gateway_ip = #{gatewayIp,jdbcType=VARCHAR},
+        subnet_mask = #{subnetMask,jdbcType=VARCHAR},
+        mac_address = #{macAddress,jdbcType=VARCHAR},
+        client_ip = #{clientIp,jdbcType=VARCHAR},
+        server_ip = #{serverIp,jdbcType=VARCHAR},
+        client_port = #{clientPort,jdbcType=VARCHAR},
+        server_port = #{serverPort,jdbcType=VARCHAR},
+        barrier_type = #{barrierType,jdbcType=CHAR},
+        barrier_position = #{barrierPosition,jdbcType=VARCHAR},
+        in_out_car = #{inOutCar,jdbcType=VARCHAR},
+        in_out_type = #{inOutType,jdbcType=INTEGER},
+        park_limit = #{parkLimit,jdbcType=VARCHAR},
+        isvalid = #{isvalid,jdbcType=INTEGER},
+        status = #{status,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        static_speech = #{staticSpeech,jdbcType=VARCHAR},
+        market_id = #{marketId,jdbcType=VARCHAR},
+        mqtt_topic = #{mqttTopic,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByBarrierId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * from barrier where barrier_id=#{barrierId}
+    </select>
+
+    <!--<select id="selectBarrierList" resultMap="BaseResultMap">-->
+        <!--SELECT * from barrier-->
+    <!--</select>-->
+
+    <delete id="deleteByBarrierId" parameterType="java.lang.String">
+        delete from barrier
+        where barrier_id = #{barrierId,jdbcType=VARCHAR}
+    </delete>
+
+    <!--<update id="updateByBarrierId" parameterType="com.maxcar.barrier.pojo.Barrier">-->
+        <!--update barrier-->
+        <!--<set>-->
+            <!--<if test="barrierId != null">-->
+                <!--barrier_id = #{barrierId,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="gatewayIp != null">-->
+                <!--gateway_ip = #{gatewayIp,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="subnetMask != null">-->
+                <!--subnet_mask = #{subnetMask,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="macAddress != null">-->
+                <!--mac_address = #{macAddress,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="clientIp != null">-->
+                <!--client_ip = #{clientIp,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="serverIp != null">-->
+                <!--server_ip = #{serverIp,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="clientPort != null">-->
+                <!--client_port = #{clientPort,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="serverPort != null">-->
+                <!--server_port = #{serverPort,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="barrierType != null">-->
+                <!--barrier_type = #{barrierType,jdbcType=CHAR},-->
+            <!--</if>-->
+            <!--<if test="barrierPosition != null">-->
+                <!--barrier_position = #{barrierPosition,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="inOutCar != null">-->
+                <!--in_out_car = #{inOutCar,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="parkLimit != null">-->
+                <!--park_limit = #{parkLimit,jdbcType=CHAR},-->
+            <!--</if>-->
+            <!--<if test="isvalid != null">-->
+                <!--isvalid = #{isvalid,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="status != null">-->
+                <!--status = #{status,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="remark != null">-->
+                <!--remark = #{remark,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="updateTime != null">-->
+                <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="createTime != null">-->
+                <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="welcomeSpeech != null">-->
+                <!--welcome_speech = #{welcomeSpeech,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="enterSpeech != null">-->
+                <!--enter_speech = #{enterSpeech,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="staticSpeech != null">-->
+                <!--static_speech = #{staticSpeech,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="marketId != null">-->
+                <!--market_id = #{marketId,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="inOutType != null">-->
+                <!--in_out_type = #{inOutType,jdbcType=VARCHAR},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--where barrier_id = #{barrierId,jdbcType=VARCHAR}-->
+    <!--</update>-->
+    <select id="getBarrierInfoLike" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from barrier
+        <where>
+            isvalid = 1
+            and barrier_id like concat('%',#{barrierId})
+            and mqtt_topic like concat(#{topic},'%')
+        </where>
+        limit 0,1
+    </select>
+</mapper>

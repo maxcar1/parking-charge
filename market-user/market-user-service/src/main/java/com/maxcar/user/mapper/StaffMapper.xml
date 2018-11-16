@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.user.dao.StaffMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.user.entity.Staff" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="tenant_no" property="tenantNo" jdbcType="VARCHAR" />
+    <result column="tenant_name" property="tenantName" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <result column="staff_type" property="staffType" jdbcType="INTEGER" />
+    <result column="staff_number" property="staffNumber" jdbcType="VARCHAR" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+    <result column="staff_role" property="staffRole" jdbcType="VARCHAR" />
+    <result column="staff_phone" property="staffPhone" jdbcType="VARCHAR" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_operator" property="updateOperator" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+    <result column="open_id" property="openId" jdbcType="VARCHAR"/>
+    <result column="weixin_id" property="weixinId" jdbcType="VARCHAR"/>
+    <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+    <result column="is_admin" property="isAdmin" jdbcType="INTEGER"/>
+    <result column="wx_nick_name" property="wxNickName" jdbcType="VARCHAR"/>
+    <result column="staff_sex" property="staffSex" jdbcType="INTEGER"/>
+    <result column="org_name" property="orgName" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <!--start staffVo-->
+  <resultMap id="StaffVoResultMap" type="com.maxcar.user.vo.StaffVo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+    <result column="staff_role" property="staffRole" jdbcType="VARCHAR" />
+    <result column="staff_phone" property="staffPhone" jdbcType="VARCHAR" />
+    <result column="roleName" property="roleName" jdbcType="VARCHAR" />
+
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="staffCheckId" property="staffCheckId" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="refuseReason" property="refuseReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--end staffVo-->
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, group_id, staff_type, staff_number, staff_name, staff_role, staff_phone, is_valid,
+    insert_time, insert_operator, update_time, update_operator, remark, market_id, open_id,
+    weixin_id, id_card, is_admin, wx_nick_name, staff_sex
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.StaffExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from staff
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from staff
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.user.entity.StaffExample" >
+    delete from staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.user.entity.Staff" >
+    insert into staff (id, group_id, staff_type,
+    staff_number, staff_name, staff_role,
+    staff_phone, is_valid, insert_time,
+    insert_operator, update_time, update_operator,
+    remark, market_id, open_id,
+    weixin_id, id_card, is_admin,
+    wx_nick_name, staff_sex)
+    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{staffType,jdbcType=INTEGER},
+    #{staffNumber,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{staffRole,jdbcType=VARCHAR},
+    #{staffPhone,jdbcType=VARCHAR}, #{isValid,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP},
+    #{insertOperator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateOperator,jdbcType=VARCHAR},
+    #{remark,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR},
+    #{weixinId,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{isAdmin,jdbcType=INTEGER},
+    #{wxNickName,jdbcType=VARCHAR}, #{staffSex,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.user.entity.Staff" >
+    insert into staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="staffType != null" >
+        staff_type,
+      </if>
+      <if test="staffNumber != null" >
+        staff_number,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="staffRole != null" >
+        staff_role,
+      </if>
+      <if test="staffPhone != null" >
+        staff_phone,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateOperator != null" >
+        update_operator,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="marketId != null" >
+        market_id,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="weixinId != null">
+        weixin_id,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="isAdmin != null">
+        is_admin,
+      </if>
+      <if test="wxNickName != null">
+        wx_nick_name,
+      </if>
+      <if test="staffSex != null">
+        staff_sex,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffType != null" >
+        #{staffType,jdbcType=INTEGER},
+      </if>
+      <if test="staffNumber != null" >
+        #{staffNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffRole != null" >
+        #{staffRole,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null" >
+        #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+        #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinId != null">
+        #{weixinId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null">
+        #{isAdmin,jdbcType=INTEGER},
+      </if>
+      <if test="wxNickName != null">
+        #{wxNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffSex != null">
+        #{staffSex,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.user.entity.StaffExample" resultType="java.lang.Integer" >
+    select count(*) from staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update staff
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffType != null" >
+        staff_type = #{record.staffType,jdbcType=INTEGER},
+      </if>
+      <if test="record.staffNumber != null" >
+        staff_number = #{record.staffNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffName != null" >
+        staff_name = #{record.staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffRole != null" >
+        staff_role = #{record.staffRole,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffPhone != null" >
+        staff_phone = #{record.staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isValid != null" >
+        is_valid = #{record.isValid,jdbcType=INTEGER},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.insertOperator != null" >
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateOperator != null" >
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketId != null">
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null">
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixinId != null">
+        weixin_id = #{record.weixinId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAdmin != null">
+        is_admin = #{record.isAdmin,jdbcType=INTEGER},
+      </if>
+      <if test="record.wxNickName != null">
+        wx_nick_name = #{record.wxNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffSex != null">
+        staff_sex = #{record.staffSex,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update staff
+    set id = #{record.id,jdbcType=VARCHAR},
+    group_id = #{record.groupId,jdbcType=VARCHAR},
+    staff_type = #{record.staffType,jdbcType=INTEGER},
+    staff_number = #{record.staffNumber,jdbcType=VARCHAR},
+    staff_name = #{record.staffName,jdbcType=VARCHAR},
+    staff_role = #{record.staffRole,jdbcType=VARCHAR},
+    staff_phone = #{record.staffPhone,jdbcType=VARCHAR},
+    is_valid = #{record.isValid,jdbcType=INTEGER},
+    insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+    insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+    update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+    remark = #{record.remark,jdbcType=VARCHAR},
+    market_id = #{record.marketId,jdbcType=VARCHAR},
+    open_id = #{record.openId,jdbcType=VARCHAR},
+    weixin_id = #{record.weixinId,jdbcType=VARCHAR},
+    id_card = #{record.idCard,jdbcType=VARCHAR},
+    is_admin = #{record.isAdmin,jdbcType=INTEGER},
+    wx_nick_name = #{record.wxNickName,jdbcType=VARCHAR},
+    staff_sex = #{record.staffSex,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.user.entity.Staff" >
+    update staff
+    <set >
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="staffType != null" >
+        staff_type = #{staffType,jdbcType=INTEGER},
+      </if>
+      <if test="staffNumber != null" >
+        staff_number = #{staffNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffRole != null" >
+        staff_role = #{staffRole,jdbcType=VARCHAR},
+      </if>
+      <if test="staffPhone != null" >
+        staff_phone = #{staffPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null">
+        market_id = #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinId != null">
+        weixin_id = #{weixinId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null">
+        is_admin = #{isAdmin,jdbcType=INTEGER},
+      </if>
+      <if test="wxNickName != null">
+        wx_nick_name = #{wxNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffSex != null">
+        staff_sex = #{staffSex,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.user.entity.Staff" >
+    update staff
+    set group_id = #{groupId,jdbcType=VARCHAR},
+    staff_type = #{staffType,jdbcType=INTEGER},
+    staff_number = #{staffNumber,jdbcType=VARCHAR},
+    staff_name = #{staffName,jdbcType=VARCHAR},
+    staff_role = #{staffRole,jdbcType=VARCHAR},
+    staff_phone = #{staffPhone,jdbcType=VARCHAR},
+    is_valid = #{isValid,jdbcType=INTEGER},
+    insert_time = #{insertTime,jdbcType=TIMESTAMP},
+    insert_operator = #{insertOperator,jdbcType=VARCHAR},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    update_operator = #{updateOperator,jdbcType=VARCHAR},
+    remark = #{remark,jdbcType=VARCHAR},
+    market_id = #{marketId,jdbcType=VARCHAR},
+    open_id = #{openId,jdbcType=VARCHAR},
+    weixin_id = #{weixinId,jdbcType=VARCHAR},
+    id_card = #{idCard,jdbcType=VARCHAR},
+    is_admin = #{isAdmin,jdbcType=INTEGER},
+    wx_nick_name = #{wxNickName,jdbcType=VARCHAR},
+    staff_sex = #{staffSex,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <!--自写sql开始-->
+  <select id="getAllMarketStaff" resultMap="BaseResultMap" >
+    select id,staff_name,group_id from staff
+    <where>
+      and is_valid = 1 and staff_type = #{staffType} and market_id = #{marketId}
+    </where>
+  </select>
+
+  <select id="selectByPrimaryId" resultMap="BaseResultMap">
+   	SELECT 
+	  st.*,
+	  us.tenant_no,
+	  us.tenant_name 
+	FROM
+	  maxcar_user_l.staff st 
+	  LEFT JOIN maxcar_tenant_l.user_tenant us 
+	  ON us.id = st.group_id 
+	WHERE st.is_valid = 1 
+	  AND st.id = #{id,jdbcType=VARCHAR} 
+  </select>
+
+  <!-- 查询市场员工列表-->
+  <select id="selectStaffTenantList" parameterType="com.maxcar.user.vo.StaffUser" resultMap="BaseResultMap">
+    select a.*,b.org_name from staff a left join organizations b
+    on a.group_id = b.org_id
+    where a.is_valid = 1 and a.staff_type = 1
+    <if test="staffName != null">
+      and a.staff_name like concat(concat('%',#{staffName}),'%')
+    </if>
+    <if test="staffPhone != null">
+      and a.staff_phone like concat(concat('%',#{staffPhone}),'%')
+    </if>
+    <if test="groupId != null">
+      and a.group_id like concat(concat('%',#{groupId}),'%')
+    </if>
+    <!--如果非管理员，只能查看自己名下账号-->
+    <if test="marketId != null and managerFlag==1">
+      and a.market_id = #{marketId}
+    </if>
+    ORDER BY a.insert_time desc
+  </select>
+
+    <select id="selectStaffList" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.Staff">
+  	SELECT * FROM staff
+	WHERE staff_type = 2 and is_valid = 1
+	<if test="groupId !=null and groupId !=''">
+		and group_id = #{groupId}
+	</if>
+  </select>
+
+    <update id="updateAdmin" parameterType="com.maxcar.user.entity.Staff">
+        update staff
+        set is_admin = #{isAdmin,jdbcType=INTEGER}
+        where group_id = #{groupId,jdbcType=VARCHAR}
+        <if test="openId !=null and openId !=''">
+            and open_id = #{openId,jdbcType=VARCHAR}
+        </if>
+    </update>
+
+  <select id="getStaffByPhone" resultMap="BaseResultMap">
+    select * from staff
+    where staff_phone = #{phoneNum} and staff_type = #{staffType}
+  </select>
+
+
+
+  <select id="getStafflist" resultMap="StaffVoResultMap" parameterType="com.maxcar.user.vo.StaffVo">
+    SELECT a.id,a.staff_name,a.staff_phone,(
+        select role_name from market_tenant_app_l.tenant_role c
+        where c.id=b.role_id and c.isvalid=1
+    )as roleName
+    FROM maxcar_user_l.staff a
+    left join market_tenant_app_l.staff_role b on a.id = b.staff_id
+    WHERE a.staff_type = 2 and a.is_valid = 1
+    <if test="tenantId !=null and tenantId !=''">
+      and a.group_id = #{tenantId}
+    </if>
+    <if test="marketId !=null and marketId !=''">
+      and a.market_id = #{marketId}
+    </if>
+    <if test="nameAndPhone !=null and nameAndPhone !=''">
+      and (a.staff_name like concat(concat('%',#{nameAndPhone}),'%') or a.staff_phone like concat(concat('%',#{nameAndPhone}),'%'))
+    </if>
+    <if test="isRelation !=null">
+      <if test="isRelation ==0">
+          and b.role_id is null
+      </if>
+    </if>
+    order by a.insert_time desc
+
+  </select>
+
+  <select id="getCheckStaffRoleList" resultMap="StaffVoResultMap" parameterType="com.maxcar.user.vo.StaffVo">
+    SELECT a.id,a.staff_name,a.staff_phone,a.id_card,b.gmt_create as insert_time,b.gmt_modified as update_time,
+    b.id as staffCheckId,b.state,b.remark as refuseReason,
+    (
+    select role_name from market_tenant_app_l.tenant_role c
+    where c.id=b.role_id and c.isvalid=1
+    )as roleName
+    FROM maxcar_user_l.staff a,market_tenant_app_l.staff_check b
+    where a.id=b.staff_id and a.is_valid = 1
+    <if test="tenantId !=null and tenantId !=''">
+      and b.tenant_id = #{tenantId}
+    </if>
+    <if test="marketId !=null and marketId !=''">
+      and b.market_id = #{marketId}
+    </if>
+    <if test="isCheck !=null">
+      <if test="isCheck ==0">
+        and b.state = 0
+      </if>
+      <if test="isCheck ==1">
+        and b.state in (-1,1)
+      </if>
+    </if>
+    order by b.gmt_create desc
+
+  </select>
+
+
+  <select id="getTenantAdminByPhone" parameterType="String" resultMap="BaseResultMap">
+    select * from staff
+    where staff_phone = #{phoneNum} and staff_type = 2 and is_admin = 1 and is_valid = 1
+  </select>
+
+  <select id="getStaffByPhoneTenant" resultMap="BaseResultMap">
+    select * from staff
+    where staff_phone = #{phone} and staff_type = 2 and is_admin = 1 and is_valid = 1 and group_id = #{tenantId}
+  </select>
+
+  <update id="updateStaffNameById">
+    update staff set staff_name = #{staffName} where id = #{staffId}
+  </update>
+
+</mapper>

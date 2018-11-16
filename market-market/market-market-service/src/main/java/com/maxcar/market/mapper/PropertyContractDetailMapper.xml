@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.market.dao.PropertyContractDetailMapper">
+    <resultMap id="BaseResultMap" type="com.maxcar.market.pojo.PropertyContractDetail">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+        <result column="property_contract_id" property="propertyContractId" jdbcType="VARCHAR"/>
+        <result column="tenant_id" property="tenantId" jdbcType="VARCHAR"/>
+        <result column="area_id" property="areaId" jdbcType="VARCHAR"/>
+        <result column="contract_category" property="contractCategory" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="preferential_price" property="preferentialPrice" jdbcType="DECIMAL"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="status_tme" property="statusTme" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="termination_remark" property="terminationRemark" jdbcType="VARCHAR"/>
+        <result column="termination_message" property="terminationMessage" jdbcType="VARCHAR"/>
+        <result column="termination_time" property="terminationTime" jdbcType="TIMESTAMP"/>
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+        <result column="property_contract_detail_status" property="propertyContractDetailStatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, market_id, property_contract_id, tenant_id, area_id, contract_category, price,
+    preferential_price, `type`, status_tme, end_time, termination_remark, termination_message,
+    termination_time, isvalid, remark, insert_time, update_time, insert_operator, update_operator,property_contract_detail_status
+  </sql>
+
+    <!-- 根据合同ID 修改合同详情 -->
+    <update id="updateDetailByPropertyContractId" parameterType="com.maxcar.market.pojo.PropertyContractDetail">
+        update property_contract_detail
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="propertyContractId != null">
+                property_contract_id = #{propertyContractId,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=VARCHAR},
+            </if>
+            <if test="contractCategory != null">
+                contract_category = #{contractCategory,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=INTEGER},
+            </if>
+            <if test="preferentialPrice != null">
+                preferential_price = #{preferentialPrice,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="statusTme != null">
+                status_tme = #{statusTme,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="terminationRemark != null">
+                termination_remark = #{terminationRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="terminationMessage != null">
+                termination_message = #{terminationMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="terminationTime != null">
+                termination_time = #{terminationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                insert_operator = #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                update_operator = #{updateOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="propertyContractDetailStatus != null">
+                property_contract_detail_status = #{propertyContractDetailStatus,jdbcType=INTEGER},
+            </if>
+        </set>
+        where property_contract_detail_status = 1 and property_contract_id = #{propertyContractId}
+    </update>
+
+    <select id="getPropertyContractDetailListByTenantId" resultMap="BaseResultMap">
+
+
+    </select>
+
+    <!--  获取物业列表 -->
+    <select id="getAllByPropertyContractId" resultMap="BaseResultMap"
+            parameterType="com.maxcar.market.model.request.GetPropertyContractDetailListRequest">
+        select
+        <include refid="Base_Column_List"/>
+        FROM property_contract_detail
+        where isvalid = 1
+        <if test="propertyContractId != null ">
+            and property_contract_id = #{propertyContractId}
+        </if>
+        <if test="propertyContractDetailStatus != null ">
+            and property_contract_detail_status = #{propertyContractDetailStatus}
+        </if>
+        <if test="tenantId != null ">
+            and tenant_id = #{tenantId}
+        </if>
+        <!-- 查询合同 到期时间 终止时间 -->
+        <if test="endTime != null ">
+
+            <if test="endTimeStatus  == null ">
+                <![CDATA[ and end_time > SYSDATE() ]]>
+            </if>
+
+            <if test=" endTimeStatus  == 2 ">
+                <![CDATA[ and end_time < SYSDATE() ]]>
+            </if>
+            <if test=" endTimeStatus  == 3 ">
+                <![CDATA[ and termination_time < SYSDATE() ]]>
+            </if>
+        </if>
+        ORDER by insert_time desc
+    </select>
+
+
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.maxcar.market.pojo.PropertyContractDetailExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from property_contract_detail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from property_contract_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from property_contract_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.maxcar.market.pojo.PropertyContractDetailExample">
+        delete from property_contract_detail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maxcar.market.pojo.PropertyContractDetail">
+    insert into property_contract_detail (id, market_id, property_contract_id,
+      tenant_id, area_id, contract_category, 
+      price, preferential_price, type, 
+      status_tme, end_time, termination_remark, 
+      termination_message, termination_time, 
+      isvalid, remark, insert_time, 
+      update_time, insert_operator, update_operator
+      )
+    values (#{id,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{propertyContractId,jdbcType=VARCHAR},
+      #{tenantId,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, #{contractCategory,jdbcType=INTEGER}, 
+      #{price,jdbcType=INTEGER}, #{preferentialPrice,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{statusTme,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{terminationRemark,jdbcType=VARCHAR}, 
+      #{terminationMessage,jdbcType=VARCHAR}, #{terminationTime,jdbcType=TIMESTAMP}, 
+      #{isvalid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{insertOperator,jdbcType=VARCHAR}, #{updateOperator,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.market.pojo.PropertyContractDetail">
+        insert into property_contract_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="marketId != null">
+                market_id,
+            </if>
+            <if test="propertyContractId != null">
+                property_contract_id,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="contractCategory != null">
+                contract_category,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="preferentialPrice != null">
+                preferential_price,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="statusTme != null">
+                status_tme,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="terminationRemark != null">
+                termination_remark,
+            </if>
+            <if test="terminationMessage != null">
+                termination_message,
+            </if>
+            <if test="terminationTime != null">
+                termination_time,
+            </if>
+            <if test="isvalid != null">
+                isvalid,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="insertTime != null">
+                insert_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="insertOperator != null">
+                insert_operator,
+            </if>
+            <if test="updateOperator != null">
+                update_operator,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="propertyContractId != null">
+                #{propertyContractId,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=VARCHAR},
+            </if>
+            <if test="contractCategory != null">
+                #{contractCategory,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=INTEGER},
+            </if>
+            <if test="preferentialPrice != null">
+                #{preferentialPrice,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="statusTme != null">
+                #{statusTme,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="terminationRemark != null">
+                #{terminationRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="terminationMessage != null">
+                #{terminationMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="terminationTime != null">
+                #{terminationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isvalid != null">
+                #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                #{updateOperator,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maxcar.market.pojo.PropertyContractDetailExample"
+            resultType="java.lang.Integer">
+        select count(*) from property_contract_detail
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update property_contract_detail
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketId != null">
+                market_id = #{record.marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.propertyContractId != null">
+                property_contract_id = #{record.propertyContractId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenantId != null">
+                tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.areaId != null">
+                area_id = #{record.areaId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contractCategory != null">
+                contract_category = #{record.contractCategory,jdbcType=INTEGER},
+            </if>
+            <if test="record.price != null">
+                price = #{record.price,jdbcType=INTEGER},
+            </if>
+            <if test="record.preferentialPrice != null">
+                preferential_price = #{record.preferentialPrice,jdbcType=INTEGER},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.statusTme != null">
+                status_tme = #{record.statusTme,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.endTime != null">
+                end_time = #{record.endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.terminationRemark != null">
+                termination_remark = #{record.terminationRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.terminationMessage != null">
+                termination_message = #{record.terminationMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.terminationTime != null">
+                termination_time = #{record.terminationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isvalid != null">
+                isvalid = #{record.isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.insertTime != null">
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.insertOperator != null">
+                insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateOperator != null">
+                update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update property_contract_detail
+        set id = #{record.id,jdbcType=VARCHAR},
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+        property_contract_id = #{record.propertyContractId,jdbcType=VARCHAR},
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+        area_id = #{record.areaId,jdbcType=VARCHAR},
+        contract_category = #{record.contractCategory,jdbcType=INTEGER},
+        price = #{record.price,jdbcType=INTEGER},
+        preferential_price = #{record.preferentialPrice,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=INTEGER},
+        status_tme = #{record.statusTme,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        termination_remark = #{record.terminationRemark,jdbcType=VARCHAR},
+        termination_message = #{record.terminationMessage,jdbcType=VARCHAR},
+        termination_time = #{record.terminationTime,jdbcType=TIMESTAMP},
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.market.pojo.PropertyContractDetail">
+        update property_contract_detail
+        <set>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="propertyContractId != null">
+                property_contract_id = #{propertyContractId,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=VARCHAR},
+            </if>
+            <if test="contractCategory != null">
+                contract_category = #{contractCategory,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=INTEGER},
+            </if>
+            <if test="propertyContractDetailStatus != null">
+                property_contract_detail_status = #{propertyContractDetailStatus,jdbcType=INTEGER},
+            </if>
+            <if test="preferentialPrice != null">
+                preferential_price = #{preferentialPrice,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="statusTme != null">
+                status_tme = #{statusTme,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="terminationRemark != null">
+                termination_remark = #{terminationRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="terminationMessage != null">
+                termination_message = #{terminationMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="terminationTime != null">
+                termination_time = #{terminationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                insert_operator = #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                update_operator = #{updateOperator,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.market.pojo.PropertyContractDetail">
+    update property_contract_detail
+    set market_id = #{marketId,jdbcType=VARCHAR},
+      property_contract_id = #{propertyContractId,jdbcType=VARCHAR},
+      tenant_id = #{tenantId,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      contract_category = #{contractCategory,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      preferential_price = #{preferentialPrice,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      status_tme = #{statusTme,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      termination_remark = #{terminationRemark,jdbcType=VARCHAR},
+      termination_message = #{terminationMessage,jdbcType=VARCHAR},
+      termination_time = #{terminationTime,jdbcType=TIMESTAMP},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      update_operator = #{updateOperator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

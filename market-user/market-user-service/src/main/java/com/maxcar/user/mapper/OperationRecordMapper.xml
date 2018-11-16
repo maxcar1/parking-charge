@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.user.dao.OperationRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.user.entity.OperationRecord" >
+    <id column="operation_id" property="operationId" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="true_name" property="trueName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="operation_title" property="operationTitle" jdbcType="VARCHAR" />
+    <result column="operation_info" property="operationInfo" jdbcType="VARCHAR" />
+    <result column="operation_type" property="operationType" jdbcType="VARCHAR" />
+    <result column="operation_url" property="operationUrl" jdbcType="VARCHAR" />
+    <result column="ind" property="ind" jdbcType="INTEGER" />
+    <result column="isvalid" property="isvalid" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    operation_id, market_id, user_id, true_name, user_name, operation_title, operation_info,
+    operation_type, operation_url, ind, isvalid, version, register_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.user.entity.OperationRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from operation_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+
+    <if test="beginPageIndex != null" >
+      limit ${beginPageIndex},${endPageIndex}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from operation_record
+    where operation_id = #{operationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from operation_record
+    where operation_id = #{operationId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.user.entity.OperationRecordExample" >
+    delete from operation_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.user.entity.OperationRecord" >
+    insert into operation_record (operation_id, market_id, user_id,
+      true_name, user_name, operation_title,
+      operation_info, operation_type, operation_url,
+      ind, isvalid, version,
+      register_time)
+    values (#{operationId,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      #{trueName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{operationTitle,jdbcType=VARCHAR},
+      #{operationInfo,jdbcType=VARCHAR}, #{operationType,jdbcType=VARCHAR}, #{operationUrl,jdbcType=VARCHAR},
+      #{ind,jdbcType=INTEGER}, #{isvalid,jdbcType=INTEGER}, #{version,jdbcType=INTEGER},
+      #{registerTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.user.entity.OperationRecord" >
+    insert into operation_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operationId != null" >
+        operation_id,
+      </if>
+      <if test="marketId != null" >
+        market_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="trueName != null" >
+        true_name,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="operationTitle != null" >
+        operation_title,
+      </if>
+      <if test="operationInfo != null" >
+        operation_info,
+      </if>
+      <if test="operationType != null" >
+        operation_type,
+      </if>
+      <if test="operationUrl != null" >
+        operation_url,
+      </if>
+      <if test="ind != null" >
+        ind,
+      </if>
+      <if test="isvalid != null" >
+        isvalid,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operationId != null" >
+        #{operationId,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null" >
+        #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTitle != null" >
+        #{operationTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="operationInfo != null" >
+        #{operationInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="operationUrl != null" >
+        #{operationUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ind != null" >
+        #{ind,jdbcType=INTEGER},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.user.entity.OperationRecordExample" resultType="java.lang.Integer" >
+    select count(*) from operation_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update operation_record
+    <set >
+      <if test="record.operationId != null" >
+        operation_id = #{record.operationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marketId != null" >
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trueName != null" >
+        true_name = #{record.trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationTitle != null" >
+        operation_title = #{record.operationTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationInfo != null" >
+        operation_info = #{record.operationInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationType != null" >
+        operation_type = #{record.operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationUrl != null" >
+        operation_url = #{record.operationUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ind != null" >
+        ind = #{record.ind,jdbcType=INTEGER},
+      </if>
+      <if test="record.isvalid != null" >
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.registerTime != null" >
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update operation_record
+    set operation_id = #{record.operationId,jdbcType=VARCHAR},
+    market_id = #{record.marketId,jdbcType=VARCHAR},
+    user_id = #{record.userId,jdbcType=VARCHAR},
+    true_name = #{record.trueName,jdbcType=VARCHAR},
+    user_name = #{record.userName,jdbcType=VARCHAR},
+    operation_title = #{record.operationTitle,jdbcType=VARCHAR},
+    operation_info = #{record.operationInfo,jdbcType=VARCHAR},
+    operation_type = #{record.operationType,jdbcType=VARCHAR},
+    operation_url = #{record.operationUrl,jdbcType=VARCHAR},
+    ind = #{record.ind,jdbcType=INTEGER},
+    isvalid = #{record.isvalid,jdbcType=INTEGER},
+    version = #{record.version,jdbcType=INTEGER},
+    register_time = #{record.registerTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.user.entity.OperationRecord" >
+    update operation_record
+    <set >
+      <if test="marketId != null" >
+        market_id = #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null" >
+        true_name = #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTitle != null" >
+        operation_title = #{operationTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="operationInfo != null" >
+        operation_info = #{operationInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="operationType != null" >
+        operation_type = #{operationType,jdbcType=VARCHAR},
+      </if>
+      <if test="operationUrl != null" >
+        operation_url = #{operationUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ind != null" >
+        ind = #{ind,jdbcType=INTEGER},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where operation_id = #{operationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.user.entity.OperationRecord" >
+    update operation_record
+    set market_id = #{marketId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      true_name = #{trueName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      operation_title = #{operationTitle,jdbcType=VARCHAR},
+      operation_info = #{operationInfo,jdbcType=VARCHAR},
+      operation_type = #{operationType,jdbcType=VARCHAR},
+      operation_url = #{operationUrl,jdbcType=VARCHAR},
+      ind = #{ind,jdbcType=INTEGER},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      version = #{version,jdbcType=INTEGER},
+      register_time = #{registerTime,jdbcType=TIMESTAMP}
+    where operation_id = #{operationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

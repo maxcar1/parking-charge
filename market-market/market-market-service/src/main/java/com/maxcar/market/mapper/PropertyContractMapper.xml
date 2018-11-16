@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.market.dao.PropertyContractMapper">
+    <resultMap id="BaseResultMap" type="com.maxcar.market.pojo.PropertyContract">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+        <result column="contract_no" property="contractNo" jdbcType="VARCHAR"/>
+        <result column="tenant_id" property="tenantId" jdbcType="VARCHAR"/>
+        <result column="margin" property="margin" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="contract_remark" property="contractRemark" jdbcType="VARCHAR"/>
+        <result column="contract_image" property="contractImage" jdbcType="VARCHAR"/>
+        <result column="guarantee_image" property="guaranteeImage" jdbcType="VARCHAR"/>
+        <result column="commitment_image" property="commitmentImage" jdbcType="VARCHAR"/>
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, market_id, contract_no, tenant_id, margin, status, contract_remark, contract_image,
+    guarantee_image, commitment_image, isvalid, remark, insert_time, update_time, insert_operator, 
+    update_operator
+  </sql>
+
+    <!-- 查看今天最大的 合同编号 -->
+    <select id="MaxContractNoByMarketId" resultType="java.lang.String" parameterType="java.lang.String">
+      SELECT MAX(contract_no)
+       FROM property_contract
+      WHERE  DATE(insert_time) = CURDATE()
+      and market_id = #{marketId}
+    </select>
+
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.maxcar.market.pojo.PropertyContractExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from property_contract
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <sql id="Base_Column_List_getAll">
+        pc.id as 'propertyContractId', pc.contract_no as 'contractNo', pc.tenant_id as 'tenantId', pc.status as 'propertyContractStatus',
+        ut.tenant_name as 'tenantName',ut.id as 'tenantUId',ut.tenant_type as 'tenantType',ut.contact_name as 'tenantContactName',
+         ut.contact_mobile as 'tenantContactMobile'
+    </sql>
+    <!-- 查询 所有 合同列表 -->
+    <select id="getAll" resultType="com.maxcar.market.model.response.GetPropertyContractAllResponse"
+            parameterType="com.maxcar.market.model.request.GetPropertyContractAllRequest">
+        select
+        <include refid="Base_Column_List_getAll"/>
+        from property_contract pc left join maxcar_tenant_l.`user_tenant` ut ON pc.tenant_id = ut.id
+        where pc.isvalid = 1 and ut.isvalid = 1
+
+        <if test="marketId != null">
+          and  pc.market_id =#{marketId}
+        </if>
+
+        <if test="propertyContractStatus != null">
+            and pc.status = #{propertyContractStatus}
+        </if>
+        <if test="tenantId != null">
+            and pc.tenant_id = #{tenantId}
+        </if>
+        <if test="tenantName != null">
+            and ut.tenant_name LIKE concat( concat('%',#{tenantName}),'%')
+        </if>
+        <if test="tenantType != null">
+            and ut.tenant_type = #{tenantType}
+        </if>
+        <if test="tenantContactName != null">
+            and ut.contact_name LIKE concat( concat('%',#{tenantContactName}),'%')
+        </if>
+        <if test="tenantContactMobile != null">
+            and ut.contact_mobile LIKE concat( concat('%',#{tenantContactMobile}),'%')
+        </if>
+        order by pc.insert_time desc
+    </select>
+
+    <!-- 查看合同详情 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from property_contract
+        where isvalid = 1 and id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from property_contract
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.maxcar.market.pojo.PropertyContractExample">
+        delete from property_contract
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.maxcar.market.pojo.PropertyContract">
+    insert into property_contract (id, market_id, contract_no, 
+      tenant_id, margin, status, 
+      contract_remark, contract_image, guarantee_image, 
+      commitment_image, isvalid, remark, 
+      insert_time, update_time, insert_operator, 
+      update_operator)
+    values (#{id,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{contractNo,jdbcType=VARCHAR}, 
+      #{tenantId,jdbcType=VARCHAR}, #{margin,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{contractRemark,jdbcType=VARCHAR}, #{contractImage,jdbcType=VARCHAR}, #{guaranteeImage,jdbcType=VARCHAR}, 
+      #{commitmentImage,jdbcType=VARCHAR}, #{isvalid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{insertOperator,jdbcType=VARCHAR}, 
+      #{updateOperator,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.market.pojo.PropertyContract">
+        insert into property_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="marketId != null">
+                market_id,
+            </if>
+            <if test="contractNo != null">
+                contract_no,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="margin != null">
+                margin,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="contractRemark != null">
+                contract_remark,
+            </if>
+            <if test="contractImage != null">
+                contract_image,
+            </if>
+            <if test="guaranteeImage != null">
+                guarantee_image,
+            </if>
+            <if test="commitmentImage != null">
+                commitment_image,
+            </if>
+            <if test="isvalid != null">
+                isvalid,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="insertTime != null">
+                insert_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="insertOperator != null">
+                insert_operator,
+            </if>
+            <if test="updateOperator != null">
+                update_operator,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNo != null">
+                #{contractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="margin != null">
+                #{margin,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="contractRemark != null">
+                #{contractRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="contractImage != null">
+                #{contractImage,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeImage != null">
+                #{guaranteeImage,jdbcType=VARCHAR},
+            </if>
+            <if test="commitmentImage != null">
+                #{commitmentImage,jdbcType=VARCHAR},
+            </if>
+            <if test="isvalid != null">
+                #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                #{updateOperator,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.maxcar.market.pojo.PropertyContractExample"
+            resultType="java.lang.Integer">
+        select count(*) from property_contract
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update property_contract
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketId != null">
+                market_id = #{record.marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contractNo != null">
+                contract_no = #{record.contractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tenantId != null">
+                tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.margin != null">
+                margin = #{record.margin,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.contractRemark != null">
+                contract_remark = #{record.contractRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contractImage != null">
+                contract_image = #{record.contractImage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.guaranteeImage != null">
+                guarantee_image = #{record.guaranteeImage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.commitmentImage != null">
+                commitment_image = #{record.commitmentImage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isvalid != null">
+                isvalid = #{record.isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.insertTime != null">
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.insertOperator != null">
+                insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateOperator != null">
+                update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update property_contract
+        set id = #{record.id,jdbcType=VARCHAR},
+        market_id = #{record.marketId,jdbcType=VARCHAR},
+        contract_no = #{record.contractNo,jdbcType=VARCHAR},
+        tenant_id = #{record.tenantId,jdbcType=VARCHAR},
+        margin = #{record.margin,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=INTEGER},
+        contract_remark = #{record.contractRemark,jdbcType=VARCHAR},
+        contract_image = #{record.contractImage,jdbcType=VARCHAR},
+        guarantee_image = #{record.guaranteeImage,jdbcType=VARCHAR},
+        commitment_image = #{record.commitmentImage,jdbcType=VARCHAR},
+        isvalid = #{record.isvalid,jdbcType=INTEGER},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.market.pojo.PropertyContract">
+        update property_contract
+        <set>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNo != null">
+                contract_no = #{contractNo,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId,jdbcType=VARCHAR},
+            </if>
+            <if test="margin != null">
+                margin = #{margin,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="contractRemark != null">
+                contract_remark = #{contractRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="contractImage != null">
+                contract_image = #{contractImage,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeImage != null">
+                guarantee_image = #{guaranteeImage,jdbcType=VARCHAR},
+            </if>
+            <if test="commitmentImage != null">
+                commitment_image = #{commitmentImage,jdbcType=VARCHAR},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                insert_operator = #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                update_operator = #{updateOperator,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.market.pojo.PropertyContract">
+    update property_contract
+    set market_id = #{marketId,jdbcType=VARCHAR},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      tenant_id = #{tenantId,jdbcType=VARCHAR},
+      margin = #{margin,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      contract_remark = #{contractRemark,jdbcType=VARCHAR},
+      contract_image = #{contractImage,jdbcType=VARCHAR},
+      guarantee_image = #{guaranteeImage,jdbcType=VARCHAR},
+      commitment_image = #{commitmentImage,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      update_operator = #{updateOperator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

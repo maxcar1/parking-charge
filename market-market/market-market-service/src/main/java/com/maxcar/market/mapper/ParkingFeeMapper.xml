@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.market.dao.ParkingFeeMapper">
+    <resultMap id="BaseResultMap" type="com.maxcar.market.pojo.ParkingFee">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+        <result column="shift" property="shift" jdbcType="VARCHAR"/>
+        <result column="brake_id" property="brakeId" jdbcType="VARCHAR"/>
+        <result column="employees_id" property="employeesId" jdbcType="VARCHAR"/>
+        <result column="arrival_time" property="arrivalTime" jdbcType="TIMESTAMP"/>
+        <result column="leave_time" property="leaveTime" jdbcType="TIMESTAMP"/>
+        <result column="is_valid" property="isValid" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, market_id, shift, brake_id, employees_id, arrival_time, leave_time, is_valid,
+    remark, insert_time, update_time, insert_operator, update_operator
+  </sql>
+
+    <!-- 查看最近一个班次的信息 -->
+    <select id="getMaxParkingFee" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from parking_fee
+        where is_valid = 1
+        order by insert_time DESC limit 1
+    </select>
+
+    <!-- 查询停车收费列表  -->
+    <select id="allParkingFee" resultMap="BaseResultMap"
+            parameterType="com.maxcar.market.model.request.AllParkingFeeRequest">
+        select
+        <include refid="Base_Column_List"/>
+        from parking_fee
+        where is_valid = 1
+        <if test=" marketId !=null and marketId !='' ">
+          and market_id = #{marketId}
+        </if>
+        <if test=" arrivalTimeStart !=null and arrivalTimeStart !='' ">
+            <![CDATA[ and arrival_time  >= #{arrivalTimeStart}  ]]>
+        </if>
+        <if test=" arrivalTimeEnd !=null and arrivalTimeEnd !='' ">
+            <![CDATA[ and arrival_time < #{arrivalTimeEnd}  ]]>
+        </if>
+        <if test=" leaveTimeStart !=null and leaveTimeStart !='' ">
+            <![CDATA[ and leave_time  >= #{leaveTimeStart}  ]]>
+        </if>
+        <if test=" leaveTimeEnd !=null and leaveTimeEnd !='' ">
+            <![CDATA[ and leave_time < #{leaveTimeEnd}  ]]>
+        </if>
+
+        order by shift DESC
+
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from parking_fee
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from parking_fee
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.maxcar.market.pojo.ParkingFee">
+    insert into parking_fee (id, market_id, shift,
+    brake_id, employees_id, arrival_time,
+    leave_time, is_valid, remark,
+    insert_time, update_time, insert_operator,
+    update_operator)
+    values (#{id,jdbcType=VARCHAR}, #{marketId,jdbcType=VARCHAR}, #{shift,jdbcType=VARCHAR},
+    #{brakeId,jdbcType=VARCHAR}, #{employeesId,jdbcType=VARCHAR}, #{arrivalTime,jdbcType=TIMESTAMP},
+    #{leaveTime,jdbcType=TIMESTAMP}, #{isValid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+    #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{insertOperator,jdbcType=VARCHAR},
+    #{updateOperator,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.maxcar.market.pojo.ParkingFee">
+        insert into parking_fee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="marketId != null">
+                market_id,
+            </if>
+            <if test="shift != null">
+                shift,
+            </if>
+            <if test="brakeId != null">
+                brake_id,
+            </if>
+            <if test="employeesId != null">
+                employees_id,
+            </if>
+            <if test="arrivalTime != null">
+                arrival_time,
+            </if>
+            <if test="leaveTime != null">
+                leave_time,
+            </if>
+            <if test="isValid != null">
+                is_valid,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="insertTime != null">
+                insert_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="insertOperator != null">
+                insert_operator,
+            </if>
+            <if test="updateOperator != null">
+                update_operator,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="marketId != null">
+                #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="shift != null">
+                #{shift,jdbcType=VARCHAR},
+            </if>
+            <if test="brakeId != null">
+                #{brakeId,jdbcType=VARCHAR},
+            </if>
+            <if test="employeesId != null">
+                #{employeesId,jdbcType=VARCHAR},
+            </if>
+            <if test="arrivalTime != null">
+                #{arrivalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaveTime != null">
+                #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isValid != null">
+                #{isValid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                #{updateOperator,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.market.pojo.ParkingFee">
+        update parking_fee
+        <set>
+            <if test="marketId != null">
+                market_id = #{marketId,jdbcType=VARCHAR},
+            </if>
+            <if test="shift != null">
+                shift = #{shift,jdbcType=VARCHAR},
+            </if>
+            <if test="brakeId != null">
+                brake_id = #{brakeId,jdbcType=VARCHAR},
+            </if>
+            <if test="employeesId != null">
+                employees_id = #{employeesId,jdbcType=VARCHAR},
+            </if>
+            <if test="arrivalTime != null">
+                arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaveTime != null">
+                leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isValid != null">
+                is_valid = #{isValid,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="insertOperator != null">
+                insert_operator = #{insertOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateOperator != null">
+                update_operator = #{updateOperator,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.maxcar.market.pojo.ParkingFee">
+    update parking_fee
+    set market_id = #{marketId,jdbcType=VARCHAR},
+      shift = #{shift,jdbcType=VARCHAR},
+      brake_id = #{brakeId,jdbcType=VARCHAR},
+      employees_id = #{employeesId,jdbcType=VARCHAR},
+      arrival_time = #{arrivalTime,jdbcType=TIMESTAMP},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      is_valid = #{isValid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      update_operator = #{updateOperator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <select id="getCurrentNewRecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from parking_fee
+        <where>
+            is_valid =1
+            and brake_id = #{barrierId,jdbcType=VARCHAR}
+            and market_id = #{marketId,jdbcType=VARCHAR}
+        </where>
+        order by insert_time desc
+        limit 0,1
+    </select>
+    <select id="getCurrentBarrierRecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from parking_fee
+        <where>
+            is_valid =1
+            and brake_id = #{barrierId,jdbcType=VARCHAR}
+            and market_id = #{marketId,jdbcType=VARCHAR}
+            and leave_time is null
+        </where>
+        order by insert_time desc
+        limit 0,1
+    </select>
+    <select id="selectEmployeeNewRecord" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from parking_fee
+        <where>
+            is_valid =1
+            and brake_id = #{brakeId,jdbcType=VARCHAR}
+            and employees_id = #{employeesId,jdbcType=VARCHAR}
+            and market_id = #{marketId,jdbcType=VARCHAR}
+            and leave_time is null
+        </where>
+        order by insert_time desc
+        limit 0,1
+    </select>
+</mapper>

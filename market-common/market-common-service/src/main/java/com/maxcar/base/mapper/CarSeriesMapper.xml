@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.base.dao.CarSeriesMapper" >
+    <cache  eviction="LRU"  flushInterval="600000"  size="512"  readOnly="true"/>
+  <resultMap id="BaseResultMap" type="com.maxcar.base.pojo.CarSeries" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="brand_id" property="brandId" jdbcType="VARCHAR" />
+    <result column="series_code" property="seriesCode" jdbcType="VARCHAR" />
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, brand_id, series_code, series_name, insert_time, update_time,remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_series
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_series
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.base.pojo.CarSeries" >
+    insert into car_series (id, brand_id, series_code, 
+      series_name, insert_time, update_time, 
+      remark)
+    values (#{id,jdbcType=VARCHAR}, #{brandId,jdbcType=VARCHAR}, #{seriesCode,jdbcType=VARCHAR}, 
+      #{seriesName,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.base.pojo.CarSeries" >
+    insert into car_series
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="seriesCode != null" >
+        series_code,
+      </if>
+      <if test="seriesName != null" >
+        series_name,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesCode != null" >
+        #{seriesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null" >
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.base.pojo.CarSeries" >
+    update car_series
+    <set >
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesCode != null" >
+        series_code = #{seriesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null" >
+        series_name = #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maxcar.base.pojo.CarSeries" >
+    update car_series
+    set brand_id = #{brandId,jdbcType=VARCHAR},
+      series_code = #{seriesCode,jdbcType=VARCHAR},
+      series_name = #{seriesName,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.base.pojo.CarSeries" >
+    update car_series
+    set brand_id = #{brandId,jdbcType=VARCHAR},
+      series_code = #{seriesCode,jdbcType=VARCHAR},
+      series_name = #{seriesName,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <insert id="syncDaSouCheSeries" parameterType="com.maxcar.base.pojo.CarSeries">
+    replace into car_series(id, brand_id, series_code, series_name, insert_time, update_time) values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id},#{item.brandId},#{item.seriesCode},#{item.seriesName},
+      #{item.insertTime},#{item.updateTime})
+    </foreach>
+  </insert>
+  <select id="getCarSeries" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from car_series where series_code = #{seriesCode,jdbcType=VARCHAR}
+  </select>
+  <select id="getCarSeriesByBrandCode" resultType="java.util.Map">
+    select a.brand_code 'brandCode',a.brand_name 'brandName',b.series_code 'seriesCode',
+    b.series_name 'seriesName' from car_brand a left join car_series b on a.id = b.brand_id
+    where a.brand_code = #{brandCode}
+  </select>
+  <select id="getAllSeries" resultMap="BaseResultMap" useCache="true">
+    select <include refid="Base_Column_List"/> from car_series where brand_id = #{brandId}
+  </select>
+</mapper>

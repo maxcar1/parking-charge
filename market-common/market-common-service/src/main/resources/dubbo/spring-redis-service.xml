@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="market-common-provider" owner="programmer" organization="dubbox"/>
+
+	<dubbo:registry address="${dubbo.registry.address}" register="true"></dubbo:registry>
+
+	<dubbo:annotation package="com.maxcar" />
+
+	<!--&lt;!&ndash;<dubbo:protocol name="dubbo" port="9006" serialization="kryo" optimizer="com.maxcar.statistics.utils.SerializationOptimizerImpl"/>&ndash;&gt;-->
+	<dubbo:protocol name="dubbo" port="9001"></dubbo:protocol>
+
+	<!--<dubbo:application name="maxcar-redis-interface"  />-->
+	<!--&lt;!&ndash; 注册中心暴露服务地址 &ndash;&gt;-->
+	<!--<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>-->
+	<!--&lt;!&ndash; 用dubbo协议在20886端口暴露服务 &ndash;&gt;-->
+	<!--<dubbo:protocol name="dubbo" port="20886" />-->
+
+	<dubbo:service interface="com.maxcar.redis.service.SsoService" ref="ssoService" timeout="1200000"/>
+	<dubbo:service interface="com.maxcar.redis.service.RedisService" ref="redisService" timeout="1200000"/>
+
+	<dubbo:service interface="com.maxcar.kafka.service.MessageProducerService" ref="messageProducerService" timeout="1200000"/>
+
+	<dubbo:service interface="com.maxcar.base.service.ProvinceService" ref="provinceService" timeout="1200000"/>
+
+	<dubbo:service interface="com.maxcar.base.service.CityService" ref="cityService" timeout="1200000"/>
+
+	<dubbo:service interface="com.maxcar.base.service.UploadService" ref="uploadService" timeout="1200000"/>
+
+	<dubbo:service interface="com.maxcar.base.service.DaSouCheService" ref="daSouCheService" timeout="1200000"/>
+    <dubbo:service interface="com.maxcar.base.service.IdDictionaryService" ref="idDictionaryService" timeout="1200000"/>
+
+    <dubbo:service interface="com.maxcar.redis.service.VCodeService" ref="vCodeService" timeout="1200000"/>
+
+	<!-- topic统一管理-->
+	<dubbo:service interface="com.maxcar.base.service.TopicService" ref="topicService" timeout="1200000"/>
+
+
+</beans>

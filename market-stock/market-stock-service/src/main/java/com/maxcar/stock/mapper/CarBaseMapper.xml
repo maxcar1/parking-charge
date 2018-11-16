@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.stock.dao.CarBaseMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.stock.pojo.CarBase" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="brand_code" property="brandCode" jdbcType="VARCHAR" />
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+    <result column="series_code" property="seriesCode" jdbcType="VARCHAR" />
+    <result column="model_year" property="modelYear" jdbcType="VARCHAR" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="model_code" property="modelCode" jdbcType="VARCHAR" />
+    <result column="mileage" property="mileage" jdbcType="INTEGER" />
+    <result column="evaluate_price" property="evaluatePrice" jdbcType="DOUBLE" />
+    <result column="new_price" property="newPrice" jdbcType="DOUBLE" />
+    <result column="market_price" property="marketPrice" jdbcType="DOUBLE" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="engine_volume_unitl" property="engineVolumeUnitl" jdbcType="DOUBLE" />
+    <result column="environmental_standards" property="environmentalStandards" jdbcType="VARCHAR" />
+    <result column="gear_box" property="gearBox" jdbcType="VARCHAR" />
+    <result column="seat_number" property="seatNumber" jdbcType="INTEGER" />
+    <result column="fuel_form" property="fuelForm" jdbcType="VARCHAR" />
+    <result column="fuel_number" property="fuelNumber" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="attribution" property="attribution" jdbcType="INTEGER" />
+    <result column="check_company_id" property="checkCompanyId" jdbcType="VARCHAR" />
+    <result column="inster_operator" property="insterOperator" jdbcType="VARCHAR" />
+    <result column="update_operator" property="updateOperator" jdbcType="VARCHAR" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="accident_type" property="accidentType" jdbcType="INTEGER" />
+    <result column="reserve_price" property="reservePrice" jdbcType="DOUBLE" />
+    <result column="initial_licence_time" property="initialLicenceTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.maxcar.stock.pojo.CarBaseWithBLOBs" extends="BaseResultMap" >
+    <result column="model_data" property="modelData" jdbcType="LONGVARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <resultMap id="CarDetailsMap" type="com.maxcar.stock.entity.Response.CarDetails">
+  <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="car_no" property="carNo" jdbcType="VARCHAR"/>
+        <result column="vin" property="vin" jdbcType="VARCHAR"/>
+        <result column="rfid" property="rfid" jdbcType="VARCHAR"/>
+        <result column="tenant" property="tenant" jdbcType="VARCHAR"/>
+        <result column="area_id" property="areaId" jdbcType="VARCHAR"/>
+        <result column="is_new_car" property="isNewCar" jdbcType="INTEGER"/>
+        <result column="stock_status" property="stockStatus" jdbcType="INTEGER"/>
+        <result column="car_status" property="carStatus" jdbcType="INTEGER"/>
+        <result column="car_type" property="carType" jdbcType="INTEGER"/>
+        <result column="register_time" property="registerTime" jdbcType="TIMESTAMP"/>
+        <result column="initial_licence_time" property="initialLicenceTime" jdbcType="TIMESTAMP"/>
+        <result column="isvalid" property="isvalid" jdbcType="INTEGER"/>
+        <result column="staff_id" property="staffId" jdbcType="VARCHAR"/>
+        <result column="market_id" property="marketId" jdbcType="VARCHAR"/>
+        <result column="update_operator" property="updateOperator" jdbcType="VARCHAR"/>
+        <result column="inster_operator" property="insterOperator" jdbcType="VARCHAR"/>
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="owner_name" property="ownerName" jdbcType="VARCHAR"/>
+        <result column="owner_idcard" property="ownerIdcard" jdbcType="VARCHAR"/>
+        <result column="no" property="no" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="limit_status" property="limitStatus" jdbcType="INTEGER"/>
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="brand_code" property="brandCode" jdbcType="VARCHAR" />
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+    <result column="series_code" property="seriesCode" jdbcType="VARCHAR" />
+    <result column="model_year" property="modelYear" jdbcType="VARCHAR" />
+    <result column="model_name" property="modelName" jdbcType="VARCHAR" />
+    <result column="model_code" property="modelCode" jdbcType="VARCHAR" />
+    <result column="mileage" property="mileage" jdbcType="INTEGER" />
+    <result column="evaluate_price" property="evaluatePrice" jdbcType="DOUBLE" />
+    <result column="new_price" property="newPrice" jdbcType="DOUBLE" />
+    <result column="market_price" property="marketPrice" jdbcType="DOUBLE" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="engine_volume_unitl" property="engineVolumeUnitl" jdbcType="DOUBLE" />
+    <result column="environmental_standards" property="environmentalStandards" jdbcType="VARCHAR" />
+    <result column="gear_box" property="gearBox" jdbcType="VARCHAR" />
+    <result column="seat_number" property="seatNumber" jdbcType="INTEGER" />
+    <result column="fuel_form" property="fuelForm" jdbcType="VARCHAR" />
+    <result column="fuel_number" property="fuelNumber" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="check_company_id" property="checkCompanyId" jdbcType="VARCHAR" />
+    <result column="reserve_price" property="reservePrice" jdbcType="DOUBLE" />
+    <result column="src" property="src" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, brand_name, brand_code, series_name, series_code, model_year, model_name, model_code,
+    mileage, evaluate_price, new_price, market_price, color, engine_volume_unitl, environmental_standards,
+    gear_box, seat_number, fuel_form, fuel_number, level, check_company_id, inster_operator,attribution ,
+    update_operator, insert_time, update_time, accident_type, reserve_price, initial_licence_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    model_data, remark
+  </sql>
+
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.maxcar.stock.pojo.CarBaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from car_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.stock.pojo.CarBaseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from car_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from car_base
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectById"  resultType="com.maxcar.stock.pojo.CarVehicle" parameterType="com.maxcar.stock.pojo.CarBase">
+    SELECT
+	b.*, c.initial_licence_time AS initialLicenceTime,c.register_time AS registerTime,c.stock_status AS stockStatus,
+	GROUP_CONCAT(p.src) AS src
+FROM
+	(
+		SELECT
+			model_code AS modelCode,
+			model_name AS modelName,
+			id,
+			market_price AS marketPrice,
+			mileage AS mileage,
+			color AS color,
+			brand_name AS brandName,
+			brand_code AS brandCode,
+			series_name AS seriesName,
+			series_code AS seriesCode,
+			evaluate_Price AS evaluatePrice,
+			environmental_Standards AS environmentalStandards,
+gear_Box AS gearBox,
+engine_Volume_Unitl AS engineVolumeUnitl
+		FROM
+			car_base
+	) b
+LEFT JOIN car c ON b.id = c.id
+LEFT JOIN car_pic p ON b.id = p.car_id
+WHERE
+	c.id = #{id,jdbcType = VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_base
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.stock.pojo.CarBaseExample" >
+    delete from car_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.stock.pojo.CarBaseWithBLOBs" >
+    insert into car_base (id, brand_name, brand_code,
+      series_name, series_code, model_year,
+      model_name, model_code, mileage,
+      evaluate_price, new_price, market_price,
+      color, engine_volume_unitl, environmental_standards,
+      gear_box, seat_number, fuel_form,
+      fuel_number, level, check_company_id,
+      inster_operator, update_operator, insert_time,
+      update_time, accident_type, reserve_price,
+      initial_licence_time, model_data, remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, #{brandCode,jdbcType=VARCHAR},
+      #{seriesName,jdbcType=VARCHAR}, #{seriesCode,jdbcType=VARCHAR}, #{modelYear,jdbcType=VARCHAR},
+      #{modelName,jdbcType=VARCHAR}, #{modelCode,jdbcType=VARCHAR}, #{mileage,jdbcType=INTEGER},
+      #{evaluatePrice,jdbcType=DOUBLE}, #{newPrice,jdbcType=DOUBLE}, #{marketPrice,jdbcType=DOUBLE},
+      #{color,jdbcType=VARCHAR}, #{engineVolumeUnitl,jdbcType=DOUBLE}, #{environmentalStandards,jdbcType=VARCHAR},
+      #{gearBox,jdbcType=VARCHAR}, #{seatNumber,jdbcType=INTEGER}, #{fuelForm,jdbcType=INTEGER},
+      #{fuelNumber,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, #{checkCompanyId,jdbcType=VARCHAR},
+      #{insterOperator,jdbcType=VARCHAR}, #{updateOperator,jdbcType=VARCHAR}, #{insertTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{accidentType,jdbcType=INTEGER}, #{reservePrice,jdbcType=DOUBLE},
+      #{initialLicenceTime,jdbcType=TIMESTAMP}, #{modelData,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.stock.pojo.CarBaseWithBLOBs" >
+    insert into car_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="brandName != null" >
+        brand_name,
+      </if>
+      <if test="brandCode != null" >
+        brand_code,
+      </if>
+      <if test="seriesName != null" >
+        series_name,
+      </if>
+      <if test="seriesCode != null" >
+        series_code,
+      </if>
+      <if test="modelYear != null" >
+        model_year,
+      </if>
+      <if test="modelName != null" >
+        model_name,
+      </if>
+      <if test="modelCode != null" >
+        model_code,
+      </if>
+      <if test="mileage != null" >
+        mileage,
+      </if>
+      <if test="evaluatePrice != null" >
+        evaluate_price,
+      </if>
+      <if test="newPrice != null" >
+        new_price,
+      </if>
+      <if test="marketPrice != null" >
+        market_price,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="engineVolumeUnitl != null" >
+        engine_volume_unitl,
+      </if>
+      <if test="environmentalStandards != null" >
+        environmental_standards,
+      </if>
+      <if test="gearBox != null" >
+        gear_box,
+      </if>
+      <if test="seatNumber != null" >
+        seat_number,
+      </if>
+      <if test="fuelForm != null" >
+        fuel_form,
+      </if>
+      <if test="fuelNumber != null" >
+        fuel_number,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="checkCompanyId != null" >
+        check_company_id,
+      </if>
+      <if test="insterOperator != null" >
+        inster_operator,
+      </if>
+      <if test="updateOperator != null" >
+        update_operator,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="accidentType != null" >
+        accident_type,
+      </if>
+      <if test="reservePrice != null" >
+        reserve_price,
+      </if>
+      <if test="initialLicenceTime != null" >
+        initial_licence_time,
+      </if>
+      <if test="modelData != null" >
+        model_data,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="attribution != null" >
+        attribution,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null" >
+        #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesCode != null" >
+        #{seriesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelYear != null" >
+        #{modelYear,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mileage != null" >
+        #{mileage,jdbcType=INTEGER},
+      </if>
+      <if test="evaluatePrice != null" >
+        #{evaluatePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="newPrice != null" >
+        #{newPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="marketPrice != null" >
+        #{marketPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="engineVolumeUnitl != null" >
+        #{engineVolumeUnitl,jdbcType=DOUBLE},
+      </if>
+      <if test="environmentalStandards != null" >
+        #{environmentalStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="gearBox != null" >
+        #{gearBox,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNumber != null" >
+        #{seatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="fuelForm != null" >
+        #{fuelForm,jdbcType=INTEGER},
+      </if>
+      <if test="fuelNumber != null" >
+        #{fuelNumber,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="checkCompanyId != null" >
+        #{checkCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="insterOperator != null" >
+        #{insterOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOperator != null" >
+        #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accidentType != null" >
+        #{accidentType,jdbcType=INTEGER},
+      </if>
+      <if test="reservePrice != null" >
+        #{reservePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="initialLicenceTime != null" >
+        #{initialLicenceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modelData != null" >
+        #{modelData,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attribution != null" >
+        #{attribution,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.stock.pojo.CarBaseExample" resultType="java.lang.Integer" >
+    select count(*) from car_base
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update car_base
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null" >
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandCode != null" >
+        brand_code = #{record.brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seriesName != null" >
+        series_name = #{record.seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seriesCode != null" >
+        series_code = #{record.seriesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelYear != null" >
+        model_year = #{record.modelYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelName != null" >
+        model_name = #{record.modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelCode != null" >
+        model_code = #{record.modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mileage != null" >
+        mileage = #{record.mileage,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluatePrice != null" >
+        evaluate_price = #{record.evaluatePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.newPrice != null" >
+        new_price = #{record.newPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.marketPrice != null" >
+        market_price = #{record.marketPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.color != null" >
+        color = #{record.color,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engineVolumeUnitl != null" >
+        engine_volume_unitl = #{record.engineVolumeUnitl,jdbcType=DOUBLE},
+      </if>
+      <if test="record.environmentalStandards != null" >
+        environmental_standards = #{record.environmentalStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gearBox != null" >
+        gear_box = #{record.gearBox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seatNumber != null" >
+        seat_number = #{record.seatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.fuelForm != null" >
+        fuel_form = #{record.fuelForm,jdbcType=INTEGER},
+      </if>
+      <if test="record.fuelNumber != null" >
+        fuel_number = #{record.fuelNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkCompanyId != null" >
+        check_company_id = #{record.checkCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insterOperator != null" >
+        inster_operator = #{record.insterOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateOperator != null" >
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accidentType != null" >
+        accident_type = #{record.accidentType,jdbcType=INTEGER},
+      </if>
+      <if test="record.reservePrice != null" >
+        reserve_price = #{record.reservePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.initialLicenceTime != null" >
+        initial_licence_time = #{record.initialLicenceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modelData != null" >
+        model_data = #{record.modelData,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update car_base
+    set id = #{record.id,jdbcType=VARCHAR},
+    brand_name = #{record.brandName,jdbcType=VARCHAR},
+    brand_code = #{record.brandCode,jdbcType=VARCHAR},
+    series_name = #{record.seriesName,jdbcType=VARCHAR},
+    series_code = #{record.seriesCode,jdbcType=VARCHAR},
+    model_year = #{record.modelYear,jdbcType=VARCHAR},
+    model_name = #{record.modelName,jdbcType=VARCHAR},
+    model_code = #{record.modelCode,jdbcType=VARCHAR},
+    mileage = #{record.mileage,jdbcType=INTEGER},
+    evaluate_price = #{record.evaluatePrice,jdbcType=DOUBLE},
+    new_price = #{record.newPrice,jdbcType=DOUBLE},
+    market_price = #{record.marketPrice,jdbcType=DOUBLE},
+    color = #{record.color,jdbcType=VARCHAR},
+    engine_volume_unitl = #{record.engineVolumeUnitl,jdbcType=DOUBLE},
+    environmental_standards = #{record.environmentalStandards,jdbcType=VARCHAR},
+    gear_box = #{record.gearBox,jdbcType=VARCHAR},
+    seat_number = #{record.seatNumber,jdbcType=INTEGER},
+    fuel_form = #{record.fuelForm,jdbcType=INTEGER},
+    fuel_number = #{record.fuelNumber,jdbcType=INTEGER},
+    level = #{record.level,jdbcType=VARCHAR},
+    check_company_id = #{record.checkCompanyId,jdbcType=VARCHAR},
+    inster_operator = #{record.insterOperator,jdbcType=VARCHAR},
+    update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+    insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+    accident_type = #{record.accidentType,jdbcType=INTEGER},
+    reserve_price = #{record.reservePrice,jdbcType=DOUBLE},
+    initial_licence_time = #{record.initialLicenceTime,jdbcType=TIMESTAMP},
+    model_data = #{record.modelData,jdbcType=LONGVARCHAR},
+    remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update car_base
+    set id = #{record.id,jdbcType=VARCHAR},
+    brand_name = #{record.brandName,jdbcType=VARCHAR},
+    brand_code = #{record.brandCode,jdbcType=VARCHAR},
+    series_name = #{record.seriesName,jdbcType=VARCHAR},
+    series_code = #{record.seriesCode,jdbcType=VARCHAR},
+    model_year = #{record.modelYear,jdbcType=VARCHAR},
+    model_name = #{record.modelName,jdbcType=VARCHAR},
+    model_code = #{record.modelCode,jdbcType=VARCHAR},
+    mileage = #{record.mileage,jdbcType=INTEGER},
+    evaluate_price = #{record.evaluatePrice,jdbcType=DOUBLE},
+    new_price = #{record.newPrice,jdbcType=DOUBLE},
+    market_price = #{record.marketPrice,jdbcType=DOUBLE},
+    color = #{record.color,jdbcType=VARCHAR},
+    engine_volume_unitl = #{record.engineVolumeUnitl,jdbcType=DOUBLE},
+    environmental_standards = #{record.environmentalStandards,jdbcType=VARCHAR},
+    gear_box = #{record.gearBox,jdbcType=VARCHAR},
+    seat_number = #{record.seatNumber,jdbcType=INTEGER},
+    fuel_form = #{record.fuelForm,jdbcType=INTEGER},
+    fuel_number = #{record.fuelNumber,jdbcType=INTEGER},
+    level = #{record.level,jdbcType=VARCHAR},
+    check_company_id = #{record.checkCompanyId,jdbcType=VARCHAR},
+    inster_operator = #{record.insterOperator,jdbcType=VARCHAR},
+    update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+    insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+    accident_type = #{record.accidentType,jdbcType=INTEGER},
+    reserve_price = #{record.reservePrice,jdbcType=DOUBLE},
+    initial_licence_time = #{record.initialLicenceTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.stock.pojo.CarBaseWithBLOBs" >
+    update car_base
+    <set >
+      <if test="brandName != null" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandCode != null" >
+        brand_code = #{brandCode,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesName != null" >
+        series_name = #{seriesName,jdbcType=VARCHAR},
+      </if>
+      <if test="seriesCode != null" >
+        series_code = #{seriesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelYear != null" >
+        model_year = #{modelYear,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null" >
+        model_name = #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelCode != null" >
+        model_code = #{modelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mileage != null" >
+        mileage = #{mileage,jdbcType=INTEGER},
+      </if>
+      <if test="evaluatePrice != null" >
+        evaluate_price = #{evaluatePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="newPrice != null" >
+        new_price = #{newPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="marketPrice != null" >
+        market_price = #{marketPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="engineVolumeUnitl != null" >
+        engine_volume_unitl = #{engineVolumeUnitl,jdbcType=DOUBLE},
+      </if>
+      <if test="environmentalStandards != null" >
+        environmental_standards = #{environmentalStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="gearBox != null" >
+        gear_box = #{gearBox,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNumber != null" >
+        seat_number = #{seatNumber,jdbcType=INTEGER},
+      </if>
+      <if test="fuelForm != null" >
+        fuel_form = #{fuelForm,jdbcType=INTEGER},
+      </if>
+      <if test="fuelNumber != null" >
+        fuel_number = #{fuelNumber,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="checkCompanyId != null" >
+        check_company_id = #{checkCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="insterOperator != null" >
+        inster_operator = #{insterOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOperator != null" >
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accidentType != null" >
+        accident_type = #{accidentType,jdbcType=INTEGER},
+      </if>
+      <if test="reservePrice != null" >
+        reserve_price = #{reservePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="initialLicenceTime != null" >
+        initial_licence_time = #{initialLicenceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modelData != null" >
+        model_data = #{modelData,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.maxcar.stock.pojo.CarBaseWithBLOBs" >
+    update car_base
+    set brand_name = #{brandName,jdbcType=VARCHAR},
+    brand_code = #{brandCode,jdbcType=VARCHAR},
+    series_name = #{seriesName,jdbcType=VARCHAR},
+    series_code = #{seriesCode,jdbcType=VARCHAR},
+    model_year = #{modelYear,jdbcType=VARCHAR},
+    model_name = #{modelName,jdbcType=VARCHAR},
+    model_code = #{modelCode,jdbcType=VARCHAR},
+    mileage = #{mileage,jdbcType=INTEGER},
+    evaluate_price = #{evaluatePrice,jdbcType=DOUBLE},
+    new_price = #{newPrice,jdbcType=DOUBLE},
+    market_price = #{marketPrice,jdbcType=DOUBLE},
+    color = #{color,jdbcType=VARCHAR},
+    engine_volume_unitl = #{engineVolumeUnitl,jdbcType=DOUBLE},
+    environmental_standards = #{environmentalStandards,jdbcType=VARCHAR},
+    gear_box = #{gearBox,jdbcType=VARCHAR},
+    seat_number = #{seatNumber,jdbcType=INTEGER},
+    fuel_form = #{fuelForm,jdbcType=INTEGER},
+    fuel_number = #{fuelNumber,jdbcType=INTEGER},
+    level = #{level,jdbcType=VARCHAR},
+    check_company_id = #{checkCompanyId,jdbcType=VARCHAR},
+    inster_operator = #{insterOperator,jdbcType=VARCHAR},
+    update_operator = #{updateOperator,jdbcType=VARCHAR},
+    insert_time = #{insertTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    accident_type = #{accidentType,jdbcType=INTEGER},
+    reserve_price = #{reservePrice,jdbcType=DOUBLE},
+    initial_licence_time = #{initialLicenceTime,jdbcType=TIMESTAMP},
+    model_data = #{modelData,jdbcType=LONGVARCHAR},
+    remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.stock.pojo.CarBase" >
+    update car_base
+    set brand_name = #{brandName,jdbcType=VARCHAR},
+      brand_code = #{brandCode,jdbcType=VARCHAR},
+      series_name = #{seriesName,jdbcType=VARCHAR},
+      series_code = #{seriesCode,jdbcType=VARCHAR},
+      model_year = #{modelYear,jdbcType=VARCHAR},
+      model_name = #{modelName,jdbcType=VARCHAR},
+      model_code = #{modelCode,jdbcType=VARCHAR},
+      mileage = #{mileage,jdbcType=INTEGER},
+      evaluate_price = #{evaluatePrice,jdbcType=DOUBLE},
+      new_price = #{newPrice,jdbcType=DOUBLE},
+      market_price = #{marketPrice,jdbcType=DOUBLE},
+      color = #{color,jdbcType=VARCHAR},
+      engine_volume_unitl = #{engineVolumeUnitl,jdbcType=DOUBLE},
+      environmental_standards = #{environmentalStandards,jdbcType=VARCHAR},
+      gear_box = #{gearBox,jdbcType=VARCHAR},
+      seat_number = #{seatNumber,jdbcType=INTEGER},
+      fuel_form = #{fuelForm,jdbcType=INTEGER},
+      fuel_number = #{fuelNumber,jdbcType=INTEGER},
+      level = #{level,jdbcType=VARCHAR},
+      check_company_id = #{checkCompanyId,jdbcType=VARCHAR},
+      inster_operator = #{insterOperator,jdbcType=VARCHAR},
+      update_operator = #{updateOperator,jdbcType=VARCHAR},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      accident_type = #{accidentType,jdbcType=INTEGER},
+      reserve_price = #{reservePrice,jdbcType=DOUBLE},
+      initial_licence_time = #{initialLicenceTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selectCarGroup" resultType="com.maxcar.user.entity.Configuration" parameterType="String">
+    SELECT
+
+    <if test="type == 'level'" >
+      'level' as configurationKey,level as  configurationValue ,
+       '车型' as configurationDesc,level as configurationName
+      FROM car_base
+      WHERE  level is not null and level != '' group by level
+     </if>
+    <if test="type == 'environmental_standards'">
+      'environmental_standards' as configurationKey,environmental_standards as  configurationValue,
+      '排放标准' as configurationDesc,environmental_standards as configurationName
+      FROM car_base
+      WHERE  environmental_standards is not null and environmental_standards != '' group by environmental_standards
+    </if>
+
+  </select>
+  
+  <select id="getCarBaseById" resultMap="CarDetailsMap" parameterType="com.maxcar.stock.entity.Response.CarDetails">
+  	SELECT 
+	  * 
+	FROM
+	  car c 
+	  LEFT JOIN car_base b 
+	    ON c.id = b.id 
+	  LEFT JOIN car_pic p 
+	    ON p.car_id = c.id 
+	WHERE c.id = #{id}
+  </select>
+
+  <select id="selectByList" resultType="com.maxcar.stock.entity.Response.CarBaseResponse" parameterType="com.maxcar.stock.pojo.CarBase" >
+    SELECT b.*,c.market_id as marketId,p.src FROM (
+    SELECT
+    model_code AS modelCode,
+    id,
+    market_price AS marketPrice,
+    initial_licence_time AS initialLicenceTime,
+    mileage AS Mileage,
+    color AS Color,
+    brand_name AS brandName,
+    brand_code AS brandCode,
+    series_name AS seriesName,
+    series_code AS seriesCode
+    FROM
+    car_base
+    <where>
+      <if test="brandCode != null" >
+        and brand_code=#{brandCode}
+      </if>
+      <if test="seriesCode != null" >
+        and series_code=#{seriesCode}
+      </if>
+      <if test="modelCode != null" >
+        and model_code=#{modelCode}
+      </if>
+      <if test="brandName != null" >
+        and brand_name like concat('%',concat(#{brandName},'%')
+      </if>
+      <if test="marketPriceStart != null and marketPriceEnd != null" >
+        and market_price between #{marketPriceStart} and #{marketPriceEnd}
+      </if>
+      <if test="autoAgeEnd != null and autoAgeStart != null" >
+        and initial_licence_time BETWEEN date_sub(now(), INTERVAL #{autoAgeEnd} YEAR) AND date_sub(now(), INTERVAL #{autoAgeStart} YEAR)
+      </if>
+    </where>) b LEFT JOIN car c
+    ON b.id = c.id LEFT JOIN car_pic p
+    ON b.id = p.car_id where c.market_id=#{marketId}
+  </select>
+
+  <select id="queryCarList" resultMap="BaseResultMap" parameterType="com.maxcar.stock.entity.Request.SearchCarRequest" >
+    select * from car_base b, car c
+    where b.id = c.id and c.market_id = #{marketId}
+    <include refid="conditionForQueryCarList" />
+  </select>
+
+  <select id="countCarList" resultType="Integer" parameterType="com.maxcar.stock.entity.Request.SearchCarRequest" >
+    select count(1) from car_base b, car c
+    where b.id = c.id and c.market_id = #{marketId}
+    <include refid="conditionForQueryCarList" />
+  </select>
+
+  <sql id="conditionForQueryCarList">
+    <if test="modelName != null and modelName != ''">
+      and b.model_name like concat('%',concat(#{modelName},'%')
+    </if>
+    <if test="brandCode != null and brandCode != ''">
+      and b.brand_code = #{brandCode}
+    </if>
+    <if test="seriesCode != null and seriesCode != ''">
+      and b.series_code = #{seriesCode}
+    </if>
+    <if test="priceStart != null">
+      and b.evaluate_price > #{priceStart}
+    </if>
+    <if test="priceEnd != null">
+      <![CDATA[
+        and b.evaluate_price <= #{priceEnd}
+	  ]]>
+    </if>
+    <if test="mileageStart != null">
+      and b.mileage > #{mileageStart}
+    </if>
+    <if test="mileageEnd != null">
+      <![CDATA[
+        and b.mileage <= #{mileageEnd}
+	  ]]>
+    </if>
+    <if test="gearBox != null and gear_box != ''">
+      and b.gear_box like concat('%',concat(#{gearBox},'%')
+    </if>
+    <if test="level != null and level != ''">
+      and b.`level` like concat('%',concat(#{level},'%')
+    </if>
+    <if test="color != null and color != ''">
+      and b.color = #{color}
+    </if>
+    <if test="environmentalStandards != null and environmentalStandards != ''">
+      and b.environmental_standards like concat('%',concat(#{environmentalStandards},'%')
+    </if>
+    <if test="initialLicenceStartTime != null">
+      and b.initial_licence_time > #{initialLicenceStartTime}
+    </if>
+    <if test="initialLicenceEndTime != null">
+      <![CDATA[
+        and b.initial_licence_time <= #{initialLicenceEndTime}
+	  ]]>
+    </if>
+  </sql>
+
+</mapper>

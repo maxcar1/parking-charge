@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maxcar.market.dao.EleLabelMapper" >
+  <resultMap id="BaseResultMap" type="com.maxcar.market.pojo.EleLabel" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="use_person" property="usePerson" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
+    <result column="use_time" property="useTime" jdbcType="TIMESTAMP" />
+    <result column="use_number" property="useNumber" jdbcType="INTEGER" />
+    <result column="used_number" property="usedNumber" jdbcType="INTEGER" />
+    <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+    <result column="scrap_number" property="scrapNumber" jdbcType="INTEGER" />
+    <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_operator" property="updateOperator" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, use_person, use_time, use_number, used_number,market_id, is_valid, scrap_number, insert_time,
+    insert_operator, update_time, update_operator, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maxcar.market.pojo.EleLabelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ele_label
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ele_label
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ele_label
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maxcar.market.pojo.EleLabelExample" >
+    delete from ele_label
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maxcar.market.pojo.EleLabel" >
+    insert into ele_label (id, use_person, use_time, 
+      use_number, used_number, is_valid, 
+      scrap_number, insert_time, insert_operator, 
+      update_time, update_operator, remark
+      )
+    values (#{id,jdbcType=VARCHAR}, #{usePerson,jdbcType=VARCHAR}, #{useTime,jdbcType=TIMESTAMP}, 
+      #{useNumber,jdbcType=INTEGER}, #{usedNumber,jdbcType=INTEGER}, #{isValid,jdbcType=INTEGER}, 
+      #{scrapNumber,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP}, #{insertOperator,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateOperator,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maxcar.market.pojo.EleLabel" >
+    insert into ele_label
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="usePerson != null" >
+        use_person,
+      </if>
+      <if test="marketId != null" >
+        market_id,
+      </if>
+      <if test="useTime != null" >
+        use_time,
+      </if>
+      <if test="useNumber != null" >
+        use_number,
+      </if>
+      <if test="usedNumber != null" >
+        used_number,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="scrapNumber != null" >
+        scrap_number,
+      </if>
+      <if test="insertTime != null" >
+        insert_time,
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateOperator != null" >
+        update_operator,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="usePerson != null" >
+        #{usePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
+      </if>
+      <if test="useTime != null" >
+        #{useTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useNumber != null" >
+        #{useNumber,jdbcType=INTEGER},
+      </if>
+      <if test="usedNumber != null" >
+        #{usedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="scrapNumber != null" >
+        #{scrapNumber,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+        #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maxcar.market.pojo.EleLabelExample" resultType="java.lang.Integer" >
+    select count(*) from ele_label
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ele_label
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usePerson != null" >
+        use_person = #{record.usePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useTime != null" >
+        use_time = #{record.useTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.useNumber != null" >
+        use_number = #{record.useNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.usedNumber != null" >
+        used_number = #{record.usedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.isValid != null" >
+        is_valid = #{record.isValid,jdbcType=INTEGER},
+      </if>
+      <if test="record.scrapNumber != null" >
+        scrap_number = #{record.scrapNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.insertTime != null" >
+        insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.insertOperator != null" >
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateOperator != null" >
+        update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ele_label
+    set id = #{record.id,jdbcType=VARCHAR},
+      use_person = #{record.usePerson,jdbcType=VARCHAR},
+      use_time = #{record.useTime,jdbcType=TIMESTAMP},
+      use_number = #{record.useNumber,jdbcType=INTEGER},
+      used_number = #{record.usedNumber,jdbcType=INTEGER},
+      is_valid = #{record.isValid,jdbcType=INTEGER},
+      scrap_number = #{record.scrapNumber,jdbcType=INTEGER},
+      insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+      insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_operator = #{record.updateOperator,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maxcar.market.pojo.EleLabel" >
+    update ele_label
+    <set >
+      <if test="usePerson != null" >
+        use_person = #{usePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="useTime != null" >
+        use_time = #{useTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="useNumber != null" >
+        use_number = #{useNumber,jdbcType=INTEGER},
+      </if>
+      <if test="usedNumber != null" >
+        used_number = #{usedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+      <if test="scrapNumber != null" >
+        scrap_number = #{scrapNumber,jdbcType=INTEGER},
+      </if>
+      <if test="insertTime != null" >
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null" >
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maxcar.market.pojo.EleLabel" >
+    update ele_label
+    set use_person = #{usePerson,jdbcType=VARCHAR},
+      use_time = #{useTime,jdbcType=TIMESTAMP},
+      use_number = #{useNumber,jdbcType=INTEGER},
+      used_number = #{usedNumber,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=INTEGER},
+      scrap_number = #{scrapNumber,jdbcType=INTEGER},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_operator = #{updateOperator,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getEleLabel" parameterType="com.maxcar.market.pojo.EleLabel" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from ele_label
+    <include refid="where_select" />
+  </select>
+  <sql id="where_select">
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test="usePerson != null and usePerson != ''">
+        and use_person = #{usePerson}
+      </if>
+      <if test="marketId != null and marketId != ''">
+        and market_id = #{marketId}
+      </if>
+      <if test="isValid != null and isValid != ''">
+        and is_valid = #{isValid}
+      </if>
+      <if test="beginDate != null and beginDate != ''">
+        and  <![CDATA[  unix_timestamp(use_time) >= unix_timestamp(#{beginDate}) ]]>
+      </if>
+      <if test="endDate != null and endDate != ''">
+        and <![CDATA[  unix_timestamp(use_time) <= unix_timestamp(#{endDate}) ]]>
+      </if>
+    </where>
+  </sql>
+</mapper>
