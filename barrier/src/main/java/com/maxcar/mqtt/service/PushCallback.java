@@ -188,18 +188,18 @@ public class PushCallback implements MqttCallback {
                         value7 = Canstats.yxcc;//允许开闸
                         outParam = value1 + value2 + value3 + value4 + value5 + value6 + value7;
                         outParam = outParam.replaceAll("leng", PushCallback.toHexStringBy0(outParam.length()/2+2));
-                        logger.info(outParam + "------发送数据");
+                        logger.info("签名错误处理，服务器发送消息：{}",outParam);
                         String outHex = CRC16M.GetModBusCRC(outParam);
 
                         outParam = outParam + outHex;
-                        logger.info(outParam + "------发送数据2");
+                        logger.info("签名错误，服务器发送完整消息:{}",outParam);
                         ServerMQTT.send(outParam,barrier.getMqttTopic());
                     }
 
                 }
 
             }else{
-                logger.info("错误的请求");
+                logger.info(">>>>>>未知的请求");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
