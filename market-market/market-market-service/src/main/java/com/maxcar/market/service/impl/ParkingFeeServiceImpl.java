@@ -29,7 +29,6 @@ import com.maxcar.market.service.ParkingFeeService;
 import com.maxcar.market.service.mapperService.ParkingFeeDetailMapperService;
 import com.maxcar.market.utils.ToolUtils;
 import com.maxcar.redis.service.RedisService;
-import com.maxcar.stock.service.BarrierCameraService;
 import com.maxcar.user.entity.Organizations;
 import com.maxcar.user.entity.Staff;
 import com.maxcar.user.entity.User;
@@ -96,8 +95,6 @@ public class ParkingFeeServiceImpl extends BaseServiceImpl<ParkingFee, String> i
     @Autowired
     private OpenBarrierRecordMapper openBarrierRecordMapper;
 
-    @Autowired
-    private BarrierCameraService barrierCameraService;
     @Autowired
     private WeiXinService weiXinService;
     @Value("${paibo_app_id}")
